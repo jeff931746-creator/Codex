@@ -1,0 +1,10 @@
+{
+  "name": "feishu-codex-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Minimal self-hosted Feishu bot bridge for OpenAI models",
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}
