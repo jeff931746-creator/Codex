@@ -1,0 +1,4 @@
+interface:
+  display_name: "ForeverNine Downloader"
+  short_description: "Reuse Chrome login to download ForeverNine assets by exact title."
+  default_prompt: "Use $forevernine-material-downloader to resolve exact material titles from ForeverNine's public-opinion library through the logged-in Chrome session and download the matched assets locally."

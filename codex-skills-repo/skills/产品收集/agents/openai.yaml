@@ -1,0 +1,4 @@
+interface:
+  display_name: "产品收集"
+  short_description: "收集公开产品信息并结构化整理到统一字段或飞书表。"
+  default_prompt: "Use $产品收集 to gather public product information across platforms, normalize the fields, and prepare a structured summary or Feishu table update."
