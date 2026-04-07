@@ -31,6 +31,6 @@ build/
 coverage/
 
 # Large local reference docs
-立项白皮书/参考文档/*.docx
-立项白皮书/参考文档/*.pptx
-立项白皮书/参考文档/*.pdf
+research/立项白皮书/参考文档/*.docx
+research/立项白皮书/参考文档/*.pptx
+research/立项白皮书/参考文档/*.pdf
