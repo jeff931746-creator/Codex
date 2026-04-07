@@ -29,3 +29,8 @@ pnpm-debug.log*
 dist/
 build/
 coverage/
+
+# Large local reference docs
+立项白皮书/参考文档/*.docx
+立项白皮书/参考文档/*.pptx
+立项白皮书/参考文档/*.pdf
