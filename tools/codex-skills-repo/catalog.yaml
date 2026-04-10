@@ -27,3 +27,16 @@ skills:
     owner: "mt"
     runtime_target: "/Users/mt/.codex/skills/产品收集"
     notes: "Prefer project-local usage when tied to a specific collection schema."
+repo:
+  source_of_truth: "/Users/mt/Documents/Codex/tools/codex-skills-repo"
+  runtime_skills_dir: "/Users/mt/.codex/skills"
+  layout:
+    - "rules"
+    - "skills"
+    - "references"
+    - "profiles"
+    - "overrides"
+    - "archive"
+  notes:
+    - "Keep shared entry logic short; route long specs into references."
+    - "Project-specific exceptions should live in overrides or project-local .agents/skills."
