@@ -3,219 +3,163 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tri-Agent Studio</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <title>丧尸围城护送肉鸽 Demo</title>
+    <link rel="stylesheet" href="./styles.css?v=20260416p" />
   </head>
   <body>
-    <div class="page-glow page-glow-left"></div>
-    <div class="page-glow page-glow-right"></div>
     <main class="app-shell">
       <aside class="sidebar">
-        <div class="brand-block">
-          <p class="eyebrow">Unified Entry</p>
-          <h1>Tri-Agent Studio</h1>
-          <p class="sidebar-copy">
-            一个统一入口，让 Codex 先生成概念创意，再自动整理成 Gemini 出图指令。
-          </p>
-        </div>
+        <p class="eyebrow">Canvas Demo</p>
+        <h1>丧尸围城护送肉鸽</h1>
+        <p class="sidebar-copy">
+          车队会沿着城市路线自动前进，玩家需要在尸潮围城中开路、保车、并靠路段强化把这一局做出差异。
+        </p>
 
         <section class="sidebar-panel">
-          <p class="section-label">工作模式</p>
-          <div class="mode-list" id="mode-list">
-            <button class="mode-chip active" data-mode="concept">概念出图</button>
-            <button class="mode-chip" data-mode="auto">自动分发</button>
-            <button class="mode-chip" data-mode="execute">执行优先</button>
+          <p class="section-label">操作说明</p>
+          <ul class="instruction-list">
+            <li><span>移动主角</span><strong>WASD / 手机虚拟摇杆</strong></li>
+            <li><span>射击</span><strong>自动锁敌 + 直线开火</strong></li>
+            <li><span>暂停</span><strong>P</strong></li>
+            <li><span>重开</span><strong>R</strong></li>
+          </ul>
+        </section>
+
+        <section class="sidebar-panel">
+          <p class="section-label">核心机制</p>
+          <ul class="instruction-list">
+            <li><span>护送目标</span><strong>自动沿路线前进</strong></li>
+            <li><span>尸潮</span><strong>四周围城压迫</strong></li>
+            <li><span>主角</span><strong>走位 + 自动锁敌</strong></li>
+            <li><span>强化</span><strong>路段三选一</strong></li>
+          </ul>
+        </section>
+
+        <section class="sidebar-panel">
+          <p class="section-label">当前 Build</p>
+          <div class="goal-card">
+            <p id="build-text">基础护送</p>
+          </div>
+          <div class="goal-card goal-card--mt">
+            <p id="hint-text">点击“开始试玩”进入护送突围局。</p>
           </div>
         </section>
 
         <section class="sidebar-panel">
-          <p class="section-label">能力分工</p>
-          <div class="agent-list">
-            <article class="agent-mini-card red">
-              <span class="agent-dot"></span>
-              <div>
-                <h2>豆包</h2>
-                <p>可选前置发散，不再是默认主链路</p>
-              </div>
-            </article>
-            <article class="agent-mini-card blue">
-              <span class="agent-dot"></span>
-              <div>
-                <h2>Gemini</h2>
-                <p>接收 Codex 提示词并负责生成图片</p>
-              </div>
-            </article>
-            <article class="agent-mini-card green">
-              <span class="agent-dot"></span>
-              <div>
-                <h2>Codex</h2>
-                <p>生成概念包、出图提示词、自动下发说明</p>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section class="sidebar-panel status-panel">
-          <p class="section-label">当前策略</p>
-          <div class="status-card">
-            <p id="strategy-title">概念出图模式已启用</p>
-            <p id="strategy-body">
-              当前默认流程是 Codex 先写概念，再把 Gemini 图像 prompt 自动准备好。
-            </p>
-          </div>
+          <p class="section-label">小丑牌组</p>
+          <div class="joker-rack" id="joker-rack"></div>
         </section>
       </aside>
 
       <section class="workspace">
-        <header class="hero">
-          <div>
-            <p class="eyebrow">Orchestrator</p>
-            <h2>让 Codex 先想，再把创意自动下发给 Gemini</h2>
-            <p class="hero-copy">
-              输入一次需求，得到概念创意包、标准化出图 prompt，以及下发给 Gemini 的自动交接链路。
-            </p>
-          </div>
-          <div class="hero-badge">
-            <span>适合角色概念、场景主视觉、KV、海报和世界观气质探索</span>
-          </div>
+        <header class="hud">
+          <article class="hud-card">
+            <p class="hud-label">护送</p>
+            <strong id="base-hp">100 / 100</strong>
+          </article>
+          <article class="hud-card">
+            <p class="hud-label">时间</p>
+            <strong id="timer">06:00</strong>
+          </article>
+          <article class="hud-card">
+            <p class="hud-label">波次</p>
+            <strong id="wave">1</strong>
+          </article>
+          <article class="hud-card">
+            <p class="hud-label">击退</p>
+            <strong id="score">0</strong>
+          </article>
+          <article class="hud-card">
+            <p class="hud-label">尸潮</p>
+            <strong id="zombies-left">0</strong>
+          </article>
+          <article class="hud-card">
+            <p class="hud-label">弹数</p>
+            <strong id="balls-left">0</strong>
+          </article>
+          <article class="hud-card">
+            <p class="hud-label">装填</p>
+            <strong id="reload">Ready</strong>
+          </article>
+          <article class="hud-card">
+            <p class="hud-label">状态</p>
+            <strong id="mode">等待开始</strong>
+          </article>
         </header>
 
-        <section class="composer">
-          <label class="composer-label" for="task-input">任务输入</label>
-          <textarea
-            id="task-input"
-            placeholder="例如：帮我做一个中世纪卡通塔防主视觉概念图。"
-          ></textarea>
+        <div class="game-shell">
+          <canvas id="game-canvas" width="1600" height="900"></canvas>
 
-          <div class="composer-grid">
-            <label class="field">
-              <span>背景材料</span>
-              <input
-                id="context-input"
-                type="text"
-                placeholder="世界观、参考图、题材、限制条件、受众说明"
-              />
-            </label>
-
-            <label class="field">
-              <span>期望输出</span>
-              <input
-                id="output-input"
-                type="text"
-                placeholder="角色设定图、场景概念图、KV、宣传海报"
-              />
-            </label>
+          <div class="mobile-controls" id="mobile-controls" aria-label="移动端操作区">
+            <div class="mobile-joystick" id="mobile-joystick" aria-label="虚拟摇杆" role="application">
+              <div class="mobile-joystick__ring"></div>
+              <div class="mobile-joystick__thumb" id="mobile-joystick-thumb"></div>
+            </div>
+            <div class="mobile-tip">
+              <strong>手机操作</strong>
+              <span>左下角虚拟摇杆移动，射击自动锁敌</span>
+            </div>
           </div>
 
-          <div class="composer-actions">
-            <button id="run-button" class="primary-button">生成概念并下发</button>
-            <button id="sample-button" class="secondary-button">填入示例</button>
-            <button id="copy-button" class="ghost-button">复制整套结果</button>
+          <div class="overlay" id="start-overlay">
+            <div class="overlay-card">
+              <p class="eyebrow">试玩目标</p>
+              <h2>护送车队穿过尸潮围城，把最后一段路打通</h2>
+              <p>
+                这版 Demo 只验证三件事：车队会自动前进、主角会自动射击、路段到点会弹出肉鸽三选一。
+              </p>
+              <button class="primary-button" id="start-button" type="button" onclick="const btn=this; btn.disabled=true; btn.textContent='加载中…'; try { if (window.__launchGame) { window.__launchGame(btn); } else { btn.disabled=false; btn.textContent='开始试玩'; } } catch (error) { btn.disabled=false; btn.textContent='开始试玩'; throw error; }">开始试玩</button>
+            </div>
           </div>
-        </section>
 
-        <section class="dashboard-grid">
-          <article class="panel route-panel">
-            <div class="panel-header">
-              <p class="section-label">链路判断</p>
-              <span id="route-badge" class="badge">等待输入</span>
+          <div class="overlay hidden" id="pause-overlay">
+            <div class="overlay-card compact">
+              <p class="eyebrow">游戏暂停</p>
+              <h2>按 P 继续</h2>
+              <p>暂停期间可以重新观察车队路线和尸潮包围圈。</p>
             </div>
-            <h3 id="route-title">系统还没开始生成概念链路</h3>
-            <p id="route-summary" class="panel-copy">
-              输入需求后，这里会告诉你为什么这次应该先由 Codex 产出概念，再交给 Gemini 出图。
-            </p>
-            <div id="tags" class="tag-row"></div>
-          </article>
-
-          <article class="panel timeline-panel">
-            <div class="panel-header">
-              <p class="section-label">出图时间线</p>
-            </div>
-            <div id="timeline" class="timeline-list"></div>
-          </article>
-        </section>
-
-        <section class="dashboard-grid concept-grid">
-          <article class="panel concept-panel">
-            <div class="panel-header">
-              <p class="section-label">Codex 概念包</p>
-            </div>
-            <div id="concept-package" class="concept-package"></div>
-          </article>
-
-          <article class="panel handoff-panel">
-            <div class="panel-header">
-              <p class="section-label">Gemini 下发状态</p>
-            </div>
-            <div class="handoff-stack">
-              <div class="handoff-status">
-                <span id="handoff-badge" class="badge">未准备</span>
-                <p id="handoff-summary" class="panel-copy">
-                  生成后这里会显示 Codex 如何把概念自动整理成 Gemini 的出图输入。
-                </p>
-              </div>
-              <pre id="gemini-handoff" class="prompt-box compact">等待生成</pre>
-              <div class="automation-box">
-                <p class="section-label">本地自动化命令（默认自动提交）</p>
-                <pre id="automation-command" class="prompt-box compact command-box">等待生成</pre>
-              </div>
-            </div>
-          </article>
-        </section>
-
-        <section class="agent-board">
-          <article class="agent-card red">
-            <div class="agent-header">
-              <div>
-                <p class="section-label">Agent 01</p>
-                <h3>豆包</h3>
-              </div>
-              <span class="agent-pill">发散</span>
-            </div>
-            <p id="doubao-summary" class="agent-copy">
-              这里会显示豆包是否需要介入，帮你补概念发散或风格语言。
-            </p>
-            <pre id="doubao-prompt" class="prompt-box">等待生成</pre>
-          </article>
-
-          <article class="agent-card blue">
-            <div class="agent-header">
-              <div>
-                <p class="section-label">Agent 02</p>
-                <h3>Gemini</h3>
-              </div>
-              <span class="agent-pill">收敛</span>
-            </div>
-            <p id="gemini-summary" class="agent-copy">
-              这里会显示 Gemini 如何接收 Codex 生成的图像 prompt 并开始出图。
-            </p>
-            <pre id="gemini-prompt" class="prompt-box">等待生成</pre>
-          </article>
-
-          <article class="agent-card green">
-            <div class="agent-header">
-              <div>
-                <p class="section-label">Agent 03</p>
-                <h3>Codex</h3>
-              </div>
-              <span class="agent-pill">执行</span>
-            </div>
-            <p id="codex-summary" class="agent-copy">
-              这里会显示 Codex 如何生成概念 JSON、图像 prompt 和自动下发步骤。
-            </p>
-            <pre id="codex-prompt" class="prompt-box">等待生成</pre>
-          </article>
-        </section>
-
-        <section class="final-panel">
-          <div class="panel-header">
-            <p class="section-label">最终交付建议</p>
           </div>
-          <div id="deliverables" class="deliverable-list"></div>
-        </section>
+
+          <div class="overlay hidden" id="upgrade-overlay">
+            <div class="overlay-card wide">
+              <p class="eyebrow" id="upgrade-eyebrow">抽小丑牌</p>
+              <h2 id="upgrade-title">从三张小丑牌里抽 1 张，继续把牌组做成型</h2>
+              <p id="upgrade-subtitle">每张牌都会朝不同的成长路线滚雪球，选牌前先看看这局缺什么。</p>
+              <div class="choice-grid" id="choice-grid"></div>
+              <div class="choice-actions">
+                <button class="secondary-button" id="reroll-button">重抽 1 次</button>
+                <button class="secondary-button secondary-button--ghost" id="skip-button">跳过并修整</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="overlay hidden" id="result-overlay">
+            <div class="overlay-card">
+              <p class="eyebrow" id="result-tag">战斗结束</p>
+              <h2 id="result-title">你守住了车队</h2>
+              <p id="result-summary">这局护送 Build 已完成基础验证。</p>
+              <button class="primary-button" id="restart-button" type="button" onclick="const btn=this; btn.disabled=true; btn.textContent='重开中…'; try { if (window.__launchGame) { window.__launchGame(btn); } else { btn.disabled=false; btn.textContent='再来一局'; } } catch (error) { btn.disabled=false; btn.textContent='再来一局'; throw error; }">再来一局</button>
+            </div>
+          </div>
+        </div>
+
+        <footer class="bottom-bar">
+          <div class="status-pill">
+            <span>当前瞄准</span>
+            <strong id="aim-text">待开始</strong>
+          </div>
+          <div class="status-pill">
+            <span>当前强化</span>
+            <strong id="build-pill">基础护送</strong>
+          </div>
+          <div class="status-pill">
+            <span>关卡目标</span>
+            <strong id="goal-pill">护送车队抵达安全区</strong>
+          </div>
+        </footer>
       </section>
     </main>
 
-    <script src="./script.js"></script>
+    <script src="./script.js?v=20260416p"></script>
   </body>
 </html>
