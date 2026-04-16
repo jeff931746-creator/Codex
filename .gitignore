@@ -2,7 +2,8 @@
 **/.DS_Store
 
 # Local scratch space
-tmp/
+/tmp/
+/research/
 
 # Python
 __pycache__/

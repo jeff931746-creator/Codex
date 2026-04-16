@@ -7,3 +7,4 @@ Start here:
 - `usage-policy.md`: day-to-day rules for contributors and project teams
 - `change-process.md`: how shared assets are changed, validated, and rolled out
 - `asset-decision-guide.md`: how to decide between rules, skills, references, overrides, and profiles
+- `agent-skill-topology.md`: recommended agent role design and skill layering for this workspace

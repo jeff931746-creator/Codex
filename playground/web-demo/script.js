@@ -92,10 +92,12 @@
       },
     },
     combat: {
-      baseFireRate: 1.468,
+      baseFireRate: 1.412,
       heroMaxEscortDistance: 220,
     },
     spawn: {
+      earlyWaveCount: 5,
+      earlyWaveMultiplier: 0.7,
       trickleStartRange: [1.8, 2.8],
       surgeStartRange: [20, 28],
       ambushStartRange: [26, 36],
@@ -157,39 +159,39 @@
   }
 
   const ROUTE = [
-    { x: 800, y: 180, label: "出发" },
-    { x: 720, y: 560, label: "外环路口" },
-    { x: 860, y: 940, label: "加油站" },
+    { x: 800, y: 2380, label: "出发" },
+    { x: 730, y: 2080, label: "外环路口" },
+    { x: 880, y: 1700, label: "加油站" },
     { x: 700, y: 1320, label: "商场广场" },
-    { x: 880, y: 1700, label: "医院街口" },
-    { x: 730, y: 2080, label: "地铁口" },
-    { x: 800, y: 2380, label: "安全区" },
+    { x: 860, y: 940, label: "医院街口" },
+    { x: 720, y: 560, label: "地铁口" },
+    { x: 800, y: 180, label: "安全区" },
   ];
 
   const SPAWN_GATES = [
-    { x: -24, y: 180 },
-    { x: 1624, y: 180 },
-    { x: -24, y: 560 },
-    { x: 1624, y: 560 },
-    { x: -24, y: 940 },
-    { x: 1624, y: 940 },
-    { x: -24, y: 1320 },
-    { x: 1624, y: 1320 },
-    { x: -24, y: 1700 },
-    { x: 1624, y: 1700 },
-    { x: -24, y: 2080 },
-    { x: 1624, y: 2080 },
-    { x: -24, y: 2380 },
-    { x: 1624, y: 2380 },
+    { x: 380, y: 2380 },
+    { x: 1220, y: 2380 },
+    { x: 380, y: 2080 },
+    { x: 1220, y: 2080 },
+    { x: 380, y: 1700 },
+    { x: 1220, y: 1700 },
+    { x: 380, y: 1320 },
+    { x: 1220, y: 1320 },
+    { x: 380, y: 940 },
+    { x: 1220, y: 940 },
+    { x: 380, y: 560 },
+    { x: 1220, y: 560 },
+    { x: 380, y: 180 },
+    { x: 1220, y: 180 },
   ];
 
   const zombieDefs = {
-    walker: { label: "普通丧尸", color: "#8fe17b", radius: 15, hp: 24, speed: 30, damage: 6, score: 40, xp: 1 },
-    runner: { label: "冲锋丧尸", color: "#b1ff92", radius: 13, hp: 16, speed: 44, damage: 4, score: 55, xp: 1 },
-    brute: { label: "重型丧尸", color: "#ff8f8d", radius: 24, hp: 42, speed: 20, damage: 12, score: 120, xp: 2 },
-    spitter: { label: "喷吐丧尸", color: "#7db5ff", radius: 18, hp: 28, speed: 24, damage: 8, score: 90, xp: 2 },
-    elite: { label: "精英尸群", color: "#ffcf6e", radius: 22, hp: 70, speed: 26, damage: 10, score: 220, xp: 3 },
-    boss: { label: "尸潮 Boss", color: "#ff6575", radius: 36, hp: 220, speed: 16, damage: 18, score: 900, xp: 8 },
+    walker: { label: "普通丧尸", color: "#8fe17b", radius: 15, hp: 48, speed: 30, damage: 6, score: 40, xp: 1 },
+    runner: { label: "冲锋丧尸", color: "#b1ff92", radius: 13, hp: 32, speed: 44, damage: 4, score: 55, xp: 1 },
+    brute: { label: "重型丧尸", color: "#ff8f8d", radius: 24, hp: 84, speed: 20, damage: 12, score: 120, xp: 2 },
+    spitter: { label: "喷吐丧尸", color: "#7db5ff", radius: 18, hp: 56, speed: 24, damage: 8, score: 90, xp: 2 },
+    elite: { label: "精英尸群", color: "#ffcf6e", radius: 22, hp: 140, speed: 26, damage: 10, score: 220, xp: 3 },
+    boss: { label: "尸潮 Boss", color: "#ff6575", radius: 36, hp: 440, speed: 16, damage: 18, score: 900, xp: 8 },
   };
 
   const jokerPool = [
@@ -1338,8 +1340,8 @@
         bulletsPerShot: 1,
         spread: 0,
         bulletSpeed: 620,
-        range: 320,
-        autoAimRange: 220,
+        range: 173,
+        autoAimRange: 119,
         chainBurst: false,
         eliteDamageMult: 1,
         overdriveEveryShots: 0,
@@ -1588,7 +1590,10 @@
     }
 
     spawnPack(count, gates, forceKind = null) {
-      for (let i = 0; i < count; i += 1) {
+      const multiplier =
+        this.currentWave <= GAME_TUNING.spawn.earlyWaveCount ? GAME_TUNING.spawn.earlyWaveMultiplier : 1;
+      const actualCount = Math.max(1, Math.round(count * multiplier));
+      for (let i = 0; i < actualCount; i += 1) {
         const kind = forceKind || this.pickZombieKind();
         this.spawnZombie(kind, gates[i % gates.length]);
       }
@@ -1739,6 +1744,7 @@
         wobbleSeed: Math.random() * 999,
         wobbleRange: rand(8, 20),
         hitFlash: 0,
+        attackCd: 0,
         checkpointThreat: Boolean(options.checkpointThreat),
         finalBoss: Boolean(options.finalBoss),
         alive: true,
@@ -1796,8 +1802,9 @@
         this.hero.fissionCharged = false;
       }
       const damage = this.hero.damage + this.hero.damageBonus;
+      const volleySpread = this.getVolleySpread(bullets);
       for (let i = 0; i < bullets; i += 1) {
-        const offset = (i - (bullets - 1) / 2) * this.hero.spread;
+        const offset = (i - (bullets - 1) / 2) * volleySpread;
         const launch = angle + offset;
         this.bullets.push({
           x: this.hero.x + Math.cos(launch) * 18,
@@ -1829,6 +1836,8 @@
     }
 
     findTarget() {
+      const locked = this.getLockedTarget();
+      if (locked) return locked;
       return this.findPriorityTarget(this.hero.x, this.hero.y, this.hero.range + this.hero.autoAimRange * 1.35);
     }
 
@@ -1852,6 +1861,22 @@
         }
       }
       return best;
+    }
+
+    getLockedTarget() {
+      if (!this.hero.lockTargetId) return null;
+      const target = this.zombies.find((zombie) => zombie.alive && zombie.id === this.hero.lockTargetId);
+      if (!target) return null;
+      const rangeLimit = this.hero.range + this.hero.autoAimRange * 1.35;
+      const heroDist = distance(this.hero.x, this.hero.y, target.x, target.y);
+      if (heroDist > rangeLimit * 1.15) return null;
+      return target;
+    }
+
+    getVolleySpread(bullets) {
+      const baseSpread = this.hero.spread || 0;
+      if (bullets <= 1) return baseSpread;
+      return Math.max(0.018, baseSpread / Math.max(1, bullets));
     }
 
     getAimPoint() {
@@ -1897,7 +1922,7 @@
         if (!bullet.alive) continue;
         bullet.x += bullet.vx * dt;
         bullet.y += bullet.vy * dt;
-        if (bullet.x < -30 || bullet.x > W + 30 || bullet.y < -30 || bullet.y > H + 30) {
+        if (bullet.x < -30 || bullet.x > WORLD_W + 30 || bullet.y < -30 || bullet.y > WORLD_H + 30) {
           bullet.alive = false;
           continue;
         }
@@ -1958,6 +1983,7 @@
       for (const zombie of this.zombies) {
         if (!zombie.alive) continue;
         zombie.hitFlash = Math.max(0, zombie.hitFlash - dt);
+        zombie.attackCd = Math.max(0, zombie.attackCd - dt);
         const sway = Math.sin(this.elapsed * 0.9 + zombie.wobbleSeed) * zombie.wobbleRange;
         const escortDist = distance(zombie.x, zombie.y, this.escort.x, this.escort.y);
         const heroDist = distance(zombie.x, zombie.y, this.hero.x, this.hero.y);
@@ -1973,14 +1999,22 @@
         const speed = zombie.speed * (zombie.kind === "runner" ? 1.1 : 1);
         zombie.x += (dx / len) * speed * dt;
         zombie.y += (dy / len) * speed * dt;
-        if (heroDist < zombie.r + this.hero.r + 4) {
-          this.hero.hp -= zombie.damage * dt * 0.7;
-          this.spawnText(this.hero.x, this.hero.y - 20, `-${Math.ceil(zombie.damage * dt * 0.7)}`, "#ff6575");
-        }
-        if (escortDist < zombie.r + this.escort.r + 6) {
-          this.escort.hp -= zombie.damage * dt * 1.25;
-          this.spawnText(this.escort.x, this.escort.y - 26, `-${Math.ceil(zombie.damage * dt * 1.25)}`, "#ff6575");
-          this.emitJokerEvent("escort_damage", { zombie });
+        if (zombie.attackCd <= 0) {
+          let attacked = false;
+          if (heroDist < zombie.r + this.hero.r + 4) {
+            this.hero.hp -= zombie.damage * 0.7;
+            this.spawnText(this.hero.x, this.hero.y - 20, `-${Math.ceil(zombie.damage * 0.7)}`, "#ff6575");
+            attacked = true;
+          }
+          if (escortDist < zombie.r + this.escort.r + 6) {
+            this.escort.hp -= zombie.damage * 1.25;
+            this.spawnText(this.escort.x, this.escort.y - 26, `-${Math.ceil(zombie.damage * 1.25)}`, "#ff6575");
+            this.emitJokerEvent("escort_damage", { zombie });
+            attacked = true;
+          }
+          if (attacked) {
+            zombie.attackCd = 2;
+          }
         }
         if (zombie.y > WORLD_H + 70 || zombie.x < -70 || zombie.x > WORLD_W + 70) zombie.alive = false;
       }
