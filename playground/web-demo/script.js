@@ -98,6 +98,9 @@
     spawn: {
       earlyWaveCount: 5,
       earlyWaveMultiplier: 0.7,
+      lateWaveRampStart: 0.28,
+      lateWaveRampEnd: 0.78,
+      lateWaveMultiplier: 1.45,
       trickleStartRange: [1.8, 2.8],
       surgeStartRange: [20, 28],
       ambushStartRange: [26, 36],
@@ -1590,13 +1593,21 @@
     }
 
     spawnPack(count, gates, forceKind = null) {
-      const multiplier =
-        this.currentWave <= GAME_TUNING.spawn.earlyWaveCount ? GAME_TUNING.spawn.earlyWaveMultiplier : 1;
+      const multiplier = this.getSpawnPackMultiplier();
       const actualCount = Math.max(1, Math.round(count * multiplier));
       for (let i = 0; i < actualCount; i += 1) {
         const kind = forceKind || this.pickZombieKind();
         this.spawnZombie(kind, gates[i % gates.length]);
       }
+    }
+
+    getSpawnPackMultiplier() {
+      if (this.currentWave <= GAME_TUNING.spawn.earlyWaveCount) return GAME_TUNING.spawn.earlyWaveMultiplier;
+      const progress = clamp(this.elapsed / MATCH_DURATION, 0, 1);
+      const rampStart = GAME_TUNING.spawn.lateWaveRampStart;
+      const rampEnd = GAME_TUNING.spawn.lateWaveRampEnd;
+      const ramp = clamp((progress - rampStart) / Math.max(0.001, rampEnd - rampStart), 0, 1);
+      return 1 + (GAME_TUNING.spawn.lateWaveMultiplier - 1) * ramp;
     }
 
     pickGateSet() {
