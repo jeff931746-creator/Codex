@@ -3100,10 +3100,8 @@
 
   canvas.addEventListener("pointermove", (event) => {
     const rect = canvas.getBoundingClientRect();
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-    game.pointer.x = (event.clientX - rect.left) * scaleX;
-    game.pointer.y = (event.clientY - rect.top) * scaleY;
+    game.pointer.x = ((event.clientX - rect.left) / Math.max(rect.width, 1)) * W;
+    game.pointer.y = ((event.clientY - rect.top) / Math.max(rect.height, 1)) * H;
     game.pointer.active = true;
     updateHud(game);
   });
@@ -3158,6 +3156,36 @@
 
   function releaseJoystick() {
     clearDirectionalKeys();
+  }
+
+  function syncCanvasSize() {
+    const rect = canvas.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const dpr = Math.max(1, window.devicePixelRatio || 1);
+    const nextWidth = Math.max(1, Math.round(rect.width * dpr));
+    const nextHeight = Math.max(1, Math.round(rect.height * dpr));
+    if (canvas.width !== nextWidth) canvas.width = nextWidth;
+    if (canvas.height !== nextHeight) canvas.height = nextHeight;
+    ctx.setTransform(nextWidth / W, 0, 0, nextHeight / H, 0, 0);
+  }
+
+  function updateResponsiveMode() {
+    const viewport = window.visualViewport;
+    const vh = (viewport ? viewport.height : window.innerHeight) * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+    const isMobile =
+      window.matchMedia("(max-width: 860px)").matches ||
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.matchMedia("(hover: none)").matches;
+    document.body.classList.toggle("is-mobile-device", isMobile);
+    syncCanvasSize();
+  }
+
+  updateResponsiveMode();
+  window.addEventListener("resize", updateResponsiveMode, { passive: true });
+  window.addEventListener("orientationchange", updateResponsiveMode, { passive: true });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", updateResponsiveMode, { passive: true });
   }
 
   if (ui.joystick) {
