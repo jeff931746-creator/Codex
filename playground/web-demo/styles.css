@@ -383,6 +383,23 @@ button {
   align-items: center;
 }
 
+.shop-resource {
+  width: min(900px, 100%);
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(125, 240, 192, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.shop-resource--hidden {
+  display: none;
+}
+
 .choice-card {
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 18px;
@@ -401,6 +418,16 @@ button {
   transform: translateY(-2px);
   border-color: rgba(125, 240, 192, 0.58);
   background: rgba(125, 240, 192, 0.08);
+}
+
+.choice-card[data-affordable="false"] {
+  border-color: rgba(255, 101, 117, 0.28);
+  background: rgba(255, 101, 117, 0.05);
+}
+
+.choice-card[data-affordable="false"]:hover {
+  border-color: rgba(255, 101, 117, 0.58);
+  background: rgba(255, 101, 117, 0.12);
 }
 
 .choice-card:nth-child(2) {
@@ -467,6 +494,10 @@ button {
   margin-top: 8px;
   line-height: 1.5;
   color: var(--muted);
+}
+
+.choice-card[data-affordable="false"] small:last-child {
+  color: #ffb7c0;
 }
 
 .choice-card:nth-child(2) .choice-badge {

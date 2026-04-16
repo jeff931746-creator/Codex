@@ -7,6 +7,7 @@
     timer: document.getElementById("timer"),
     wave: document.getElementById("wave"),
     score: document.getElementById("score"),
+    supply: document.getElementById("supply"),
     zombiesLeft: document.getElementById("zombies-left"),
     ballsLeft: document.getElementById("balls-left"),
     reload: document.getElementById("reload"),
@@ -21,6 +22,7 @@
     upgradeOverlay: document.getElementById("upgrade-overlay"),
     resultOverlay: document.getElementById("result-overlay"),
     choiceGrid: document.getElementById("choice-grid"),
+    shopResource: document.getElementById("shop-resource"),
     jokerRack: document.getElementById("joker-rack"),
     resultTag: document.getElementById("result-tag"),
     resultTitle: document.getElementById("result-title"),
@@ -28,6 +30,7 @@
     startButton: document.getElementById("start-button"),
     restartButton: document.getElementById("restart-button"),
     rerollButton: document.getElementById("reroll-button"),
+    repairButton: document.getElementById("repair-button"),
     skipButton: document.getElementById("skip-button"),
     upgradeEyebrow: document.getElementById("upgrade-eyebrow"),
     upgradeTitle: document.getElementById("upgrade-title"),
@@ -112,6 +115,27 @@
     },
     roguelike: {
       killChoiceThresholds: [4, 8, 16, 32, 64, 128, 256, 512],
+      killSupplyRewardBase: 10,
+      killSupplyRewardStep: 4,
+      checkpointSupplyRewardBase: 12,
+      checkpointLateSupplyBonus: 8,
+      checkpointTrialSupplyBase: 12,
+      checkpointTrialSupplyStep: 6,
+      checkpointTrialXpBase: 2,
+      checkpointTrialXpStep: 1,
+      checkpointTrialKillBase: 10,
+      checkpointTrialKillStep: 5,
+      checkpointTrialHeavyBase: 1,
+      checkpointTrialHeavyStep: 2,
+      checkpointTrialDamageBase: 24,
+      checkpointTrialDamageStep: 3,
+      shopRefreshCostBase: 10,
+      shopRefreshCostStep: 6,
+      shopPackCostStep: 4,
+      shopRepairCostBase: 14,
+      shopRepairCostStep: 4,
+      shopRepairBaseAmount: 26,
+      shopRepairMissingHpRatio: 0.24,
     },
   };
 
@@ -340,7 +364,7 @@
       title: "赏金小丑",
       rarity: "rare",
       tag: "节奏",
-      description: "每击杀数只精英或 Boss，就额外获得一次抽牌与一次重抽，后半局更容易滚起雪球。",
+      description: "每击杀数只精英或 Boss，就额外拿到一笔补给，后半局更容易把商店节奏滚起来。",
       maxLevel: 3,
       condition: () => true,
       apply: (game, card) => {
@@ -381,12 +405,70 @@
       title: "镜像小丑",
       rarity: "rare",
       tag: "节奏",
-      description: "每次抽牌时，会有一张已拥有小丑的镜像回响。",
+      description: "每次进入补给站时，三选一中的一张会更容易变成已拥有路线的镜像回响。",
       maxLevel: 2,
       condition: () => true,
       apply: (game, card) => {
         game.dupChoiceBonus = 1 + (card.level - 1);
       },
+    },
+  ];
+
+  const packCatalog = [
+    {
+      id: "standard_pack",
+      kind: "pack",
+      title: "标准卡包",
+      rarity: "common",
+      tag: "通用",
+      cardCount: 3,
+      cost: 12,
+      focusTags: ["攻击", "节奏"],
+      description: "稳定起步，优先补基础火力与节奏件。",
+    },
+    {
+      id: "defense_pack",
+      kind: "pack",
+      title: "防线卡包",
+      rarity: "uncommon",
+      tag: "防守",
+      cardCount: 3,
+      cost: 14,
+      focusTags: ["防守", "节奏"],
+      description: "更容易开出修车、耐久和驻点收益类小丑牌。",
+    },
+    {
+      id: "burst_pack",
+      kind: "pack",
+      title: "爆发卡包",
+      rarity: "rare",
+      tag: "爆发",
+      cardCount: 3,
+      cost: 20,
+      focusTags: ["攻击", "爆发"],
+      description: "更偏向高上限输出件，适合后半局提压。",
+    },
+    {
+      id: "mirror_pack",
+      kind: "pack",
+      title: "镜像卡包",
+      rarity: "legendary",
+      tag: "节奏",
+      cardCount: 3,
+      cost: 30,
+      focusTags: ["节奏"],
+      description: "更容易出现当前路线的镜像回响。",
+    },
+    {
+      id: "jumbo_pack",
+      kind: "pack",
+      title: "巨型卡包",
+      rarity: "uncommon",
+      tag: "成长",
+      cardCount: 3,
+      cost: 24,
+      focusTags: ["攻击", "防守", "节奏"],
+      description: "更容易刷出一组能补短板的中期候选。",
     },
   ];
 
@@ -477,15 +559,18 @@
     }
   }
 
-  function renderChoiceGrid(choices) {
+  function renderChoiceGrid(choices, gameState) {
+    const supply = Math.floor(gameState?.supply || 0);
     ui.choiceGrid.innerHTML = choices
+      .slice(0, 3)
       .map(
         (choice) => `
-          <button class="choice-card" data-upgrade="${choice.id}" data-rarity="${choice.rarity || "common"}">
-            <span class="choice-badge">${choice.tag || "通用"}</span>
-            <span class="choice-level">Lv.${choice.level || 1}</span>
+          <button class="choice-card" data-upgrade="${choice.id}" data-rarity="${choice.rarity || "common"}" data-affordable="${choice.kind === "pack" ? (supply >= (choice.cost || 0)) : "true"}">
+            <span class="choice-badge">${choice.kind === "pack" ? "卡包" : choice.tag || "通用"}</span>
+            <span class="choice-level">${choice.kind === "pack" ? `${choice.cardCount || 3} 张` : `Lv.${choice.level || 1}`}</span>
             <p>${choice.title}</p>
             <small>${choice.description}</small>
+            <small>${choice.kind === "pack" ? `花费 ${choice.cost || 0} 补给 · ${supply >= (choice.cost || 0) ? "当前可购买" : `还差 ${(choice.cost || 0) - supply} 补给`}` : choice.cost ? `花费 ${choice.cost} 补给` : "开包后免费领取"}</small>
           </button>
         `,
       )
@@ -505,7 +590,7 @@
     const emptySlots = Array.from({ length: emptyCount }, (_, index) => `
       <div class="joker-card joker-card--empty">
         <strong>空槽 ${occupied.length + index + 1}</strong>
-        <small>等待抽牌</small>
+        <small>等待补给站购入</small>
       </div>
     `);
 
@@ -521,6 +606,7 @@
     ui.timer.textContent = formatTime(game.timer);
     ui.wave.textContent = `${Math.min(game.currentWave, GAME_TUNING.waves.totalMonsterWaves)} / ${GAME_TUNING.waves.totalMonsterWaves}`;
     ui.score.textContent = `${game.kills}`;
+    ui.supply.textContent = `${Math.floor(game.supply)}`;
     ui.zombiesLeft.textContent = `${game.zombies.length}`;
     ui.ballsLeft.textContent = `${game.bullets.length}`;
     ui.reload.textContent = game.hero.fireCd > 0 ? `${game.hero.fireCd.toFixed(1)}s` : "Ready";
@@ -530,7 +616,30 @@
     ui.aimText.textContent = game.state === "start" ? "待开始" : `主角 ${Math.round(game.hero.x)}, ${Math.round(game.hero.y)}`;
     ui.goalPill.textContent = game.getGoalText();
     if (ui.rerollButton) {
-      ui.rerollButton.textContent = game.rerollCharges > 0 ? `重抽 ${game.rerollCharges} 次` : "重抽已空";
+      if (game.state === "choice") {
+        ui.rerollButton.textContent =
+          game.shopPhase === "pack_cards" ? "卡包已打开" : `刷新货架 ${game.getShopRefreshCost()} 补给`;
+        ui.rerollButton.disabled = game.shopPhase === "pack_cards" || game.supply < game.getShopRefreshCost();
+      } else {
+        ui.rerollButton.textContent = "刷新驻点";
+        ui.rerollButton.disabled = false;
+      }
+    }
+    if (ui.repairButton) {
+      ui.repairButton.textContent = game.state === "choice" ? `修车 ${game.getRepairCost()} 补给` : "修理车辆";
+      ui.repairButton.disabled = game.state === "choice" ? game.supply < game.getRepairCost() || game.escort.hp >= game.escort.maxHp : false;
+    }
+    if (ui.skipButton) {
+      ui.skipButton.textContent = game.state === "choice" ? "离开驻点" : "离开";
+    }
+    if (ui.shopResource) {
+      if (game.state === "choice") {
+        ui.shopResource.textContent = `当前补给 ${Math.floor(game.supply)} · 刷新 ${game.getShopRefreshCost()} · 修车 ${game.getRepairCost()} · 本驻点已买 ${game.shopPackPurchaseCount} 包`;
+        ui.shopResource.classList.remove("shop-resource--hidden");
+      } else {
+        ui.shopResource.textContent = "";
+        ui.shopResource.classList.add("shop-resource--hidden");
+      }
     }
     updateJokerRack(game);
   }
@@ -846,9 +955,11 @@
       this.checkpointPauseRemaining = 0;
       this.score = 0;
       this.kills = 0;
+      this.eliteKills = 0;
+      this.bossKills = 0;
+      this.supply = 12;
       this.xp = 0;
       this.xpNeed = 5;
-      this.upgradeCharge = 0;
       this.nextChoiceKillIndex = 0;
       this.nextChoiceKillTarget = GAME_TUNING.roguelike.killChoiceThresholds[0];
       this.jokerSlots = 8;
@@ -857,8 +968,17 @@
       this.finalHold = false;
       this.nextChoiceReason = "";
       this.nextChoiceSubtitle = "";
-      this.choiceReasonQueue = [];
+      this.choiceContext = "checkpoint_shop";
+      this.shopPhase = "pack_offers";
+      this.pendingPackOffers = [];
+      this.activePack = null;
       this.checkpointPulseCd = 0;
+      this.currentCheckpointTrial = null;
+      this.checkpointTrialEscortHpStart = 0;
+      this.checkpointTrialKillStart = 0;
+      this.checkpointTrialHeavyKillStart = 0;
+      this.shopRefreshCount = 0;
+      this.shopPackPurchaseCount = 0;
       this.spawnTimers = {
         trickle: rand(...GAME_TUNING.spawn.trickleStartRange),
         surge: rand(...GAME_TUNING.spawn.surgeStartRange),
@@ -872,7 +992,6 @@
       this.lastJokerRackHtml = "";
       this.upgradesTaken = new Set();
       this.pendingChoices = [];
-      this.rerollCharges = 1;
       this.route = ROUTE.map((point) => ({ ...point }));
       this.baseEscort = {
         x: this.route[0].x,
@@ -976,12 +1095,9 @@
       this.updateBullets(dt);
       this.updateZombies(dt);
       this.updateCheckpointPulse(dt);
+      this.updateCheckpointTrial();
       this.updateParticles(dt);
       this.updateTexts(dt);
-      if (this.upgradeCharge > 0 && this.pendingChoices.length === 0 && this.state === "playing") {
-        this.upgradeCharge -= 1;
-        this.triggerChoice(this.choiceReasonQueue.shift() || `击杀达到 ${this.kills}`);
-      }
       if (this.escort.hp <= 0 || this.hero.hp <= 0) {
         this.finish(false, this.escort.hp <= 0 ? "护送目标被尸潮拖垮了。" : "主角被尸潮压制倒下了。");
         return;
@@ -1032,13 +1148,18 @@
         this.checkpointPauseRemaining = this.getCheckpointStopDuration();
         this.escort.hp = Math.min(this.escort.maxHp, this.escort.hp + this.escort.checkpointHeal);
         this.score += 120;
-        if (this.segmentIndex >= GAME_TUNING.route.latePressure.checkpointChoiceStartSegment) {
-          this.upgradeCharge += GAME_TUNING.route.latePressure.checkpointChoiceGain;
-          this.choiceReasonQueue.push(`抵达 ${target.label}`);
-          this.spawnText(target.x, target.y - 66, "后半局补给 · 获得抽牌", "#ffd166");
-        }
+        const checkpointSupply =
+          GAME_TUNING.roguelike.checkpointSupplyRewardBase +
+          (this.segmentIndex >= GAME_TUNING.route.latePressure.checkpointChoiceStartSegment ? GAME_TUNING.roguelike.checkpointLateSupplyBonus : 0);
+        this.prepareCheckpointTrial();
+        this.gainSupply(checkpointSupply, `抵达 ${target.label}`, target.x, target.y - 66);
         this.spawnText(target.x, target.y - 44, `抵达 ${target.label} · 驻守 ${this.getCheckpointStopDuration()}s`, "#7df0c0");
+        if (this.currentCheckpointTrial) {
+          this.spawnText(target.x, target.y - 22, this.currentCheckpointTrial.title, "#ffcf6e");
+        }
         this.emitJokerEvent("checkpoint", { segmentIndex: this.segmentIndex, label: target.label });
+        this.triggerChoice(target.label, "checkpoint_shop");
+        return;
       }
     }
 
@@ -1513,15 +1634,14 @@
       this.kills += 1;
       this.score += zombie.score;
       this.xp += zombie.xp;
-      let awardedCharge = 0;
+      if (zombie.kind === "elite") this.eliteKills += 1;
+      if (zombie.kind === "boss") this.bossKills += 1;
       while (this.kills >= this.nextChoiceKillTarget) {
-        this.upgradeCharge += 1;
-        awardedCharge += 1;
-        this.choiceReasonQueue.push(`击杀达到 ${this.kills}`);
+        const supplyReward =
+          GAME_TUNING.roguelike.killSupplyRewardBase +
+          this.nextChoiceKillIndex * GAME_TUNING.roguelike.killSupplyRewardStep;
+        this.gainSupply(supplyReward, "击杀补给", W / 2, 86);
         this.advanceChoiceKillTarget();
-      }
-      if (awardedCharge > 0) {
-        this.spawnText(W / 2, 86, `击杀达标，获得 ${awardedCharge} 次抽牌`, "#7df0c0");
       }
       this.emitJokerEvent(zombie.kind === "boss" ? "boss_kill" : "kill", { zombie });
       if (this.hero.chainBurst) {
@@ -1550,10 +1670,8 @@
         this.hero.bountyCounter = (this.hero.bountyCounter || 0) + 1;
         if (this.hero.bountyCounter >= this.hero.bountyNeed) {
           this.hero.bountyCounter = 0;
-          this.upgradeCharge += 1;
-          this.choiceReasonQueue.push("赏金兑现");
-          this.rerollCharges = Math.min(4, this.rerollCharges + 1);
-          this.spawnText(W / 2, 68, "赏金兑现 · 获得抽牌与重抽", "#ffd166");
+          this.gainSupply(20, "赏金兑现", W / 2, 68);
+          this.spawnText(W / 2, 46, "处刑赏金到账", "#ffd166");
         }
       }
       if (zombie.kind === "boss" && zombie.finalBoss) {
@@ -1575,61 +1693,78 @@
       }
     }
 
-    triggerChoice(reason) {
-      if (this.jokerCards.length >= this.jokerSlots) {
-        this.upgradeCharge = 0;
-        this.spawnText(W / 2, 86, "牌组已满", "#ffd166");
-        return;
-      }
-      const available = shuffle(jokerPool.filter((upgrade) => !this.upgradesTaken.has(upgrade.id) && upgrade.condition(this)));
-      if (available.length === 0) {
-        this.upgradeCharge = 0;
-        return;
-      }
+    gainSupply(amount, reason, x = W / 2, y = 86) {
+      if (amount <= 0) return;
+      this.supply += amount;
+      this.spawnText(x, y, `${reason} +${Math.floor(amount)} 补给`, "#7df0c0");
+    }
+
+    // 卡包 / 购买：驻点货架、开包与卡包内选牌
+    triggerChoice(reason, context = "checkpoint_shop") {
       this.state = "choice";
-      this.pendingChoices = this.pickChoiceSet(available, 3).map((choice) => this.decorateChoice(choice));
+      this.choiceContext = context;
+      this.shopPhase = "pack_offers";
+      this.activePack = null;
+      this.shopRefreshCount = 0;
+      this.shopPackPurchaseCount = 0;
+      this.pendingPackOffers = this.buildPackOffers();
+      this.pendingChoices = this.pendingPackOffers;
       this.nextChoiceReason = reason;
-      this.nextChoiceSubtitle = reason.includes("路口") || reason.includes("广场") || reason.includes("安全区") ? "路段抽牌" : "战斗抽牌";
-      const focusTag = this.getDominantTag();
-      if (this.dupChoiceBonus > 0 && focusTag) {
-        const focusPool = available.filter((choice) => choice.tag === focusTag);
-        if (focusPool.length > 0) {
-          const focus = this.decorateChoice(focusPool[0]);
-          focus.isMirror = true;
-          focus.id = `mirror_${focus.id}_${this.nextId}`;
-          focus.title = `镜像回响 · ${focus.title}`;
-          focus.description = `强化你当前最成型的 ${focusTag} 路线，直接让一张同类牌 +1 级。`;
-          focus.rarity = "legendary";
-          this.pendingChoices.push(focus);
-        }
-      }
+      this.nextChoiceSubtitle = "卡包货架";
       this.renderUpgradeChoices();
       showOverlay(ui.upgradeOverlay);
-      ui.upgradeEyebrow.textContent = "抽小丑牌";
-      ui.upgradeTitle.textContent = "从牌堆里挑出一条更像样的成长路线";
-      ui.upgradeSubtitle.textContent = `${this.nextChoiceSubtitle} · 击杀越快，抽牌节奏就越快。`;
-      ui.mode.textContent = "抽牌中";
+      ui.upgradeEyebrow.textContent = "驻点卡包货架";
+      ui.upgradeTitle.textContent = `${reason} · 先买卡包，再从开包结果里选 1 张`;
+      ui.upgradeSubtitle.textContent = this.getShopSubtitle();
+      ui.mode.textContent = "补给中";
+      updateHud(this);
     }
 
     rerollChoices() {
-      if (this.state !== "choice" || this.rerollCharges <= 0) return;
-      this.rerollCharges -= 1;
-      const exclude = new Set(this.pendingChoices.map((choice) => choice.id));
-      const available = shuffle(jokerPool.filter((upgrade) => !this.upgradesTaken.has(upgrade.id) && upgrade.condition(this) && !exclude.has(upgrade.id)));
-      this.pendingChoices = this.pickChoiceSet(available, 3).map((choice) => this.decorateChoice(choice));
+      if (this.state !== "choice" || this.shopPhase !== "pack_offers") return;
+      const cost = this.getShopRefreshCost();
+      if (this.supply < cost) {
+        this.spawnText(W / 2, 88, "补给不足", "#ff6575");
+        return;
+      }
+      this.supply -= cost;
+      this.shopRefreshCount += 1;
+      this.pendingPackOffers = this.buildPackOffers();
+      this.pendingChoices = this.pendingPackOffers;
       this.renderUpgradeChoices();
-      this.spawnText(W / 2, 88, "重抽", "#7df0c0");
+      ui.upgradeSubtitle.textContent = this.getShopSubtitle();
+      this.spawnText(W / 2, 88, `刷新卡包 -${cost}`, "#7df0c0");
+      updateHud(this);
+    }
+
+    repairAtShop() {
+      if (this.state !== "choice") return;
+      const cost = this.getRepairCost();
+      if (this.supply < cost) {
+        this.spawnText(W / 2, 90, "补给不足", "#ff6575");
+        return;
+      }
+      if (this.escort.hp >= this.escort.maxHp) {
+        this.spawnText(W / 2, 90, "车辆状态良好", "#ffd166");
+        return;
+      }
+      this.supply -= cost;
+      const repair = this.getRepairAmount();
+      this.escort.hp = Math.min(this.escort.maxHp, this.escort.hp + repair);
+      ui.upgradeSubtitle.textContent = this.getShopSubtitle();
+      this.spawnText(W / 2, 90, `修车 +${repair}`, "#7df0c0");
       updateHud(this);
     }
 
     skipChoice() {
       if (this.state !== "choice") return;
       this.pendingChoices = [];
-      this.escort.hp = Math.min(this.escort.maxHp, this.escort.hp + 18);
-      this.rerollCharges = Math.min(3, this.rerollCharges + 1);
+      this.pendingPackOffers = [];
+      this.activePack = null;
+      this.shopPhase = "pack_offers";
       this.state = "playing";
       hideOverlay(ui.upgradeOverlay);
-      this.spawnText(W / 2, 90, "跳过并修整", "#ffd166");
+      this.spawnText(W / 2, 90, "离开驻点", "#ffd166");
       updateHud(this);
     }
 
@@ -1637,6 +1772,15 @@
       if (this.state !== "choice") return;
       const selected = this.pendingChoices.find((choice) => choice.id === id);
       if (!selected) return;
+      if (selected.kind === "pack") {
+        this.buyPack(selected);
+        return;
+      }
+
+      if (this.shopPhase !== "pack_cards" && selected.kind !== "card") {
+        return;
+      }
+
       if (selected.isMirror) {
         const target = this.getPreferredUpgradeTarget(selected.tag);
         if (target) {
@@ -1652,14 +1796,24 @@
         this.spawnText(W / 2, 90, selected.title, "#7df0c0");
         this.rebuildLoadout();
       }
-      this.pendingChoices = [];
-      this.state = "playing";
-      hideOverlay(ui.upgradeOverlay);
+      this.activePack = null;
+      this.shopPhase = "pack_offers";
+      this.pendingPackOffers = this.buildPackOffers();
+      this.pendingChoices = this.pendingPackOffers;
+      this.nextChoiceReason = this.currentCheckpointName || "驻点补给站";
+      this.nextChoiceSubtitle = "卡包货架";
+      this.renderUpgradeChoices();
+      ui.upgradeEyebrow.textContent = "驻点卡包货架";
+      ui.upgradeTitle.textContent = this.currentCheckpointName
+        ? `${this.currentCheckpointName} · 可以继续购买卡包`
+        : "驻点卡包货架 · 可以继续购买卡包";
+      ui.upgradeSubtitle.textContent = this.getShopSubtitle();
+      this.spawnText(W / 2, 88, `${selected.title} 已收下，可继续买包`, "#7df0c0");
       updateHud(this);
     }
 
     renderUpgradeChoices() {
-      renderChoiceGrid(this.pendingChoices);
+      renderChoiceGrid(this.pendingChoices, this);
     }
 
     rebuildLoadout() {
@@ -1782,7 +1936,16 @@
     }
 
     decorateChoice(choice) {
-      return { ...choice, rarity: choice.rarity || "common", level: 1 };
+      return { ...choice, kind: "card", rarity: choice.rarity || "common", level: 1, cost: 0 };
+    }
+
+    decoratePackOffer(pack) {
+      return {
+        ...pack,
+        kind: "pack",
+        cardCount: pack.cardCount || 3,
+        cost: this.getPackCost(pack),
+      };
     }
 
     createJokerCard(choice) {
@@ -1822,37 +1985,238 @@
       );
     }
 
-    getCardEventWeight(card, type) {
-      const tag = card.tag;
-      if (type === "fire" && (tag === "节奏" || tag === "弹幕")) return 1;
-      if (type === "hit" && (tag === "弹幕" || tag === "攻击")) return 1;
-      if (type === "kill" && (tag === "攻击" || tag === "爆发")) return 1;
-      if (type === "checkpoint" && (tag === "防守" || tag === "节奏")) return 1.35;
-      if (type === "wave_start" && (tag === "节奏" || tag === "攻击")) return 0.8;
-      if (type === "escort_damage" && (tag === "防守" || tag === "爆发")) return 1.3;
-      if (type === "boss_kill") return 1.5;
-      if (card.id === "fission_joker" && type === "kill") return 1.4;
-      if (card.id === "mirror_joker" && type === "checkpoint") return 1;
-      return 0.35;
+    getShopRefreshCost() {
+      return GAME_TUNING.roguelike.shopRefreshCostBase + this.shopRefreshCount * GAME_TUNING.roguelike.shopRefreshCostStep;
     }
 
-    pickChoiceSet(choices, count) {
-      const pool = [...choices];
-      const picked = [];
-      while (picked.length < count && pool.length > 0) {
-        const totalWeight = pool.reduce((sum, choice) => sum + this.getChoiceWeight(choice), 0);
-        let roll = Math.random() * totalWeight;
-        let index = 0;
-        for (; index < pool.length; index += 1) {
-          roll -= this.getChoiceWeight(pool[index]);
-          if (roll <= 0) break;
-        }
-        picked.push(pool.splice(Math.min(index, pool.length - 1), 1)[0]);
+    getPackCost(pack) {
+      const baseCost = pack.cost || 0;
+      return baseCost + this.shopPackPurchaseCount * GAME_TUNING.roguelike.shopPackCostStep;
+    }
+
+    getRepairCost() {
+      return GAME_TUNING.roguelike.shopRepairCostBase + Math.max(0, this.segmentIndex - 1) * GAME_TUNING.roguelike.shopRepairCostStep;
+    }
+
+    getRepairAmount() {
+      const missing = Math.max(0, this.escort.maxHp - this.escort.hp);
+      return Math.max(
+        GAME_TUNING.roguelike.shopRepairBaseAmount,
+        Math.round(missing * GAME_TUNING.roguelike.shopRepairMissingHpRatio),
+      );
+    }
+
+    prepareCheckpointTrial() {
+      const tier = Math.max(0, this.segmentIndex - 1);
+      const reward = GAME_TUNING.roguelike.checkpointTrialSupplyBase + tier * GAME_TUNING.roguelike.checkpointTrialSupplyStep;
+      const xpReward = GAME_TUNING.roguelike.checkpointTrialXpBase + tier * GAME_TUNING.roguelike.checkpointTrialXpStep;
+      const dominantTag = this.getDominantTag();
+      let type = ["clear", "fortify", "execute"][tier % 3];
+      if (dominantTag === "防守") type = "fortify";
+      else if (dominantTag === "攻击" || dominantTag === "弹幕") type = "clear";
+      else if (dominantTag === "爆发") type = "execute";
+
+      const baseTrial = {
+        type,
+        reward,
+        xpReward,
+        success: false,
+        resolved: false,
+      };
+
+      if (type === "fortify") {
+        const target = Math.max(10, GAME_TUNING.roguelike.checkpointTrialDamageBase - tier * GAME_TUNING.roguelike.checkpointTrialDamageStep);
+        this.currentCheckpointTrial = {
+          ...baseTrial,
+          title: "坚守检定",
+          target,
+          rewardTags: ["防守", "节奏"],
+          description: `驻守结束前让车辆损伤不超过 ${target} 点`,
+        };
+      } else if (type === "execute") {
+        const target =
+          GAME_TUNING.roguelike.checkpointTrialHeavyBase +
+          Math.floor(tier / Math.max(1, GAME_TUNING.roguelike.checkpointTrialHeavyStep));
+        this.currentCheckpointTrial = {
+          ...baseTrial,
+          title: "处刑检定",
+          target,
+          rewardTags: ["爆发", "攻击"],
+          description: `驻点期间击杀 ${target} 只精英或 Boss`,
+        };
+      } else {
+        const target = GAME_TUNING.roguelike.checkpointTrialKillBase + tier * GAME_TUNING.roguelike.checkpointTrialKillStep;
+        this.currentCheckpointTrial = {
+          ...baseTrial,
+          title: "清线检定",
+          target,
+          rewardTags: ["攻击", "弹幕"],
+          description: `驻点期间击杀 ${target} 只尸群`,
+        };
       }
-      return picked;
+
+      this.checkpointTrialEscortHpStart = this.escort.hp;
+      this.checkpointTrialKillStart = this.kills;
+      this.checkpointTrialHeavyKillStart = this.eliteKills + this.bossKills;
     }
 
+    updateCheckpointTrial() {
+      const trial = this.currentCheckpointTrial;
+      if (!trial || trial.resolved) return;
+      const killDelta = this.kills - this.checkpointTrialKillStart;
+      const heavyKillDelta = this.eliteKills + this.bossKills - this.checkpointTrialHeavyKillStart;
+      const escortDamage = Math.max(0, this.checkpointTrialEscortHpStart - this.escort.hp);
+
+      if (trial.type === "clear" && killDelta >= trial.target) {
+        this.resolveCheckpointTrial(true);
+        return;
+      }
+      if (trial.type === "execute" && heavyKillDelta >= trial.target) {
+        this.resolveCheckpointTrial(true);
+        return;
+      }
+      if (trial.type === "fortify" && escortDamage > trial.target) {
+        this.resolveCheckpointTrial(false);
+        return;
+      }
+      if (this.checkpointPauseRemaining <= 0) {
+        const success = trial.type === "fortify" ? escortDamage <= trial.target : false;
+        this.resolveCheckpointTrial(success);
+      }
+    }
+
+    resolveCheckpointTrial(success) {
+      const trial = this.currentCheckpointTrial;
+      if (!trial || trial.resolved) return;
+      trial.resolved = true;
+      trial.success = success;
+      if (success) {
+        this.gainSupply(trial.reward, `${trial.title} 达成`, W / 2, 72);
+        this.grantTrialTagXp(trial.rewardTags, trial.xpReward, trial.title);
+        this.spawnText(W / 2, 50, `${trial.title}成功`, "#ffcf6e");
+        return;
+      }
+      this.spawnText(W / 2, 72, `${trial.title}失败`, "#ff8f8d");
+    }
+
+    grantTrialTagXp(tags, amount, title) {
+      const matchedCards = this.jokerCards.filter((card) => tags.includes(card.tag));
+      if (matchedCards.length === 0) return;
+      for (const card of matchedCards) {
+        this.gainJokerXp(card, amount);
+      }
+      this.spawnText(W / 2, 28, `${title} · ${tags.join("/")} 获得经验`, "#7df0c0");
+    }
+
+    getCheckpointTrialProgress() {
+      const trial = this.currentCheckpointTrial;
+      if (!trial) return "";
+      if (trial.resolved) return trial.success ? `${trial.title}已达成` : `${trial.title}已失败`;
+      if (trial.type === "fortify") {
+        const escortDamage = Math.max(0, this.checkpointTrialEscortHpStart - this.escort.hp);
+        return `坚守 ${Math.round(escortDamage)}/${trial.target}`;
+      }
+      if (trial.type === "execute") {
+        const heavyKillDelta = this.eliteKills + this.bossKills - this.checkpointTrialHeavyKillStart;
+        return `处刑 ${heavyKillDelta}/${trial.target}`;
+      }
+      const killDelta = this.kills - this.checkpointTrialKillStart;
+      return `清线 ${killDelta}/${trial.target}`;
+    }
+
+    getShopSubtitle() {
+      const trialText = this.currentCheckpointTrial ? `本驻点检定：${this.currentCheckpointTrial.description}。` : "";
+      if (this.shopPhase === "pack_cards" && this.activePack) {
+        return `${trialText} 当前补给 ${Math.floor(this.supply)} · 已开 ${this.activePack.title}，从卡包里选 1 张。`;
+      }
+      const packCountText = this.shopPackPurchaseCount > 0 ? `本驻点已买 ${this.shopPackPurchaseCount} 包。` : "";
+      return `${trialText} 当前补给 ${Math.floor(this.supply)} · ${packCountText}先买卡包，再开包选牌，或选择修车 / 刷新。`;
+    }
+
+    buildPackOffers() {
+      return this.pickChoiceSet(packCatalog, 3, (pack) => this.getPackWeight(pack)).map((pack) => this.decoratePackOffer(pack));
+    }
+
+    buildPackCards(pack) {
+      const available = shuffle(jokerPool.filter((upgrade) => !this.upgradesTaken.has(upgrade.id) && upgrade.condition(this)));
+      let nextChoices = this.pickChoiceSet(
+        available,
+        Math.min(pack.cardCount || 3, 3),
+        (choice) => this.getPackCardWeight(choice, pack),
+      ).map((choice) => this.decorateChoice(choice));
+      const focusTag = this.getDominantTag();
+      if (this.dupChoiceBonus > 0 && focusTag && nextChoices.length > 0) {
+        const focusPool = available.filter((choice) => choice.tag === focusTag);
+        if (focusPool.length > 0) {
+          const focus = this.decorateChoice(focusPool[0]);
+          focus.isMirror = true;
+          focus.id = `mirror_${focus.id}_${this.nextId}`;
+          focus.title = `镜像回响 · ${focus.title}`;
+          focus.description = `强化你当前最成型的 ${focusTag} 路线，直接让一张同类牌 +1 级。`;
+          focus.rarity = "legendary";
+          nextChoices[Math.min(1, nextChoices.length - 1)] = focus;
+        }
+      }
+      return nextChoices;
+    }
+
+    buyPack(packOrId) {
+      const pack = typeof packOrId === "string" ? this.pendingChoices.find((item) => item.id === packOrId) : packOrId;
+      if (!pack || pack.kind !== "pack") return;
+      const cost = this.getPackCost(pack);
+      if (this.supply < cost) {
+        this.spawnText(W / 2, 90, `补给不足，还差 ${cost - this.supply}`, "#ff6575");
+        if (ui.shopResource) {
+          ui.shopResource.textContent = `补给不足，还差 ${Math.ceil(cost - this.supply)} 才能买 ${pack.title}`;
+        }
+        if (ui.upgradeSubtitle) {
+          ui.upgradeSubtitle.textContent = `补给不足，还差 ${Math.ceil(cost - this.supply)} 才能买 ${pack.title}。${this.getShopSubtitle()}`;
+        }
+        return;
+      }
+      this.supply -= cost;
+      this.shopPackPurchaseCount += 1;
+      this.activePack = pack;
+      this.shopPhase = "pack_cards";
+      this.choiceContext = "pack_cards";
+      this.pendingChoices = this.buildPackCards(pack);
+      this.nextChoiceReason = pack.title;
+      this.nextChoiceSubtitle = "卡包已打开";
+      this.renderUpgradeChoices();
+      ui.upgradeEyebrow.textContent = pack.title;
+      ui.upgradeTitle.textContent = `${pack.title} 已打开，从卡包里选 1 张`;
+      ui.upgradeSubtitle.textContent = this.getShopSubtitle();
+      this.spawnText(W / 2, 88, `${pack.title} -${cost}`, "#7df0c0");
+      updateHud(this);
+    }
+
+    // 随机：卡包权重、卡包内候选与通用抽样
     getChoiceWeight(choice) {
+      if (choice.kind === "pack") return this.getPackWeight(choice);
+      return this.getCardWeight(choice);
+    }
+
+    getPackWeight(pack) {
+      const progress = this.elapsed / MATCH_DURATION;
+      let weight = { common: 6, uncommon: 3, rare: 1.25, legendary: 0.45 }[pack.rarity || "common"] || 1;
+      if (progress > 0.35) weight *= { common: 0.95, uncommon: 1.05, rare: 1.15, legendary: 1.25 }[pack.rarity || "common"] || 1;
+      if (progress > 0.65) weight *= { common: 0.8, uncommon: 1, rare: 1.25, legendary: 1.8 }[pack.rarity || "common"] || 1;
+      const focusTag = this.getDominantTag();
+      if (focusTag && pack.focusTags && pack.focusTags.includes(focusTag)) weight *= 1.25;
+      if (this.escort.hp < this.escort.maxHp * 0.65 && pack.focusTags && pack.focusTags.includes("防守")) weight *= 1.2;
+      if (this.hero.bulletsPerShot >= 2 && pack.focusTags && pack.focusTags.includes("攻击")) weight *= 1.1;
+      return weight;
+    }
+
+    getPackCardWeight(choice, pack) {
+      let weight = this.getCardWeight(choice);
+      if (pack.focusTags && pack.focusTags.includes(choice.tag)) weight *= 1.35;
+      if (pack.id === "mirror_pack" && choice.tag === this.getDominantTag()) weight *= 1.35;
+      if (pack.rarity === "legendary" && choice.rarity === "rare") weight *= 1.15;
+      return weight;
+    }
+
+    getCardWeight(choice) {
       const progress = this.elapsed / MATCH_DURATION;
       const rarity = choice.rarity || "common";
       let weight = { common: 6, uncommon: 3, rare: 1.2, legendary: 0.35 }[rarity] || 1;
@@ -1866,6 +2230,37 @@
       if (this.escort.hp < this.escort.maxHp * 0.65 && choice.tag === "防守") weight *= 1.2;
       if (this.hero.bulletsPerShot >= 2 && choice.tag === "弹幕") weight *= 1.2;
       return weight;
+    }
+
+    pickChoiceSet(choices, count, weightFn = (choice) => this.getChoiceWeight(choice)) {
+      const pool = [...choices];
+      const picked = [];
+      while (picked.length < count && pool.length > 0) {
+        const totalWeight = pool.reduce((sum, choice) => sum + weightFn(choice), 0);
+        let roll = Math.random() * totalWeight;
+        let index = 0;
+        for (; index < pool.length; index += 1) {
+          roll -= weightFn(pool[index]);
+          if (roll <= 0) break;
+        }
+        picked.push(pool.splice(Math.min(index, pool.length - 1), 1)[0]);
+      }
+      return picked;
+    }
+
+    // 肉鸽：驻点检定与路段压力
+    getCardEventWeight(card, type) {
+      const tag = card.tag;
+      if (type === "fire" && (tag === "节奏" || tag === "弹幕")) return 1;
+      if (type === "hit" && (tag === "弹幕" || tag === "攻击")) return 1;
+      if (type === "kill" && (tag === "攻击" || tag === "爆发")) return 1;
+      if (type === "checkpoint" && (tag === "防守" || tag === "节奏")) return 1.35;
+      if (type === "wave_start" && (tag === "节奏" || tag === "攻击")) return 0.8;
+      if (type === "escort_damage" && (tag === "防守" || tag === "爆发")) return 1.3;
+      if (type === "boss_kill") return 1.5;
+      if (card.id === "fission_joker" && type === "kill") return 1.4;
+      if (card.id === "mirror_joker" && type === "checkpoint") return 1;
+      return 0.35;
     }
 
     getDominantTag() {
@@ -1896,7 +2291,7 @@
       if (this.state === "start") return "等待开始";
       if (this.checkpointPauseRemaining > 0) return "驻点停留";
       if (this.state === "playing") return "护送中";
-      if (this.state === "choice") return "抽牌中";
+      if (this.state === "choice") return "补给中";
       if (this.state === "pause") return "暂停";
       if (this.state === "win") return "胜利";
       if (this.state === "lose") return "失败";
@@ -1905,7 +2300,9 @@
 
     getGoalText() {
       if (this.checkpointPauseRemaining > 0 && this.currentCheckpointName) {
-        return `驻守 ${this.currentCheckpointName} ${Math.ceil(this.checkpointPauseRemaining)}s`;
+        return this.state === "choice"
+          ? `${this.currentCheckpointName} 补给站`
+          : `驻守 ${this.currentCheckpointName} ${Math.ceil(this.checkpointPauseRemaining)}s · ${this.getCheckpointTrialProgress()}`;
       }
       if (this.finalHold && this.bossSpawned && !this.bossKilled) return "守住安全区前线";
       if (this.finalHold && this.bossKilled) return "等待结算";
@@ -1914,6 +2311,7 @@
 
     getBuildSummary() {
       const parts = [];
+      parts.push(`补给 ${Math.floor(this.supply)}`);
       if (this.jokerCards.length > 0) parts.push(`小丑牌 ${this.jokerCards.length}/${this.jokerSlots}`);
       if (this.jokerCards.some((card) => card.level > 1)) parts.push(`总等级 ${this.jokerCards.reduce((sum, card) => sum + card.level, 0)}`);
       if (this.escort.maxHp > this.baseEscort.maxHp) parts.push(`车体 ${this.escort.maxHp}`);
@@ -1930,9 +2328,7 @@
       if (this.escort.checkpointPulseDamage > 0) parts.push("驻点脉冲");
       if (this.hero.chainBurst) parts.push("连锁爆发");
       if (this.hero.panicBlast) parts.push("紧急爆破");
-      if (this.rerollCharges > 0) parts.push(`重抽 ${this.rerollCharges}`);
-      if (this.upgradeCharge > 0) parts.push(`待抽牌 ${this.upgradeCharge}`);
-      parts.push(`下次抽牌 ${this.nextChoiceKillTarget} 杀`);
+      parts.push(`下次补给 ${this.nextChoiceKillTarget} 杀`);
       return parts.length ? parts.join(" / ") : "基础护送";
     }
 
@@ -1977,12 +2373,24 @@
 
     updateHintText() {
       let hint = "护送目标会沿路线自动推进，使用 WASD 手动走位，火力会自动锁敌并直线射击。";
-      if (this.checkpointPauseRemaining > 0 && this.currentCheckpointName) {
-        hint = `车队正在 ${this.currentCheckpointName} 驻守补给，停留 ${Math.ceil(this.checkpointPauseRemaining)} 秒后继续推进。`;
+      if (this.state === "choice" && this.currentCheckpointName) {
+        if (this.shopPhase === "pack_cards" && this.activePack) {
+          hint = `你已打开 ${this.activePack.title}。${this.currentCheckpointTrial ? `本驻点检定是“${this.currentCheckpointTrial.description}”。` : ""}先从 3 张里选 1 张，再继续推进。`;
+        } else {
+          hint = `你已到达 ${this.currentCheckpointName} 补给站。${this.currentCheckpointTrial ? `本驻点检定是“${this.currentCheckpointTrial.description}”。` : ""}这里可以反复买卡包、修车或刷新，买到满意再离开。`;
+        }
+      } else if (this.checkpointPauseRemaining > 0 && this.currentCheckpointName) {
+        if (this.currentCheckpointTrial?.resolved) {
+          hint = this.currentCheckpointTrial.success
+            ? `车队正在 ${this.currentCheckpointName} 驻守补给，检定已达成，稳住 ${Math.ceil(this.checkpointPauseRemaining)} 秒后继续推进。`
+            : `车队正在 ${this.currentCheckpointName} 驻守补给，检定已失败，至少保住车辆撑过剩余 ${Math.ceil(this.checkpointPauseRemaining)} 秒。`;
+        } else {
+          hint = `车队正在 ${this.currentCheckpointName} 驻守补给。当前检定：${this.currentCheckpointTrial?.description || "稳住当前阵线"}，进度 ${this.getCheckpointTrialProgress()}。`;
+        }
       } else if (this.segmentIndex === 0) hint = "开局先用 WASD 保持站位，角色活动范围会被限制在护送车周围。";
       else if (this.segmentIndex === 1) hint = "中段围堵更密，继续把小丑牌组往一个方向凑成型。";
       else if (this.segmentIndex === 2) hint = "广场和医院街口都在收网，看看牌组能不能顶住后半局。";
-      else if (this.segmentIndex >= 3 && !this.finalHold) hint = "第三节点后尸潮会明显提压，精英和驻点抽牌都会变多，尽快把牌组成型。";
+      else if (this.segmentIndex >= 3 && !this.finalHold) hint = "第三节点后尸潮会明显提压，精英会更早进场，驻点补给也更关键，尽快把牌组做成型。";
       else if (this.finalHold && !this.bossKilled) hint = "安全区前最后一战，先打掉 Boss 再让车队进门。";
       else if (this.finalHold && this.bossKilled) hint = "安全区已经打开，稳住最后几秒就能过关。";
       ui.hintText.textContent = hint;
@@ -2119,6 +2527,10 @@
 
   if (ui.rerollButton) {
     ui.rerollButton.addEventListener("click", () => game.rerollChoices());
+  }
+
+  if (ui.repairButton) {
+    ui.repairButton.addEventListener("click", () => game.repairAtShop());
   }
 
   if (ui.skipButton) {

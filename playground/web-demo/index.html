@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>丧尸围城护送肉鸽 Demo</title>
-    <link rel="stylesheet" href="./styles.css?v=20260416p" />
+    <link rel="stylesheet" href="./styles.css?v=20260416s" />
   </head>
   <body>
     <main class="app-shell">
@@ -12,7 +12,7 @@
         <p class="eyebrow">Canvas Demo</p>
         <h1>丧尸围城护送肉鸽</h1>
         <p class="sidebar-copy">
-          车队会沿着城市路线自动前进，玩家需要在尸潮围城中开路、保车、并靠路段强化把这一局做出差异。
+          车队会沿着城市路线自动前进，玩家需要在尸潮围城中开路、保车，并在驻点补给站里先买卡包、再开包选牌，把这一局逐步做成型。
         </p>
 
         <section class="sidebar-panel">
@@ -31,7 +31,7 @@
             <li><span>护送目标</span><strong>自动沿路线前进</strong></li>
             <li><span>尸潮</span><strong>四周围城压迫</strong></li>
             <li><span>主角</span><strong>走位 + 自动锁敌</strong></li>
-            <li><span>强化</span><strong>路段三选一</strong></li>
+            <li><span>成长</span><strong>驻点补给站买卡包</strong></li>
           </ul>
         </section>
 
@@ -70,6 +70,10 @@
             <strong id="score">0</strong>
           </article>
           <article class="hud-card">
+            <p class="hud-label">补给</p>
+            <strong id="supply">0</strong>
+          </article>
+          <article class="hud-card">
             <p class="hud-label">尸潮</p>
             <strong id="zombies-left">0</strong>
           </article>
@@ -106,7 +110,7 @@
               <p class="eyebrow">试玩目标</p>
               <h2>护送车队穿过尸潮围城，把最后一段路打通</h2>
               <p>
-                这版 Demo 只验证三件事：车队会自动前进、主角会自动射击、路段到点会弹出肉鸽三选一。
+                这版 Demo 只验证三件事：车队会自动前进、主角会自动锁敌射击、驻点到站会先买卡包再开包选牌。
               </p>
               <button class="primary-button" id="start-button" type="button" onclick="const btn=this; btn.disabled=true; btn.textContent='加载中…'; try { if (window.__launchGame) { window.__launchGame(btn); } else { btn.disabled=false; btn.textContent='开始试玩'; } } catch (error) { btn.disabled=false; btn.textContent='开始试玩'; throw error; }">开始试玩</button>
             </div>
@@ -122,13 +126,15 @@
 
           <div class="overlay hidden" id="upgrade-overlay">
             <div class="overlay-card wide">
-              <p class="eyebrow" id="upgrade-eyebrow">抽小丑牌</p>
-              <h2 id="upgrade-title">从三张小丑牌里抽 1 张，继续把牌组做成型</h2>
-              <p id="upgrade-subtitle">每张牌都会朝不同的成长路线滚雪球，选牌前先看看这局缺什么。</p>
+              <p class="eyebrow" id="upgrade-eyebrow">驻点补给站</p>
+              <h2 id="upgrade-title">先买卡包，再从包里选 1 张小丑牌</h2>
+              <p id="upgrade-subtitle">卡包先决定本次货架方向，开包后再从 3 张里挑 1 张，把这一局推向更明确的路线。</p>
+              <div class="shop-resource" id="shop-resource"></div>
               <div class="choice-grid" id="choice-grid"></div>
               <div class="choice-actions">
-                <button class="secondary-button" id="reroll-button">重抽 1 次</button>
-                <button class="secondary-button secondary-button--ghost" id="skip-button">跳过并修整</button>
+                <button class="secondary-button" id="reroll-button">刷新补给站</button>
+                <button class="secondary-button" id="repair-button">修理车辆</button>
+                <button class="secondary-button secondary-button--ghost" id="skip-button">离开驻点</button>
               </div>
             </div>
           </div>
@@ -160,6 +166,6 @@
       </section>
     </main>
 
-    <script src="./script.js?v=20260416p"></script>
+    <script src="./script.js?v=20260416t"></script>
   </body>
 </html>
