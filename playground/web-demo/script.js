@@ -35,6 +35,13 @@
     upgradeEyebrow: document.getElementById("upgrade-eyebrow"),
     upgradeTitle: document.getElementById("upgrade-title"),
     upgradeSubtitle: document.getElementById("upgrade-subtitle"),
+    packOpenPanel: document.getElementById("pack-open-panel"),
+    packOpenPack: document.getElementById("pack-open-pack"),
+    packOpenTitle: document.getElementById("pack-open-title"),
+    packOpenSubtitle: document.getElementById("pack-open-subtitle"),
+    packDrawPanel: document.getElementById("pack-draw-panel"),
+    packDrawTitle: document.getElementById("pack-draw-title"),
+    packDrawNote: document.getElementById("pack-draw-note"),
     joystick: document.getElementById("mobile-joystick"),
     joystickThumb: document.getElementById("mobile-joystick-thumb"),
   };
@@ -43,6 +50,8 @@
   const BASE_H = 720;
   const W = 1600;
   const H = 900;
+  const WORLD_W = W;
+  const WORLD_H = 2600;
   const SCALE_X = W / BASE_W;
   const SCALE_Y = H / BASE_H;
   const MATCH_DURATION = 480;
@@ -83,7 +92,7 @@
       },
     },
     combat: {
-      baseFireRate: 0.734,
+      baseFireRate: 1.468,
       heroMaxEscortDistance: 220,
     },
     spawn: {
@@ -148,25 +157,31 @@
   }
 
   const ROUTE = [
-    { x: 640, y: 640, label: "出发" },
-    { x: 560, y: 560, label: "外环路口" },
-    { x: 720, y: 480, label: "加油站" },
-    { x: 520, y: 390, label: "商场广场" },
-    { x: 760, y: 300, label: "医院街口" },
-    { x: 500, y: 210, label: "地铁口" },
-    { x: 640, y: 140, label: "安全区" },
-  ].map(scalePoint);
+    { x: 800, y: 180, label: "出发" },
+    { x: 720, y: 560, label: "外环路口" },
+    { x: 860, y: 940, label: "加油站" },
+    { x: 700, y: 1320, label: "商场广场" },
+    { x: 880, y: 1700, label: "医院街口" },
+    { x: 730, y: 2080, label: "地铁口" },
+    { x: 800, y: 2380, label: "安全区" },
+  ];
 
   const SPAWN_GATES = [
-    { x: -24, y: 120 },
-    { x: 1304, y: 150 },
-    { x: -24, y: 540 },
-    { x: 1304, y: 520 },
-    { x: 220, y: -24 },
-    { x: 1060, y: -24 },
-    { x: 250, y: 744 },
-    { x: 1030, y: 744 },
-  ].map(scalePoint);
+    { x: -24, y: 180 },
+    { x: 1624, y: 180 },
+    { x: -24, y: 560 },
+    { x: 1624, y: 560 },
+    { x: -24, y: 940 },
+    { x: 1624, y: 940 },
+    { x: -24, y: 1320 },
+    { x: 1624, y: 1320 },
+    { x: -24, y: 1700 },
+    { x: 1624, y: 1700 },
+    { x: -24, y: 2080 },
+    { x: 1624, y: 2080 },
+    { x: -24, y: 2380 },
+    { x: 1624, y: 2380 },
+  ];
 
   const zombieDefs = {
     walker: { label: "普通丧尸", color: "#8fe17b", radius: 15, hp: 24, speed: 30, damage: 6, score: 40, xp: 1 },
@@ -183,13 +198,13 @@
       title: "守车小丑",
       rarity: "common",
       tag: "防守",
-      description: "护送目标最大耐久 +30，并立刻修复 20 点。等级越高，检查点修复越强。",
+      description: "车体最大耐久提升，驻点修理更有效。",
       maxLevel: 3,
       condition: () => true,
       apply: (game, card) => {
         const level = card.level;
-        game.escort.maxHp += 24 + (level - 1) * 12;
-        game.escort.hp = Math.min(game.escort.maxHp, game.escort.hp + 18 + (level - 1) * 8);
+        game.escort.maxHp += 28 + (level - 1) * 14;
+        game.escort.hp = Math.min(game.escort.maxHp, game.escort.hp + 20 + (level - 1) * 10);
         game.escort.checkpointHeal += 6 + (level - 1) * 4;
       },
     },
@@ -198,20 +213,21 @@
       title: "推进小丑",
       rarity: "common",
       tag: "节奏",
-      description: "护送目标移动速度 +12%。等级越高，推进节奏越稳。",
+      description: "车队推进速度提升，角色贴车更灵活。",
       maxLevel: 3,
       condition: () => true,
       apply: (game, card) => {
         const level = card.level;
-        game.escort.speed *= 1 + 0.1 + (level - 1) * 0.05;
+        game.escort.speed *= 1 + 0.08 + (level - 1) * 0.04;
+        game.hero.autoAimRange += 10 + (level - 1) * 6;
       },
     },
     {
       id: "hero_damage",
       title: "重击小丑",
       rarity: "common",
-      tag: "攻击",
-      description: "主角武器伤害 +5。等级越高，击杀成长越快。",
+      tag: "处刑",
+      description: "对精英和 Boss 的基础伤害提升。",
       maxLevel: 4,
       condition: () => true,
       apply: (game, card) => {
@@ -224,40 +240,41 @@
       title: "连射小丑",
       rarity: "common",
       tag: "节奏",
-      description: "开火冷却 -16%。等级越高，射击节奏越紧。",
+      description: "开火冷却降低，射击节奏更稳。",
       maxLevel: 4,
       condition: () => true,
       apply: (game, card) => {
         const level = card.level;
-        game.hero.fireRateMult *= Math.max(0.72, 0.86 - (level - 1) * 0.03);
+        game.hero.fireRateMult *= Math.max(0.68, 0.88 - (level - 1) * 0.04);
       },
     },
     {
       id: "multi_shot",
       title: "散射小丑",
       rarity: "uncommon",
-      tag: "弹幕",
-      description: "每次开火额外发射 1 枚子弹。等级越高，弹幕扩张越强。",
+      tag: "爆发",
+      description: "每次开火额外发射子弹，适合做清线爆发。",
       maxLevel: 3,
       condition: (game) => game.hero.bulletsPerShot < 4,
       apply: (game, card) => {
         const level = card.level;
         game.hero.bulletsPerShot += 1 + Math.floor((level - 1) / 2);
-        game.hero.spread += 0.14 + (level - 1) * 0.04;
+        game.hero.spread += 0.14 + (level - 1) * 0.05;
       },
     },
     {
       id: "pierce_rounds",
-      title: "重弹小丑",
+      title: "点杀牌",
       rarity: "uncommon",
-      tag: "攻击",
-      description: "子弹命中即消失，但单发伤害更高。等级越高，伤害与索敌范围继续提升。",
+      tag: "处刑",
+      description: "提高对高威胁目标的直线击穿能力。",
       maxLevel: 3,
       condition: () => true,
       apply: (game, card) => {
         const level = card.level;
-        game.hero.damageBonus += 4 + (level - 1) * 4;
-        game.hero.range += Math.max(0, level - 1) * 18;
+        game.hero.damageBonus += 5 + (level - 1) * 4;
+        game.hero.range += 16 + (level - 1) * 10;
+        game.hero.eliteDamageMult += 0.08 + (level - 1) * 0.05;
       },
     },
     {
@@ -265,7 +282,7 @@
       title: "修理小丑",
       rarity: "uncommon",
       tag: "防守",
-      description: "每经过一个路段检查点，护送目标额外回复 18 点。等级越高，回复更稳。",
+      description: "每个驻点都会额外修一口车，越早拿越稳。",
       maxLevel: 3,
       condition: () => true,
       apply: (game, card) => {
@@ -278,14 +295,14 @@
       title: "连锁小丑",
       rarity: "rare",
       tag: "爆发",
-      description: "击杀丧尸后会对附近敌人造成溅射伤害。等级越高，爆炸范围更大。",
+      description: "击杀会带出连锁伤害，越打越像引爆器。",
       maxLevel: 3,
       condition: (game) => !game.hero.chainBurst,
       apply: (game, card) => {
         const level = card.level;
         game.hero.chainBurst = true;
-        game.hero.chainBurstRadius = 84 + (level - 1) * 22;
-        game.hero.chainBurstDamage = 8 + (level - 1) * 4;
+        game.hero.chainBurstRadius = 88 + (level - 1) * 24;
+        game.hero.chainBurstDamage = 10 + (level - 1) * 5;
       },
     },
     {
@@ -293,14 +310,14 @@
       title: "堡垒小丑",
       rarity: "rare",
       tag: "防守",
-      description: "驻点停留时，护送车会周期性释放防守脉冲，击退近身尸潮并小幅修车。",
+      description: "驻点停留时释放防守脉冲，帮助反打和修车。",
       maxLevel: 3,
       condition: () => true,
       apply: (game, card) => {
         const level = card.level;
         game.escort.checkpointPulseDamage = 10 + (level - 1) * 6;
-        game.escort.checkpointPulseRadius = 126 + (level - 1) * 18;
-        game.escort.checkpointPulseInterval = Math.max(1.4, 2.8 - (level - 1) * 0.35);
+        game.escort.checkpointPulseRadius = 132 + (level - 1) * 18;
+        game.escort.checkpointPulseInterval = Math.max(1.35, 2.7 - (level - 1) * 0.35);
         game.escort.checkpointPulseHeal = 2 + (level - 1) * 2;
       },
     },
@@ -309,20 +326,21 @@
       title: "锁敌小丑",
       rarity: "common",
       tag: "节奏",
-      description: "自动索敌范围 +70，火力更容易锁住拦路怪。等级越高，优先级越高。",
+      description: "自动索敌更强，驻点和高压段都更容易锁住目标。",
       maxLevel: 3,
       condition: () => true,
       apply: (game, card) => {
         const level = card.level;
         game.hero.range += 60 + (level - 1) * 25;
+        game.hero.autoAimRange += 30 + (level - 1) * 10;
       },
     },
     {
       id: "executioner_joker",
       title: "处刑小丑",
       rarity: "uncommon",
-      tag: "攻击",
-      description: "对精英与 Boss 造成更高伤害。等级越高，后半局处理高威胁单位更快。",
+      tag: "处刑",
+      description: "对精英和 Boss 的伤害进一步提高。",
       maxLevel: 3,
       condition: () => true,
       apply: (game, card) => {
@@ -335,7 +353,7 @@
       title: "狂热小丑",
       rarity: "rare",
       tag: "节奏",
-      description: "每打出数次射击后，进入短暂过载连射。等级越高，过载更频繁、持续更久。",
+      description: "射击会周期性进入过载，节奏窗口更猛。",
       maxLevel: 3,
       condition: () => true,
       apply: (game, card) => {
@@ -349,27 +367,28 @@
       id: "panic_blast",
       title: "绝境小丑",
       rarity: "rare",
-      tag: "爆发",
-      description: "当护送目标生命较低时，自动触发一次范围冲击。等级越高，触发阈值更宽。",
+      tag: "防守",
+      description: "车体越危险，越容易触发一次范围救场。",
       maxLevel: 2,
       condition: (game) => !game.hero.panicBlast,
       apply: (game, card) => {
         const level = card.level;
         game.hero.panicBlast = true;
-        game.hero.panicBlastThreshold = 0.4 + level * 0.05;
+        game.hero.panicBlastThreshold = 0.42 + level * 0.05;
       },
     },
     {
       id: "bounty_joker",
       title: "赏金小丑",
       rarity: "rare",
-      tag: "节奏",
-      description: "每击杀数只精英或 Boss，就额外拿到一笔补给，后半局更容易把商店节奏滚起来。",
+      tag: "经营",
+      description: "击杀收益更高，精英和 Boss 还能额外滚钱。",
       maxLevel: 3,
       condition: () => true,
       apply: (game, card) => {
         const level = card.level;
         game.hero.bountyNeed = Math.max(1, 3 - (level - 1));
+        game.killSupplyMult += 0.08 + (level - 1) * 0.05;
       },
     },
     {
@@ -377,7 +396,7 @@
       title: "破片小丑",
       rarity: "rare",
       tag: "爆发",
-      description: "命中精英或 Boss 时触发破片爆裂，对周围尸群造成额外伤害。",
+      description: "命中高威胁目标时触发破片爆裂。",
       maxLevel: 3,
       condition: () => true,
       apply: (game, card) => {
@@ -391,8 +410,8 @@
       id: "fission_joker",
       title: "裂变小丑",
       rarity: "legendary",
-      tag: "弹幕",
-      description: "每 5 次击杀，下一轮射击会额外分裂两枚子弹。",
+      tag: "爆发",
+      description: "击杀积累后，下一轮射击会额外分裂。",
       maxLevel: 2,
       condition: () => true,
       apply: (game, card) => {
@@ -404,60 +423,278 @@
       id: "mirror_joker",
       title: "镜像小丑",
       rarity: "rare",
-      tag: "节奏",
-      description: "每次进入补给站时，三选一中的一张会更容易变成已拥有路线的镜像回响。",
+      tag: "商店",
+      description: "补给站更容易刷出主路线的镜像回响。",
       maxLevel: 2,
       condition: () => true,
       apply: (game, card) => {
         game.dupChoiceBonus = 1 + (card.level - 1);
+        game.shopOfferBonus += 1;
+      },
+    },
+    {
+      id: "supply_scavenger",
+      title: "回收小丑",
+      rarity: "uncommon",
+      tag: "经营",
+      description: "普通击杀也会额外返一点补给，越早拿越容易滚起来。",
+      maxLevel: 3,
+      condition: () => true,
+      apply: (game, card) => {
+        const level = card.level;
+        game.killSupplyMult += 0.12 + (level - 1) * 0.06;
+        game.checkpointSupplyMult += 0.05 + (level - 1) * 0.03;
+      },
+    },
+    {
+      id: "suppression_joker",
+      title: "压制小丑",
+      rarity: "uncommon",
+      tag: "节奏",
+      description: "连续开火后射击节奏会更顺，贴车作战更稳。",
+      maxLevel: 3,
+      condition: () => true,
+      apply: (game, card) => {
+        const level = card.level;
+        game.hero.fireRateMult *= Math.max(0.7, 0.9 - (level - 1) * 0.04);
+        game.hero.autoAimRange += 18 + (level - 1) * 8;
+      },
+    },
+    {
+      id: "armor_breaker",
+      title: "破甲小丑",
+      rarity: "rare",
+      tag: "处刑",
+      description: "高威胁目标会更快被拆掉，后半局更不容易拖死。",
+      maxLevel: 3,
+      condition: () => true,
+      apply: (game, card) => {
+        const level = card.level;
+        game.hero.damageBonus += 6 + (level - 1) * 4;
+        game.hero.eliteDamageMult += 0.1 + (level - 1) * 0.06;
+      },
+    },
+    {
+      id: "siege_joker",
+      title: "围城小丑",
+      rarity: "rare",
+      tag: "防守",
+      description: "车周围的防线更难被冲破，驻点里也更能反打。",
+      maxLevel: 3,
+      condition: () => true,
+      apply: (game, card) => {
+        const level = card.level;
+        game.escort.maxHp += 20 + (level - 1) * 10;
+        game.escort.hp = Math.min(game.escort.maxHp, game.escort.hp + 16 + (level - 1) * 8);
+        game.escort.checkpointHeal += 6 + (level - 1) * 3;
+      },
+    },
+    {
+      id: "scorch_joker",
+      title: "烈焰小丑",
+      rarity: "rare",
+      tag: "爆发",
+      description: "命中时更容易引爆成片伤害，清线压力会轻很多。",
+      maxLevel: 3,
+      condition: () => true,
+      apply: (game, card) => {
+        const level = card.level;
+        game.hero.bulletsPerShot += 1;
+        game.hero.spread += 0.1 + (level - 1) * 0.04;
+        game.hero.impactBurst = true;
+        game.hero.impactBurstRadius = Math.max(game.hero.impactBurstRadius, 84 + (level - 1) * 12);
+        game.hero.impactBurstDamage = Math.max(game.hero.impactBurstDamage, 8 + (level - 1) * 4);
+      },
+    },
+    {
+      id: "portfolio_joker",
+      title: "组合小丑",
+      rarity: "rare",
+      tag: "商店",
+      description: "货架更厚，商店牌更容易连成一套。",
+      maxLevel: 2,
+      condition: () => true,
+      apply: (game, card) => {
+        game.shopOfferBonus += 1 + (card.level - 1);
+        game.shopPackCostDiscount += 0.06 + (card.level - 1) * 0.04;
+        game.shopRefreshDiscount += 0.04 + (card.level - 1) * 0.03;
+      },
+    },
+    {
+      id: "discount_voucher",
+      title: "折扣券",
+      rarity: "common",
+      tag: "商店",
+      description: "卡包和刷新更便宜，适合反复滚货架。",
+      maxLevel: 3,
+      condition: () => true,
+      apply: (game, card) => {
+        game.shopPackCostDiscount += 0.08 + (card.level - 1) * 0.04;
+        game.shopRefreshDiscount += 0.05 + (card.level - 1) * 0.03;
+      },
+    },
+    {
+      id: "bank_voucher",
+      title: "夺回牌",
+      rarity: "rare",
+      tag: "经营",
+      description: "把战斗收益的一部分转成持续利息。",
+      maxLevel: 3,
+      condition: () => true,
+      apply: (game, card) => {
+        game.supplyInterestRate += 0.03 + (card.level - 1) * 0.02;
+        game.checkpointSupplyMult += 0.08 + (card.level - 1) * 0.04;
+      },
+    },
+    {
+      id: "econ_planet",
+      title: "经济星球",
+      rarity: "rare",
+      tag: "经营",
+      description: "击杀返利和驻点奖励都会更值钱。",
+      maxLevel: 3,
+      condition: () => true,
+      apply: (game, card) => {
+        const level = card.level;
+        game.killSupplyMult += 0.1 + (level - 1) * 0.05;
+        game.checkpointSupplyMult += 0.05 + (level - 1) * 0.03;
+      },
+    },
+    {
+      id: "garage_voucher",
+      title: "车库券",
+      rarity: "common",
+      tag: "防守",
+      description: "修车更便宜，车辆补给更顺。",
+      maxLevel: 3,
+      condition: () => true,
+      apply: (game, card) => {
+        const level = card.level;
+        game.repairCostDiscount += 0.1 + (level - 1) * 0.05;
+        game.escort.checkpointHeal += 4 + (level - 1) * 3;
+      },
+    },
+    {
+      id: "shelf_voucher",
+      title: "货架券",
+      rarity: "uncommon",
+      tag: "商店",
+      description: "货架更厚，刷新后的选择也更宽。",
+      maxLevel: 3,
+      condition: () => true,
+      apply: (game, card) => {
+        game.shopOfferBonus += 1;
+        game.shopRefreshDiscount += 0.08 + (card.level - 1) * 0.03;
+      },
+    },
+    {
+      id: "info_voucher",
+      title: "侦查券",
+      rarity: "rare",
+      tag: "商店",
+      description: "提前知道下一驻点大概会考什么。",
+      maxLevel: 2,
+      condition: () => true,
+      apply: (game, card) => {
+        game.peekNextCheckpoint = true;
+        game.shopOfferBonus += 1 + (card.level - 1);
+      },
+    },
+    {
+      id: "expand_voucher",
+      title: "扩容券",
+      rarity: "uncommon",
+      tag: "商店",
+      description: "小丑槽位增加，能更完整地成型。",
+      maxLevel: 2,
+      condition: () => true,
+      apply: (game, card) => {
+        game.jokerSlots += 1 + Math.floor((card.level - 1) / 2);
+        game.shopOfferBonus += 1;
+      },
+    },
+    {
+      id: "finality_voucher",
+      title: "终局券",
+      rarity: "legendary",
+      tag: "商店",
+      description: "终局驻点的货架更容易刷出关键牌。",
+      maxLevel: 2,
+      condition: () => true,
+      apply: (game, card) => {
+        game.shopRefreshFreeBonus += 1;
+        game.shopPackCostDiscount += 0.1 + (card.level - 1) * 0.05;
+        game.shopOfferBonus += 1;
       },
     },
   ];
 
   const packCatalog = [
     {
-      id: "standard_pack",
+      id: "profit_pack",
       kind: "pack",
-      title: "标准卡包",
+      title: "复利卡包",
       rarity: "common",
-      tag: "通用",
-      cardCount: 3,
+      tag: "经营",
+      cardCount: 4,
       cost: 12,
-      focusTags: ["攻击", "节奏"],
-      description: "稳定起步，优先补基础火力与节奏件。",
+      focusTags: ["经营", "商店"],
+      description: "优先补收益、利息和货架操盘件。",
     },
     {
-      id: "defense_pack",
+      id: "tempo_pack",
+      kind: "pack",
+      title: "节奏卡包",
+      rarity: "common",
+      tag: "节奏",
+      cardCount: 4,
+      cost: 12,
+      focusTags: ["节奏"],
+      description: "优先补推进、锁敌和过载窗口。",
+    },
+    {
+      id: "execution_pack",
+      kind: "pack",
+      title: "处刑卡包",
+      rarity: "uncommon",
+      tag: "处刑",
+      cardCount: 4,
+      cost: 14,
+      focusTags: ["处刑", "经营"],
+      description: "优先补点杀和高威胁目标处理。",
+    },
+    {
+      id: "fortress_pack",
       kind: "pack",
       title: "防线卡包",
       rarity: "uncommon",
       tag: "防守",
-      cardCount: 3,
+      cardCount: 4,
       cost: 14,
-      focusTags: ["防守", "节奏"],
-      description: "更容易开出修车、耐久和驻点收益类小丑牌。",
+      focusTags: ["防守"],
+      description: "优先补车体、修理和驻点反打。",
     },
     {
       id: "burst_pack",
       kind: "pack",
-      title: "爆发卡包",
+      title: "爆裂卡包",
       rarity: "rare",
       tag: "爆发",
-      cardCount: 3,
-      cost: 20,
-      focusTags: ["攻击", "爆发"],
-      description: "更偏向高上限输出件，适合后半局提压。",
+      cardCount: 4,
+      cost: 18,
+      focusTags: ["爆发", "处刑"],
+      description: "优先补散射、连锁和破片爆发件。",
     },
     {
-      id: "mirror_pack",
+      id: "shop_pack",
       kind: "pack",
-      title: "镜像卡包",
-      rarity: "legendary",
-      tag: "节奏",
-      cardCount: 3,
-      cost: 30,
-      focusTags: ["节奏"],
-      description: "更容易出现当前路线的镜像回响。",
+      title: "货架卡包",
+      rarity: "rare",
+      tag: "商店",
+      cardCount: 4,
+      cost: 18,
+      focusTags: ["商店", "经营"],
+      description: "优先补折扣、扩容和补给站操盘件。",
     },
     {
       id: "jumbo_pack",
@@ -465,10 +702,21 @@
       title: "巨型卡包",
       rarity: "uncommon",
       tag: "成长",
-      cardCount: 3,
-      cost: 24,
-      focusTags: ["攻击", "防守", "节奏"],
-      description: "更容易刷出一组能补短板的中期候选。",
+      cardCount: 5,
+      cost: 22,
+      focusTags: ["经营", "节奏", "处刑", "防守", "爆发", "商店"],
+      description: "更容易刷出能直接接近成型的中期候选。",
+    },
+    {
+      id: "mirror_pack",
+      kind: "pack",
+      title: "镜像卡包",
+      rarity: "legendary",
+      tag: "商店",
+      cardCount: 5,
+      cost: 30,
+      focusTags: ["商店", "节奏"],
+      description: "更容易出现主路线的镜像回响和终局券。",
     },
   ];
 
@@ -477,6 +725,15 @@
     uncommon: 1,
     rare: 2,
     legendary: 3,
+  };
+
+  const FLOW_LABELS = {
+    经营: "复利经营流",
+    节奏: "节奏转场流",
+    处刑: "处刑兑现流",
+    防守: "保本守车流",
+    爆发: "超支爆发流",
+    商店: "货架操盘流",
   };
 
   function clamp(value, min, max) {
@@ -561,18 +818,39 @@
 
   function renderChoiceGrid(choices, gameState) {
     const supply = Math.floor(gameState?.supply || 0);
+    const visibleCount =
+      typeof gameState?.getShopOfferCount === "function" ? gameState.getShopOfferCount() : 3;
+    ui.choiceGrid.classList.toggle("choice-grid--pack-draw", gameState?.shopPhase === "pack_cards");
+    if (!choices || choices.length === 0) {
+      ui.choiceGrid.innerHTML = `
+        <div class="shop-empty">
+          <strong>货架已空</strong>
+          <small>点击“刷新货架”补货后继续买包。</small>
+        </div>
+      `;
+      return;
+    }
     ui.choiceGrid.innerHTML = choices
-      .slice(0, 3)
+      .slice(0, visibleCount)
       .map(
-        (choice) => `
-          <button class="choice-card" data-upgrade="${choice.id}" data-rarity="${choice.rarity || "common"}" data-affordable="${choice.kind === "pack" ? (supply >= (choice.cost || 0)) : "true"}">
+        (choice) => {
+          const packCost =
+            choice.kind === "pack"
+              ? typeof gameState?.getPackCost === "function"
+                ? gameState.getPackCost(choice)
+                : choice.cost || 0
+              : choice.cost || 0;
+          const affordable = choice.kind === "pack" ? supply >= packCost : true;
+          return `
+          <button class="choice-card" data-upgrade="${choice.id}" data-rarity="${choice.rarity || "common"}" data-affordable="${affordable}">
             <span class="choice-badge">${choice.kind === "pack" ? "卡包" : choice.tag || "通用"}</span>
             <span class="choice-level">${choice.kind === "pack" ? `${choice.cardCount || 3} 张` : `Lv.${choice.level || 1}`}</span>
             <p>${choice.title}</p>
             <small>${choice.description}</small>
-            <small>${choice.kind === "pack" ? `花费 ${choice.cost || 0} 补给 · ${supply >= (choice.cost || 0) ? "当前可购买" : `还差 ${(choice.cost || 0) - supply} 补给`}` : choice.cost ? `花费 ${choice.cost} 补给` : "开包后免费领取"}</small>
+            <small>${choice.kind === "pack" ? `花费 ${packCost} 补给 · ${affordable ? "当前可购买" : `还差 ${packCost - supply} 补给`}` : choice.cost ? `花费 ${choice.cost} 补给` : "开包后免费领取"}</small>
           </button>
-        `,
+        `;
+        }
       )
       .join("");
   }
@@ -616,25 +894,44 @@
     ui.aimText.textContent = game.state === "start" ? "待开始" : `主角 ${Math.round(game.hero.x)}, ${Math.round(game.hero.y)}`;
     ui.goalPill.textContent = game.getGoalText();
     if (ui.rerollButton) {
-      if (game.state === "choice") {
+      if (game.state === "choice" || game.shopPhase === "arrival_notice") {
+        const inOpening = game.shopPhase === "pack_opening";
+        const arriving = game.shopPhase === "arrival_notice";
         ui.rerollButton.textContent =
-          game.shopPhase === "pack_cards" ? "卡包已打开" : `刷新货架 ${game.getShopRefreshCost()} 补给`;
-        ui.rerollButton.disabled = game.shopPhase === "pack_cards" || game.supply < game.getShopRefreshCost();
+          arriving
+            ? "停靠中"
+            : inOpening
+            ? "开包中"
+            : game.shopPhase === "pack_cards"
+            ? "卡包已打开"
+            : game.shopRefreshFreeCount > 0
+              ? "刷新货架 免费"
+              : `刷新货架 ${game.getShopRefreshCost()} 补给`;
+        ui.rerollButton.disabled =
+          arriving ||
+          inOpening ||
+          game.shopPhase === "pack_cards" ||
+          (game.shopRefreshFreeCount <= 0 && game.supply < game.getShopRefreshCost());
       } else {
         ui.rerollButton.textContent = "刷新驻点";
         ui.rerollButton.disabled = false;
       }
     }
     if (ui.repairButton) {
-      ui.repairButton.textContent = game.state === "choice" ? `修车 ${game.getRepairCost()} 补给` : "修理车辆";
-      ui.repairButton.disabled = game.state === "choice" ? game.supply < game.getRepairCost() || game.escort.hp >= game.escort.maxHp : false;
+      const inOpening = (game.state === "choice" || game.shopPhase === "arrival_notice") && game.shopPhase === "pack_opening";
+      const arriving = game.shopPhase === "arrival_notice";
+      ui.repairButton.textContent = game.state === "choice" || game.shopPhase === "arrival_notice" ? `修车 ${game.getRepairCost()} 补给` : "修理车辆";
+      ui.repairButton.disabled = game.state === "choice" || game.shopPhase === "arrival_notice" ? arriving || inOpening || game.supply < game.getRepairCost() || game.escort.hp >= game.escort.maxHp : false;
     }
     if (ui.skipButton) {
-      ui.skipButton.textContent = game.state === "choice" ? "离开驻点" : "离开";
+      ui.skipButton.textContent = game.state === "choice" || game.shopPhase === "arrival_notice" ? (game.shopPhase === "arrival_notice" ? "停靠中" : game.shopPhase === "pack_opening" ? "开包中" : "离开驻点") : "离开";
+      ui.skipButton.disabled = (game.state === "choice" || game.shopPhase === "arrival_notice") && (game.shopPhase === "arrival_notice" || game.shopPhase === "pack_opening");
     }
     if (ui.shopResource) {
-      if (game.state === "choice") {
-        ui.shopResource.textContent = `当前补给 ${Math.floor(game.supply)} · 刷新 ${game.getShopRefreshCost()} · 修车 ${game.getRepairCost()} · 本驻点已买 ${game.shopPackPurchaseCount} 包`;
+      if (game.state === "choice" || game.shopPhase === "arrival_notice") {
+        ui.shopResource.textContent = game.shopPhase === "arrival_notice"
+          ? `当前补给 ${Math.floor(game.supply)} · 正在停靠，1 秒后展开货架`
+          : `当前补给 ${Math.floor(game.supply)} · 刷新 ${game.shopRefreshFreeCount > 0 ? "免费" : game.getShopRefreshCost()} · 修车 ${game.getRepairCost()} · 货架 ${game.getShopOfferCount()} 格 · 本驻点已买 ${game.shopPackPurchaseCount} 包`;
         ui.shopResource.classList.remove("shop-resource--hidden");
       } else {
         ui.shopResource.textContent = "";
@@ -647,6 +944,8 @@
   function renderGame(game) {
     ctx.clearRect(0, 0, W, H);
     drawBackground();
+    ctx.save();
+    ctx.translate(-game.camera.x, -game.camera.y);
     drawRoad();
     drawSpawnZones();
     drawRoute(game);
@@ -656,6 +955,7 @@
     drawHero(game);
     drawParticles(game);
     drawTexts(game);
+    ctx.restore();
     drawTopBanner(game);
     drawBottomGuide();
   }
@@ -677,23 +977,23 @@
   function drawRoad() {
     ctx.save();
     ctx.fillStyle = "#121721";
-    ctx.fillRect(ROAD_LEFT, 0, ROAD_RIGHT - ROAD_LEFT, H);
+    ctx.fillRect(ROAD_LEFT, 0, ROAD_RIGHT - ROAD_LEFT, WORLD_H);
     const strip = ctx.createLinearGradient(ROAD_LEFT, 0, ROAD_RIGHT, 0);
     strip.addColorStop(0, "rgba(255,255,255,0.02)");
     strip.addColorStop(0.5, "rgba(125,240,192,0.03)");
     strip.addColorStop(1, "rgba(255,255,255,0.02)");
     ctx.fillStyle = strip;
-    ctx.fillRect(ROAD_LEFT, 0, ROAD_RIGHT - ROAD_LEFT, H);
+    ctx.fillRect(ROAD_LEFT, 0, ROAD_RIGHT - ROAD_LEFT, WORLD_H);
     ctx.strokeStyle = "rgba(255,255,255,0.07)";
     ctx.lineWidth = 1;
-    for (let y = 0; y < H; y += 42) {
+    for (let y = 0; y < WORLD_H; y += 42) {
       ctx.beginPath();
       ctx.moveTo(ROAD_LEFT, y);
       ctx.lineTo(ROAD_RIGHT, y);
       ctx.stroke();
     }
     ctx.fillStyle = "rgba(255,255,255,0.06)";
-    for (let y = 40; y < H; y += 92) {
+    for (let y = 40; y < WORLD_H; y += 92) {
       ctx.fillRect(CENTER_X - 3, y, 6, 42);
     }
     ctx.restore();
@@ -702,15 +1002,15 @@
   function drawSpawnZones() {
     ctx.save();
     ctx.fillStyle = "rgba(255, 101, 117, 0.06)";
-    ctx.fillRect(0, 0, ROAD_LEFT, H);
-    ctx.fillRect(ROAD_RIGHT, 0, W - ROAD_RIGHT, H);
+    ctx.fillRect(0, 0, ROAD_LEFT, WORLD_H);
+    ctx.fillRect(ROAD_RIGHT, 0, WORLD_W - ROAD_RIGHT, WORLD_H);
     ctx.fillStyle = "rgba(255, 101, 117, 0.11)";
-    ctx.fillRect(0, 0, W, 86);
-    ctx.fillRect(0, H - 86, W, 86);
+    ctx.fillRect(0, 0, WORLD_W, 86);
+    ctx.fillRect(0, WORLD_H - 86, WORLD_W, 86);
     ctx.fillStyle = "rgba(255,255,255,0.03)";
     for (let i = 0; i < 14; i += 1) {
-      const x = i % 2 === 0 ? rand(16, ROAD_LEFT - 28) : rand(ROAD_RIGHT + 8, W - 16);
-      const y = rand(10, H - 10);
+      const x = i % 2 === 0 ? rand(16, ROAD_LEFT - 28) : rand(ROAD_RIGHT + 8, WORLD_W - 16);
+      const y = rand(10, WORLD_H - 10);
       ctx.fillRect(x, y, rand(8, 30), rand(18, 64));
     }
     ctx.restore();
@@ -882,7 +1182,9 @@
     for (const text of game.texts) {
       ctx.globalAlpha = clamp(text.life / 0.9, 0, 1);
       ctx.fillStyle = text.color;
-      ctx.fillText(text.text, text.x, text.y);
+      const x = text.screenSpace ? text.x + game.camera.x : text.x;
+      const y = text.screenSpace ? text.y + game.camera.y : text.y;
+      ctx.fillText(text.text, x, y);
     }
     ctx.globalAlpha = 1;
   }
@@ -962,7 +1264,7 @@
       this.xpNeed = 5;
       this.nextChoiceKillIndex = 0;
       this.nextChoiceKillTarget = GAME_TUNING.roguelike.killChoiceThresholds[0];
-      this.jokerSlots = 8;
+      this.jokerSlots = 12;
       this.bossSpawned = false;
       this.bossKilled = false;
       this.finalHold = false;
@@ -970,8 +1272,21 @@
       this.nextChoiceSubtitle = "";
       this.choiceContext = "checkpoint_shop";
       this.shopPhase = "pack_offers";
+      this.arrivalNoticeTimer = 0;
       this.pendingPackOffers = [];
       this.activePack = null;
+      this.openingPack = null;
+      this.packOpeningTimer = 0;
+      this.shopOfferBonus = 0;
+      this.shopRefreshDiscount = 0;
+      this.shopPackCostDiscount = 0;
+      this.shopRefreshFreeBonus = 0;
+      this.shopRefreshFreeCount = 0;
+      this.repairCostDiscount = 0;
+      this.killSupplyMult = 1;
+      this.checkpointSupplyMult = 1;
+      this.supplyInterestRate = 0.06;
+      this.peekNextCheckpoint = false;
       this.checkpointPulseCd = 0;
       this.currentCheckpointTrial = null;
       this.checkpointTrialEscortHpStart = 0;
@@ -991,6 +1306,8 @@
       this.jokerCards = [];
       this.lastJokerRackHtml = "";
       this.upgradesTaken = new Set();
+      this.jokerCards = this.getStarterLoadout();
+      this.upgradesTaken = new Set(this.jokerCards.map((card) => card.id));
       this.pendingChoices = [];
       this.route = ROUTE.map((point) => ({ ...point }));
       this.baseEscort = {
@@ -999,7 +1316,7 @@
         r: 24,
         hp: 160,
         maxHp: 160,
-        speed: 8,
+        speed: 12,
         checkpointHeal: 12,
         checkpointPulseDamage: 0,
         checkpointPulseRadius: 0,
@@ -1022,7 +1339,7 @@
         spread: 0,
         bulletSpeed: 620,
         range: 320,
-        autoAimRange: 140,
+        autoAimRange: 220,
         chainBurst: false,
         eliteDamageMult: 1,
         overdriveEveryShots: 0,
@@ -1036,9 +1353,14 @@
         impactBurstRadius: 0,
         impactBurstDamage: 0,
         panicBlast: false,
+        lockTargetId: null,
       };
       this.hero = { ...this.baseHero };
       this.escort = { ...this.baseEscort };
+      this.camera = {
+        x: 0,
+        y: 0,
+      };
       this.rebuildLoadout();
       this.showStartState();
       this.renderUpgradeChoices();
@@ -1071,6 +1393,8 @@
       try {
         if (this.state === "playing") {
           this.update(dt);
+        } else if (this.state === "choice") {
+          this.updateChoiceFlow(dt);
         }
         renderGame(this);
       } catch (error) {
@@ -1084,6 +1408,17 @@
     update(dt) {
       this.elapsed += dt;
       this.timer = Math.max(0, MATCH_DURATION - this.elapsed);
+      if (this.shopPhase === "arrival_notice") {
+        this.arrivalNoticeTimer = Math.max(0, this.arrivalNoticeTimer - dt);
+        if (ui.upgradeSubtitle) {
+          ui.upgradeSubtitle.textContent = `请停留 ${Math.max(0, this.arrivalNoticeTimer).toFixed(1)} 秒，补给站马上展开。`;
+        }
+        if (this.arrivalNoticeTimer <= 0) {
+          this.openCheckpointShop();
+          updateHud(this);
+          return;
+        }
+      }
       this.handleRouteProgress(dt);
       if (this.state !== "playing") {
         updateHud(this);
@@ -1091,6 +1426,7 @@
       }
       this.handleSpawnTimers(dt);
       this.updateHero(dt);
+      this.updateCamera(dt);
       this.updateAutoFire();
       this.updateBullets(dt);
       this.updateZombies(dt);
@@ -1116,6 +1452,30 @@
       }
       this.updateHintText();
       updateHud(this);
+    }
+
+    updateChoiceFlow(dt) {
+      if (this.shopPhase === "arrival_notice") {
+        this.arrivalNoticeTimer = Math.max(0, this.arrivalNoticeTimer - dt);
+        if (ui.upgradeSubtitle) {
+          ui.upgradeSubtitle.textContent = `请停留 ${Math.max(0, this.arrivalNoticeTimer).toFixed(1)} 秒，补给站马上展开。`;
+        }
+        if (this.arrivalNoticeTimer <= 0) {
+          this.openCheckpointShop();
+        }
+        updateHud(this);
+        return;
+      }
+      if (this.shopPhase === "pack_opening") {
+        this.packOpeningTimer = Math.max(0, this.packOpeningTimer - dt);
+        if (ui.packOpenSubtitle && this.openingPack) {
+          ui.packOpenSubtitle.textContent = `正在拆封 ${this.openingPack.title}… ${Math.max(0, this.packOpeningTimer).toFixed(1)}s`;
+        }
+        if (this.packOpeningTimer <= 0) {
+          this.finishPackOpening();
+        }
+        updateHud(this);
+      }
     }
 
     handleRouteProgress(dt) {
@@ -1152,7 +1512,11 @@
           GAME_TUNING.roguelike.checkpointSupplyRewardBase +
           (this.segmentIndex >= GAME_TUNING.route.latePressure.checkpointChoiceStartSegment ? GAME_TUNING.roguelike.checkpointLateSupplyBonus : 0);
         this.prepareCheckpointTrial();
-        this.gainSupply(checkpointSupply, `抵达 ${target.label}`, target.x, target.y - 66);
+        this.gainSupply(Math.round(checkpointSupply * this.checkpointSupplyMult), `抵达 ${target.label}`, target.x, target.y - 66);
+        const interest = this.getCheckpointInterestAmount();
+        if (interest > 0) {
+          this.gainSupply(interest, "驻点利息", target.x, target.y - 86);
+        }
         this.spawnText(target.x, target.y - 44, `抵达 ${target.label} · 驻守 ${this.getCheckpointStopDuration()}s`, "#7df0c0");
         if (this.currentCheckpointTrial) {
           this.spawnText(target.x, target.y - 22, this.currentCheckpointTrial.title, "#ffcf6e");
@@ -1208,14 +1572,14 @@
     spawnOpeningWave() {
       if (!this.registerWave("opening")) return;
       this.spawnPack(GAME_TUNING.waves.openingWaveCount, this.pickGateSet());
-      this.spawnText(W / 2, 78, "护送开始", "#ffd166");
+      this.spawnText(W / 2, 78, "护送开始", "#ffd166", true);
       this.emitJokerEvent("wave_start", { kind: "opening" });
     }
 
     registerWave(kind) {
       if (this.currentWave >= GAME_TUNING.waves.totalMonsterWaves) {
         if (kind !== "limit") {
-          this.spawnText(W / 2, 86, `${GAME_TUNING.waves.totalMonsterWaves} 波尸潮已全部出完`, "#ffd166");
+          this.spawnText(W / 2, 86, `${GAME_TUNING.waves.totalMonsterWaves} 波尸潮已全部出完`, "#ffd166", true);
         }
         return false;
       }
@@ -1302,7 +1666,7 @@
         this.spawnZombie("elite", gates[Math.floor(Math.random() * gates.length)]);
       }
       this.spawnCheckpointThreat(gates, 1);
-      this.spawnText(W / 2, 88, "尸潮加压", "#ff8f8d");
+      this.spawnText(W / 2, 88, "尸潮加压", "#ff8f8d", true);
       this.emitJokerEvent("wave_start", { kind: "surge" });
     }
 
@@ -1332,7 +1696,7 @@
       this.spawnZombie("elite", SPAWN_GATES[1]);
       this.spawnZombie("elite", SPAWN_GATES[3]);
       this.spawnZombie("brute", SPAWN_GATES[0]);
-      this.spawnText(W / 2, 102, "Boss 入场", "#ff6575");
+      this.spawnText(W / 2, 102, "Boss 入场", "#ff6575", true);
       this.emitJokerEvent("wave_start", { kind: "boss" });
     }
 
@@ -1353,7 +1717,7 @@
         Math.random() < checkpointThreat.bossChance * intensity
       ) {
         this.spawnZombie("boss", gate, { checkpointThreat: true, finalBoss: false });
-        this.spawnText(gate.x, clamp(gate.y, 88, H - 88), "驻点 Boss 突袭", "#ff6575");
+        this.spawnText(gate.x, clamp(gate.y, 88, WORLD_H - 88), "驻点 Boss 突袭", "#ff6575");
       }
     }
 
@@ -1362,8 +1726,8 @@
       this.zombies.push({
         id: this.nextId += 1,
         kind,
-        x: clamp(gate.x + rand(-26, 26), 18, W - 18),
-        y: clamp(gate.y + rand(-18, 18), 18, H - 18),
+        x: clamp(gate.x + rand(-26, 26), 18, WORLD_W - 18),
+        y: clamp(gate.y + rand(-18, 18), 18, WORLD_H - 18),
         r: def.radius,
         hp: def.hp,
         maxHp: def.hp,
@@ -1412,16 +1776,8 @@
         this.hero.x += (moveX / len) * this.hero.speed * dt;
         this.hero.y += (moveY / len) * this.hero.speed * dt;
       }
-      this.hero.x = clamp(this.hero.x, EDGE_PADDING, W - EDGE_PADDING);
-      this.hero.y = clamp(this.hero.y, EDGE_PADDING, H - EDGE_PADDING);
-      const leashDx = this.hero.x - this.escort.x;
-      const leashDy = this.hero.y - this.escort.y;
-      const leashDistance = Math.hypot(leashDx, leashDy) || 1;
-      if (leashDistance > GAME_TUNING.combat.heroMaxEscortDistance) {
-        const leashRatio = GAME_TUNING.combat.heroMaxEscortDistance / leashDistance;
-        this.hero.x = this.escort.x + leashDx * leashRatio;
-        this.hero.y = this.escort.y + leashDy * leashRatio;
-      }
+      this.hero.x = clamp(this.hero.x, EDGE_PADDING, WORLD_W - EDGE_PADDING);
+      this.hero.y = clamp(this.hero.y, EDGE_PADDING, WORLD_H - EDGE_PADDING);
       this.hero.fireCd = Math.max(0, this.hero.fireCd - dt);
       if (this.hero.hp < this.hero.maxHp) this.hero.hp = Math.min(this.hero.maxHp, this.hero.hp + dt * 0.8);
       if (this.escort.checkpointHeal > 0 && this.finalHold) this.escort.hp = Math.min(this.escort.maxHp, this.escort.hp + dt * 0.35);
@@ -1431,6 +1787,7 @@
       if (this.state !== "playing" || this.hero.fireCd > 0) return;
       const target = this.findTarget();
       if (!target) return;
+      this.hero.lockTargetId = target.id;
       const aimPoint = this.getInterceptAimPoint(target);
       const angle = Math.atan2(aimPoint.y - this.hero.y, aimPoint.x - this.hero.x);
       let bullets = this.hero.bulletsPerShot;
@@ -1472,7 +1829,7 @@
     }
 
     findTarget() {
-      return this.findPriorityTarget(this.hero.x, this.hero.y, this.hero.range + this.hero.autoAimRange);
+      return this.findPriorityTarget(this.hero.x, this.hero.y, this.hero.range + this.hero.autoAimRange * 1.35);
     }
 
     findPriorityTarget(originX, originY, maxRange) {
@@ -1486,7 +1843,9 @@
         const threat = clamp(1 - escortDist / 280, 0, 1) * 2.2;
         const proximity = clamp(1 - heroDist / maxRange, 0, 1) * 1.5;
         const weight = { walker: 0.2, runner: 0.45, spitter: 0.55, brute: 0.8, elite: 1.1, boss: 1.8 }[zombie.kind] || 0.2;
-        const score = threat + proximity + weight;
+        const lockBonus = this.hero.lockTargetId === zombie.id ? 2.6 : 0;
+        const pressureBias = zombie.kind === "elite" || zombie.kind === "boss" ? 0.45 : 0;
+        const score = threat + proximity + weight + lockBonus + pressureBias;
         if (score > bestScore) {
           best = zombie;
           bestScore = score;
@@ -1623,7 +1982,7 @@
           this.spawnText(this.escort.x, this.escort.y - 26, `-${Math.ceil(zombie.damage * dt * 1.25)}`, "#ff6575");
           this.emitJokerEvent("escort_damage", { zombie });
         }
-        if (zombie.y > H + 70 || zombie.x < -70 || zombie.x > W + 70) zombie.alive = false;
+        if (zombie.y > WORLD_H + 70 || zombie.x < -70 || zombie.x > WORLD_W + 70) zombie.alive = false;
       }
       this.zombies = this.zombies.filter((zombie) => zombie.alive);
     }
@@ -1637,9 +1996,7 @@
       if (zombie.kind === "elite") this.eliteKills += 1;
       if (zombie.kind === "boss") this.bossKills += 1;
       while (this.kills >= this.nextChoiceKillTarget) {
-        const supplyReward =
-          GAME_TUNING.roguelike.killSupplyRewardBase +
-          this.nextChoiceKillIndex * GAME_TUNING.roguelike.killSupplyRewardStep;
+        const supplyReward = this.getKillSupplyRewardAmount(this.nextChoiceKillIndex);
         this.gainSupply(supplyReward, "击杀补给", W / 2, 86);
         this.advanceChoiceKillTarget();
       }
@@ -1671,12 +2028,12 @@
         if (this.hero.bountyCounter >= this.hero.bountyNeed) {
           this.hero.bountyCounter = 0;
           this.gainSupply(20, "赏金兑现", W / 2, 68);
-          this.spawnText(W / 2, 46, "处刑赏金到账", "#ffd166");
+      this.spawnText(W / 2, 46, "处刑赏金到账", "#ffd166", true);
         }
       }
       if (zombie.kind === "boss" && zombie.finalBoss) {
         this.bossKilled = true;
-        this.spawnText(W / 2, 112, "Boss 被击穿", "#ffd166");
+        this.spawnText(W / 2, 112, "Boss 被击穿", "#ffd166", true);
       } else if (zombie.kind === "boss") {
         this.spawnText(zombie.x, zombie.y - zombie.r - 18, "驻点 Boss 清除", "#ffd166");
       }
@@ -1701,70 +2058,100 @@
 
     // 卡包 / 购买：驻点货架、开包与卡包内选牌
     triggerChoice(reason, context = "checkpoint_shop") {
-      this.state = "choice";
+      this.state = "playing";
       this.choiceContext = context;
-      this.shopPhase = "pack_offers";
+      this.shopPhase = "arrival_notice";
+      this.arrivalNoticeTimer = 1;
       this.activePack = null;
+      this.openingPack = null;
+      this.packOpeningTimer = 0;
       this.shopRefreshCount = 0;
       this.shopPackPurchaseCount = 0;
+      this.shopRefreshFreeCount = 0;
+      this.pendingPackOffers = [];
+      this.pendingChoices = [];
+      this.nextChoiceReason = reason;
+      this.nextChoiceSubtitle = "已抵达站点";
+      showOverlay(ui.upgradeOverlay);
+      ui.upgradeEyebrow.textContent = "驻点提示";
+      ui.upgradeTitle.textContent = `${reason} · 已抵达站点`;
+      ui.upgradeSubtitle.textContent = "请停留 1 秒，补给站马上展开。";
+      ui.mode.textContent = "到站提示";
+      this.updateShopPanels();
+      updateHud(this);
+    }
+
+    openCheckpointShop() {
+      if (this.shopPhase !== "arrival_notice") return;
+      this.state = "choice";
+      this.shopPhase = "pack_offers";
+      this.choiceContext = "checkpoint_shop";
+      this.shopRefreshCount = 0;
+      this.shopPackPurchaseCount = 0;
+      this.shopRefreshFreeCount = this.shopRefreshFreeBonus;
       this.pendingPackOffers = this.buildPackOffers();
       this.pendingChoices = this.pendingPackOffers;
-      this.nextChoiceReason = reason;
       this.nextChoiceSubtitle = "卡包货架";
       this.renderUpgradeChoices();
-      showOverlay(ui.upgradeOverlay);
       ui.upgradeEyebrow.textContent = "驻点卡包货架";
-      ui.upgradeTitle.textContent = `${reason} · 先买卡包，再从开包结果里选 1 张`;
+      ui.upgradeTitle.textContent = `${this.currentCheckpointName || this.nextChoiceReason} · 先买卡包，再从开包结果里选 1 张`;
       ui.upgradeSubtitle.textContent = this.getShopSubtitle();
-      ui.mode.textContent = "补给中";
+      this.spawnText(W / 2, 88, `${this.currentCheckpointName || this.nextChoiceReason} 补给站已展开`, "#7df0c0", true);
+      this.updateShopPanels();
       updateHud(this);
     }
 
     rerollChoices() {
       if (this.state !== "choice" || this.shopPhase !== "pack_offers") return;
-      const cost = this.getShopRefreshCost();
-      if (this.supply < cost) {
-        this.spawnText(W / 2, 88, "补给不足", "#ff6575");
+      const cost = this.shopRefreshFreeCount > 0 ? 0 : this.getShopRefreshCost();
+      if (cost > 0 && this.supply < cost) {
+        this.spawnText(W / 2, 88, "补给不足", "#ff6575", true);
         return;
       }
-      this.supply -= cost;
+      if (this.shopRefreshFreeCount > 0) {
+        this.shopRefreshFreeCount -= 1;
+      } else {
+        this.supply -= cost;
+      }
       this.shopRefreshCount += 1;
       this.pendingPackOffers = this.buildPackOffers();
       this.pendingChoices = this.pendingPackOffers;
       this.renderUpgradeChoices();
       ui.upgradeSubtitle.textContent = this.getShopSubtitle();
-      this.spawnText(W / 2, 88, `刷新卡包 -${cost}`, "#7df0c0");
+      this.spawnText(W / 2, 88, cost > 0 ? `刷新卡包 -${cost}` : "免费刷新货架", "#7df0c0", true);
       updateHud(this);
     }
 
     repairAtShop() {
-      if (this.state !== "choice") return;
+      if (this.state !== "choice" || this.shopPhase === "arrival_notice") return;
       const cost = this.getRepairCost();
       if (this.supply < cost) {
-        this.spawnText(W / 2, 90, "补给不足", "#ff6575");
+        this.spawnText(W / 2, 90, "补给不足", "#ff6575", true);
         return;
       }
       if (this.escort.hp >= this.escort.maxHp) {
-        this.spawnText(W / 2, 90, "车辆状态良好", "#ffd166");
+        this.spawnText(W / 2, 90, "车辆状态良好", "#ffd166", true);
         return;
       }
       this.supply -= cost;
       const repair = this.getRepairAmount();
       this.escort.hp = Math.min(this.escort.maxHp, this.escort.hp + repair);
       ui.upgradeSubtitle.textContent = this.getShopSubtitle();
-      this.spawnText(W / 2, 90, `修车 +${repair}`, "#7df0c0");
+      this.spawnText(W / 2, 90, `修车 +${repair}`, "#7df0c0", true);
       updateHud(this);
     }
 
     skipChoice() {
-      if (this.state !== "choice") return;
+      if (this.state !== "choice" || this.shopPhase === "arrival_notice") return;
       this.pendingChoices = [];
       this.pendingPackOffers = [];
       this.activePack = null;
+      this.openingPack = null;
+      this.packOpeningTimer = 0;
       this.shopPhase = "pack_offers";
       this.state = "playing";
       hideOverlay(ui.upgradeOverlay);
-      this.spawnText(W / 2, 90, "离开驻点", "#ffd166");
+      this.spawnText(W / 2, 90, "离开驻点", "#ffd166", true);
       updateHud(this);
     }
 
@@ -1772,6 +2159,7 @@
       if (this.state !== "choice") return;
       const selected = this.pendingChoices.find((choice) => choice.id === id);
       if (!selected) return;
+      const previousRefreshBonus = this.shopRefreshFreeBonus;
       if (selected.kind === "pack") {
         this.buyPack(selected);
         return;
@@ -1787,33 +2175,82 @@
           target.level = Math.min(target.maxLevel, target.level + 1);
           target.xp = 0;
           target.xpNeed = this.getCardXpNeed(target);
-          this.spawnText(W / 2, 90, `${target.title} +1 级`, "#7df0c0");
+          this.spawnText(W / 2, 90, `${target.title} +1 级`, "#7df0c0", true);
           this.rebuildLoadout();
         }
       } else {
         this.upgradesTaken.add(selected.id);
         this.jokerCards.push(this.createJokerCard(selected));
-        this.spawnText(W / 2, 90, selected.title, "#7df0c0");
+        this.spawnText(W / 2, 90, selected.title, "#7df0c0", true);
         this.rebuildLoadout();
       }
+      const consumedPackId = this.activePack?.id || null;
       this.activePack = null;
       this.shopPhase = "pack_offers";
-      this.pendingPackOffers = this.buildPackOffers();
+      if (consumedPackId) {
+        this.pendingPackOffers = this.pendingPackOffers.filter((offer) => offer.id !== consumedPackId);
+      }
       this.pendingChoices = this.pendingPackOffers;
-      this.nextChoiceReason = this.currentCheckpointName || "驻点补给站";
-      this.nextChoiceSubtitle = "卡包货架";
       this.renderUpgradeChoices();
+      if (this.shopRefreshFreeBonus > previousRefreshBonus) {
+        this.shopRefreshFreeCount += this.shopRefreshFreeBonus - previousRefreshBonus;
+      }
       ui.upgradeEyebrow.textContent = "驻点卡包货架";
       ui.upgradeTitle.textContent = this.currentCheckpointName
-        ? `${this.currentCheckpointName} · 可以继续购买卡包`
-        : "驻点卡包货架 · 可以继续购买卡包";
+        ? this.pendingPackOffers.length > 0
+          ? `${this.currentCheckpointName} · 可以继续购买卡包`
+          : `${this.currentCheckpointName} · 货架已空，点击刷新补货`
+        : this.pendingPackOffers.length > 0
+          ? "驻点卡包货架 · 可以继续购买卡包"
+          : "驻点卡包货架 · 货架已空，点击刷新补货";
       ui.upgradeSubtitle.textContent = this.getShopSubtitle();
-      this.spawnText(W / 2, 88, `${selected.title} 已收下，可继续买包`, "#7df0c0");
+      this.spawnText(W / 2, 88, `${selected.title} 已收下，可继续买包`, "#7df0c0", true);
       updateHud(this);
     }
 
     renderUpgradeChoices() {
       renderChoiceGrid(this.pendingChoices, this);
+      this.updateShopPanels();
+    }
+
+    updateShopPanels() {
+      if (!ui.packOpenPanel || !ui.packDrawPanel || !ui.choiceGrid) return;
+      const arriving = this.shopPhase === "arrival_notice";
+      const opening = this.state === "choice" && this.shopPhase === "pack_opening";
+      const drawing = this.state === "choice" && this.shopPhase === "pack_cards";
+      ui.packOpenPanel.classList.toggle("hidden", arriving || !opening);
+      ui.packOpenPanel.classList.toggle("is-opening", opening);
+      ui.packDrawPanel.classList.toggle("hidden", arriving || !drawing);
+      ui.choiceGrid.classList.toggle("hidden", arriving || opening);
+      ui.choiceGrid.classList.toggle("choice-grid--pack-draw", drawing);
+      if (ui.packOpenTitle && this.openingPack) {
+        ui.packOpenTitle.textContent = this.openingPack.title;
+      }
+      if (ui.packDrawTitle && this.activePack) {
+        ui.packDrawTitle.textContent = `从 ${this.activePack.cardCount || 3} 张里选 1 张`;
+      }
+      if (ui.packDrawNote && this.activePack) {
+        ui.packDrawNote.textContent = `${this.activePack.title} · 参考小丑牌的三选一`;
+      }
+    }
+
+    finishPackOpening() {
+      if (!this.openingPack || this.shopPhase !== "pack_opening") return;
+      this.activePack = this.openingPack;
+      this.openingPack = null;
+      this.packOpeningTimer = 0;
+      this.shopPhase = "pack_cards";
+      this.choiceContext = "pack_cards";
+      this.pendingChoices = this.buildPackCards(this.activePack);
+      this.nextChoiceReason = this.activePack.title;
+      this.nextChoiceSubtitle = "卡包已打开";
+      this.renderUpgradeChoices();
+      ui.upgradeEyebrow.textContent = this.activePack.title;
+      ui.upgradeTitle.textContent = `${this.activePack.title} 已打开，从 ${this.activePack.cardCount || 3} 张里选 1 张`;
+      ui.upgradeSubtitle.textContent = this.getShopSubtitle();
+      this.updateShopPanels();
+      this.spawnText(W / 2, 88, `${this.activePack.title} 已展开`, "#ffd166", true);
+      updateHud(this);
     }
 
     rebuildLoadout() {
@@ -1872,6 +2309,15 @@
       this.escort.checkpointPulseInterval = 0;
       this.escort.checkpointPulseHeal = 0;
       this.dupChoiceBonus = 0;
+      this.shopOfferBonus = 0;
+      this.shopRefreshDiscount = 0;
+      this.shopPackCostDiscount = 0;
+      this.shopRefreshFreeBonus = 0;
+      this.repairCostDiscount = 0;
+      this.killSupplyMult = 1;
+      this.checkpointSupplyMult = 1;
+      this.supplyInterestRate = 0.06;
+      this.peekNextCheckpoint = false;
       for (const card of this.jokerCards) {
         card.xpNeed = this.getCardXpNeed(card);
         card.apply(this, card);
@@ -1884,20 +2330,61 @@
       for (const card of this.jokerCards) {
         counts.set(card.tag, (counts.get(card.tag) || 0) + 1);
       }
-      if ((counts.get("攻击") || 0) >= 2) this.hero.damageBonus += 4;
+      if ((counts.get("经营") || 0) >= 1) this.killSupplyMult += 0.06;
+      if ((counts.get("经营") || 0) >= 2) {
+        this.supplyInterestRate += 0.05;
+        this.shopPackCostDiscount += 0.08;
+      }
+      if ((counts.get("经营") || 0) >= 4) {
+        this.killSupplyMult += 0.08;
+        this.checkpointSupplyMult += 0.12;
+        this.shopRefreshDiscount += 0.08;
+      }
+      if ((counts.get("节奏") || 0) >= 2) {
+        this.hero.fireRateMult *= 0.9;
+        this.escort.speed *= 1.05;
+      }
+      if ((counts.get("节奏") || 0) >= 4) {
+        this.hero.autoAimRange += 40;
+        this.hero.range += 20;
+      }
+      if ((counts.get("处刑") || 0) >= 2) {
+        this.hero.eliteDamageMult += 0.2;
+        this.hero.damageBonus += 3;
+      }
+      if ((counts.get("处刑") || 0) >= 4) {
+        this.hero.eliteDamageMult += 0.18;
+        this.hero.damageBonus += 4;
+      }
       if ((counts.get("防守") || 0) >= 2) {
         this.escort.maxHp += 25;
         this.escort.hp = Math.min(this.escort.maxHp, this.escort.hp + 25);
+        this.escort.checkpointHeal += 8;
       }
-      if ((counts.get("节奏") || 0) >= 2) this.hero.fireRateMult *= 0.9;
-      if ((counts.get("弹幕") || 0) >= 2) {
-        this.hero.bulletsPerShot += 1;
-        this.hero.spread += 0.12;
-      }
-      if ((counts.get("爆发") || 0) >= 2) this.hero.damageBonus += 5;
-      if ((counts.get("防守") || 0) >= 3 && this.segmentIndex >= GAME_TUNING.route.latePressure.startSegmentIndex) {
+      if ((counts.get("防守") || 0) >= 4) {
+        this.repairCostDiscount += 0.12;
         this.escort.checkpointPulseDamage += 6;
         this.escort.checkpointPulseRadius += 12;
+      }
+      if ((counts.get("爆发") || 0) >= 2) {
+        this.hero.bulletsPerShot += 1;
+        this.hero.spread += 0.12;
+        this.hero.damageBonus += 3;
+      }
+      if ((counts.get("爆发") || 0) >= 4) {
+        this.hero.chainBurst = true;
+        this.hero.chainBurstRadius = Math.max(this.hero.chainBurstRadius, 104);
+        this.hero.chainBurstDamage = Math.max(this.hero.chainBurstDamage, 14);
+        this.hero.impactBurst = true;
+        this.hero.impactBurstRadius = Math.max(this.hero.impactBurstRadius, 90);
+      }
+      if ((counts.get("商店") || 0) >= 2) {
+        this.shopOfferBonus += 1;
+        this.shopRefreshDiscount += 0.08;
+      }
+      if ((counts.get("商店") || 0) >= 4) {
+        this.shopOfferBonus += 1;
+        this.shopRefreshFreeCount += 1;
       }
       if (this.jokerCards.length >= 4) {
         this.hero.range += 50;
@@ -1930,7 +2417,7 @@
         card.xp -= card.xpNeed;
         card.level += 1;
         card.xpNeed = this.getCardXpNeed(card);
-        this.spawnText(W / 2, 82, `${card.title} Lv.${card.level}`, "#ffd166");
+        this.spawnText(W / 2, 82, `${card.title} Lv.${card.level}`, "#ffd166", true);
         this.rebuildLoadout();
       }
     }
@@ -1963,6 +2450,14 @@
       };
     }
 
+    getStarterLoadout() {
+      const starterIds = ["escort_armor", "hero_fire", "hero_damage", "aim_assist", "suppression_joker"];
+      return starterIds
+        .map((id) => jokerPool.find((card) => card.id === id))
+        .filter(Boolean)
+        .map((card) => this.createJokerCard(card));
+    }
+
     getCardXpNeed(card) {
       const base = { common: 3, uncommon: 4, rare: 5, legendary: 6 }[card.rarity || "common"] || 3;
       return base + Math.max(0, (card.level || 1) - 1);
@@ -1986,16 +2481,19 @@
     }
 
     getShopRefreshCost() {
-      return GAME_TUNING.roguelike.shopRefreshCostBase + this.shopRefreshCount * GAME_TUNING.roguelike.shopRefreshCostStep;
+      const raw = GAME_TUNING.roguelike.shopRefreshCostBase + this.shopRefreshCount * GAME_TUNING.roguelike.shopRefreshCostStep;
+      return Math.max(0, Math.round(raw * Math.max(0.25, 1 - this.shopRefreshDiscount)));
     }
 
     getPackCost(pack) {
       const baseCost = pack.cost || 0;
-      return baseCost + this.shopPackPurchaseCount * GAME_TUNING.roguelike.shopPackCostStep;
+      const raw = baseCost + this.shopPackPurchaseCount * GAME_TUNING.roguelike.shopPackCostStep;
+      return Math.max(1, Math.round(raw * Math.max(0.3, 1 - this.shopPackCostDiscount)));
     }
 
     getRepairCost() {
-      return GAME_TUNING.roguelike.shopRepairCostBase + Math.max(0, this.segmentIndex - 1) * GAME_TUNING.roguelike.shopRepairCostStep;
+      const raw = GAME_TUNING.roguelike.shopRepairCostBase + Math.max(0, this.segmentIndex - 1) * GAME_TUNING.roguelike.shopRepairCostStep;
+      return Math.max(1, Math.round(raw * Math.max(0.3, 1 - this.repairCostDiscount)));
     }
 
     getRepairAmount() {
@@ -2006,15 +2504,30 @@
       );
     }
 
+    getShopOfferCount() {
+      return clamp(3 + this.shopOfferBonus, 3, 6);
+    }
+
+    getKillSupplyRewardAmount(index) {
+      const base =
+        GAME_TUNING.roguelike.killSupplyRewardBase +
+        index * GAME_TUNING.roguelike.killSupplyRewardStep;
+      return Math.max(1, Math.round(base * this.killSupplyMult));
+    }
+
+    getCheckpointInterestAmount() {
+      return Math.max(0, Math.floor(Math.min(this.supply, 80) * this.supplyInterestRate));
+    }
+
     prepareCheckpointTrial() {
       const tier = Math.max(0, this.segmentIndex - 1);
       const reward = GAME_TUNING.roguelike.checkpointTrialSupplyBase + tier * GAME_TUNING.roguelike.checkpointTrialSupplyStep;
       const xpReward = GAME_TUNING.roguelike.checkpointTrialXpBase + tier * GAME_TUNING.roguelike.checkpointTrialXpStep;
       const dominantTag = this.getDominantTag();
       let type = ["clear", "fortify", "execute"][tier % 3];
-      if (dominantTag === "防守") type = "fortify";
-      else if (dominantTag === "攻击" || dominantTag === "弹幕") type = "clear";
-      else if (dominantTag === "爆发") type = "execute";
+      if (dominantTag === "防守" || dominantTag === "经营" || dominantTag === "商店") type = "fortify";
+      else if (dominantTag === "处刑") type = "execute";
+      else if (dominantTag === "节奏" || dominantTag === "爆发") type = "clear";
 
       const baseTrial = {
         type,
@@ -2030,7 +2543,7 @@
           ...baseTrial,
           title: "坚守检定",
           target,
-          rewardTags: ["防守", "节奏"],
+          rewardTags: ["防守", "经营"],
           description: `驻守结束前让车辆损伤不超过 ${target} 点`,
         };
       } else if (type === "execute") {
@@ -2041,7 +2554,7 @@
           ...baseTrial,
           title: "处刑检定",
           target,
-          rewardTags: ["爆发", "攻击"],
+          rewardTags: ["处刑", "爆发"],
           description: `驻点期间击杀 ${target} 只精英或 Boss`,
         };
       } else {
@@ -2050,7 +2563,7 @@
           ...baseTrial,
           title: "清线检定",
           target,
-          rewardTags: ["攻击", "弹幕"],
+          rewardTags: ["节奏", "爆发"],
           description: `驻点期间击杀 ${target} 只尸群`,
         };
       }
@@ -2093,10 +2606,10 @@
       if (success) {
         this.gainSupply(trial.reward, `${trial.title} 达成`, W / 2, 72);
         this.grantTrialTagXp(trial.rewardTags, trial.xpReward, trial.title);
-        this.spawnText(W / 2, 50, `${trial.title}成功`, "#ffcf6e");
+        this.spawnText(W / 2, 50, `${trial.title}成功`, "#ffcf6e", true);
         return;
       }
-      this.spawnText(W / 2, 72, `${trial.title}失败`, "#ff8f8d");
+      this.spawnText(W / 2, 72, `${trial.title}失败`, "#ff8f8d", true);
     }
 
     grantTrialTagXp(tags, amount, title) {
@@ -2105,7 +2618,7 @@
       for (const card of matchedCards) {
         this.gainJokerXp(card, amount);
       }
-      this.spawnText(W / 2, 28, `${title} · ${tags.join("/")} 获得经验`, "#7df0c0");
+      this.spawnText(W / 2, 28, `${title} · ${tags.join("/")} 获得经验`, "#7df0c0", true);
     }
 
     getCheckpointTrialProgress() {
@@ -2126,22 +2639,30 @@
 
     getShopSubtitle() {
       const trialText = this.currentCheckpointTrial ? `本驻点检定：${this.currentCheckpointTrial.description}。` : "";
+      if (this.shopPhase === "arrival_notice") {
+        return `${trialText} 当前补给 ${Math.floor(this.supply)} · 已抵达站点，停留 1 秒后展开卡包货架。`;
+      }
+      if (this.shopPhase === "pack_opening" && this.openingPack) {
+        return `${trialText} 当前补给 ${Math.floor(this.supply)} · 正在拆封 ${this.openingPack.title}，马上进入三选一抽牌界面。`;
+      }
       if (this.shopPhase === "pack_cards" && this.activePack) {
-        return `${trialText} 当前补给 ${Math.floor(this.supply)} · 已开 ${this.activePack.title}，从卡包里选 1 张。`;
+        return `${trialText} 当前补给 ${Math.floor(this.supply)} · 已开 ${this.activePack.title}，从 ${this.activePack.cardCount || 3} 张里选 1 张。`;
       }
       const packCountText = this.shopPackPurchaseCount > 0 ? `本驻点已买 ${this.shopPackPurchaseCount} 包。` : "";
-      return `${trialText} 当前补给 ${Math.floor(this.supply)} · ${packCountText}先买卡包，再开包选牌，或选择修车 / 刷新。`;
+      const interestText = this.supplyInterestRate > 0 ? `利息 ${Math.round(this.supplyInterestRate * 100)}%。` : "";
+      const offerText = `货架 ${this.getShopOfferCount()} 格。`;
+      return `${trialText} 当前补给 ${Math.floor(this.supply)} · ${interestText}${offerText}${packCountText}先买卡包，再开包选牌，或选择修车 / 刷新。`;
     }
 
     buildPackOffers() {
-      return this.pickChoiceSet(packCatalog, 3, (pack) => this.getPackWeight(pack)).map((pack) => this.decoratePackOffer(pack));
+      return this.pickChoiceSet(packCatalog, this.getShopOfferCount(), (pack) => this.getPackWeight(pack)).map((pack) => this.decoratePackOffer(pack));
     }
 
     buildPackCards(pack) {
       const available = shuffle(jokerPool.filter((upgrade) => !this.upgradesTaken.has(upgrade.id) && upgrade.condition(this)));
       let nextChoices = this.pickChoiceSet(
         available,
-        Math.min(pack.cardCount || 3, 3),
+        Math.min(pack.cardCount || 3, available.length),
         (choice) => this.getPackCardWeight(choice, pack),
       ).map((choice) => this.decorateChoice(choice));
       const focusTag = this.getDominantTag();
@@ -2165,7 +2686,7 @@
       if (!pack || pack.kind !== "pack") return;
       const cost = this.getPackCost(pack);
       if (this.supply < cost) {
-        this.spawnText(W / 2, 90, `补给不足，还差 ${cost - this.supply}`, "#ff6575");
+        this.spawnText(W / 2, 90, `补给不足，还差 ${cost - this.supply}`, "#ff6575", true);
         if (ui.shopResource) {
           ui.shopResource.textContent = `补给不足，还差 ${Math.ceil(cost - this.supply)} 才能买 ${pack.title}`;
         }
@@ -2176,17 +2697,19 @@
       }
       this.supply -= cost;
       this.shopPackPurchaseCount += 1;
-      this.activePack = pack;
-      this.shopPhase = "pack_cards";
-      this.choiceContext = "pack_cards";
-      this.pendingChoices = this.buildPackCards(pack);
+      this.openingPack = pack;
+      this.activePack = null;
+      this.shopPhase = "pack_opening";
+      this.choiceContext = "pack_opening";
+      this.packOpeningTimer = 0.92;
+      this.pendingChoices = [];
       this.nextChoiceReason = pack.title;
-      this.nextChoiceSubtitle = "卡包已打开";
-      this.renderUpgradeChoices();
+      this.nextChoiceSubtitle = "卡包拆封中";
+      this.updateShopPanels();
       ui.upgradeEyebrow.textContent = pack.title;
-      ui.upgradeTitle.textContent = `${pack.title} 已打开，从卡包里选 1 张`;
-      ui.upgradeSubtitle.textContent = this.getShopSubtitle();
-      this.spawnText(W / 2, 88, `${pack.title} -${cost}`, "#7df0c0");
+      ui.upgradeTitle.textContent = `${pack.title} 正在拆封`;
+      ui.upgradeSubtitle.textContent = `正在打开 ${pack.title}，稍后会进入三选一抽牌界面。`;
+      this.spawnText(W / 2, 88, `${pack.title} -${cost}`, "#7df0c0", true);
       updateHud(this);
     }
 
@@ -2204,7 +2727,8 @@
       const focusTag = this.getDominantTag();
       if (focusTag && pack.focusTags && pack.focusTags.includes(focusTag)) weight *= 1.25;
       if (this.escort.hp < this.escort.maxHp * 0.65 && pack.focusTags && pack.focusTags.includes("防守")) weight *= 1.2;
-      if (this.hero.bulletsPerShot >= 2 && pack.focusTags && pack.focusTags.includes("攻击")) weight *= 1.1;
+      if (this.hero.bulletsPerShot >= 2 && pack.focusTags && (pack.focusTags.includes("处刑") || pack.focusTags.includes("爆发"))) weight *= 1.1;
+      if (this.supply < 28 && pack.focusTags && (pack.focusTags.includes("经营") || pack.focusTags.includes("商店"))) weight *= 1.2;
       return weight;
     }
 
@@ -2228,7 +2752,8 @@
       const focusTag = this.getDominantTag();
       if (focusTag && choice.tag === focusTag) weight *= 1.25;
       if (this.escort.hp < this.escort.maxHp * 0.65 && choice.tag === "防守") weight *= 1.2;
-      if (this.hero.bulletsPerShot >= 2 && choice.tag === "弹幕") weight *= 1.2;
+      if (this.hero.bulletsPerShot >= 2 && choice.tag === "爆发") weight *= 1.2;
+      if (this.supply < 28 && (choice.tag === "经营" || choice.tag === "商店")) weight *= 1.2;
       return weight;
     }
 
@@ -2251,13 +2776,13 @@
     // 肉鸽：驻点检定与路段压力
     getCardEventWeight(card, type) {
       const tag = card.tag;
-      if (type === "fire" && (tag === "节奏" || tag === "弹幕")) return 1;
-      if (type === "hit" && (tag === "弹幕" || tag === "攻击")) return 1;
-      if (type === "kill" && (tag === "攻击" || tag === "爆发")) return 1;
-      if (type === "checkpoint" && (tag === "防守" || tag === "节奏")) return 1.35;
-      if (type === "wave_start" && (tag === "节奏" || tag === "攻击")) return 0.8;
+      if (type === "fire" && (tag === "节奏" || tag === "爆发")) return 1;
+      if (type === "hit" && (tag === "处刑" || tag === "爆发")) return 1;
+      if (type === "kill" && (tag === "处刑" || tag === "经营")) return 1;
+      if (type === "checkpoint" && (tag === "防守" || tag === "经营" || tag === "商店")) return 1.35;
+      if (type === "wave_start" && (tag === "节奏" || tag === "经营")) return 0.85;
       if (type === "escort_damage" && (tag === "防守" || tag === "爆发")) return 1.3;
-      if (type === "boss_kill") return 1.5;
+      if (type === "boss_kill") return tag === "处刑" || tag === "经营" ? 1.6 : 1.3;
       if (card.id === "fission_joker" && type === "kill") return 1.4;
       if (card.id === "mirror_joker" && type === "checkpoint") return 1;
       return 0.35;
@@ -2289,6 +2814,8 @@
 
     getModeText() {
       if (this.state === "start") return "等待开始";
+      if (this.shopPhase === "arrival_notice") return "到站提示";
+      if (this.state === "choice" && this.shopPhase === "arrival_notice") return "到站提示";
       if (this.checkpointPauseRemaining > 0) return "驻点停留";
       if (this.state === "playing") return "护送中";
       if (this.state === "choice") return "补给中";
@@ -2313,6 +2840,8 @@
       const parts = [];
       parts.push(`补给 ${Math.floor(this.supply)}`);
       if (this.jokerCards.length > 0) parts.push(`小丑牌 ${this.jokerCards.length}/${this.jokerSlots}`);
+      const dominantTag = this.getDominantTag();
+      if (dominantTag && FLOW_LABELS[dominantTag]) parts.push(`主流派 ${FLOW_LABELS[dominantTag]}`);
       if (this.jokerCards.some((card) => card.level > 1)) parts.push(`总等级 ${this.jokerCards.reduce((sum, card) => sum + card.level, 0)}`);
       if (this.escort.maxHp > this.baseEscort.maxHp) parts.push(`车体 ${this.escort.maxHp}`);
       if (this.escort.speed > this.baseEscort.speed) parts.push(`推进 ${Math.round((this.escort.speed / this.baseEscort.speed) * 100)}%`);
@@ -2322,6 +2851,8 @@
       if (this.hero.eliteDamageMult > 1) parts.push(`处刑 ${Math.round(this.hero.eliteDamageMult * 100)}%`);
       if (this.hero.range > this.baseHero.range) parts.push(`索敌 +${this.hero.range - this.baseHero.range}`);
       if (this.escort.checkpointHeal > this.baseEscort.checkpointHeal) parts.push(`检查点修理 +${this.escort.checkpointHeal - this.baseEscort.checkpointHeal}`);
+      if (this.shopPackCostDiscount > 0 || this.shopRefreshDiscount > 0) parts.push(`商店折扣 ${Math.round(Math.max(this.shopPackCostDiscount, this.shopRefreshDiscount) * 100)}%`);
+      if (this.supplyInterestRate > 0.06) parts.push(`利息 ${Math.round(this.supplyInterestRate * 100)}%`);
       if (this.hero.overdriveEveryShots > 0) parts.push("过载连射");
       if (this.hero.bountyNeed > 0) parts.push(`赏金 ${this.hero.bountyNeed} 精英`);
       if (this.hero.impactBurst) parts.push("破片爆裂");
@@ -2348,8 +2879,8 @@
       }
     }
 
-    spawnText(x, y, text, color) {
-      this.texts.push({ x, y, text, color, life: 0.9 });
+    spawnText(x, y, text, color, screenSpace = false) {
+      this.texts.push({ x, y, text, color, life: 0.9, screenSpace });
     }
 
     updateParticles(dt) {
@@ -2371,11 +2902,25 @@
       this.texts = this.texts.filter((text) => text.life > 0);
     }
 
+    updateCamera(dt) {
+      const targetX = 0;
+      const targetY = clamp(this.escort.y - H * 0.45, 0, Math.max(0, WORLD_H - H));
+      const smoothing = clamp(dt * 8, 0.08, 0.22);
+      this.camera.x += (targetX - this.camera.x) * smoothing;
+      this.camera.y += (targetY - this.camera.y) * smoothing;
+    }
+
     updateHintText() {
       let hint = "护送目标会沿路线自动推进，使用 WASD 手动走位，火力会自动锁敌并直线射击。";
-      if (this.state === "choice" && this.currentCheckpointName) {
-        if (this.shopPhase === "pack_cards" && this.activePack) {
-          hint = `你已打开 ${this.activePack.title}。${this.currentCheckpointTrial ? `本驻点检定是“${this.currentCheckpointTrial.description}”。` : ""}先从 3 张里选 1 张，再继续推进。`;
+      if (this.shopPhase === "arrival_notice" && this.currentCheckpointName) {
+        hint = `你已抵达 ${this.currentCheckpointName}。先停留 1 秒，补给站会马上展开。`;
+      } else if (this.state === "choice" && this.currentCheckpointName) {
+        if (this.shopPhase === "arrival_notice") {
+          hint = `你已抵达 ${this.currentCheckpointName}。先停留 1 秒，补给站会马上展开。`;
+        } else if (this.shopPhase === "pack_opening" && this.openingPack) {
+          hint = `你已买下 ${this.openingPack.title}，正在拆封卡包，稍后会进入新抽牌界面。`;
+        } else if (this.shopPhase === "pack_cards" && this.activePack) {
+          hint = `你已打开 ${this.activePack.title}。${this.currentCheckpointTrial ? `本驻点检定是“${this.currentCheckpointTrial.description}”。` : ""}先从 ${this.activePack.cardCount || 3} 张里选 1 张，再继续推进。`;
         } else {
           hint = `你已到达 ${this.currentCheckpointName} 补给站。${this.currentCheckpointTrial ? `本驻点检定是“${this.currentCheckpointTrial.description}”。` : ""}这里可以反复买卡包、修车或刷新，买到满意再离开。`;
         }
@@ -2393,6 +2938,13 @@
       else if (this.segmentIndex >= 3 && !this.finalHold) hint = "第三节点后尸潮会明显提压，精英会更早进场，驻点补给也更关键，尽快把牌组做成型。";
       else if (this.finalHold && !this.bossKilled) hint = "安全区前最后一战，先打掉 Boss 再让车队进门。";
       else if (this.finalHold && this.bossKilled) hint = "安全区已经打开，稳住最后几秒就能过关。";
+      if (this.peekNextCheckpoint && this.segmentIndex < this.route.length - 1) {
+        hint = `${hint} 下一驻点预告：${this.route[this.segmentIndex + 1].label}。`;
+      }
+      const dominantTag = this.getDominantTag();
+      if (dominantTag && FLOW_LABELS[dominantTag]) {
+        hint = `${FLOW_LABELS[dominantTag]} · ${hint}`;
+      }
       ui.hintText.textContent = hint;
     }
 

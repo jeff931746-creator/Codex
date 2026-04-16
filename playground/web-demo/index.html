@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>丧尸围城护送肉鸽 Demo</title>
-    <link rel="stylesheet" href="./styles.css?v=20260416s" />
+    <link rel="stylesheet" href="./styles.css?v=20260416u" />
   </head>
   <body>
     <main class="app-shell">
@@ -12,7 +12,7 @@
         <p class="eyebrow">Canvas Demo</p>
         <h1>丧尸围城护送肉鸽</h1>
         <p class="sidebar-copy">
-          车队会沿着城市路线自动前进，玩家需要在尸潮围城中开路、保车，并在驻点补给站里先买卡包、再开包选牌，把这一局逐步做成型。
+          车队会沿着城市路线自动前进，玩家需要在尸潮围城中开路、保车，并在驻点补给站里通过利息、买卡包和货架操盘，把这一局逐步做成型。
         </p>
 
         <section class="sidebar-panel">
@@ -31,7 +31,7 @@
             <li><span>护送目标</span><strong>自动沿路线前进</strong></li>
             <li><span>尸潮</span><strong>四周围城压迫</strong></li>
             <li><span>主角</span><strong>走位 + 自动锁敌</strong></li>
-            <li><span>成长</span><strong>驻点补给站买卡包</strong></li>
+            <li><span>成长</span><strong>利息 + 驻点买卡包</strong></li>
           </ul>
         </section>
 
@@ -46,7 +46,7 @@
         </section>
 
         <section class="sidebar-panel">
-          <p class="section-label">小丑牌组</p>
+          <p class="section-label">流派面板</p>
           <div class="joker-rack" id="joker-rack"></div>
         </section>
       </aside>
@@ -130,6 +130,25 @@
               <h2 id="upgrade-title">先买卡包，再从包里选 1 张小丑牌</h2>
               <p id="upgrade-subtitle">卡包先决定本次货架方向，开包后再从 3 张里挑 1 张，把这一局推向更明确的路线。</p>
               <div class="shop-resource" id="shop-resource"></div>
+              <div class="pack-open-panel hidden" id="pack-open-panel">
+                <div class="pack-open-panel__burst"></div>
+                <div class="pack-open-panel__pack" id="pack-open-pack">
+                  <span class="pack-open-panel__sigil">JOKER</span>
+                </div>
+                <div class="pack-open-panel__meta">
+                  <strong id="pack-open-title">卡包已选定</strong>
+                  <span id="pack-open-subtitle">正在拆封中…</span>
+                </div>
+              </div>
+              <div class="pack-draw-panel hidden" id="pack-draw-panel">
+                <div class="pack-draw-panel__header">
+                  <div class="pack-draw-panel__title-wrap">
+                    <p class="pack-draw-panel__eyebrow">抽牌界面</p>
+                    <strong id="pack-draw-title">从 3 张里选 1 张</strong>
+                  </div>
+                  <span id="pack-draw-note">参考小丑牌的三选一</span>
+                </div>
+              </div>
               <div class="choice-grid" id="choice-grid"></div>
               <div class="choice-actions">
                 <button class="secondary-button" id="reroll-button">刷新补给站</button>
@@ -155,7 +174,7 @@
             <strong id="aim-text">待开始</strong>
           </div>
           <div class="status-pill">
-            <span>当前强化</span>
+            <span>当前流派</span>
             <strong id="build-pill">基础护送</strong>
           </div>
           <div class="status-pill">
@@ -166,6 +185,6 @@
       </section>
     </main>
 
-    <script src="./script.js?v=20260416t"></script>
+    <script src="./script.js?v=20260416v"></script>
   </body>
 </html>
