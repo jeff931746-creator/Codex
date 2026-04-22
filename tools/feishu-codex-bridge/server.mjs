@@ -2,6 +2,7 @@ import http from "node:http";
 import { spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
+import fs from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath, URL } from "node:url";
 
@@ -512,6 +513,95 @@ function isUserAuthRequiredMessage(message) {
     text.includes("FEISHU_USER_AUTH_APP_ID") ||
     text.includes("FEISHU_READ_ACCESS_MODE 改回 tenant")
   );
+}
+
+async function handleAdComboCommand(userText, chatId) {
+  const text = userText.trim();
+
+  if (text.startsWith("补充 ")) {
+    return await handleSupplementCommand(text);
+  }
+
+  if (text.startsWith("评估 ")) {
+    return await handleEvaluateCommand(text);
+  }
+
+  return { handled: false };
+}
+
+async function handleSupplementCommand(text) {
+  const match = text.match(/^补充\s+(.+?)\s+(.+)$/);
+  if (!match) {
+    return {
+      handled: true,
+      reply: "格式错误。正确格式：补充 [组合名] [数据]\n例如：补充 末日生存×像素复古 目标受众25-35岁男性，付费意愿中等"
+    };
+  }
+
+  const [, comboName, supplementData] = match;
+  const stateFile = process.env.AD_COMBO_STATE_FILE || "/tmp/ad_combo_candidates.json";
+
+  try {
+    let state;
+    try {
+      const content = await fs.promises.readFile(stateFile, "utf-8");
+      state = JSON.parse(content);
+    } catch {
+      state = {
+        last_run: null,
+        candidates: { themes: [], art_styles: [], combos: [] },
+        evaluated: { combos: [] }
+      };
+    }
+
+    let found = false;
+    for (const combo of state.candidates.combos) {
+      const key = `${combo.theme}×${combo.art_style}`;
+      if (key === comboName || combo.theme === comboName || combo.art_style === comboName) {
+        combo.user_notes = supplementData;
+        combo.status = "user_reviewed";
+        found = true;
+        break;
+      }
+    }
+
+    if (!found) {
+      return {
+        handled: true,
+        reply: `未找到组合"${comboName}"。请检查组合名称是否正确。`
+      };
+    }
+
+    await fs.promises.writeFile(stateFile, JSON.stringify(state, null, 2), "utf-8");
+
+    return {
+      handled: true,
+      reply: `✅ 已记录补充数据\n组合：${comboName}\n数据：${supplementData}\n\n状态已更新为"用户已审核"。如需触发完整评估，请回复：评估 ${comboName}`
+    };
+  } catch (error) {
+    console.error("[ad-combo] supplement failed", error);
+    return {
+      handled: true,
+      reply: `补充数据失败：${error instanceof Error ? error.message : String(error)}`
+    };
+  }
+}
+
+async function handleEvaluateCommand(text) {
+  const match = text.match(/^评估\s+(.+)$/);
+  if (!match) {
+    return {
+      handled: true,
+      reply: "格式错误。正确格式：评估 [组合名]\n例如：评估 末日生存×像素复古"
+    };
+  }
+
+  const [, comboName] = match;
+
+  return {
+    handled: true,
+    reply: `📋 评估请求已收到：${comboName}\n\n⚠️ 完整评估需要在 Codex 会话中执行"买量组合评估"Skill。\n\n请在 Codex 中运行：\n/买量组合评估 ${comboName}\n\n或者手动触发评估流程。`
+  };
 }
 
 function getWsReconnectInfo() {
@@ -2459,6 +2549,20 @@ async function handleFeishuEvent(payload, options = {}) {
     eventId,
     messageId: message?.message_id || ""
   });
+
+  const commandResult = await handleAdComboCommand(userText, chatId);
+  if (commandResult.handled) {
+    if (commandResult.reply) {
+      void (async () => {
+        try {
+          await sendFeishuMessage(chatId, commandResult.reply);
+        } catch (error) {
+          console.error("[ad-combo] failed to send command reply", error);
+        }
+      })();
+    }
+    return { kind: "command_handled" };
+  }
 
   const shouldShowRunIndicator = config.feishuRunIndicator && message?.message_id && isOwnerMessage(payload);
   if (shouldShowRunIndicator) {
