@@ -4,8 +4,8 @@ This workspace is organized into a few stable top-level groups.
 
 ## Layout
 
-- `projects/`: active project folders and prompt packages
-- `research/`: reference libraries, whitepapers, and topic research
+- `projects/`: active project folders and shared capability packs
+- `research/`: canonical knowledge base, whitepapers, and durable reference material
 - `tools/`: reusable utilities and local tool repos
 - `playground/`: ad hoc demos and experiments
 - `tmp/`: local scratch space that is ignored by Git
@@ -14,28 +14,35 @@ This workspace is organized into a few stable top-level groups.
 
 Open files from the grouped directories directly. The workspace root is intentionally kept minimal.
 
+## Session Protocol
+
+The workspace follows the root [`CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md) session protocol, including memory loading, routing, compacting, rewinding, and subagent delegation.
+
+## Knowledge Rule
+
+- All durable knowledge capture, notes, research, and reusable references must be stored under `research/资料/`.
+- Other top-level folders may contain project work, tools, demos, or scratch files, but not the canonical knowledge base.
+- If a task produces reusable analysis or breakdowns, archive the final output in `research/资料/`, even if the work was performed from a project folder.
+
 ## Current Map
 
 ### Projects
 
-- `projects/发行制作人`
-- `projects/国王带队守线RPG塔防`
-- `projects/模块槽位塔防`
-- `projects/策划组`
-- `projects/系统策划`
+- `projects/00-共享能力`
+- `projects/10-立项预演`
 
 ### Research
 
-- `research/game_category_research`
-- `research/塔防资料库`
 - `research/立项白皮书`
-- `research/war3_rpg_td_maps.md`
+- `research/资料`
 
 ### Tools
 
+- `tools/codex-desktop-bridge`
 - `tools/codex-skills-repo`
 - `tools/feishu-codex-bridge`
-- `tools/gemini_web_handoff.sh`
+- `tools/gemini-breakdown-worker`
+- `tools/gemma4`
 
 ### Playground
 

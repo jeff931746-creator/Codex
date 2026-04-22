@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.mt.feishu-codex-bridge</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/sh</string>
+      <string>/Users/mt/Library/Application Support/FeishuCodexBridge/bridge/run.sh</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>HOME</key>
+      <string>/Users/mt</string>
+      <key>PATH</key>
+      <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/mt/Library/Application Support/FeishuCodexBridge/bridge</string>
+
+    <key>StandardOutPath</key>
+    <string>/Users/mt/Library/Logs/FeishuCodexBridge/bridge.stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/mt/Library/Logs/FeishuCodexBridge/bridge.stderr.log</string>
+  </dict>
+</plist>

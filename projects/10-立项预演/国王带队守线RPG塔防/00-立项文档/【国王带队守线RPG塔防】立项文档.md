@@ -477,15 +477,15 @@
 ## 附录A：核心对标样本
 
 - 移动端：
-  - [正中靶心](/Users/mt/Documents/Codex/塔防资料库/2025塔防资料库/tower_defense_2025_mobile_minigame_watchlist.csv)
-  - [魔法之路](/Users/mt/Documents/Codex/塔防资料库/2025塔防资料库/tower_defense_2025_mobile_minigame_watchlist.csv)
-  - [永远的蔚蓝星球](/Users/mt/Documents/Codex/塔防资料库/2025塔防资料库/tower_defense_2025_mobile_minigame_watchlist.csv)
-  - [塔防精灵](/Users/mt/Documents/Codex/塔防资料库/2025塔防资料库/tower_defense_2025_mobile_minigame_watchlist.csv)
+  - [正中靶心](/Users/mt/Documents/Codex/research/资料/竞品库/塔防/2025塔防资料库/tower_defense_2025_mobile_minigame_watchlist.csv)
+  - [魔法之路](/Users/mt/Documents/Codex/research/资料/竞品库/塔防/2025塔防资料库/tower_defense_2025_mobile_minigame_watchlist.csv)
+  - [永远的蔚蓝星球](/Users/mt/Documents/Codex/research/资料/竞品库/塔防/2025塔防资料库/tower_defense_2025_mobile_minigame_watchlist.csv)
+  - [塔防精灵](/Users/mt/Documents/Codex/research/资料/竞品库/塔防/2025塔防资料库/tower_defense_2025_mobile_minigame_watchlist.csv)
 
 - PC / 中重度参考：
-  - [Orcs Must Die! Deathtrap](/Users/mt/Documents/Codex/塔防资料库/2025塔防资料库/tower_defense_2025_library.csv)
-  - [Dungeon Warfare 3](/Users/mt/Documents/Codex/塔防资料库/2025塔防资料库/tower_defense_2025_library.csv)
-  - [Defender's Quest 2: Mists of Ruin](/Users/mt/Documents/Codex/塔防资料库/2025塔防资料库/tower_defense_2025_library.csv)
+  - [Orcs Must Die! Deathtrap](/Users/mt/Documents/Codex/research/资料/竞品库/塔防/2025塔防资料库/tower_defense_2025_library.csv)
+  - [Dungeon Warfare 3](/Users/mt/Documents/Codex/research/资料/竞品库/塔防/2025塔防资料库/tower_defense_2025_library.csv)
+  - [Defender's Quest 2: Mists of Ruin](/Users/mt/Documents/Codex/research/资料/竞品库/塔防/2025塔防资料库/tower_defense_2025_library.csv)
 
 ---
 

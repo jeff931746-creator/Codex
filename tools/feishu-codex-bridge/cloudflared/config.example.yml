@@ -1,0 +1,7 @@
+tunnel: 00000000-0000-0000-0000-000000000000
+credentials-file: /Users/mt/.cloudflared/00000000-0000-0000-0000-000000000000.json
+
+ingress:
+  - hostname: feishu-codex.example.com
+    service: http://127.0.0.1:3002
+  - service: http_status:404

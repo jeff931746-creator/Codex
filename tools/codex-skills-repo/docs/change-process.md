@@ -2,6 +2,8 @@
 
 This document defines how shared agent-team assets are changed and rolled out.
 
+It follows the root workspace session protocol in [`/Users/mt/Documents/Codex/CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md).
+
 ## Standard Flow
 
 1. Classify the proposed change.

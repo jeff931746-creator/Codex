@@ -1,4 +1,0 @@
-interface:
-  display_name: "聊天归档清理"
-  short_description: "把当前对话保存到本地并清理无关噪音内容"
-  default_prompt: "Use $chat-archive-cleaner to save the important parts of the current conversation to a local Markdown archive, removing repetition and irrelevant chatter unless the user explicitly asks for a fuller transcript."

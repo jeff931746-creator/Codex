@@ -3,6 +3,8 @@
 This folder contains a minimal local deployment workflow for running Gemma 4
 through Ollama on this machine.
 
+This folder follows the root workspace session protocol in [`/Users/mt/Documents/Codex/CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md).
+
 ## Recommended model for this Mac
 
 - Machine: Apple M1 Pro

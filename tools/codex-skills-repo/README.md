@@ -2,6 +2,8 @@
 
 This repository is the source of truth for shared AI coding governance assets.
 
+It inherits the root workspace session protocol from [`/Users/mt/Documents/Codex/CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md), including memory loading, routing, compacting, rewinding, and subagent delegation.
+
 ## Layout
 
 - `rules/`: lightweight trigger rules and routing logic

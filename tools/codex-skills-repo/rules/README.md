@@ -9,3 +9,7 @@ Rules should stay short and selective:
 - avoid embedding long policy text directly here
 
 Move long explanations, schemas, and examples into `../references/` and link to them from the rule entrypoint.
+
+Current rules:
+
+- `execution-routing.md`: lightweight gate for `continue`, `plan`, `subagent`, and hook-triggered control actions

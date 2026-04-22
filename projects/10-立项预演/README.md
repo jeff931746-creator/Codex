@@ -2,6 +2,8 @@
 
 这里用于放还处在方向探索、评审准备和立项论证阶段的项目。
 
+本目录及其子目录默认遵守根目录 [`CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md) 的 Session Management Protocol。
+
 ## 项目结构
 
 1. `00-立项文档/`：放正式立项文档、玩法模型、GDD 骨架等正文材料

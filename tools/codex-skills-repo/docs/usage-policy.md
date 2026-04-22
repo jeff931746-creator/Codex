@@ -2,6 +2,8 @@
 
 This document defines the default team rules for using the shared agent-team repository.
 
+It is meant to be used inside the root workspace session protocol defined in [`/Users/mt/Documents/Codex/CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md).
+
 ## Core Principles
 
 1. Shared assets live in the central repository and are versioned with Git.
@@ -30,6 +32,7 @@ This document defines the default team rules for using the shared agent-team rep
 2. Shared skill directories in runtime should be symlinks or mapped projections from this repo.
 3. Broken runtime links must be fixed before further editing or rollout.
 4. Runtime directories must not become alternate sources of truth.
+5. Runtime-specific mappings must preserve the shared routing semantics; for example, Claude-facing entrypoints should still follow the mandatory `plan` step, task-flow classification, stage gates, plus `subagent` and hook-triggered control flow unless an explicit override is documented.
 
 ## Contribution Constraints
 

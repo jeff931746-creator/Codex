@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "pango-skillsrv": {
+      "url": "https://pango.forevernine.net/api/v2/mcp",
+      "headers": {
+        "Authorization": "Bearer d47b6195fcb9a0c5800095386fa721dc"
+      }
+    }
+  }
+}

@@ -1,4 +1,0 @@
-interface:
-  display_name: "Prompt 保存规则"
-  short_description: "按迭代或新增规则保存与归档 Prompt 文档"
-  default_prompt: "Use $prompt-save-workflow to update an existing prompt in place or create a new Chinese-named folder for a new prompt package."

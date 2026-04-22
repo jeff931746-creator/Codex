@@ -2,6 +2,8 @@
 
 This demo is deployed as a standalone static site through GitHub Pages.
 
+This demo follows the root workspace session protocol in [`/Users/mt/Documents/Codex/CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md).
+
 Expected site URL:
 
 - `https://jeff931746-creator.github.io/Codex/`
