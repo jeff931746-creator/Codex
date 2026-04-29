@@ -7,3 +7,9 @@ This folder and its children follow the root [`CLAUDE.md`](/Users/mt/Documents/C
 Current entry points:
 
 - `web-demo/`
+
+## Experiment Rules
+
+Each experiment should have a short `README.md` when it becomes useful enough to keep. The README should state the purpose, how to run it, and whether the folder is disposable.
+
+Keep generated output, caches, and one-off downloads inside the experiment folder or `tmp/`, and remove them when the experiment is no longer active. Anything that becomes reusable should move to `projects/`, `research/`, or `tools/` instead of staying in `playground/`.

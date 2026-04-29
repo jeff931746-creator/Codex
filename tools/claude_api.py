@@ -10,7 +10,17 @@ import sys
 import anthropic
 
 MODEL = "claude-opus-4-7"
-client = anthropic.Anthropic()  # 读取 ANTHROPIC_API_KEY 环境变量
+client = anthropic.Anthropic(
+    api_key=os.getenv("ANTHROPIC_AUTH_TOKEN") or os.getenv("ANTHROPIC_API_KEY"),
+    base_url=os.getenv("ANTHROPIC_BASE_URL") or None,
+)
+
+
+def _thinking_config(max_tokens: int) -> dict | None:
+    """Return a thinking config that is always below the output token budget."""
+    if max_tokens < 2048:
+        return None
+    return {"type": "adaptive", "budget_tokens": min(8000, max_tokens // 2)}
 
 
 def _usage_int(value) -> int:
@@ -49,14 +59,20 @@ def ask(prompt: str, system: str = "", max_tokens: int = 4096) -> str:
         "model": MODEL,
         "max_tokens": max_tokens,
         "messages": messages,
-        "thinking": {"type": "adaptive"},
     }
+    thinking = _thinking_config(max_tokens)
+    if thinking:
+        params["thinking"] = thinking
     if system:
         params["system"] = [
             {"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}
         ]
 
-    response = client.messages.create(**params)
+    try:
+        response = client.messages.create(**params)
+    except anthropic.APIError as e:
+        print(f"[error] Claude API 调用失败: {e}", file=sys.stderr)
+        return ""
     log_usage(response.usage, "claude_api.ask")
     return next((b.text for b in response.content if b.type == "text"), "")
 
@@ -68,8 +84,10 @@ def stream(prompt: str, system: str = "", max_tokens: int = 16000) -> str:
         "model": MODEL,
         "max_tokens": max_tokens,
         "messages": messages,
-        "thinking": {"type": "adaptive"},
     }
+    thinking = _thinking_config(max_tokens)
+    if thinking:
+        params["thinking"] = thinking
     if system:
         params["system"] = [
             {"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}
@@ -94,8 +112,8 @@ if __name__ == "__main__":
     prompt = sys.argv[1]
     use_stream = "--stream" in sys.argv
 
-    if not os.getenv("ANTHROPIC_API_KEY"):
-        print("错误: 请先设置 ANTHROPIC_API_KEY 环境变量")
+    if not (os.getenv("ANTHROPIC_AUTH_TOKEN") or os.getenv("ANTHROPIC_API_KEY")):
+        print("错误: 请先设置 ANTHROPIC_AUTH_TOKEN 或 ANTHROPIC_API_KEY 环境变量")
         sys.exit(1)
 
     if use_stream:

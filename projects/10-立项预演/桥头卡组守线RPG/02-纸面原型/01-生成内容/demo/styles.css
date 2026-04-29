@@ -1,0 +1,388 @@
+:root {
+  color-scheme: light;
+  --ink: #1f2933;
+  --muted: #5f6f7f;
+  --line: #d7dee7;
+  --paper: #f7f8fb;
+  --panel: #ffffff;
+  --bridge: #b9a278;
+  --water: #b7dce9;
+  --danger: #bf3a30;
+  --guard: #3574a6;
+  --control: #4f8c8a;
+  --terminal: #9461a8;
+  --block: #a66840;
+  --accent: #2d6cdf;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 1060px;
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1440px, calc(100vw - 32px));
+  margin: 0 auto;
+  padding: 20px 0 28px;
+}
+
+.topbar,
+.hud-grid,
+.battle-layout,
+.hand-section {
+  margin-bottom: 14px;
+}
+
+.topbar {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 15px;
+}
+
+.topbar p,
+.section-title p,
+.chain-hint {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.commander-switch {
+  display: flex;
+  gap: 8px;
+}
+
+.choice,
+.actions button,
+.card-actions button,
+#resultRestartBtn {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.choice.active,
+.actions button:hover,
+.card-actions button:hover,
+#resultRestartBtn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.hud-grid {
+  display: grid;
+  grid-template-columns: 290px 1fr 260px;
+  gap: 12px;
+}
+
+.meter-panel,
+.resource-panel,
+.round-panel,
+.side-panel,
+.hand-section {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 8px;
+}
+
+.meter-panel,
+.resource-panel,
+.round-panel {
+  padding: 12px;
+}
+
+.meter-row,
+.round-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bar {
+  margin-top: 8px;
+  height: 10px;
+  border-radius: 999px;
+  background: #edf1f5;
+  overflow: hidden;
+}
+
+.bar i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #2c9a67, #e3b341, #c94b3d);
+}
+
+.resource-panel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.resource-panel span {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border: 1px solid #e6ebf1;
+  border-radius: 6px;
+  background: #fbfcfe;
+}
+
+.battle-layout {
+  display: grid;
+  grid-template-columns: 230px minmax(720px, 1fr) 270px;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.side-panel {
+  padding: 12px;
+  min-height: 540px;
+}
+
+#battleCanvas {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #d8edf5;
+}
+
+.chain-track {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.chain-step {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px;
+  background: #fbfcfe;
+}
+
+.chain-step.active {
+  border-color: var(--accent);
+  box-shadow: inset 4px 0 0 var(--accent);
+}
+
+.actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.actions button {
+  width: 100%;
+}
+
+.log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 485px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.log-item {
+  border-left: 3px solid var(--line);
+  padding: 4px 0 4px 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.log-item.hot {
+  border-color: var(--danger);
+  color: var(--ink);
+}
+
+.hand-section {
+  padding: 12px;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 10px;
+}
+
+.hand {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.card {
+  min-height: 170px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #fff;
+}
+
+.card.block {
+  border-top: 5px solid var(--block);
+}
+
+.card.output {
+  border-top: 5px solid var(--guard);
+}
+
+.card.control {
+  border-top: 5px solid var(--control);
+}
+
+.card.terminal {
+  border-top: 5px solid var(--terminal);
+}
+
+.card.wild {
+  border-top: 5px solid var(--accent);
+}
+
+.card h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.tag {
+  display: inline-flex;
+  width: fit-content;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #edf1f5;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.card p {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.card-actions.single {
+  grid-template-columns: 1fr;
+}
+
+.card-actions button:first-child {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.card-actions button:disabled,
+.actions button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  background: rgba(22, 31, 42, 0.48);
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-card {
+  width: min(840px, calc(100vw - 48px));
+  border-radius: 8px;
+  padding: 22px;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 20px 80px rgba(28, 39, 50, 0.25);
+}
+
+.modal-card p {
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+.upgrade-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.upgrade {
+  min-height: 130px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: left;
+  background: #fbfcfe;
+  cursor: pointer;
+}
+
+.upgrade strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.upgrade span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.result-card {
+  max-width: 520px;
+}
+
+.result-card button {
+  margin-top: 16px;
+}

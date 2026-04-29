@@ -6,6 +6,8 @@
 
 - `纸面原型_v1.md`
 - `纸面原型_重构版_v1.md`
+- [纸面原型补证稿_递进部署链_v1.md](纸面原型补证稿_递进部署链_v1.md)
+- [demo/index.html](demo/index.html)
 - 概念图 Prompt
 - 辅助脚本
 - 规则参考

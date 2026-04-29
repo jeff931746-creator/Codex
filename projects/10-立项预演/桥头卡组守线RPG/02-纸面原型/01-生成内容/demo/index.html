@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>桥头卡组守线RPG - 自动技能与运营卡 Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="topbar">
+        <div>
+          <h1>桥头卡组守线RPG</h1>
+          <p>自动技能与运营卡 Demo</p>
+        </div>
+      </section>
+
+      <section class="hud-grid">
+        <div class="meter-panel">
+          <div class="meter-row">
+            <span>城门</span>
+            <strong id="gateLabel">20 / 20</strong>
+          </div>
+          <div class="bar"><i id="gateBar"></i></div>
+        </div>
+        <div class="resource-panel">
+          <span>能量 <b id="energyValue">0</b></span>
+          <span>击杀 <b id="killValue">0</b></span>
+          <span>Boss <b id="bossValue">未出现</b></span>
+          <span>运营牌 <b id="upgradeValue">0</b></span>
+        </div>
+        <div class="round-panel">
+          <span id="waveLabel">波次 1</span>
+          <span id="timeLabel">00:00</span>
+          <span id="statusLabel">实时推进</span>
+        </div>
+      </section>
+
+      <section class="battle-layout">
+        <aside class="side-panel">
+          <h2>自动技能</h2>
+          <div class="chain-track" id="schoolList"></div>
+          <p id="schoolHint" class="chain-hint">技能自动释放。你负责用运营卡调整能量、频率、目标和下一次爆发。</p>
+          <div class="actions">
+            <button id="restartBtn" type="button">重开</button>
+          </div>
+        </aside>
+
+        <canvas id="battleCanvas" width="960" height="540" aria-label="桥头战场"></canvas>
+
+        <aside class="side-panel log-panel">
+          <h2>战斗记录</h2>
+          <div id="logList" class="log-list"></div>
+        </aside>
+      </section>
+
+      <section class="hand-section">
+        <div class="section-title">
+          <h2>运营卡</h2>
+          <p>输出自动进行。点击运营卡获得资源、过载技能、校准目标，或像 Cash Out 一样回收换牌。</p>
+        </div>
+        <div id="skillBar" class="hand"></div>
+      </section>
+
+      <section id="upgradeModal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-card">
+          <h2>选择局内强化</h2>
+          <p>选择一个牌系强化，观察它是否能成为主输出路线。</p>
+          <div id="upgradeChoices" class="upgrade-grid"></div>
+        </div>
+      </section>
+
+      <section id="resultModal" class="modal hidden" role="dialog" aria-modal="true">
+        <div class="modal-card result-card">
+          <h2 id="resultTitle">胜利</h2>
+          <p id="resultBody"></p>
+          <button id="resultRestartBtn" type="button">再跑一局</button>
+        </div>
+      </section>
+    </main>
+
+    <script src="./game.js"></script>
+  </body>
+</html>

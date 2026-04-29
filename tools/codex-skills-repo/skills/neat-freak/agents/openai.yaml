@@ -1,0 +1,4 @@
+interface:
+  display_name: "neat-freak"
+  short_description: "任务结束前对齐改动、文档、规则、记忆和交付摘要。"
+  default_prompt: "Use $neat-freak before delivery to review actual changes, align docs/rules/memory, check temporary artifacts, and produce a concise handoff summary."

@@ -6,8 +6,10 @@ This document defines the shared task types and their mandatory gate order.
 
 These rules apply to every task flow:
 
-- every new task must be assigned a `task type`
-- every new task must start with `plan`
+- every new task should first be classified by flow intensity: `quick`, `standard`, or `strict`
+- `quick` tasks can be answered or executed directly when they are low-risk and do not need staged work
+- `standard` and `strict` tasks must be assigned a `task type`
+- `standard` and `strict` tasks must start with `plan`
 - a gate must be marked complete before the next gate begins
 - if a gate is blocked, stay in that gate, `rewind`, or re-enter `plan`
 - if the task changes type, stop and choose a new flow through `plan`
@@ -17,6 +19,7 @@ These rules apply to every task flow:
 
 Every active task should track:
 
+- `flow intensity`
 - `task type`
 - `current gate`
 - `completed gates`

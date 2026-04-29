@@ -77,7 +77,7 @@ def collect_reference() -> str:
 
 # ---------- providers ----------
 
-def http_post_json(url: str, payload: dict, headers: dict, timeout: int = 600) -> dict:
+def http_post_json(url: str, payload: dict, headers: dict, timeout: int = 1200) -> dict:
     data = json.dumps(payload).encode("utf-8")
     req = urllib.request.Request(url, data=data, headers=headers)
     try:
@@ -89,11 +89,26 @@ def http_post_json(url: str, payload: dict, headers: dict, timeout: int = 600) -
     except urllib.error.URLError as e:
         sys.exit(f"[错] 网络错误: {e}")
 
+def estimate_tokens(text: str) -> int:
+    """粗估 token 数（中文约 1.5 chars/token，英文约 4 chars/token）"""
+    return len(text) // 2
+
+TOKEN_WARN = 40_000   # 超过此值打警告
+TOKEN_ABORT = 80_000  # 超过此值直接退出，防止意外巨额消耗
+
 def call_siliconflow(model: str, system_prompt: str, user_prompt: str) -> str:
     api_key = os.environ.get("SILICONFLOW_API_KEY")
     base_url = os.environ.get("SILICONFLOW_BASE_URL", "https://api.siliconflow.cn/v1")
     if not api_key:
         sys.exit("[错] SILICONFLOW_API_KEY 未设置")
+
+    input_tokens = estimate_tokens(system_prompt + user_prompt)
+    print(f"[tokens] 预估输入 ~{input_tokens:,} tokens（system {len(system_prompt):,} + user {len(user_prompt):,} chars）")
+    if input_tokens > TOKEN_ABORT:
+        sys.exit(f"[中止] 输入超过 {TOKEN_ABORT:,} tokens 安全阈值，请检查 prompt 构造")
+    if input_tokens > TOKEN_WARN:
+        print(f"[警告] 输入超过 {TOKEN_WARN:,} tokens，请确认 prompt 没有多余内容")
+
     url = f"{base_url}/chat/completions"
     payload = {
         "model": model,
@@ -102,18 +117,42 @@ def call_siliconflow(model: str, system_prompt: str, user_prompt: str) -> str:
             {"role": "user", "content": user_prompt},
         ],
         "temperature": 0.7,
-        "max_tokens": 32768,
-        "stream": False,
+        "max_tokens": 16384,
+        "stream": True,  # 流式避免长文生成超时
     }
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {api_key}",
     }
-    body = http_post_json(url, payload, headers)
+    data = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(url, data=data, headers=headers)
+    chunks = []
+    char_count = 0
     try:
-        return body["choices"][0]["message"]["content"]
-    except (KeyError, IndexError):
-        sys.exit(f"[错] SiliconFlow 响应结构异常: {json.dumps(body, ensure_ascii=False)[:500]}")
+        with urllib.request.urlopen(req, timeout=1200, context=_SSL_CTX) as resp:
+            for raw_line in resp:
+                line = raw_line.decode("utf-8").strip()
+                if not line or line == "data: [DONE]":
+                    continue
+                if line.startswith("data: "):
+                    try:
+                        obj = json.loads(line[6:])
+                        delta = obj["choices"][0]["delta"].get("content", "")
+                        if delta:
+                            chunks.append(delta)
+                            char_count += len(delta)
+                            if char_count % 2000 < len(delta):
+                                print(f"[stream] 已生成 {char_count:,} chars…", flush=True)
+                    except Exception:
+                        pass
+    except urllib.error.HTTPError as e:
+        body_err = e.read().decode("utf-8", "ignore")
+        sys.exit(f"[错] HTTP {e.code}: {body_err[:800]}")
+    except urllib.error.URLError as e:
+        sys.exit(f"[错] 网络错误: {e}")
+    content = "".join(chunks)
+    print(f"[tokens] 输出 {char_count:,} chars（约 {char_count//2:,} tokens）")
+    return content
 
 def call_gemini(model: str, system_prompt: str, user_prompt: str) -> str:
     api_key = os.environ.get("GEMINI_API_KEY")
@@ -126,7 +165,7 @@ def call_gemini(model: str, system_prompt: str, user_prompt: str) -> str:
     payload = {
         "systemInstruction": {"parts": [{"text": system_prompt}]},
         "contents": [{"role": "user", "parts": [{"text": user_prompt}]}],
-        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 32768},
+        "generationConfig": {"temperature": 0.7, "maxOutputTokens": 16384},
     }
     body = http_post_json(url, payload, {"Content-Type": "application/json"})
     try:
@@ -236,9 +275,6 @@ def main():
         critique_prompt = read_text(ROOT / "prompts" / "critique.md")
         critique_user = f"""# 拆解质量标准
 {standards}
-
-# 参考范式
-{reference}
 
 # 待审稿的初稿
 {draft}
