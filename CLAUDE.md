@@ -212,7 +212,7 @@ Available Skills:
 
 ## Git And Deployment
 
-- Commit messages should be short English descriptions of the change intent.
+- Commit messages must be written in Chinese and must summarize all meaningful changes included in the commit, not only the main intent.
 - Do not run `git push` automatically. Use push only when the user asks, typically for cross-device sync.
 - Deployment follows the project's own documented command. Do not treat `git push` as deployment unless the project explicitly says so.
 
