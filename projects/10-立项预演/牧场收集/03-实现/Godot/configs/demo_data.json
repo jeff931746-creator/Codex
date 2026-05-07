@@ -1,0 +1,109 @@
+{
+  "starter_energy": 10,
+  "starter_partner": "field_calf",
+  "energy_return_on_growth": 2,
+  "guided_first_win_fragments": {"leaf_pup": 5, "wool_bun": 1},
+  "demo_steps": {
+    "first_battle_area": "meadow",
+    "first_hatch_partner": "leaf_pup",
+    "first_battle_reward": {"leaf_pup": 5},
+    "unlock_after_hatch": "orchard",
+    "second_battle_area": "orchard",
+    "second_battle_reward": {"honey_chick": 3, "moss_turtle": 2, "leaf_pup": 2}
+  },
+  "areas": {
+    "meadow": {
+      "name": "草地牧门",
+      "description": "第一轮：防守一次，孵化叶犬，解锁果园。",
+      "energy_cost": 3,
+      "base_gold": 12,
+      "drops": ["leaf_pup", "wool_bun", "field_calf"],
+      "unlock": {"type": "always", "value": 0},
+      "waves": [
+        {"count": 3, "hp": 16, "speed": 34, "damage": 1},
+        {"count": 4, "hp": 20, "speed": 38, "damage": 1}
+      ]
+    },
+    "orchard": {
+      "name": "果园围栏",
+      "description": "第二轮：带着两个伙伴收集更稀有的碎片。",
+      "energy_cost": 4,
+      "base_gold": 18,
+      "drops": ["honey_chick", "leaf_pup", "moss_turtle"],
+      "unlock": {"type": "partner_count", "value": 2},
+      "waves": [
+        {"count": 5, "hp": 22, "speed": 44, "damage": 1},
+        {"count": 5, "hp": 28, "speed": 48, "damage": 1}
+      ]
+    },
+    "ridge": {
+      "name": "石脊高地",
+      "description": "第三轮：需要更高总战力。",
+      "energy_cost": 5,
+      "base_gold": 26,
+      "drops": ["moss_turtle", "spark_foal", "honey_chick"],
+      "unlock": {"type": "total_power", "value": 8},
+      "waves": [
+        {"count": 6, "hp": 32, "speed": 55, "damage": 1},
+        {"count": 7, "hp": 38, "speed": 58, "damage": 1},
+        {"count": 5, "hp": 55, "speed": 46, "damage": 2}
+      ]
+    }
+  },
+  "partners": {
+    "field_calf": {
+      "name": "田园小牛",
+      "role": "初始伙伴",
+      "color": "#d8a06a",
+      "hatch_threshold": 6,
+      "base_power": 2,
+      "growth_power": 1,
+      "skill": "稳步射击"
+    },
+    "leaf_pup": {
+      "name": "叶犬",
+      "role": "快速支援",
+      "color": "#62c46e",
+      "hatch_threshold": 5,
+      "base_power": 3,
+      "growth_power": 1,
+      "skill": "疾咬"
+    },
+    "wool_bun": {
+      "name": "绒绒兔",
+      "role": "护盾",
+      "color": "#e8e4c9",
+      "hatch_threshold": 5,
+      "base_power": 2,
+      "growth_power": 2,
+      "skill": "柔软守护"
+    },
+    "honey_chick": {
+      "name": "蜜糖小鸡",
+      "role": "溅射",
+      "color": "#f0c64e",
+      "hatch_threshold": 6,
+      "base_power": 4,
+      "growth_power": 1,
+      "skill": "黏蜜射击"
+    },
+    "moss_turtle": {
+      "name": "苔甲龟",
+      "role": "重装支援",
+      "color": "#4c9c7d",
+      "hatch_threshold": 7,
+      "base_power": 5,
+      "growth_power": 2,
+      "skill": "重壳冲击"
+    },
+    "spark_foal": {
+      "name": "电光小马",
+      "role": "爆发",
+      "color": "#88b8ff",
+      "hatch_threshold": 8,
+      "base_power": 6,
+      "growth_power": 2,
+      "skill": "蓄电闪击"
+    }
+  }
+}

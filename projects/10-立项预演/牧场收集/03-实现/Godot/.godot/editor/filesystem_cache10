@@ -1,0 +1,17 @@
+63f7b34db8d8cdea90c76aacccf841ec
+::res://::1778147100
+README.md::TextFile::-1::1778145750::0::1::::<><><>0<>0<><>::
+::res://assets/::1778145510
+::res://autoload/::1778146763
+GameState.gd::GDScript::9176112392215210621::1778146404::0::1::::<>Node<><>0<>0<><>::
+::res://configs/::1778145669
+demo_data.json::JSON::-1::1778145669::0::1::::<><><>0<>0<><>::
+::res://docs/::1778145669
+implementation_notes.md::TextFile::-1::1778145669::0::1::::<><><>0<>0<><>::
+::res://scenes/::1778145669
+Battle.tscn::PackedScene::-1::1778145669::0::1::::<><><>0<>0<><>::res://scripts/Battle.gd
+Main.tscn::PackedScene::-1::1778145669::0::1::::<><><>0<>0<><>::res://scripts/Main.gd
+::res://scripts/::1778146763
+Battle.gd::GDScript::2979024108057958702::1778146817::0::1::::<>Node2D<><>0<>0<><>::
+Main.gd::GDScript::1238850180897616543::1778146404::0::1::::<>Control<><>0<>0<><>::
+::res://ui/::1778145510

@@ -51,11 +51,14 @@ The workspace follows the root [`CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md
 
 ### Tools
 
-- `tools/codex-desktop-bridge`
-- `tools/codex-skills-repo`
-- `tools/feishu-codex-bridge`
-- `tools/gemini-breakdown-worker`
-- `tools/gemma4`
+- `tools/services/codex-desktop-bridge`
+- `tools/services/feishu-codex-bridge`
+- `tools/repos/codex-skills-repo`
+- `tools/repos/breakdown-worker`
+- `tools/model-tools/gemma4`
+- `tools/scripts`
+
+Root-level compatibility links are kept under `tools/` for older commands and docs.
 
 ### Playground
 

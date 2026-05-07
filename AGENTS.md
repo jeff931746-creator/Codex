@@ -47,7 +47,7 @@ These rules apply repo-wide unless a deeper folder explicitly narrows them.
 
 ## Skills
 
-Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/tools/codex-skills-repo/skills/`. Before starting any task that matches a Skill's description, read the corresponding `SKILL.md` and follow its workflow exactly.
+Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/skills/`. The old `/Users/mt/Documents/Codex/tools/codex-skills-repo/` path is kept as a compatibility symlink. Before starting any task that matches a Skill's description, read the corresponding `SKILL.md` and follow its workflow exactly.
 
 Available Skills:
 
@@ -110,7 +110,7 @@ Available Skills:
 
 任务流程矩阵见：
 
-- [`tools/codex-skills-repo/references/task-flow-matrix.md`](/Users/mt/Documents/Codex/tools/codex-skills-repo/references/task-flow-matrix.md)
+- [`tools/repos/codex-skills-repo/references/task-flow-matrix.md`](/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/references/task-flow-matrix.md)
 
 ### 任务管理
 
@@ -139,7 +139,7 @@ Available Skills:
 
 详细分工规则见：
 
-- [`tools/codex-skills-repo/references/agent-delegation-policy.md`](/Users/mt/Documents/Codex/tools/codex-skills-repo/references/agent-delegation-policy.md)
+- [`tools/repos/codex-skills-repo/references/agent-delegation-policy.md`](/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/references/agent-delegation-policy.md)
 
 ### 决策路由器
 
