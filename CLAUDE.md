@@ -56,13 +56,25 @@ Available Skills:
 - `forevernine-material-downloader` — 下载指定来源的素材资料
 - `session-router` — 按 `quick` / `standard` / `strict` 判断流程强度，再决定是否 plan、继续执行、委托或上下文控制
 - `session-compact` — 压缩当前会话状态并写入记忆库，compact 或 clear 前必须运行
+- `session-resume` — 新会话开始时恢复指定任务的上下文，让对话从正确状态继续
 - `neat-freak` — 任务结束前的轻量收尾门禁，对齐改动、文档、规则、记忆和交付摘要
 
 ## Session Management Protocol
 
 ### 会话开始
 
-每次会话开始时，读取 `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md`，加载与当前任务相关的记忆。
+每次会话开始时，读取 `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md`，加载与当前任务相关的记忆。如果是续接已有任务，读完 MEMORY.md 后立即运行 `session-resume {任务名}`。
+
+### 资料导航
+
+| 需要什么 | 去哪里找 |
+|---|---|
+| 任务当前状态 | `memory/task_{任务名}.md` → 运行 `session-resume` |
+| 活跃任务列表 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md` |
+| 可用 Skills | `tools/codex-skills-repo/skills/` |
+| 任务流程矩阵 | `tools/codex-skills-repo/references/task-flow-matrix.md` |
+| Agent 委派规则 | `tools/codex-skills-repo/references/agent-delegation-policy.md` |
+| 记忆文件 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/` |
 
 ### 流程强度分级
 
@@ -220,6 +232,7 @@ Available Skills:
 
 - `session-router`：不确定走哪条路时，运行此 skill 做路由决策
 - `session-compact`：compress 或 clear 前，运行此 skill 保存状态
+- `session-resume`：续接已有任务时，运行此 skill 恢复任务上下文
 - `neat-freak`：重要任务交付前，运行此 skill 做轻量收尾检查
 
 ---
