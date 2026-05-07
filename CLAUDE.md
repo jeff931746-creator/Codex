@@ -4,7 +4,7 @@ This workspace is for workflow-related assets only.
 
 ## Collaboration Defaults
 
-- Default to Chinese for discussion; keep code, commands, filenames, and identifiers in English unless the local project uses another convention.
+- Default to Chinese for discussion, including all thinking processes between tool calls; keep code, commands, filenames, and identifiers in English unless the local project uses another convention.
 - Lead with the conclusion, then give reasons. Avoid long background setup unless the task requires it.
 - Explain technical decisions in terms of `why` and user impact, not only implementation details.
 - Do not flatter, over-agree, or label ideas as good by default. If a direction is weak, say so directly and offer the better path.
@@ -78,7 +78,7 @@ Available Skills:
 
 - `strict` 任务不得跳过 `plan`。
 - 如果任务方向发生明显变化，重新进入 `plan`。
-- 如果用户明确说“直接做 / 继续 / 修掉 / 跑一下”，且任务不是高风险，可以把 `plan` 压缩为一句执行说明后继续。
+- 如果用户明确说"直接做 / 继续 / 修掉 / 跑一下"，且任务不是高风险，可以把 `plan` 压缩为一句执行说明后继续。
 - 需要调整既有规范时，先改文档，再按新规范执行；不要先实践、后补规则。
 
 ### 约束先行
@@ -105,7 +105,7 @@ Available Skills:
 
 - 当前阶段未完成前，不得进入后续阶段。
 - 如果当前阶段被阻塞，停留在当前阶段解决，或 `rewind` / 重新 `plan`。
-- 不允许通过口头假设把“未完成”当成“已完成”。
+- 不允许通过口头假设把"未完成"当成"已完成"。
 
 任务流程矩阵见：
 
@@ -142,17 +142,18 @@ Available Skills:
 
 ### 决策路由器
 
-`standard` 和 `strict` 任务在 `plan` 获批后，每次重大步骤前，对照以下规则（首条命中即执行）：
+`standard` 和 `strict` 任务在 `plan` 获批后，每次重大步骤前，对照以下规则（按从上到下顺序匹配，命中第一条规则即执行对应动作）：
 
 | 条件 | 动作 |
 |---|---|
+| 游戏分析 / 立项推演 / 竞品对比类任务 | **subagent** |
+| 需要读 ≥ 3 个文件但不修改它们 | **subagent** |
+| 任务产生大量中间输出，主上下文只需结论 | **subagent** |
+| 验证 / 校对 / 文档生成类任务 | **subagent** |
 | 同一问题连续失败 ≥ 3 次 | **rewind** |
 | 任务方向根本性偏移（变成了新目标） | **rewind** |
 | 上下文 >80% 满，或累积 ≥ 3 个失败分支 | **clear** |
 | 同任务继续，上下文 >60% 满 | **compact** |
-| 需要读 ≥ 3 个文件但不修改它们 | **subagent** |
-| 任务产生大量中间输出，主上下文只需结论 | **subagent** |
-| 验证 / 校对 / 文档生成类任务 | **subagent** |
 | 以上均不符合 | **continue** |
 
 **错误分级**（决定是 rewind 还是就地修复）：
