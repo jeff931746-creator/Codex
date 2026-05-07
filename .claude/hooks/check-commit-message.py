@@ -21,6 +21,10 @@ if not m:
 
 message = m.group(2).strip().split('\n')[0]
 
+# shell 展开（如 $(cat <<'EOF'...)），无法静态解析，放行
+if message.startswith('$(') or message.startswith('`'):
+    sys.exit(0)
+
 # 检测中文字符（CJK 统一表意文字）
 has_chinese = bool(re.search(r'[一-鿿㐀-䶿]', message))
 if not has_chinese:

@@ -12,8 +12,10 @@ PROJECT_DIR="/Users/mt/Documents/Codex"
 status=$(git -C "$PROJECT_DIR" status --short 2>/dev/null | grep -v '^\?' | grep -v 'worktrees/' || true)
 untracked=$(git -C "$PROJECT_DIR" status --short 2>/dev/null | grep '^?' | grep -v 'worktrees/' | grep -v '.claude/worktrees' || true)
 
-changed_count=$(echo "$status" | grep -c . 2>/dev/null || echo 0)
-untracked_count=$(echo "$untracked" | grep -c . 2>/dev/null || echo 0)
+changed_count=0
+untracked_count=0
+[[ -n "$status" ]] && changed_count=$(echo "$status" | grep -c . || true)
+[[ -n "$untracked" ]] && untracked_count=$(echo "$untracked" | grep -c . || true)
 total=$((changed_count + untracked_count))
 
 if [[ $total -gt 0 ]]; then
