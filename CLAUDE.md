@@ -72,6 +72,7 @@ Available Skills:
 | 任务当前状态 | `memory/task_{任务名}.md` → 运行 `session-resume` |
 | 活跃任务列表 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md` |
 | 可用 Skills | `tools/codex-skills-repo/skills/` |
+| 自动 Hooks | `.claude/hooks/`（git commit 中文检查、危险命令拦截、Stop 状态播报） |
 | 任务流程矩阵 | `tools/codex-skills-repo/references/task-flow-matrix.md` |
 | Agent 委派规则 | `tools/codex-skills-repo/references/agent-delegation-policy.md` |
 | 记忆文件 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/` |
