@@ -46,7 +46,7 @@ This workspace is for workflow-related assets only.
 
 ## Skills
 
-Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/tools/codex-skills-repo/skills/`. Before starting any task that matches a Skill's description, read the corresponding `SKILL.md` and follow its workflow exactly.
+Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/skills/`. The old `/Users/mt/Documents/Codex/tools/codex-skills-repo/` path is kept as a compatibility symlink. Before starting any task that matches a Skill's description, read the corresponding `SKILL.md` and follow its workflow exactly.
 
 Available Skills:
 
@@ -56,13 +56,25 @@ Available Skills:
 - `forevernine-material-downloader` — 下载指定来源的素材资料
 - `session-router` — 按 `quick` / `standard` / `strict` 判断流程强度，再决定是否 plan、继续执行、委托或上下文控制
 - `session-compact` — 压缩当前会话状态并写入记忆库，compact 或 clear 前必须运行
+- `session-resume` — 新会话开始时恢复指定任务的上下文，让对话从正确状态继续
 - `neat-freak` — 任务结束前的轻量收尾门禁，对齐改动、文档、规则、记忆和交付摘要
 
 ## Session Management Protocol
 
 ### 会话开始
 
-每次会话开始时，读取 `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md`，加载与当前任务相关的记忆。
+每次会话开始时，读取 `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md`，加载与当前任务相关的记忆。如果是续接已有任务，读完 MEMORY.md 后立即运行 `session-resume {任务名}`。
+
+### 资料导航
+
+| 需要什么 | 去哪里找 |
+|---|---|
+| 任务当前状态 | `memory/task_{任务名}.md` → 运行 `session-resume` |
+| 活跃任务列表 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md` |
+| 可用 Skills | `tools/codex-skills-repo/skills/` |
+| 任务流程矩阵 | `tools/codex-skills-repo/references/task-flow-matrix.md` |
+| Agent 委派规则 | `tools/codex-skills-repo/references/agent-delegation-policy.md` |
+| 记忆文件 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/` |
 
 ### 流程强度分级
 
@@ -109,7 +121,7 @@ Available Skills:
 
 任务流程矩阵见：
 
-- [`tools/codex-skills-repo/references/task-flow-matrix.md`](/Users/mt/Documents/Codex/tools/codex-skills-repo/references/task-flow-matrix.md)
+- [`tools/repos/codex-skills-repo/references/task-flow-matrix.md`](/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/references/task-flow-matrix.md)
 
 ### 任务管理
 
@@ -138,21 +150,22 @@ Available Skills:
 
 详细分工规则见：
 
-- [`tools/codex-skills-repo/references/agent-delegation-policy.md`](/Users/mt/Documents/Codex/tools/codex-skills-repo/references/agent-delegation-policy.md)
+- [`tools/repos/codex-skills-repo/references/agent-delegation-policy.md`](/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/references/agent-delegation-policy.md)
 
 ### 决策路由器
 
-`standard` 和 `strict` 任务在 `plan` 获批后，每次重大步骤前，对照以下规则（首条命中即执行）：
+`standard` 和 `strict` 任务在 `plan` 获批后，每次重大步骤前，对照以下规则（按从上到下顺序匹配，命中第一条规则即执行对应动作）：
 
 | 条件 | 动作 |
 |---|---|
+| 游戏分析 / 立项推演 / 竞品对比类任务 | **subagent** |
+| 需要读 ≥ 3 个文件但不修改它们 | **subagent** |
+| 任务产生大量中间输出，主上下文只需结论 | **subagent** |
+| 验证 / 校对 / 文档生成类任务 | **subagent** |
 | 同一问题连续失败 ≥ 3 次 | **rewind** |
 | 任务方向根本性偏移（变成了新目标） | **rewind** |
 | 上下文 >80% 满，或累积 ≥ 3 个失败分支 | **clear** |
 | 同任务继续，上下文 >60% 满 | **compact** |
-| 需要读 ≥ 3 个文件但不修改它们 | **subagent** |
-| 任务产生大量中间输出，主上下文只需结论 | **subagent** |
-| 验证 / 校对 / 文档生成类任务 | **subagent** |
 | 以上均不符合 | **continue** |
 
 **错误分级**（决定是 rewind 还是就地修复）：
@@ -220,6 +233,7 @@ Available Skills:
 
 - `session-router`：不确定走哪条路时，运行此 skill 做路由决策
 - `session-compact`：compress 或 clear 前，运行此 skill 保存状态
+- `session-resume`：续接已有任务时，运行此 skill 恢复任务上下文
 - `neat-freak`：重要任务交付前，运行此 skill 做轻量收尾检查
 
 ---
