@@ -54,7 +54,6 @@ Available Skills:
 
 - `游戏机制拆解` — 对一款游戏做系统性机制拆解并入机制库
 - `产品收集` — 跨平台收集产品信息并做结构化录入
-- `prompt-save-workflow` — 保存和组织 prompt 产物到本地目录
 - `forevernine-material-downloader` — 下载指定来源的素材资料
 - `session-router` — 按 `quick` / `standard` / `strict` 判断流程强度，再决定是否 plan、继续执行、委托或上下文控制
 - `session-compact` — 压缩当前会话状态并写入记忆库，compact 或 clear 前必须运行
