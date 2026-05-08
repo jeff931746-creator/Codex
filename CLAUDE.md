@@ -55,6 +55,7 @@ Available Skills:
 - `游戏机制拆解` — 对一款游戏做系统性机制拆解并入机制库
 - `产品收集` — 跨平台收集产品信息并做结构化录入
 - `forevernine-material-downloader` — 下载指定来源的素材资料
+- `买量组合评估` — 评估买量素材组合的蓝海度、可玩性与 IAP 变现潜力
 - `session-router` — 按 `quick` / `standard` / `strict` 判断流程强度，再决定是否 plan、继续执行、委托或上下文控制
 - `session-compact` — 压缩当前会话状态并写入记忆库，compact 或 clear 前必须运行
 - `session-resume` — 新会话开始时恢复指定任务的上下文，让对话从正确状态继续
