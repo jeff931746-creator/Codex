@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>牧场收集 - 组合猜想原型</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18201f;
+      --muted: #63706c;
+      --line: #cfd8d2;
+      --soft: #eef4ef;
+      --field: #dcebd8;
+      --leaf: #2f7d57;
+      --leaf-dark: #1f5e42;
+      --gold: #c07a18;
+      --clay: #b65b45;
+      --sky: #4d7f9f;
+      --panel: #ffffff;
+      --shadow: 0 16px 34px rgba(30, 55, 45, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.74), rgba(255,255,255,.5)),
+        radial-gradient(circle at 20% 10%, #f0d9a8 0 9%, transparent 10%),
+        linear-gradient(135deg, #d8ece4 0%, #f5efd8 52%, #e0d8c3 100%);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr) 330px;
+      gap: 18px;
+      padding: 18px;
+    }
+
+    .rail,
+    .main,
+    .side {
+      min-width: 0;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(128, 145, 135, 0.42);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .rail {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .brand {
+      padding: 16px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
+
+    .brand p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .meter {
+      padding: 14px 16px;
+    }
+
+    .meter-title,
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #31423c;
+    }
+
+    .meter-track {
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid #b9c9c0;
+      background: #e8eee9;
+      overflow: hidden;
+    }
+
+    .meter-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--leaf), #88a642);
+      transition: width .25s ease;
+    }
+
+    .step-list {
+      padding: 8px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 8px;
+      padding: 10px 8px;
+      border-radius: 7px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .step.active {
+      background: #e6f1ea;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .step.done {
+      color: #2f6d4e;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid #b8c6bd;
+      background: #fff;
+      font-size: 12px;
+      flex: 0 0 auto;
+    }
+
+    .main {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 18px;
+    }
+
+    .stage {
+      padding: 20px;
+      min-height: 420px;
+      display: grid;
+      align-content: start;
+      gap: 18px;
+    }
+
+    .stage-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 14px;
+    }
+
+    .stage h2 {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .stage-copy {
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 720px;
+      font-size: 15px;
+    }
+
+    .stage-tag {
+      flex: 0 0 auto;
+      border: 1px solid #b3c2ba;
+      border-radius: 999px;
+      padding: 7px 11px;
+      background: #f8fbf8;
+      font-size: 12px;
+      color: #3f524b;
+      white-space: nowrap;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      min-height: 138px;
+      padding: 14px;
+      border: 1px solid #c7d3cc;
+      border-radius: 8px;
+      background: var(--panel);
+      cursor: pointer;
+      text-align: left;
+      color: var(--ink);
+      box-shadow: 0 4px 12px rgba(38, 56, 48, 0.08);
+      transition: transform .12s ease, border-color .12s ease, background .12s ease;
+    }
+
+    .card:hover,
+    .card.selected {
+      border-color: var(--leaf);
+      background: #f1f8f3;
+      transform: translateY(-1px);
+    }
+
+    .card.locked {
+      cursor: default;
+      background: #f7f7f4;
+      color: #7a817d;
+    }
+
+    .card-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .creatures {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .creature {
+      padding: 12px;
+      border: 1px solid #c7d3cc;
+      border-radius: 8px;
+      background: #fff;
+      min-height: 110px;
+    }
+
+    .creature .icon {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .creature h3 {
+      margin: 7px 0 4px;
+      font-size: 15px;
+    }
+
+    .creature p {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+
+    .progress-row {
+      margin-top: 9px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+      color: #53615c;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid #c5d1ca;
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 2px;
+    }
+
+    .primary,
+    .secondary {
+      border-radius: 7px;
+      border: 1px solid transparent;
+      min-height: 42px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .primary {
+      background: var(--leaf);
+      color: #fff;
+    }
+
+    .primary:hover {
+      background: var(--leaf-dark);
+    }
+
+    .secondary {
+      background: #fff;
+      color: var(--leaf-dark);
+      border-color: #b8c8bf;
+    }
+
+    .secondary:hover {
+      border-color: var(--leaf);
+      background: #f1f8f3;
+    }
+
+    .primary:disabled,
+    .secondary:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .battle {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 14px;
+    }
+
+    .battlefield {
+      min-height: 260px;
+      border: 1px solid #b7c6bd;
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.65) 0 2px, transparent 2px 70px),
+        linear-gradient(180deg, rgba(255,255,255,.55) 0 2px, transparent 2px 62px),
+        linear-gradient(135deg, #d7e8cf, #c7ded9);
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .enemy {
+      position: absolute;
+      right: 18px;
+      top: 42px;
+      display: grid;
+      gap: 10px;
+      font-size: 28px;
+    }
+
+    .team-row {
+      position: absolute;
+      left: 18px;
+      bottom: 22px;
+      display: flex;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .unit {
+      display: grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 2px solid rgba(31, 94, 66, .35);
+      background: rgba(255,255,255,.84);
+      font-size: 29px;
+    }
+
+    .effect-line {
+      position: absolute;
+      left: 86px;
+      right: 92px;
+      top: 124px;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, #d29423, transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    .effect-line.play {
+      animation: strike .9s ease forwards;
+    }
+
+    @keyframes strike {
+      0% { transform: scaleX(0); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: scaleX(1); opacity: 0; }
+    }
+
+    .result {
+      border: 1px solid #c7d3cc;
+      border-radius: 8px;
+      background: #fff;
+      padding: 14px;
+      min-height: 260px;
+    }
+
+    .result h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .result p {
+      margin: 0 0 10px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .log {
+      padding: 14px;
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+    }
+
+    .log-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .log-item {
+      border-left: 3px solid #b9cabc;
+      padding: 8px 0 8px 10px;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .log-item strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .note {
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #d1c59a;
+      background: #fff8df;
+      color: #67562a;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 1040px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .side {
+        order: 3;
+      }
+
+      .log {
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .app {
+        padding: 10px;
+        gap: 10px;
+      }
+
+      .stage-head,
+      .battle {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .cards,
+      .creatures {
+        grid-template-columns: 1fr;
+      }
+
+      .stage {
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="rail">
+      <section class="panel brand">
+        <h1>牧场收集<br>组合猜想原型</h1>
+        <p>你不是为了收满卡而继续玩，而是为了验证自己猜的强组合。</p>
+      </section>
+
+      <section class="panel meter">
+        <div class="meter-title">
+          <span>体验链路</span>
+          <span id="progressLabel">0/5</span>
+        </div>
+        <div class="meter-track"><div id="progressFill" class="meter-fill"></div></div>
+      </section>
+
+      <section class="panel step-list" id="stepList"></section>
+    </aside>
+
+    <main class="main">
+      <section class="panel stage" id="stage"></section>
+    </main>
+
+    <aside class="side">
+      <section class="panel log">
+        <div class="section-title">
+          <span>你的推理记录</span>
+          <button class="secondary" id="resetBtn" type="button">重来</button>
+        </div>
+        <ul class="log-list" id="logList"></ul>
+      </section>
+    </aside>
+  </div>
+
+  <script>
+    const branches = {
+      strike: {
+        id: "strike",
+        title: "高速突袭",
+        rumor: "利用速度和冲击力，瞬间击溃强敌。",
+        guess: "快 + 冲锋",
+        firstPair: ["rabbit", "deer"],
+        firstBattle: "单体强敌战",
+        firstResult: "小鹿冲撞打出破绽，兔子立即追击，双倍伤害。BOSS 被瞬间击溃。",
+        firstWhy: "一个负责打开破绽，一个负责快速追击。",
+        weakBattle: "群体小怪战",
+        weakResult: "兔子和小鹿能快速点杀，但面对一群敌人会被围住，清场不稳定。",
+        needQuestion: "这个组合面对群体小怪时缺什么？",
+        options: [
+          {
+            id: "eagle",
+            label: "补鹰",
+            text: "飞行标记",
+            reason: "先标记关键目标，让冲锋和追击不浪费。",
+            finalTeam: ["rabbit", "deer", "eagle"],
+            finalName: "三位一体突袭",
+            finalResult: "鹰从空中标记弱点，小鹿冲撞暴击，兔子快速收割。混合战场完美胜利。",
+            recommended: true
+          },
+          {
+            id: "wolf",
+            label: "补狼",
+            text: "群体攻击",
+            reason: "补足清小怪能力，但缺少鹰的精准标记。",
+            finalTeam: ["rabbit", "deer", "wolf"],
+            finalName: "侧翼突袭",
+            finalResult: "狼帮忙清掉小怪，兔子和小鹿继续处理强敌。胜利，但节奏不如鹰标记稳定。",
+            recommended: false
+          }
+        ],
+        drops: [
+          { rabbit: 2, deer: 1 },
+          { rabbit: 1, deer: 2 }
+        ]
+      },
+      wall: {
+        id: "wall",
+        title: "铁壁防线",
+        rumor: "前排能扛，后排能治，敌人根本打不死。",
+        guess: "能扛 + 治疗",
+        firstPair: ["sheep", "bear"],
+        firstBattle: "群体小怪战",
+        firstResult: "熊吸引火力，羊持续治疗，小怪打不穿防线。",
+        firstWhy: "一个承伤，一个恢复，让战线不会崩。",
+        weakBattle: "单体强敌战",
+        weakResult: "羊和熊能活下来，但输出不足，战斗拖得很久。",
+        needQuestion: "这个组合面对单体强敌时缺什么？",
+        options: [
+          {
+            id: "wolf",
+            label: "补狼",
+            text: "群体输出",
+            reason: "给铁壁阵容补稳定伤害，让防线有反击能力。",
+            finalTeam: ["sheep", "bear", "wolf"],
+            finalName: "野兽军团",
+            finalResult: "羊持续治疗，熊吸引火力，狼稳定输出。敌人无法突破防线，混合战场完美胜利。",
+            recommended: true
+          },
+          {
+            id: "deer",
+            label: "补小鹿",
+            text: "冲锋爆发",
+            reason: "增加单点爆发，但阵容清群能力仍然一般。",
+            finalTeam: ["sheep", "bear", "deer"],
+            finalName: "重装救援",
+            finalResult: "小鹿能解决强敌，羊和熊保住阵线。胜利，但面对分散敌人时处理较慢。",
+            recommended: false
+          }
+        ],
+        drops: [
+          { sheep: 2, bear: 1 },
+          { sheep: 1, bear: 2 }
+        ]
+      }
+    };
+
+    const creatures = {
+      rabbit: { icon: "🐰", name: "兔子", role: "快速移动", short: "快" },
+      deer: { icon: "🦌", name: "小鹿", role: "冲锋攻击", short: "冲锋" },
+      sheep: { icon: "🐑", name: "羊", role: "治疗恢复", short: "治疗" },
+      bear: { icon: "🐻", name: "熊", role: "高血量坦克", short: "能扛" },
+      eagle: { icon: "🦅", name: "鹰", role: "飞行标记", short: "标记" },
+      wolf: { icon: "🐺", name: "狼", role: "群体攻击", short: "输出" }
+    };
+
+    const steps = [
+      "读传闻，提出组合猜想",
+      "为了猜想收集并孵化",
+      "上场验证第一组合",
+      "发现缺口，选择补强",
+      "验证三生物组合"
+    ];
+
+    const state = {
+      step: "rumor",
+      branch: null,
+      inventory: {},
+      hatched: [],
+      selectedPatch: null,
+      logs: []
+    };
+
+    const stage = document.getElementById("stage");
+    const logList = document.getElementById("logList");
+    const stepList = document.getElementById("stepList");
+    const progressFill = document.getElementById("progressFill");
+    const progressLabel = document.getElementById("progressLabel");
+    document.getElementById("resetBtn").addEventListener("click", reset);
+
+    function reset() {
+      state.step = "rumor";
+      state.branch = null;
+      state.inventory = {};
+      state.hatched = [];
+      state.selectedPatch = null;
+      state.logs = [];
+      render();
+    }
+
+    function addLog(title, body) {
+      state.logs.unshift({ title, body });
+    }
+
+    function setStep(step) {
+      state.step = step;
+      render();
+    }
+
+    function chooseBranch(id) {
+      state.branch = id;
+      state.inventory = {};
+      state.hatched = [];
+      state.selectedPatch = null;
+      addLog("组合猜想", `你选择验证「${branches[id].title}」：${branches[id].guess} 可能很强。`);
+      setStep("collect");
+    }
+
+    function applyDrop(index) {
+      const branch = branches[state.branch];
+      const drop = branch.drops[index];
+      Object.entries(drop).forEach(([id, count]) => {
+        state.inventory[id] = (state.inventory[id] || 0) + count;
+      });
+      Object.entries(state.inventory).forEach(([id, count]) => {
+        if (count >= 3 && !state.hatched.includes(id)) {
+          state.hatched.push(id);
+        }
+      });
+      addLog("收集进度", formatDrop(drop));
+      render();
+    }
+
+    function hatchPatch(optionId) {
+      const branch = branches[state.branch];
+      const option = branch.options.find(item => item.id === optionId);
+      state.selectedPatch = option;
+      state.inventory[option.id] = 3;
+      if (!state.hatched.includes(option.id)) state.hatched.push(option.id);
+      addLog("补强选择", `你选择「${creatures[option.id].name}」：${option.reason}`);
+      setStep("final");
+    }
+
+    function currentIndex() {
+      return {
+        rumor: 0,
+        collect: 1,
+        verify: 2,
+        gap: 3,
+        final: 4,
+        done: 5
+      }[state.step] ?? 0;
+    }
+
+    function renderShell() {
+      const index = currentIndex();
+      progressLabel.textContent = `${Math.min(index, 5)}/5`;
+      progressFill.style.width = `${Math.min(index, 5) / 5 * 100}%`;
+      stepList.innerHTML = steps.map((label, i) => {
+        const status = i < index ? "done" : i === index ? "active" : "";
+        const mark = i < index ? "✓" : i + 1;
+        return `<div class="step ${status}"><span class="badge">${mark}</span><span>${label}</span></div>`;
+      }).join("");
+    }
+
+    function renderLogs() {
+      if (state.logs.length === 0) {
+        logList.innerHTML = `<li class="log-item"><strong>等待你的第一条猜想</strong>选择一张传闻卡开始。</li>`;
+        return;
+      }
+      logList.innerHTML = state.logs.map(item => (
+        `<li class="log-item"><strong>${item.title}</strong>${item.body}</li>`
+      )).join("");
+    }
+
+    function render() {
+      renderShell();
+      renderLogs();
+      if (state.step === "rumor") renderRumor();
+      if (state.step === "collect") renderCollect();
+      if (state.step === "verify") renderVerify();
+      if (state.step === "gap") renderGap();
+      if (state.step === "final") renderFinal();
+      if (state.step === "done") renderDone();
+    }
+
+    function renderRumor() {
+      stage.innerHTML = `
+        ${head("先选一个你想验证的传闻", "读生物定位，提出自己的组合猜想。", "组合猜想")}
+        <div class="cards">
+          ${rumorCard("strike", "🌟", "高速突袭", branches.strike.rumor, "我猜：兔子 + 小鹿")}
+          ${rumorCard("wall", "🛡️", "铁壁防线", branches.wall.rumor, "我猜：羊 + 熊")}
+        </div>
+        <div>
+          <div class="section-title"><span>生物定位</span><span>用定位来推组合</span></div>
+          <div class="creatures">
+            ${Object.entries(creatures).map(([id, item]) => creatureCard(id, item)).join("")}
+          </div>
+        </div>
+      `;
+      document.querySelectorAll("[data-branch]").forEach(btn => {
+        btn.addEventListener("click", () => chooseBranch(btn.dataset.branch));
+      });
+    }
+
+    function renderCollect() {
+      const branch = branches[state.branch];
+      const firstDone = hasDrop(branch.drops[0]);
+      const secondDone = branch.firstPair.every(id => state.hatched.includes(id));
+      stage.innerHTML = `
+        ${head("为了你的猜想收集", `目标是凑出「${branch.title}」：${branch.guess}。`, "收集")}
+        <div class="note">你现在不是在收满图鉴，而是在追一个自己选的组合猜想。</div>
+        <div class="actions">
+          <button class="primary" id="drop1" ${firstDone ? "disabled" : ""}>第一次收集</button>
+          <button class="primary" id="drop2" ${!firstDone || secondDone ? "disabled" : ""}>第二次收集并孵化</button>
+          <button class="secondary" id="verify" ${secondDone ? "" : "disabled"}>带组合上场验证</button>
+        </div>
+        <div>
+          <div class="section-title"><span>当前进度</span><span>每只 3 个碎片孵化</span></div>
+          <div class="creatures">${Object.entries(creatures).map(([id, item]) => creatureCard(id, item)).join("")}</div>
+        </div>
+      `;
+      document.getElementById("drop1").addEventListener("click", () => applyDrop(0));
+      document.getElementById("drop2").addEventListener("click", () => applyDrop(1));
+      document.getElementById("verify").addEventListener("click", () => {
+        addLog("组合凑齐", `你凑齐了 ${teamNames(branch.firstPair)}，准备验证「${branch.title}」。`);
+        setStep("verify");
+      });
+    }
+
+    function renderVerify() {
+      const branch = branches[state.branch];
+      stage.innerHTML = `
+        ${head("上场验证你的猜想", branch.firstBattle, "第一次验证")}
+        <div class="battle">
+          ${battlefield(branch.firstPair, branch.id === "strike" ? "👹" : "🟢🟢🟢")}
+          <div class="result">
+            <h3>${branch.title}成立</h3>
+            <p>${branch.firstResult}</p>
+            <p><strong>为什么强：</strong>${branch.firstWhy}</p>
+            <div class="actions">
+              <button class="primary" id="playVerify">播放验证</button>
+              <button class="secondary" id="nextGap">继续看缺口</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById("playVerify").addEventListener("click", playStrike);
+      document.getElementById("nextGap").addEventListener("click", () => {
+        addLog("验证成功", `「${branch.title}」有效：${branch.firstWhy}`);
+        setStep("gap");
+      });
+    }
+
+    function renderGap() {
+      const branch = branches[state.branch];
+      stage.innerHTML = `
+        ${head("发现缺口，选择补强", branch.weakBattle, "补强猜想")}
+        <div class="note">${branch.weakResult}</div>
+        <div class="section-title"><span>${branch.needQuestion}</span><span>选择一个补强方向</span></div>
+        <div class="cards">
+          ${branch.options.map(option => patchCard(option)).join("")}
+        </div>
+      `;
+      document.querySelectorAll("[data-patch]").forEach(btn => {
+        btn.addEventListener("click", () => hatchPatch(btn.dataset.patch));
+      });
+    }
+
+    function renderFinal() {
+      const branch = branches[state.branch];
+      const option = state.selectedPatch;
+      stage.innerHTML = `
+        ${head("验证三生物组合", option.finalName, "最终验证")}
+        <div class="battle">
+          ${battlefield(option.finalTeam, "👹 🟢🟢")}
+          <div class="result">
+            <h3>${option.recommended ? "完美补强" : "可用但不完美"}</h3>
+            <p>${option.finalResult}</p>
+            <p><strong>体验重点：</strong>你先猜出组合，再为了它收集，最后通过战斗知道自己猜得对不对。</p>
+            <div class="actions">
+              <button class="primary" id="playFinal">播放验证</button>
+              <button class="secondary" id="finish">记录结论</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById("playFinal").addEventListener("click", playStrike);
+      document.getElementById("finish").addEventListener("click", () => {
+        addLog("最终结论", `${option.finalName}：${option.finalResult}`);
+        setStep("done");
+      });
+    }
+
+    function renderDone() {
+      const branch = branches[state.branch];
+      const option = state.selectedPatch;
+      stage.innerHTML = `
+        ${head("原型体验完成", "回看这条链路是否成立。", "总结")}
+        <div class="cards">
+          <div class="card locked">
+            <div class="card-title"><span>第一次猜想</span><span>1</span></div>
+            <p>你选择了「${branch.title}」，并为这个组合收集。</p>
+          </div>
+          <div class="card locked">
+            <div class="card-title"><span>战斗验证</span><span>2</span></div>
+            <p>${branch.firstResult}</p>
+          </div>
+          <div class="card locked">
+            <div class="card-title"><span>补强猜想</span><span>3</span></div>
+            <p>你选择 ${creatures[option.id].name} 补强：${option.reason}</p>
+          </div>
+          <div class="card locked">
+            <div class="card-title"><span>下一步问题</span><span>4</span></div>
+            <p>你会想继续试另一个传闻，还是扩展当前组合的更多分支？</p>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="primary" id="again">换一条传闻再试</button>
+        </div>
+      `;
+      document.getElementById("again").addEventListener("click", reset);
+    }
+
+    function head(title, copy, tag) {
+      return `
+        <div class="stage-head">
+          <div>
+            <h2>${title}</h2>
+            <p class="stage-copy">${copy}</p>
+          </div>
+          <span class="stage-tag">${tag}</span>
+        </div>
+      `;
+    }
+
+    function rumorCard(id, icon, title, copy, guess) {
+      return `
+        <button class="card" type="button" data-branch="${id}">
+          <div class="card-title"><span>${icon} ${title}</span><span>选择</span></div>
+          <p>${copy}</p>
+          <p style="margin-top:10px;color:#1f5e42;font-weight:800;">${guess}</p>
+        </button>
+      `;
+    }
+
+    function creatureCard(id, item) {
+      const count = state.inventory[id] || 0;
+      const hatched = state.hatched.includes(id);
+      return `
+        <div class="creature">
+          <div class="icon">${item.icon}</div>
+          <h3>${item.name}</h3>
+          <p>${item.role}</p>
+          <div class="progress-row">
+            <span>${hatched ? "已孵化" : "碎片"}</span>
+            <strong>${Math.min(count, 3)}/3</strong>
+          </div>
+        </div>
+      `;
+    }
+
+    function patchCard(option) {
+      const item = creatures[option.id];
+      return `
+        <button class="card" type="button" data-patch="${option.id}">
+          <div class="card-title"><span>${item.icon} ${option.label}</span><span>${option.text}</span></div>
+          <p>${option.reason}</p>
+          <p style="margin-top:10px;color:${option.recommended ? "#1f5e42" : "#67562a"};font-weight:800;">
+            ${option.recommended ? "更贴合缺口" : "也能补强，但方向不同"}
+          </p>
+        </button>
+      `;
+    }
+
+    function battlefield(team, enemies) {
+      return `
+        <div class="battlefield">
+          <div class="enemy">${enemies}</div>
+          <div class="effect-line" id="effectLine"></div>
+          <div class="team-row">${team.map(id => `<div class="unit" title="${creatures[id].name}">${creatures[id].icon}</div>`).join("")}</div>
+        </div>
+      `;
+    }
+
+    function playStrike() {
+      const line = document.getElementById("effectLine");
+      if (!line) return;
+      line.classList.remove("play");
+      void line.offsetWidth;
+      line.classList.add("play");
+    }
+
+    function hasDrop(drop) {
+      return Object.entries(drop).every(([id, count]) => (state.inventory[id] || 0) >= count);
+    }
+
+    function teamNames(ids) {
+      return ids.map(id => creatures[id].name).join(" + ");
+    }
+
+    function formatDrop(drop) {
+      return Object.entries(drop).map(([id, count]) => `${creatures[id].name}碎片 x${count}`).join("，");
+    }
+
+    render();
+  </script>
+</body>
+</html>
