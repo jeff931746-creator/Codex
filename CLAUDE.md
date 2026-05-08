@@ -76,6 +76,8 @@ Available Skills:
 | 任务流程矩阵 | `tools/codex-skills-repo/references/task-flow-matrix.md` |
 | Agent 委派规则 | `tools/codex-skills-repo/references/agent-delegation-policy.md` |
 | 记忆文件 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/` |
+| 工作流链路规则 | `.claude/rules/workflow-chain.md` |
+| 共享能力标准 | `projects/00-共享能力/` |
 
 ### 流程强度分级
 
