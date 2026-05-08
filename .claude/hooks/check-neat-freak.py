@@ -1,40 +1,52 @@
 #!/usr/bin/env python3
 """
-pre-commit 门禁：验证 neat-freak 检查点是否在 30 分钟内完成。
-从 stdin 读取 Claude hook JSON，仅拦截 git commit 命令。
+Stop 钩子：检查 neat-freak 检查点是否有效。
+如果检测到未提交改动且检查点缺失或已过期，输出提示。
+非阻断，仅作警告。
 """
 import sys
 import json
-import re
 import os
 import time
+import subprocess
 
-data = json.load(sys.stdin)
-tool_name = data.get('tool_name', '')
-command = data.get('tool_input', {}).get('command', '')
+# 读取 stdin（Stop 钩子格式，不依赖其内容做判断）
+try:
+    json.load(sys.stdin)
+except Exception:
+    pass
 
-if tool_name != 'Bash':
-    sys.exit(0)
-if not re.search(r'git\s+commit', command):
-    sys.exit(0)
-
-CHECKPOINT_FILE = '/Users/mt/Documents/Codex/.claude/.neat-freak-checkpoint'
+WORKSPACE = '/Users/mt/Documents/Codex'
+CHECKPOINT_FILE = os.path.join(WORKSPACE, '.claude/.neat-freak-checkpoint')
 MAX_AGE = 1800  # 30 分钟
 
+# 检查是否有未提交的改动
+try:
+    result = subprocess.run(
+        ['git', '-C', WORKSPACE, 'status', '--porcelain'],
+        capture_output=True, text=True, timeout=5
+    )
+    has_changes = bool(result.stdout.strip())
+except Exception:
+    sys.exit(0)
+
+if not has_changes:
+    sys.exit(0)
+
+# 有未提交改动，检查 neat-freak 检查点
 if not os.path.exists(CHECKPOINT_FILE):
-    print('BLOCK:未找到 neat-freak 检查点。commit 前请完成 neat-freak 收尾步骤，并运行 .claude/hooks/neat-freak-checkpoint.sh', flush=True)
-    sys.exit(2)
+    print('⚠️  neat-freak：检测到未提交改动，尚未完成收尾检查。commit 前请先完成 neat-freak 步骤并运行检查点脚本。', flush=True)
+    sys.exit(0)
 
 try:
     checkpoint_time = int(open(CHECKPOINT_FILE).read().strip())
 except Exception:
-    print('BLOCK:neat-freak 检查点文件损坏，请重新运行 .claude/hooks/neat-freak-checkpoint.sh', flush=True)
-    sys.exit(2)
+    print('⚠️  neat-freak：检查点文件损坏，请重新运行 .claude/hooks/neat-freak-checkpoint.sh', flush=True)
+    sys.exit(0)
 
 age = int(time.time()) - checkpoint_time
 if age > MAX_AGE:
     minutes = age // 60
-    print(f'BLOCK:neat-freak 检查点已过期（{minutes} 分钟前）。请重新完成 neat-freak 收尾步骤后再 commit', flush=True)
-    sys.exit(2)
+    print(f'⚠️  neat-freak：检查点已过期（{minutes} 分钟前）。如有新改动请重新完成收尾步骤。', flush=True)
 
 sys.exit(0)
