@@ -2,7 +2,7 @@
 
 新建立项预演项目时，直接复制这套按流程归档的结构。适用于**立项评估阶段**（阶段制管理，00-05）。
 
-工作流全链路（包括立项通过后的正式项目结构）详见 [`.claude/rules/workflow-chain.md`](/Users/mt/Documents/Codex/.claude/rules/workflow-chain.md)。立项通过后请使用 [`projects/_正式项目模板/`](/Users/mt/Documents/Codex/projects/_正式项目模板/)。
+工作流全链路（包括立项通过后的正式项目结构）详见 [`.claude/rules/workflow-chain.md`](/Users/mt/Documents/Codex/.claude/rules/workflow-chain.md)。立项通过后请使用 [`reference/模板/正式项目/`](/Users/mt/Documents/Codex/reference/模板/正式项目/)。
 
 This template follows the root workspace session protocol in [`/Users/mt/Documents/Codex/CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md).
 

@@ -1,0 +1,3 @@
+display_name: ForeverNine Downloader
+short_description: Reuse Chrome login to resolve and download ForeverNine material assets by exact title.
+default_prompt: Download requested assets from ForeverNine's public-opinion material library by reusing the logged-in Chrome session, resolving exact titles through the page's API, and saving the files locally.
