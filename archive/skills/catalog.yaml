@@ -1,11 +1,4 @@
 skills:
-  - name: "chat-archive-cleaner"
-    path: "skills/chat-archive-cleaner"
-    status: "active"
-    scope: "global"
-    owner: "mt"
-    runtime_target: "/Users/mt/.codex/skills/chat-archive-cleaner"
-    notes: "Has script support; good candidate for regression cases."
   - name: "forevernine-material-downloader"
     path: "skills/forevernine-material-downloader"
     status: "active"
