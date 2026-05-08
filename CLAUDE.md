@@ -77,7 +77,7 @@ Available Skills:
 | Agent 委派规则 | `tools/codex-skills-repo/references/agent-delegation-policy.md` |
 | 记忆文件 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/` |
 | 工作流链路规则 | `.claude/rules/workflow-chain.md` |
-| 共享能力标准 | `projects/00-共享能力/` |
+| 共享能力标准 | `tools/部门标准/` |
 
 ### 流程强度分级
 

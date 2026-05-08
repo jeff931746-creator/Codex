@@ -14,8 +14,8 @@
 评审输入：
 
 - 项目目录中的 `00-立项文档`
-- [原型立项闸门表.md](/Users/mt/Documents/Codex/projects/00-共享能力/立项/立项流程机制/原型立项闸门表.md) 对应证据
-- [长线经营假设卡.md](/Users/mt/Documents/Codex/projects/00-共享能力/立项/立项流程机制/长线经营假设卡.md)
+- [原型立项闸门表.md](/Users/mt/Documents/Codex/tools/部门标准/立项/立项流程机制/原型立项闸门表.md) 对应证据
+- [长线经营假设卡.md](/Users/mt/Documents/Codex/tools/部门标准/立项/立项流程机制/长线经营假设卡.md)
 - 若当前证据不足，需要明确缺口属于：
   `需要纸面原型补证`
   `需要竞品/题材/发行信息补证`
@@ -38,9 +38,9 @@
 
 使用入口：
 
-- [标准评审模板文档.md](/Users/mt/Documents/Codex/projects/00-共享能力/立项/立项流程机制/01-立项评审/标准评审模板文档.md)
-- [原型立项闸门表.md](/Users/mt/Documents/Codex/projects/00-共享能力/立项/立项流程机制/原型立项闸门表.md)
-- [长线经营假设卡.md](/Users/mt/Documents/Codex/projects/00-共享能力/立项/立项流程机制/长线经营假设卡.md)
+- [标准评审模板文档.md](/Users/mt/Documents/Codex/tools/部门标准/立项/立项流程机制/01-立项评审/标准评审模板文档.md)
+- [原型立项闸门表.md](/Users/mt/Documents/Codex/tools/部门标准/立项/立项流程机制/原型立项闸门表.md)
+- [长线经营假设卡.md](/Users/mt/Documents/Codex/tools/部门标准/立项/立项流程机制/长线经营假设卡.md)
 
 本阶段结论只能选一个：
 
@@ -58,4 +58,4 @@
 
 如果结论是 `进入纸面原型补证`，则进入：
 
-- [02-纸面原型/README.md](/Users/mt/Documents/Codex/projects/00-共享能力/立项/立项流程机制/02-纸面原型/README.md)
+- [02-纸面原型/README.md](/Users/mt/Documents/Codex/tools/部门标准/立项/立项流程机制/02-纸面原型/README.md)

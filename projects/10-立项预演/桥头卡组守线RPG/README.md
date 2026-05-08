@@ -28,6 +28,6 @@
 
 ## 相关文档
 
-- [立项流程总览](/Users/mt/Documents/Codex/projects/00-共享能力/立项/立项流程机制/00-流程总览.md)
-- [原型立项闸门表](/Users/mt/Documents/Codex/projects/00-共享能力/立项/立项流程机制/原型立项闸门表.md)
-- [标准评审模板](/Users/mt/Documents/Codex/projects/00-共享能力/立项/立项流程机制/01-立项评审/标准评审模板文档.md)
+- [立项流程总览](/Users/mt/Documents/Codex/tools/部门标准/立项/立项流程机制/00-流程总览.md)
+- [原型立项闸门表](/Users/mt/Documents/Codex/tools/部门标准/立项/立项流程机制/原型立项闸门表.md)
+- [标准评审模板](/Users/mt/Documents/Codex/tools/部门标准/立项/立项流程机制/01-立项评审/标准评审模板文档.md)

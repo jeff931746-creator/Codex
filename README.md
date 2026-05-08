@@ -41,8 +41,8 @@ The workspace follows the root [`CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md
 
 ### Projects
 
-- `projects/00-共享能力`
 - `projects/10-立项预演`
+- `projects/_正式项目模板`
 
 ### Research
 
