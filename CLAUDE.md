@@ -75,8 +75,8 @@ Available Skills:
 | 活跃任务列表 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md` |
 | 可用 Skills | `archive/skills/skills/` |
 | 自动 Hooks | `.claude/hooks/`（git commit 中文检查、危险命令拦截、Stop 状态播报） |
-| 任务流程矩阵 | `archive/skills/references/task-flow-matrix.md` |
-| Agent 委派规则 | `archive/skills/references/agent-delegation-policy.md` |
+| 任务流程矩阵 | `.claude/rules/task-flow-matrix.md` |
+| Agent 委派规则 | `.claude/rules/agent-delegation-policy.md` |
 | 记忆文件 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/` |
 | 工作流链路规则 | `.claude/rules/workflow-chain.md` |
 | 部门标准 | `reference/部门标准/` |
@@ -126,7 +126,7 @@ Available Skills:
 
 任务流程矩阵见：
 
-- [`archive/skills/references/task-flow-matrix.md`](/Users/mt/Documents/Codex/archive/skills/references/task-flow-matrix.md)
+- [`.claude/rules/task-flow-matrix.md`](/Users/mt/Documents/Codex/.claude/rules/task-flow-matrix.md)
 
 ### 任务管理
 
@@ -155,7 +155,7 @@ Available Skills:
 
 详细分工规则见：
 
-- [`archive/skills/references/agent-delegation-policy.md`](/Users/mt/Documents/Codex/archive/skills/references/agent-delegation-policy.md)
+- [`.claude/rules/agent-delegation-policy.md`](/Users/mt/Documents/Codex/.claude/rules/agent-delegation-policy.md)
 
 ### 决策路由器
 
@@ -248,7 +248,7 @@ Available Skills:
 Any time you complete a game analysis or mechanism breakdown — whether for a project knowledge base (e.g. `向僵尸开炮知识库/`) or as a standalone task — you **must also** run the `游戏机制拆解` Skill and write the results into:
 
 ```
-/Users/mt/Documents/Codex/reference/资料/机制库/{游戏名}/
+/Users/mt/Documents/Codex/archive/资料/机制库/{游戏名}/
 ```
 
 The project knowledge base and the 机制库 serve different purposes and are not interchangeable:
