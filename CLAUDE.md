@@ -24,7 +24,9 @@ This workspace is for workflow-related assets only.
 ## Scope
 
 - Keep only files, scripts, notes, research, prompts, and tools that directly support the active workflow.
-- Prefer placing work in the existing top-level folders: `projects/`, `research/`, `tools/`, `playground/`, and `tmp/`.
+- Prefer placing work in the existing top-level folders: `workspace/projects/`, `workspace/playground/`, and `workspace/tmp/`.
+- `reference/` is the core knowledge base — AI must not modify files here without explicit user permission.
+- `archive/` holds accumulated methods and tools. `reference/` holds stable standards and research.
 
 ## Software And Runtime Policy
 
@@ -41,12 +43,12 @@ This workspace is for workflow-related assets only.
 
 ## Tooling Exceptions
 
-- Reusable scripts or tool repos may live in `tools/` when they directly support this workflow.
+- Reusable scripts or tool repos live in `archive/tools/` when they directly support this workflow.
 - Keep tooling minimal and purpose-built; avoid general environment setup inside this workspace.
 
 ## Skills
 
-Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/skills/`. The old `/Users/mt/Documents/Codex/tools/codex-skills-repo/` path is kept as a compatibility symlink. Before starting any task that matches a Skill's description, read the corresponding `SKILL.md` and follow its workflow exactly.
+Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/archive/skills/skills/`. Before starting any task that matches a Skill's description, read the corresponding `SKILL.md` and follow its workflow exactly.
 
 Available Skills:
 
@@ -71,13 +73,13 @@ Available Skills:
 |---|---|
 | 任务当前状态 | `memory/task_{任务名}.md` → 运行 `session-resume` |
 | 活跃任务列表 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md` |
-| 可用 Skills | `tools/codex-skills-repo/skills/` |
+| 可用 Skills | `archive/skills/skills/` |
 | 自动 Hooks | `.claude/hooks/`（git commit 中文检查、危险命令拦截、Stop 状态播报） |
-| 任务流程矩阵 | `tools/codex-skills-repo/references/task-flow-matrix.md` |
-| Agent 委派规则 | `tools/codex-skills-repo/references/agent-delegation-policy.md` |
+| 任务流程矩阵 | `archive/skills/references/task-flow-matrix.md` |
+| Agent 委派规则 | `archive/skills/references/agent-delegation-policy.md` |
 | 记忆文件 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/` |
 | 工作流链路规则 | `.claude/rules/workflow-chain.md` |
-| 部门标准 | `tools/部门标准/` |
+| 部门标准 | `reference/部门标准/` |
 
 ### 流程强度分级
 
@@ -124,7 +126,7 @@ Available Skills:
 
 任务流程矩阵见：
 
-- [`tools/repos/codex-skills-repo/references/task-flow-matrix.md`](/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/references/task-flow-matrix.md)
+- [`archive/skills/references/task-flow-matrix.md`](/Users/mt/Documents/Codex/archive/skills/references/task-flow-matrix.md)
 
 ### 任务管理
 
@@ -153,7 +155,7 @@ Available Skills:
 
 详细分工规则见：
 
-- [`tools/repos/codex-skills-repo/references/agent-delegation-policy.md`](/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/references/agent-delegation-policy.md)
+- [`archive/skills/references/agent-delegation-policy.md`](/Users/mt/Documents/Codex/archive/skills/references/agent-delegation-policy.md)
 
 ### 决策路由器
 
@@ -246,7 +248,7 @@ Available Skills:
 Any time you complete a game analysis or mechanism breakdown — whether for a project knowledge base (e.g. `向僵尸开炮知识库/`) or as a standalone task — you **must also** run the `游戏机制拆解` Skill and write the results into:
 
 ```
-/Users/mt/Documents/Codex/research/资料/机制库/{游戏名}/
+/Users/mt/Documents/Codex/reference/资料/机制库/{游戏名}/
 ```
 
 The project knowledge base and the 机制库 serve different purposes and are not interchangeable:

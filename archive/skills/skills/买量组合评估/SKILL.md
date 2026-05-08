@@ -12,14 +12,14 @@
 
 ## 输出
 
-在 `/Users/mt/Documents/Codex/research/资料/买量组合库/组合案例库/` 下生成：
+在 `/Users/mt/Documents/Codex/reference/资料/买量组合库/组合案例库/` 下生成：
 - `{题材名}×{画风名}.md`：完整评估报告
 
 ## 工作流程
 
 ### 1. 准备阶段
 
-- 读取 `/Users/mt/Documents/Codex/research/资料/买量组合库/评估模板/组合评估模板.md`
+- 读取 `/Users/mt/Documents/Codex/reference/资料/买量组合库/评估模板/组合评估模板.md`
 - 检查题材库和画风库中是否已有基础信息
   - 如有，读取作为背景
   - 如无，在评估过程中补充基础信息

@@ -18,7 +18,7 @@ import certifi
 # ========== 配置 ==========
 LIBRARY_ROOT = Path(os.environ.get(
     "AD_COMBO_LIBRARY_ROOT",
-    "/Users/mt/Documents/Codex/research/资料/买量组合库"
+    "/Users/mt/Documents/Codex/reference/资料/买量组合库"
 ))
 STATE_FILE = Path(os.environ.get(
     "AD_COMBO_STATE_FILE",

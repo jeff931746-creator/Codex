@@ -15,7 +15,7 @@ from pathlib import Path
 
 import certifi
 
-LIBRARY_ROOT = Path("/Users/mt/Documents/Codex/research/资料/机制库")
+LIBRARY_ROOT = Path("/Users/mt/Documents/Codex/reference/资料/机制库")
 INDEX_FILE = LIBRARY_ROOT / "00_总索引.md"
 STATE_FILE = Path("/tmp/daily_game_breakdown_state.json")
 STATE_TTL_HOURS = 24

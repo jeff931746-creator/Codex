@@ -8,7 +8,7 @@
     python3 collect_hits.py --overwrite  # 覆盖已存在的文件
 
 输出:
-    /Users/mt/Documents/Codex/research/资料/竞品库/爆款年度榜/{year}.md
+    /Users/mt/Documents/Codex/reference/资料/竞品库/爆款年度榜/{year}.md
 """
 import argparse
 import json

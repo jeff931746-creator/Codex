@@ -46,7 +46,7 @@ const config = {
   codexPython: process.env.CODEX_PYTHON_BIN || process.env.PYTHON_BIN || "python3",
   codexBridgeScript:
     process.env.CODEX_DESKTOP_BRIDGE_SCRIPT ||
-    "/Users/mt/Documents/Codex/tools/codex-desktop-bridge/codex_desktop_bridge.py",
+    "/Users/mt/Documents/Codex/archive/tools/codex-desktop-bridge/codex_desktop_bridge.py",
   codexSessionTarget: process.env.CODEX_SESSION_TARGET || "",
   codexWorkdir:
     process.env.CODEX_BRIDGE_WORKDIR || "/Users/mt/Documents/Codex",
