@@ -31,8 +31,6 @@ dist/
 build/
 coverage/
 
-# Large local reference docs
-research/立项白皮书/参考文档/*.docx
-research/立项白皮书/参考文档/*.pptx
-research/立项白皮书/参考文档/*.pdf
+# Large local reference docs（不推送到远端）
+archive/方法论/立项白皮书/
 .claude/.neat-freak-checkpoint
