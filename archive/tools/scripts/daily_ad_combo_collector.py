@@ -18,7 +18,7 @@ import certifi
 # ========== 配置 ==========
 LIBRARY_ROOT = Path(os.environ.get(
     "AD_COMBO_LIBRARY_ROOT",
-    "/Users/mt/Documents/Codex/reference/资料/买量组合库"
+    "/Users/mt/Documents/Codex/archive/资料/买量组合库"
 ))
 STATE_FILE = Path(os.environ.get(
     "AD_COMBO_STATE_FILE",
@@ -196,47 +196,6 @@ def _merge_unique_list(left, right) -> list:
             out.append(item)
     return out
 
-def _normalize_monetization(value: str) -> str:
-    text = str(value or "").strip()
-    upper = text.upper().replace(" ", "")
-    if not text:
-        return "未知"
-    if "IAP+IAA" in upper or "混合" in text:
-        return "IAP+IAA"
-    if "IAA" in upper or "广告" in text or "内容消费" in text or "ONLY" in upper:
-        return "IAA主导"
-    if "IAP" in upper or "内购" in text or "付费" in text:
-        return "IAP主导"
-    return "未知"
-
-def _normalize_market_status(value: str, blue_ocean_score_value: int = 0, competition_risk: str = "") -> str:
-    text = str(value or "").strip()
-    risk = str(competition_risk or "")
-    if "浅" in text and "红" in text:
-        return "浅红海"
-    if "红" in text:
-        return "红海"
-    if "蓝" in text or "稀缺" in text:
-        return "蓝海"
-    if any(flag in risk for flag in ("大厂", "饱和", "同题材游戏约")):
-        return "红海"
-    if blue_ocean_score_value >= 3:
-        return "蓝海"
-    if blue_ocean_score_value >= 1:
-        return "浅红海"
-    return "红海"
-
-def _normalize_recommendation(value: str) -> str:
-    text = str(value or "").strip()
-    if "差异" in text:
-        return "差异化后保留"
-    if "改写" in text or "复评" in text:
-        return "改写后复评"
-    if "排除" in text or "不保留" in text:
-        return "排除"
-    if "保留" in text:
-        return "保留"
-    return "未知"
 
 def _pick_first(*values) -> str:
     for value in values:
@@ -277,59 +236,82 @@ def _merge_theme_record(existing: dict, incoming: dict) -> dict:
     return existing
 
 def _standardize_assessment(theme: dict, info: dict) -> dict:
-    score = info.get("score", 0)
-    try:
-        score = max(0, min(6, int(score)))
-    except (TypeError, ValueError):
-        score = 0
+    # 兼容旧格式（仅有 score 字段）
+    if "score" in info and "dim1_demand" not in info:
+        return {
+            "effective_acquisition_score": 0.0,
+            "roi_score": 0.0,
+            "quadrant": "未知",
+            "hard_fail_dims": [],
+            "recommendation": "改写后复评",
+            "reason": _pick_first(info.get("reason"), "旧格式数据，需重新评估"),
+            "gameplay_carrier": _pick_first(info.get("gameplay_carrier"), theme.get("gameplay_carrier")),
+            "entry_angle": _pick_first(info.get("differentiation_angle"), theme.get("differentiation_angle")),
+            "ad_creative_hooks": _merge_unique_list(info.get("ad_creative_hooks"), theme.get("ad_creative_hooks")),
+        }
 
-    monetization_fit = _normalize_monetization(
-        info.get("monetization_fit") or info.get("monetization") or theme.get("monetization_fit") or theme.get("monetization")
-    )
-    market_status = _normalize_market_status(
-        info.get("market_status") or theme.get("market_status"),
-        theme.get("blue_ocean_score", 0),
-        theme.get("competition_risk", "")
-    )
-    recommendation = _normalize_recommendation(info.get("recommendation") or theme.get("recommendation"))
-    differentiation_angle = _pick_first(info.get("differentiation_angle"), theme.get("differentiation_angle"))
+    def _dim(key: str) -> int:
+        val = info.get(key, 3)
+        try:
+            return max(1, min(5, int(val)))
+        except (TypeError, ValueError):
+            return 3
 
-    if recommendation == "未知":
-        if monetization_fit == "IAA主导":
-            recommendation = "排除"
-        elif market_status == "红海":
-            recommendation = "差异化后保留"
-        else:
-            recommendation = "保留"
+    acq_dims = [_dim("dim1_demand"), _dim("dim2_hook"), _dim("dim3_freshness"),
+                _dim("dim4_competition"), _dim("dim5_cpi")]
+    roi_dims = [_dim("dim6_ltv"), _dim("dim7_retention"), _dim("dim8_payment"),
+                _dim("dim9_content"), _dim("dim10_payback")]
 
-    if market_status in ("红海", "浅红海"):
-        if not differentiation_angle and recommendation in ("保留", "差异化后保留"):
-            recommendation = "改写后复评"
-        elif differentiation_angle and recommendation == "保留":
-            recommendation = "差异化后保留"
+    ea = round(sum(acq_dims) / 5, 1)
+    roi = round(sum(roi_dims) / 5, 1)
+
+    dim_names = ["需求规模", "第一眼刺激", "素材新鲜度", "竞争压力", "CPI风险",
+                 "LTV上限", "留存深度", "付费自然度", "内容效率", "回本压力"]
+    all_dims = acq_dims + roi_dims
+    hard_fail_dims = [dim_names[i] for i, v in enumerate(all_dims) if v < 3]
+
+    if ea >= 4 and roi >= 4:
+        quadrant = "高获量+高ROI"
+    elif ea >= 4:
+        quadrant = "高获量+低ROI"
+    elif roi >= 4:
+        quadrant = "低获量+高ROI"
+    else:
+        quadrant = "低获量+低ROI"
+
+    # 均分 < 3 为轴级硬伤，直接不通过
+    if ea < 3 or roi < 3:
+        recommendation = "不通过"
+    # 单维度 < 3 为项级硬伤，不得用均分掩盖；降为补证
+    elif hard_fail_dims:
+        recommendation = "补证"
+    # 任一轴均分在 3-4 之间，需补证
+    elif ea < 4 or roi < 4:
+        recommendation = "补证"
+    else:
+        recommendation = "通过"
 
     return {
-        "score": score,
-        "reason": _pick_first(info.get("reason"), theme.get("game_viability_reason"), "未评估"),
-        "monetization_fit": monetization_fit,
-        "market_status": market_status,
+        "effective_acquisition_score": ea,
+        "roi_score": roi,
+        "quadrant": quadrant,
+        "hard_fail_dims": hard_fail_dims,
         "recommendation": recommendation,
+        "reason": _pick_first(info.get("reason"), theme.get("game_viability_reason"), "未评估"),
         "gameplay_carrier": _pick_first(info.get("gameplay_carrier"), theme.get("gameplay_carrier")),
-        "differentiation_angle": differentiation_angle,
+        "entry_angle": _pick_first(info.get("entry_angle"), theme.get("entry_angle"), theme.get("differentiation_angle")),
         "ad_creative_hooks": _merge_unique_list(info.get("ad_creative_hooks"), theme.get("ad_creative_hooks")),
     }
 
 def _theme_sort_key(theme: dict):
-    recommendation_rank = {"保留": 3, "差异化后保留": 2, "改写后复评": 1, "排除": 0, "未知": 0}
-    monetization_rank = {"IAP主导": 3, "IAP+IAA": 2, "IAA主导": 0, "未知": 1}
-    market_rank = {"蓝海": 3, "浅红海": 2, "红海": 1, "未知": 0}
+    quadrant_rank = {"高获量+高ROI": 4, "高获量+低ROI": 2, "低获量+高ROI": 2, "低获量+低ROI": 0, "未知": 0}
+    recommendation_rank = {"通过": 3, "补证": 2, "改写后复评": 1, "不通过": 0, "差异化后保留": 2, "保留": 3, "排除": 0, "未知": 0}
     return (
+        -quadrant_rank.get(theme.get("quadrant", "未知"), 0),
         -recommendation_rank.get(theme.get("recommendation", "未知"), 0),
-        -monetization_rank.get(theme.get("monetization_fit", "未知"), 0),
-        -market_rank.get(theme.get("market_status", "未知"), 0),
+        -theme.get("effective_acquisition_score", 0.0),
+        -theme.get("roi_score", 0.0),
         -len(_as_list(theme.get("ad_creative_hooks"))),
-        -theme.get("game_viability_score", 0),
-        -theme.get("blue_ocean_score", 0),
     )
 
 def _md_cell(value) -> str:
@@ -337,94 +319,98 @@ def _md_cell(value) -> str:
         value = "、".join(_as_list(value))
     return str(value or "").replace("|", "/").replace("\n", " ")
 
-_VIABILITY_PROMPT_TEMPLATE = """你是一名买量游戏立项评审，目标不是判断"能不能做成游戏"，而是判断一个题材是否能成为可投放验证的题材风格假设。
-你要同时评估：题材幻想、玩法承接、商业化闭环、素材母题、市场竞争与差异化切口。
+_THEME_EVAL_PROMPT = """你是一名买量游戏题材评审专家，依据"有效获量能力 × ROI承接能力"四象限方法论对每个题材评分。
 
-## 六个评估维度（各1分，满分6分，≥3分才合格）
+## 有效获量轴（5个维度，各1-5分）
 
-1. **IAP/混合变现驱动力**：题材是否天然支撑"越付越强/越稀有/越领先"
-   - 不得分：爽点是看结果、看热闹、看反转，只适合广告变现
-   - 得分：角色/装备/技能/宠物/基地/资源/领地能持续成长并形成数值压力
+1. **需求规模**：当前市场是否有真实可触达需求？
+   1分=无受众验证；3分=有潜在受众但未被大量消费；5分=已在小说/短剧/动漫中大规模消费
 
-2. **3秒买量钩子**：是否能用一眼画面讲清冲突和爽点
-   - 不得分：需要大量文字解释，主要靠剧情理解
-   - 得分：尸潮压境、Boss破门、抽到神宠、装备带出、基地进化等画面直观
+2. **第一眼刺激**：第一张图是否有强识别、强情绪、强冲突？
+   1分=需要大量解释才懂；3分=能看懂但无冲击；5分=一眼识别+立即触发情绪反应
 
-3. **素材可持续性**：是否能持续产出素材母题
-   - 不得分：只有一次性的反转/揭秘/测算结果
-   - 得分：失败开局、升级爆发、稀有掉落、压迫翻盘、三选一、撤离贪婪等可重复拍
+3. **素材新鲜度**：和现有买量素材相比，是否有一眼可见的新表达？
+   1分=高度同质化，素材桥段已被大量使用；3分=有差异但不突出；5分=新视角/新冲突/新人群切口
 
-4. **玩法承接清晰度**：能否落到明确玩法载体
-   - 不得分：只有设定，没有循环
-   - 得分：塔防、割草、放置RPG、卡牌、搜打撤、模拟经营、SLG、肉鸽等承接清楚
+4. **竞争压力**（反向评分）：同题材、同人群、同素材表达是否已高度拥挤？
+   1分=红海+腾讯/网易/米哈游已大量入场；3分=有竞争但有可见切口；5分=蓝海/供给明显不足
 
-5. **蓝海/差异化潜力**：题材是否供给不足，或红海中有明确切口
-   - 不得分：大类红海且没有子题材/画风/玩法错位
-   - 得分：蓝海子题材，或红海题材能给出清晰差异化切口
+5. **CPI风险**：预估买量成本是否仍在产品可承接范围内？
+   1分=行业公认CPI过高，难以回本；3分=成本不确定；5分=预期CPI合理可接受
 
-6. **受众-付费习惯匹配**：题材受众是否愿意为成长、稀缺、竞争或效率付费
-   - 不得分：种田、日常、恋爱、温馨、治愈、情感、邻里（无对抗）
-   - 得分：末世资源争夺、御兽进化、战争扩张、搜打撤装备带出、技能Build成长
+有效获量均分 = (dim1+dim2+dim3+dim4+dim5) / 5
 
-## 硬性扣分规则（触发任一条直接 ≤2 分）
+## ROI承接轴（5个维度，各1-5分）
 
-- 含"种田/日常/温馨/恋爱/治愈/邻里/宅斗"且无明确对抗元素
-- 题材受众是轻娱乐消费者但玩法需要策略重度用户
-- 爽点完全依赖剧情反转（打脸/掉马/复仇揭秘），无独立游戏目标
-- 题材核心爽点是"看结果/看内容"而非"操控/积累/成长/带出"
-- 红海题材没有子题材、画风、玩法或平台错位的差异化切口
+6. **LTV上限**：题材是否支撑足够高的长期变现价值？
+   1分=只适合广告变现，无成长付费点；3分=有部分付费承接；5分=多条成长线+自然付费深度
 
-## 分类要求
+7. **留存深度**：是否能形成持续目标和重复行为？
+   1分=一次性体验，看完即走；3分=有目标但牵引力不强；5分=身份目标+阶段推进+长期追求都清楚
 
-- **IAP主导蓝海**：IAP主导 + 蓝海/浅红海 + 保留
-- **IAP+IAA混合潜力**：局内爽感强，广告可补资源/复活/加速，但长期仍有成长付费
-- **好题材但红海**：需求强、竞争多，必须给出差异化切口，推荐结论通常为"差异化后保留"
-- **IAA-only内容消费型**：看结果/看反转/看内容，若无法改写成成长或战斗结构则排除
+8. **付费自然度**：付费是否服务体验而非硬塞？
+   1分=强行插入付费破坏体验；3分=付费可接受但不自然；5分=付费完全服务题材情绪和成长逻辑
 
-## 变现模式判断
+9. **内容效率**：题材内容是否能持续生产且成本可控？
+   1分=需大量高成本美术/剧情才成立；3分=可以适度制作；5分=角色/关卡/皮肤可稳定低成本扩展
 
-- **IAP主导**：角色/装备/技能/资源/领地等付费深度强
-- **IAP+IAA**：局内爽感和广告点强，同时有装备、技能、Build、关卡或资源成长承接
-- **IAA主导**：主要靠内容消费、一次性反转或结果揭示，缺少越付越强压力
+10. **回本压力**：预期回本周期是否匹配团队能力？
+    1分=回本周期超长或获量成本极高；3分=回本路径不确定；5分=轻量产品快速验证或回本路径清晰
 
-## 市场状态判断
+ROI承接均分 = (dim6+dim7+dim8+dim9+dim10) / 5
 
-- **蓝海**：需求有证据，但同类游戏和买量素材明显少
-- **浅红海**：已有供给，但仍有题材、画风、玩法或平台切口
-- **红海**：竞品和素材都多，必须说明差异化切口
+## 四象限判断
+
+- 有效获量均分 ≥ 4 且 ROI均分 ≥ 4 → 高获量+高ROI（优先立项）
+- 有效获量均分 ≥ 4 且 ROI均分 < 4 → 高获量+低ROI（需增加长线承接）
+- 有效获量均分 < 4 且 ROI均分 ≥ 4 → 低获量+高ROI（需换外壳或找新切口）
+- 有效获量均分 < 4 且 ROI均分 < 4 → 低获量+低ROI（不建议立项）
+
+任一维度 < 3 → 该轴存在硬伤，必须说明，不得用均分掩盖。
+
+## 进入切口
+
+蓝海题材可为空；红海题材（竞争压力维度 ≤ 2）必须填写：
+新表达 / 新人群 / 新玩法承接 / 成本优势，说明具体切口。
 
 题材列表：
 {theme_list}
 
 返回 JSON 对象，key 是题材名，value 必须包含：
 {{
-  "score": 1-6,
-  "reason": "指出最关键的通过/降级/排除理由",
-  "monetization_fit": "IAP主导/IAP+IAA/IAA主导",
-  "market_status": "蓝海/浅红海/红海",
-  "recommendation": "保留/差异化后保留/改写后复评/排除",
+  "dim1_demand": 1到5的整数,
+  "dim2_hook": 1到5的整数,
+  "dim3_freshness": 1到5的整数,
+  "dim4_competition": 1到5的整数,
+  "dim5_cpi": 1到5的整数,
+  "dim6_ltv": 1到5的整数,
+  "dim7_retention": 1到5的整数,
+  "dim8_payment": 1到5的整数,
+  "dim9_content": 1到5的整数,
+  "dim10_payback": 1到5的整数,
+  "entry_angle": "进入切口描述，蓝海可为空，红海必填",
+  "reason": "一句话评审结论",
   "gameplay_carrier": "塔防/割草/搜打撤/RPG/卡牌/放置/模拟经营/SLG/肉鸽等",
-  "differentiation_angle": "蓝海可为空；浅红海或红海必须填写",
   "ad_creative_hooks": ["至少3个素材母题"]
 }}
 只返回 JSON 对象，不要其他文字，不要 markdown 代码块。"""
 
 
 def _assess_viability_one_batch(themes_batch: list) -> dict:
-    """单批次可玩性评估（最多15个题材）"""
+    """单批次四象限评估（最多15个题材）"""
     theme_list = "\n".join(_format_theme_for_assessment(t) for t in themes_batch)
-    prompt = _VIABILITY_PROMPT_TEMPLATE.format(theme_list=theme_list)
+    prompt = _THEME_EVAL_PROMPT.format(theme_list=theme_list)
     result = call_llm(prompt, max_tokens=3500)
     if not result:
         return {}
     try:
         data = _parse_json(result)
         if isinstance(data, list):
-            log(f"可玩性评估返回了 list，跳过该批次")
+            log(f"四象限评估返回了 list，跳过该批次")
             return {}
-        return {k: v for k, v in data.items() if isinstance(v, dict) and "score" in v}
+        return {k: v for k, v in data.items() if isinstance(v, dict) and ("dim1_demand" in v or "score" in v)}
     except Exception as e:
-        log(f"可玩性评估批次解析失败: {e}")
+        log(f"四象限评估批次解析失败: {e}")
         return {}
 
 
@@ -433,7 +419,7 @@ def assess_game_viability_batch(themes: list) -> dict:
     if not themes:
         return {}
 
-    BATCH_SIZE = 15
+    BATCH_SIZE = 5
     batches = [themes[i:i+BATCH_SIZE] for i in range(0, len(themes), BATCH_SIZE)]
     log(f"商业潜力评估：{len(themes)} 个题材分 {len(batches)} 批并行...")
 
@@ -460,6 +446,8 @@ def blue_ocean_score(theme: str, sources: list, frequency: int, competition_map:
 ENT_QUERIES = [
     ("小说", "2024-2025年网络小说（番茄小说/起点/晋江）中最火的细分题材"),
     ("短剧", "2024-2025年抖音/爱奇艺短剧中最火的细分题材"),
+    ("海外影视", "2024-2025年Netflix/Disney+/HBO/全球票房最火的美剧英剧日剧动漫电影细分题材"),
+    ("Steam", "Steam 2024-2025年最热门最畅销游戏的题材类型风格"),
 ]
 
 def fetch_entertainment_trends() -> list:
@@ -513,6 +501,7 @@ def fetch_game_rankings() -> dict:
         "ios":    "iOS 游戏免费榜 Top 50 2026年4月",
         "taptap": "TapTap 热门游戏榜单 2026年4月",
         "wechat": "微信小游戏热榜 2026年4月",
+        "steam":  "Steam 2025-2026年最热门最畅销游戏 Top 100 题材类型",
     }
 
     def _fetch_one(key_query):
@@ -521,8 +510,8 @@ def fetch_game_rankings() -> dict:
         games = parse_game_list(result, key) if result else []
         return key, games
 
-    rankings = {"ios": [], "taptap": [], "wechat": []}
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+    rankings = {"ios": [], "taptap": [], "wechat": [], "steam": []}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         futures = {executor.submit(_fetch_one, kq): kq[0] for kq in queries.items()}
         for future in concurrent.futures.as_completed(futures):
             try:
@@ -531,7 +520,8 @@ def fetch_game_rankings() -> dict:
             except Exception as e:
                 log(f"榜单获取失败（{futures[future]}）: {e}")
 
-    log(f"榜单获取完成: iOS {len(rankings['ios'])} 款, TapTap {len(rankings['taptap'])} 款, 微信 {len(rankings['wechat'])} 款")
+    log(f"榜单获取完成: iOS {len(rankings['ios'])} 款, TapTap {len(rankings['taptap'])} 款, "
+        f"微信 {len(rankings['wechat'])} 款, Steam {len(rankings['steam'])} 款")
     return rankings
 
 def _parse_json(text: str):
@@ -732,6 +722,7 @@ _BRAINSTORM_BATCHES = [
     ("动作/战斗/生存类", "末世生存、怪物猎杀、异能战斗、太空战争、地下城探险"),
     ("策略/经营/建造类", "基地建设、资源争夺、领地扩张、星球殖民、文明重建"),
     ("内容消费转游戏化改写类", "玄学算命、民俗怪谈、直播热度、短剧打脸、身份反转"),
+    ("海外IP/影视/Steam题材本土化", "西方奇幻冒险、赛博朋克生存、超级英雄能力、末日科幻殖民、北欧神话战斗、吸血鬼贵族成长、蒸汽朋克工业经营"),
 ]
 
 def _brainstorm_one_batch(batch_info: tuple) -> list:
@@ -795,33 +786,32 @@ def update_theme_master_table(state: dict):
 
     now = datetime.now().strftime("%Y-%m-%d %H:%M")
     lines = [
-        "# 题材总表（按商业化买量潜力排序）",
+        "# 题材总表（按四象限评分排序）",
         "",
         f"> 更新时间：{now}　　共 {len(sorted_themes)} 个题材",
         "",
-        "| 题材 | 商业化 | 市场状态 | 推荐结论 | 玩法承接 | 蓝海分 | 可玩性 | 差异化切口 | 素材钩子 | 可玩性说明 | 来源 | 发现日期 | 状态 |",
-        "|------|--------|----------|----------|----------|--------|--------|------------|----------|------------|------|----------|------|",
+        "| 题材 | 四象限 | 有效获量 | ROI承接 | 推荐结论 | 玩法承接 | 进入切口 | 硬伤维度 | 素材钩子 | 评审说明 | 来源 | 发现日期 | 状态 |",
+        "|------|--------|----------|---------|----------|----------|----------|----------|----------|----------|------|----------|------|",
     ]
 
     for t in sorted_themes:
         name = t.get("name", "")
-        bo = t.get("blue_ocean_score", 0)
-        via = t.get("game_viability_score", 0)
-        via_reason = t.get("game_viability_reason", "")
-        monetization = t.get("monetization_fit") or t.get("monetization", "未知")
-        market_status = t.get("market_status", "未知")
+        quadrant = t.get("quadrant", "未知")
+        ea = t.get("effective_acquisition_score", 0.0)
+        roi = t.get("roi_score", 0.0)
         recommendation = t.get("recommendation", "未知")
         gameplay_carrier = t.get("gameplay_carrier", "")
-        differentiation_angle = t.get("differentiation_angle", "")
+        entry_angle = t.get("entry_angle", "")
+        hard_fails = "、".join(t.get("hard_fail_dims", []))
         hooks = "、".join(_as_list(t.get("ad_creative_hooks"))[:3])
+        reason = t.get("game_viability_reason", "")
         source = t.get("source", "")
         discovered = t.get("discovered_at", "")[:10]
         status = t.get("status", "待评估")
-        bo_str = f"+{bo}" if bo >= 0 else str(bo)
         lines.append(
-            f"| {_md_cell(name)} | {_md_cell(monetization)} | {_md_cell(market_status)} | {_md_cell(recommendation)} | "
-            f"{_md_cell(gameplay_carrier)} | {bo_str} | {via}/6 | {_md_cell(differentiation_angle)} | "
-            f"{_md_cell(hooks)} | {_md_cell(via_reason)} | {_md_cell(source)} | {discovered} | {_md_cell(status)} |"
+            f"| {_md_cell(name)} | {_md_cell(quadrant)} | {ea} | {roi} | {_md_cell(recommendation)} | "
+            f"{_md_cell(gameplay_carrier)} | {_md_cell(entry_angle)} | {_md_cell(hard_fails)} | "
+            f"{_md_cell(hooks)} | {_md_cell(reason)} | {_md_cell(source)} | {discovered} | {_md_cell(status)} |"
         )
 
     MASTER_TABLE_FILE.parent.mkdir(parents=True, exist_ok=True)
@@ -938,7 +928,7 @@ def prioritize(candidates: dict) -> dict:
             log(f"[过滤] 题材「{name}」过于宽泛，排除")
         else:
             if score <= 0:
-                log(f"[观察] 题材「{name}」蓝海分={score}（{risk}），进入商业潜力复评")
+                log(f"[观察] 题材「{name}」竞争预判分={score}（{risk}），进入四象限复评")
             filtered_themes.append(theme)
 
     filtered_styles = []
@@ -958,54 +948,51 @@ def prioritize(candidates: dict) -> dict:
 
     # ── 商业潜力分类 ──
     viability_map = assess_game_viability_batch(filtered_themes)
-    log(f"商业潜力评估完成：{len(viability_map)} 个题材")
+    log(f"四象限评估完成：{len(viability_map)} 个题材")
 
     viable_themes = []
     for theme in filtered_themes:
         name = theme["theme"]
         info = viability_map.get(name, {})
         if not info:
-            theme["game_viability_score"] = 0
-            theme["game_viability_reason"] = "商业潜力评估缺失，保留待复评"
-            theme["monetization_fit"] = theme.get("monetization_fit", theme.get("monetization", "未知"))
-            theme["monetization"] = theme["monetization_fit"]
-            theme["market_status"] = _normalize_market_status(
-                theme.get("market_status"),
-                theme.get("blue_ocean_score", 0),
-                theme.get("competition_risk", "")
-            )
+            theme["effective_acquisition_score"] = 0.0
+            theme["roi_score"] = 0.0
+            theme["quadrant"] = "未知"
+            theme["hard_fail_dims"] = []
             theme["recommendation"] = "改写后复评"
             theme["gameplay_carrier"] = theme.get("gameplay_carrier", "")
-            theme["differentiation_angle"] = theme.get("differentiation_angle", "")
+            theme["entry_angle"] = theme.get("entry_angle", theme.get("differentiation_angle", ""))
             theme["ad_creative_hooks"] = _as_list(theme.get("ad_creative_hooks"))
             theme["priority"] = "low"
-            log(f"[待复评] 题材「{name}」商业潜力评估缺失，保留到队列")
+            log(f"[待复评] 题材「{name}」四象限评估缺失，保留到队列")
             viable_themes.append(theme)
             continue
         assessment = _standardize_assessment(theme, info)
-        score = assessment["score"]
-        reason = assessment["reason"]
-        theme["game_viability_score"] = score
-        theme["game_viability_reason"] = reason
-        theme["monetization_fit"] = assessment["monetization_fit"]
-        theme["monetization"] = assessment["monetization_fit"]
-        theme["market_status"] = assessment["market_status"]
+        ea = assessment["effective_acquisition_score"]
+        roi = assessment["roi_score"]
+        theme["effective_acquisition_score"] = ea
+        theme["roi_score"] = roi
+        theme["quadrant"] = assessment["quadrant"]
+        theme["hard_fail_dims"] = assessment["hard_fail_dims"]
         theme["recommendation"] = assessment["recommendation"]
         theme["gameplay_carrier"] = assessment["gameplay_carrier"]
-        theme["differentiation_angle"] = assessment["differentiation_angle"]
+        theme["entry_angle"] = assessment["entry_angle"]
         theme["ad_creative_hooks"] = assessment["ad_creative_hooks"]
+        theme["game_viability_reason"] = assessment["reason"]
 
-        if theme["recommendation"] == "保留" and theme["monetization_fit"] == "IAP主导" and theme["market_status"] == "蓝海":
+        if ea < 3 or roi < 3:
+            log(f"[过滤] 题材「{name}」有效获量={ea} ROI={roi}，硬伤排除（{assessment['reason']}）")
+            continue
+
+        if assessment["quadrant"] == "高获量+高ROI":
             theme["priority"] = "high"
-        elif theme["recommendation"] in ("保留", "差异化后保留") and theme["monetization_fit"] in ("IAP主导", "IAP+IAA"):
-            theme["priority"] = "medium" if theme["recommendation"] == "差异化后保留" else "high"
+        elif assessment["recommendation"] in ("通过", "补证", "差异化后保留", "保留"):
+            theme["priority"] = "medium"
         else:
             theme["priority"] = "low"
 
-        if score < 3:
-            log(f"[过滤] 题材「{name}」商业潜力={score}/6（{reason}），排除")
-        elif theme["monetization_fit"] == "IAA主导" and theme["recommendation"] == "排除":
-            log(f"[过滤] 题材「{name}」变现模式=IAA主导且建议排除（{reason}）")
+        if assessment["recommendation"] == "不通过":
+            log(f"[过滤] 题材「{name}」四象限结论=不通过（{assessment['reason']}）")
         else:
             viable_themes.append(theme)
 
@@ -1019,21 +1006,27 @@ def prioritize(candidates: dict) -> dict:
 # ========== 候选队列管理 ==========
 def load_candidate_queue() -> dict:
     """读取候选队列"""
+    _default = {
+        "last_run": None,
+        "last_collection": None,
+        "last_analysis": None,
+        "last_review": None,
+        "raw_candidates": {"themes": [], "art_styles": []},
+        "scored_candidates": {"themes": [], "art_styles": [], "combos": []},
+        "candidates": {"themes": [], "art_styles": [], "combos": []},
+        "evaluated": {"combos": []}
+    }
     if not STATE_FILE.exists():
-        return {
-            "last_run": None,
-            "candidates": {"themes": [], "art_styles": [], "combos": []},
-            "evaluated": {"combos": []}
-        }
+        return _default
 
     try:
-        return json.loads(STATE_FILE.read_text(encoding="utf-8"))
+        data = json.loads(STATE_FILE.read_text(encoding="utf-8"))
+        # 兼容旧状态文件，补全新字段
+        for key, val in _default.items():
+            data.setdefault(key, val)
+        return data
     except:
-        return {
-            "last_run": None,
-            "candidates": {"themes": [], "art_styles": [], "combos": []},
-            "evaluated": {"combos": []}
-        }
+        return _default
 
 def save_candidate_queue(state: dict):
     """保存候选队列"""
@@ -1059,18 +1052,18 @@ def merge_candidates(old_state: dict, new_candidates: dict) -> dict:
             "source": "、".join(sources),
             "discovered_at": today,
             "priority": theme["priority"],
+            "effective_acquisition_score": theme.get("effective_acquisition_score", 0.0),
+            "roi_score": theme.get("roi_score", 0.0),
+            "quadrant": theme.get("quadrant", "未知"),
+            "hard_fail_dims": theme.get("hard_fail_dims", []),
+            "entry_angle": theme.get("entry_angle", ""),
             "blue_ocean_score": theme.get("blue_ocean_score", 0),
             "competition_risk": theme.get("competition_risk", "未知"),
-            "game_viability_score": theme.get("game_viability_score", 0),
             "game_viability_reason": theme.get("game_viability_reason", ""),
             "game_fantasy": theme.get("game_fantasy", ""),
             "gameplay_carrier": theme.get("gameplay_carrier", ""),
             "iap_driver": theme.get("iap_driver", ""),
-            "monetization_fit": theme.get("monetization_fit", theme.get("monetization", "未知")),
-            "monetization": theme.get("monetization_fit", theme.get("monetization", "未知")),
-            "market_status": theme.get("market_status", "未知"),
             "recommendation": theme.get("recommendation", "未知"),
-            "differentiation_angle": theme.get("differentiation_angle", ""),
             "ad_creative_hooks": _as_list(theme.get("ad_creative_hooks")),
             "risk_tag": theme.get("risk_tag", ""),
             "status": "pending"
@@ -1131,27 +1124,30 @@ def format_daily_digest(new_candidates: dict) -> str:
     # 题材风格假设
     top_themes = sorted(new_candidates["themes"], key=_theme_sort_key)
     if top_themes:
-        lines.append("🔥 题材风格假设（买量钩子 × 商业承接 × 差异化）")
+        lines.append("🔥 题材风格假设（四象限 × 有效获量 × ROI承接）")
         for i, theme in enumerate(top_themes[:5], 1):
-            sources = "、".join(_as_list(theme.get("sources") or theme.get("source") or ["游戏榜单"]))
-            bo = theme.get("blue_ocean_score", 0)
-            via = theme.get("game_viability_score", 0)
-            via_reason = theme.get("game_viability_reason", "")
-            monetization = theme.get("monetization_fit") or theme.get("monetization", "未知")
-            market_status = theme.get("market_status", "未知")
+            quadrant = theme.get("quadrant", "未知")
+            ea = theme.get("effective_acquisition_score", 0.0)
+            roi = theme.get("roi_score", 0.0)
             recommendation = theme.get("recommendation", "未知")
             gameplay_carrier = theme.get("gameplay_carrier", "")
+            entry_angle = theme.get("entry_angle", "")
+            reason = theme.get("game_viability_reason", "")
             hooks = _as_list(theme.get("ad_creative_hooks"))
             first_hook = hooks[0] if hooks else ""
-            bo_str = f"+{bo}" if bo >= 0 else str(bo)
+            hard_fails = theme.get("hard_fail_dims", [])
             lines.append(
-                f"{i}. {theme['theme']}（{monetization} / {market_status} / {recommendation} / "
-                f"玩法：{gameplay_carrier or '未知'} / 蓝海分：{bo_str} / 商业潜力：{via}/6）"
+                f"{i}. {theme['theme']}（{quadrant} / 有效获量：{ea} / ROI：{roi} / "
+                f"玩法：{gameplay_carrier or '未知'} / {recommendation}）"
             )
             if first_hook:
                 lines.append(f"   - 素材钩子：{first_hook}")
-            if via_reason:
-                lines.append(f"   → {via_reason}")
+            if entry_angle:
+                lines.append(f"   - 进入切口：{entry_angle}")
+            if hard_fails:
+                lines.append(f"   ⚠ 硬伤：{'、'.join(hard_fails)}")
+            if reason:
+                lines.append(f"   → {reason}")
         lines.append("")
 
     # 画风（标注蓝海分）
@@ -1218,11 +1214,12 @@ def send_feishu_notification(message: str):
     except Exception as e:
         log(f"飞书通知发送失败: {e}")
 
-# ========== 主流程 ==========
-def main():
-    log("========== 买量组合收集开始 ==========")
+# ========== 三阶段 Agent ==========
 
-    # 1. 并行发起：游戏榜单 + 泛娱乐 + 直接头脑风暴
+def run_collect(state: dict) -> dict:
+    """收集 Agent：榜单+泛娱乐+头脑风暴 → raw_candidates"""
+    log("========== [收集] 开始 ==========")
+
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
         f_rankings      = executor.submit(fetch_game_rankings)
         f_entertainment = executor.submit(fetch_entertainment_trends)
@@ -1235,59 +1232,124 @@ def main():
         f"泛娱乐 {len(entertainment_themes)} 个，"
         f"直接头脑风暴 {len(brainstorm_themes)} 个")
 
-    # 2. 将头脑风暴题材规范化后并入娱乐趋势
     for item in brainstorm_themes:
         item.setdefault("source", "头脑风暴")
         item.setdefault("frequency", 3)
     entertainment_themes = entertainment_themes + brainstorm_themes
 
-    # 3. 提取题材和画风
-    themes = extract_themes(rankings, entertainment_themes)
+    themes     = extract_themes(rankings, entertainment_themes)
     art_styles = extract_art_styles(rankings)
 
-    raw_candidates = {
-        "themes": themes,
-        "art_styles": art_styles,
-        "combos": []
+    # 对照已有库去重，只保留新题材
+    existing  = load_existing_data()
+    new_raw   = deduplicate({"themes": themes, "art_styles": art_styles}, existing)
+
+    state["raw_candidates"]  = new_raw
+    state["last_collection"] = datetime.now().isoformat()
+
+    log(f"[收集] 完成：新题材 {len(new_raw['themes'])} 个，新画风 {len(new_raw['art_styles'])} 个")
+    log("========== [收集] 结束 ==========")
+    return state
+
+
+def run_analyze(state: dict) -> dict:
+    """分析 Agent：竞争评估+四象限评分+过滤排序+组合识别 → scored_candidates"""
+    log("========== [分析] 开始 ==========")
+
+    raw = state.get("raw_candidates", {"themes": [], "art_styles": []})
+    if not raw.get("themes") and not raw.get("art_styles"):
+        log("[分析] raw_candidates 为空，跳过（请先运行 collect）")
+        return state
+
+    candidates = {
+        "themes":     list(raw.get("themes", [])),
+        "art_styles": list(raw.get("art_styles", [])),
+        "combos":     []
     }
 
-    # 5. 去重
-    existing = load_existing_data()
-    new_candidates = deduplicate(raw_candidates, existing)
+    # 竞争评估 + 四象限评分（batch_size=5，避免超时）
+    scored = prioritize(candidates)
 
-    # 6. 商业潜力分类 + 过滤排序
-    new_candidates = prioritize(new_candidates)
-
-    # 7. 基于通过商业潜力分类的题材识别组合
-    combo_candidates = identify_combos(new_candidates["themes"], new_candidates["art_styles"])
-    existing_combo_keys = existing.get("combos", set())
-    new_candidates["combos"] = []
-    for combo in combo_candidates:
+    # 组合识别，排除已有组合
+    combos = identify_combos(scored["themes"], scored["art_styles"])
+    existing_combo_keys = {
+        f"{c.get('theme','')}×{c.get('art_style','')}"
+        for c in state.get("candidates", {}).get("combos", [])
+    }
+    new_combos = []
+    for combo in combos:
         key = f"{combo.get('theme', '')}×{combo.get('art_style', '')}"
-        if key in existing_combo_keys:
-            continue
-        combo["priority"] = "medium"
-        combo["blue_ocean_score"] = 0
-        combo["competition_risk"] = "待评估"
-        new_candidates["combos"].append(combo)
+        if key not in existing_combo_keys:
+            combo["priority"] = "medium"
+            combo["blue_ocean_score"] = 0
+            combo["competition_risk"] = "待评估"
+            new_combos.append(combo)
+    scored["combos"] = new_combos
 
-    # 8. 合并到候选队列
-    state = load_candidate_queue()
-    state = merge_candidates(state, new_candidates)
-    save_candidate_queue(state)
+    state["scored_candidates"] = scored
+    state["last_analysis"]     = datetime.now().isoformat()
 
-    # 9. 更新持久化题材总表
+    log(f"[分析] 完成：题材 {len(scored['themes'])} 个，组合 {len(scored['combos'])} 个")
+    log("========== [分析] 结束 ==========")
+    return state
+
+
+def run_review(state: dict) -> dict:
+    """审核 Agent：合并主库+更新总表+发飞书通知"""
+    log("========== [审核] 开始 ==========")
+
+    scored = state.get("scored_candidates", {"themes": [], "art_styles": [], "combos": []})
+    if not scored.get("themes") and not scored.get("art_styles"):
+        log("[审核] scored_candidates 为空，跳过（请先运行 analyze）")
+        return state
+
+    # 合并进主候选队列
+    state = merge_candidates(state, scored)
+
+    # 更新题材总表
     update_theme_master_table(state)
 
-    # 10. 发送飞书通知
-    if any(len(v) > 0 for v in new_candidates.values()):
-        digest = format_daily_digest(new_candidates)
+    # 飞书通知
+    if any(len(v) > 0 for v in scored.values() if isinstance(v, list)):
+        digest = format_daily_digest(scored)
         send_feishu_notification(digest)
         log("今日有新发现，已发送飞书通知")
     else:
         log("今日无新发现")
 
-    log("========== 买量组合收集完成 ==========")
+    state["last_review"] = datetime.now().isoformat()
+
+    log("========== [审核] 结束 ==========")
+    return state
+
+
+# ========== 主流程 ==========
+def main():
+    import sys
+    mode = sys.argv[1] if len(sys.argv) > 1 else "all"
+    if mode not in {"collect", "analyze", "review", "all"}:
+        print(f"用法: python3 {sys.argv[0]} [collect|analyze|review|all]")
+        print("  collect  — 收集榜单+题材（写入 raw_candidates）")
+        print("  analyze  — 四象限评估+过滤（读 raw_candidates，写 scored_candidates）")
+        print("  review   — 审核+输出+通知（读 scored_candidates，合并主库）")
+        print("  all      — 顺序执行三步（默认）")
+        sys.exit(1)
+
+    state = load_candidate_queue()
+
+    if mode in ("collect", "all"):
+        state = run_collect(state)
+        save_candidate_queue(state)
+
+    if mode in ("analyze", "all"):
+        state = run_analyze(state)
+        save_candidate_queue(state)
+
+    if mode in ("review", "all"):
+        state = run_review(state)
+        save_candidate_queue(state)
+
+    log(f"[{mode}] 完成")
 
 if __name__ == "__main__":
     main()
