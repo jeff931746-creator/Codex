@@ -45,6 +45,32 @@ These rules apply repo-wide unless a deeper folder explicitly narrows them.
 - Reusable scripts or tool repos may live in `tools/` when they directly support this workflow.
 - Keep tooling minimal and purpose-built; avoid general environment setup inside this workspace.
 
+## Claude Rule Boundary
+
+`.claude/` and `/Users/mt/.claude/` are Claude-owned rule, hook, worktree, and memory sources.
+
+Codex may:
+
+- read relevant `.claude` rules and memory when required by this workspace protocol
+- summarize those rules into the current task context
+- follow compatible rules during execution
+
+Codex must not:
+
+- create, edit, move, delete, format, sync, or indirectly mutate files under `.claude/` or `/Users/mt/.claude/`
+- update Claude hooks, Claude settings, Claude worktrees, or Claude memory directly
+- treat `.claude` as a writable Codex state store
+
+Claude may continue to own and modify those paths. If Codex needs a rule or memory change that belongs to Claude, it must propose the change in conversation or write the Codex-side counterpart in `AGENTS.md`, Codex Skills, or workspace docs.
+
+Before Codex runs a shell command or script intended to create, edit, move, delete, format, or sync files, pass the known target paths through:
+
+```bash
+bash /Users/mt/Documents/Codex/tools/codex-guard/check-paths.sh <path> [...]
+```
+
+For `apply_patch`, Codex must inspect the patch targets directly and must not include protected `.claude` paths.
+
 ## Skills
 
 Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/skills/`. The old `/Users/mt/Documents/Codex/tools/codex-skills-repo/` path is kept as a compatibility symlink. Before starting any task that matches a Skill's description, read the corresponding `SKILL.md` and follow its workflow exactly.
