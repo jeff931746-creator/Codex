@@ -34,3 +34,20 @@ coverage/
 # Large local reference docs（不推送到远端）
 archive/方法论/立项白皮书/
 .claude/.neat-freak-checkpoint
+.claude/.impl-review-checkpoint
+
+# 脚本产物（可再生，不入版本）
+archive/tools/scripts/*_数据/
+**/_logs/
+**/_raw/
+**/_去重前备份/
+
+# Git worktrees（git worktree 机制独立追踪，不进父仓库）
+.claude/worktrees/
+
+# 编辑器与系统垃圾
+.idea/
+.vscode/
+*.swp
+*~
+Thumbs.db
