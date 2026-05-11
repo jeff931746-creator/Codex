@@ -156,6 +156,49 @@ Completion standard:
 - `normalization` is complete only when the data is mapped into the target structure
 - `validation` is complete only when obvious gaps, duplicates, and format errors are checked
 
+### `knowledge-asset`
+
+Use for:
+
+- standards (`标准` / `规范`)
+- libraries / knowledge bases (`库`)
+- methodologies (`方法论`)
+- long-term workflows (`流程` / `体系` / `框架`)
+- any artifact meant to evolve and be reused across sessions
+
+This flow exists because `doc-change` does not force the agent to reason about main data, lifecycle, and integration before writing. Misclassifying a long-term asset as `doc-change` is the canonical failure this flow prevents.
+
+Gate order:
+
+1. `intake`
+2. `plan`
+3. `governance-design`
+4. `target-inspection`
+5. `edit`
+6. `validation`
+7. `delivery`
+
+Completion standard:
+
+- `governance-design` is complete only when all 5 governance fields below resolve to concrete paths or lists, not yes/no or abstract principles
+- `target-inspection` is complete only when the existing assets named in `governance-design` field 4 have actually been read
+- `edit` is complete only when the scoped change is applied
+- `validation` is complete only when references in memory, README, and related rules are checked for consistency
+
+#### Governance Design Checklist
+
+The `governance-design` gate must produce these 5 fields. Each answer must be a file path, file list, or directory path. Yes/no answers, abstract principles, or "should consider..." phrasing fail this gate.
+
+| # | Field | Acceptance form |
+|---|---|---|
+| 1 | Long-term reuse impact | List affected paths under `archive/`, `reference/`, `archive/skills/`, `archive/tools/`. If none, declare `无,产物只落 workspace/` |
+| 2 | Rules / directory structure / Skills / automation scripts touched | List specific paths (`.claude/rules/*.md`, `SKILL.md`, `*.py`, directory paths). If none, declare so explicitly |
+| 3 | Memory / archive / reference writes | Name target directory(s) and trigger timing: `write immediately` / `write on task completion` / `no write`. If write, name the target file path |
+| 4 | Existing same-kind assets scanned | List paths already read (e.g. `archive/资料/买量组合库/README.md`, `reference/部门标准/立项/`). Empty list means this gate is not complete |
+| 5 | Main data ownership | Name the single source of truth file path. Describe how derived files refresh when main data changes |
+
+Any field that cannot point to a path or list fails this gate. Do not advance to `target-inspection` until all 5 fields are concrete.
+
 ## Scope Change Rule
 
 When the task changes materially, do not keep pushing through the old flow.
@@ -166,3 +209,20 @@ Instead:
 2. re-enter `plan`
 3. decide whether the same task type still applies
 4. if not, switch to the new flow and restart at the correct gate
+
+### Misclassification Rewind Rule
+
+Classification errors must rewind to the classification gate. Do not patch the current execution gate to make the artifact look compliant.
+
+Triggers (any one):
+
+- the user flags that the abstract task level was identified incorrectly
+- the produced artifact is missing any of: main data ownership, lifecycle, integration relations
+- the task actually produces long-term assets but is running under `doc-change` or `implementation`
+
+When triggered:
+
+1. stop the current gate immediately
+2. any artifact already produced is downgraded to `draft` and does not count toward gate completion
+3. return to `intake`, re-classify, re-`plan`
+4. do not continue patching the current gate to retro-fit governance fields onto an artifact that was built without them

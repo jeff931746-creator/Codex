@@ -79,6 +79,7 @@ Available Skills:
 | Agent 委派规则 | `.claude/rules/agent-delegation-policy.md` |
 | 记忆文件 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/` |
 | 工作流链路规则 | `.claude/rules/workflow-chain.md` |
+| Git 卫生规则 | `.claude/rules/git-hygiene.md` |
 | 部门标准 | `reference/部门标准/` |
 
 ### 流程强度分级

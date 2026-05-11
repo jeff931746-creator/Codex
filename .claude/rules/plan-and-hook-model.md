@@ -80,8 +80,11 @@ The default shared flow types are:
 - `implementation`
 - `review`
 - `collection`
+- `knowledge-asset`
 
 The flow type determines which mandatory gates must be completed in order.
+
+`knowledge-asset` is the dedicated flow for long-term reusable assets — standards, libraries, methodologies, frameworks. It exists because `doc-change` does not force the agent to reason about main data, lifecycle, and integration before writing. See [`task-flow-matrix.md`](/Users/mt/Documents/Codex/.claude/rules/task-flow-matrix.md) for the gate order and the 5-field governance design checklist.
 
 ### Hook
 
@@ -142,6 +145,34 @@ The difference is only how long the `plan` needs to be:
 
 If the task direction changes materially after approval, the agent should stop and re-enter `plan`.
 
+## Trigger-Word Routing
+
+Certain words in the user request signal that the task is most likely a long-term asset, not a one-off document. When any of these appear in the request, the default classification is `knowledge-asset` at `strict` intensity:
+
+- `标准` / `规范`
+- `库` (when referring to a knowledge base, not a single file)
+- `流程` / `体系` / `框架`
+- `方法论`
+- `沉淀` / `长期管理` / `长期演进`
+
+Behavior:
+
+- the main agent must classify as `knowledge-asset` and run the `governance-design` gate before writing any artifact
+- downgrade to `doc-change` is only allowed if the user explicitly says "this is a one-off, no need for long-term governance" (or equivalent)
+- if the trigger word appears but the classification ends up being `doc-change`, the plan must explicitly state why long-term governance does not apply
+
+This rule exists because the typical failure is: user says "建立 X 标准/库/流程", agent jumps to template design without first scanning existing assets and defining main data ownership. Trigger-word routing makes this jump structurally impossible.
+
+## Plan-Stage Scan Requirement For `knowledge-asset`
+
+A `knowledge-asset` plan is not acceptable unless it explicitly reports:
+
+- existing same-kind assets searched (list of paths searched, even if empty)
+- existing READMEs and rule files read (list of paths, with content summarized)
+- existing automation script entry points inspected (list of paths)
+
+A plan without these three lists is an unqualified plan and the user should reject it. The hook table below treats this as a planning-gate failure.
+
 ## Mandatory Stage Gates
 
 Every flow is gate-based.
@@ -176,6 +207,9 @@ They should also be assigned a scoped `task type` and `current gate`.
 |---|---|
 | New task or material scope change | `plan` |
 | Task not yet classified | classify task flow |
+| Request mentions `标准 / 库 / 流程 / 体系 / 框架 / 方法论 / 沉淀 / 长期管理` | default to `knowledge-asset` + `strict`; require `governance-design` gate |
+| `knowledge-asset` plan without the 3 scan lists (existing assets / READMEs / scripts) | reject the plan, stay in `plan` gate |
+| Classification turns out wrong mid-task | rewind to `intake`, downgrade in-progress artifacts to `draft` |
 | Current gate not complete | stay in gate |
 | Same task, context usage above 60% | `compact` |
 | Context usage above 80% or too many failed branches | `clear` |
