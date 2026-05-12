@@ -32,8 +32,8 @@ except ImportError:
     _SSL_CTX = ssl.create_default_context()
 
 ROOT = Path(__file__).resolve().parent
-REPO_ROOT = ROOT.parent.parent.parent  # /Users/mt/Documents/Codex
-LIBRARY = REPO_ROOT / "research" / "资料" / "机制库"
+REPO_ROOT = ROOT.parent.parent.parent.parent  # /Users/mt/Documents/Codex
+LIBRARY = REPO_ROOT / "archive" / "资料" / "机制库"
 STANDARDS = LIBRARY / "拆解质量标准.md"
 REFERENCE_GAME = LIBRARY / "保卫向日葵"
 
