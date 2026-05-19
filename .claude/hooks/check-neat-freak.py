@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Stop 钩子：检查 neat-freak 检查点和 QA 检查点是否有效。
-如果检测到未提交改动但检查点缺失或已过期，输出提示。
-非阻断，仅作警告。
+Stop 钩子：检查本轮会话是否完成了收尾 QA。
+触发条件：本轮有实质性写操作（Write/Edit 工具调用）但 QA 检查点缺失或已过期。
+与"有无未提交文件"无关。非阻断，仅作警告。
 """
 import sys
 import json
@@ -10,33 +10,36 @@ import os
 import time
 import subprocess
 
-try:
-    json.load(sys.stdin)
-except Exception:
-    pass
-
 WORKSPACE = '/Users/mt/Documents/Codex'
-NEAT_FREAK_CHECKPOINT = os.path.join(WORKSPACE, '.claude/.neat-freak-checkpoint')
 QA_CHECKPOINT = os.path.join(WORKSPACE, '.claude/.qa-checkpoint')
-MAX_AGE = 1800  # 30 分钟
+LAST_NOTIFY_FILE = os.path.join(WORKSPACE, '.claude/.neat-freak-last-notify')
+MAX_AGE = 1800       # QA 检查点有效期：30 分钟
+NOTIFY_COOLDOWN = 1800  # 通知冷却：30 分钟内不重复发
 
-# 检查是否有未提交的改动
+# 读取 transcript
 try:
-    result = subprocess.run(
-        ['git', '-C', WORKSPACE, 'status', '--porcelain'],
-        capture_output=True, text=True, timeout=5
-    )
-    has_changes = bool(result.stdout.strip())
+    data = json.load(sys.stdin)
 except Exception:
     sys.exit(0)
 
-if not has_changes:
+transcript = data.get('transcript', [])
+
+# 判断本轮是否有实质性写操作
+WRITE_TOOLS = {'Write', 'Edit', 'NotebookEdit'}
+has_write = False
+for entry in transcript:
+    tool = entry.get('toolName', '') or entry.get('tool_name', '')
+    if tool in WRITE_TOOLS:
+        has_write = True
+        break
+
+# 没有写操作，不需要 QA，直接退出
+if not has_write:
     sys.exit(0)
 
 now = int(time.time())
-NOTIFY_COOLDOWN = 1800  # 通知冷却：30 分钟内不重复发
-LAST_NOTIFY_FILE = os.path.join(WORKSPACE, '.claude/.neat-freak-last-notify')
 
+# 检查 QA 检查点是否有效
 def checkpoint_valid(path):
     if not os.path.exists(path):
         return False, 'missing'
@@ -50,7 +53,6 @@ def checkpoint_valid(path):
         return False, 'corrupt'
 
 def notify_cooldown_ok():
-    """返回 True 表示可以发通知（距上次通知已超过冷却时间）"""
     if not os.path.exists(LAST_NOTIFY_FILE):
         return True
     try:
@@ -59,25 +61,16 @@ def notify_cooldown_ok():
     except Exception:
         return True
 
-neat_ok, neat_reason = checkpoint_valid(NEAT_FREAK_CHECKPOINT)
 qa_ok, qa_reason = checkpoint_valid(QA_CHECKPOINT)
 
-warnings = []
-
-if not neat_ok:
-    warnings.append(f'neat-freak 检查点{"缺失" if neat_reason == "missing" else "已过期" if "expired" in neat_reason else "损坏"}，commit 前请先完成 neat-freak 步骤并运行 .claude/hooks/neat-freak-checkpoint.sh')
-
 if not qa_ok:
-    warnings.append(f'QA 检查点{"缺失" if qa_reason == "missing" else "已过期" if "expired" in qa_reason else "损坏"}，commit 前请先启动收尾子 agent 完成 QA，子 agent 运行 .claude/hooks/qa-checkpoint.sh 后方可继续')
+    reason_str = '缺失' if qa_reason == 'missing' else f'已过期（{qa_reason}）' if 'expired' in qa_reason else '损坏'
+    print(f'⚠️  收尾 QA：本轮有文件写操作，但 QA 检查点{reason_str}。请启动收尾子 agent，完成后运行 .claude/hooks/qa-checkpoint.sh', flush=True)
 
-if warnings:
-    for w in warnings:
-        print(f'⚠️  neat-freak：{w}', flush=True)
-    # 只在冷却期过后才发系统通知，避免重复轰炸
     if notify_cooldown_ok():
         subprocess.run([
             'osascript', '-e',
-            'display notification "收尾检查点未完成，请勿 commit" with title "⚠️ Claude · 收尾门禁" sound name "Basso"'
+            'display notification "本轮有写操作，尚未完成收尾 QA" with title "⚠️ Claude · 收尾 QA 未完成" sound name "Basso"'
         ], capture_output=True)
         try:
             open(LAST_NOTIFY_FILE, 'w').write(str(now))
