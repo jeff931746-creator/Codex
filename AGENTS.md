@@ -25,7 +25,10 @@ These rules apply repo-wide unless a deeper folder explicitly narrows them.
 ## Scope
 
 - Keep only files, scripts, notes, research, prompts, and tools that directly support the active workflow.
-- Prefer placing work in the existing top-level folders: `projects/`, `research/`, `tools/`, `playground/`, and `tmp/`.
+- Prefer placing execution work in the existing `workspace/` folders: `workspace/projects/`, `workspace/playground/`, and `workspace/tmp/`.
+- Put reusable materials, methods, mechanism studies, and structured external data under `archive/`.
+- Treat `reference/` as the stable rule and template layer; do not modify it without explicit user permission.
+- Do not create or write new workflow assets under `research/`; it is ignored local/deprecated space, not a canonical knowledge base.
 
 ## Software And Runtime Policy
 
@@ -61,7 +64,7 @@ Codex must not:
 - update Claude hooks, Claude settings, Claude worktrees, or Claude memory directly
 - treat `.claude` as a writable Codex state store
 
-Claude may continue to own and modify those paths. If Codex needs a rule or memory change that belongs to Claude, it must propose the change in conversation or write the Codex-side counterpart in `AGENTS.md`, Codex Skills, or workspace docs.
+Claude may continue to own and modify those paths. If Codex needs a rule or memory change that belongs to Claude, it must propose the change in conversation; it must not create a parallel Codex-side rule source.
 
 Before Codex runs a shell command or script intended to create, edit, move, delete, format, or sync files, pass the known target paths through:
 
@@ -73,7 +76,9 @@ For `apply_patch`, Codex must inspect the patch targets directly and must not in
 
 ## Skills
 
-Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/skills/`. The old `/Users/mt/Documents/Codex/tools/codex-skills-repo/` path is kept as a compatibility symlink. Before starting any task that matches a Skill's description, read the corresponding `SKILL.md` and follow its workflow exactly.
+Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/archive/skills/skills/`. Before starting any task that matches a Skill's description, read the corresponding `SKILL.md` and follow its workflow exactly.
+
+Legacy references to `/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/` or `/Users/mt/Documents/Codex/tools/codex-skills-repo/` are stale. Do not rely on those paths unless they are restored in the working tree.
 
 Available Skills:
 
@@ -85,150 +90,29 @@ Available Skills:
 - `session-compact` — 压缩当前会话状态并写入记忆库，compact 或 clear 前必须运行
 - `neat-freak` — 任务结束前的轻量收尾门禁，对齐改动、文档、规则、记忆和交付摘要
 
-## Session Management Protocol
+## Claude Rule Consumption Protocol
 
-### 会话开始
+Claude is the only author of workflow rules for this workspace. Codex must treat Claude-owned rules as authoritative read-only sources, not copy or redefine them in `AGENTS.md`.
 
-每次会话开始时，读取 `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md`，加载与当前任务相关的记忆。
+Before Codex performs any non-trivial task, and before the first mutating tool call in a turn, Codex must read the relevant Claude rule and memory sources:
 
-### 流程强度分级
+- `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md`
+- `/Users/mt/Documents/Codex/.claude/rules/workflow-chain.md`
+- `/Users/mt/Documents/Codex/.claude/rules/task-flow-matrix.md`
+- `/Users/mt/Documents/Codex/.claude/rules/agent-delegation-policy.md`
 
-先判断任务强度，再选择流程重量。默认使用能保证质量的最小流程。
+Codex must then execute the task according to those Claude-defined flow gates, task types, routing rules, memory rules, and closeout expectations where compatible with Codex system and developer instructions. If a Claude rule conflicts with higher-priority Codex runtime rules, Codex must follow the higher-priority rule and explicitly report the deviation.
 
-| 任务强度 | 适用场景 | 流程要求 |
-|---|---|---|
-| `quick` | 单步问答、查一个事实、轻量说明、无文件改动的小判断 | 可以直接给结论；必要时用 1 句说明假设 |
-| `standard` | 一般分析、局部文档修改、小范围代码或脚本调整 | 先给极简 `plan`，获批后执行 |
-| `strict` | 新项目、新目录结构、跨文件改动、部署、自动化、会影响长期工作流的规则或 Skill | 必须完整 `plan`，说明目标、范围、风险、验证方式，获批后执行 |
+Codex-specific files may define only adapters and guards, such as:
 
-硬规则：
+- read-only protection for `.claude/`
+- checks that Claude rule intake happened before mutation
+- Codex tool compatibility notes
+- non-Claude storage locations for temporary hook state
 
-- `strict` 任务不得跳过 `plan`。
-- 如果任务方向发生明显变化，重新进入 `plan`。
-- 如果用户明确说“直接做 / 继续 / 修掉 / 跑一下”，且任务不是高风险，可以把 `plan` 压缩为一句执行说明后继续。
-- 需要调整既有规范时，先改文档，再按新规范执行；不要先实践、后补规则。
+Codex must not create a parallel workflow source of truth in `AGENTS.md`, Codex Skills, or workspace docs. Any durable workflow rule change belongs to Claude and must be proposed to the user or authored by Claude in `.claude/`.
 
-### 约束先行
-
-新项目、新目录、长期工具、复用脚本、知识库结构和跨团队工作流，开始前必须先有规则：
-
-- 新项目先写项目级 `CLAUDE.md` 或等效规则文件。
-- 新目录先说明结构约定：什么放哪、怎么命名、何时清理。
-- 已有规范的项目，严格遵守更深层目录中的 `CLAUDE.md` / `AGENTS.md` / README 约定。
-- 小任务不为了形式创建规则文件；只在会重复、会扩展、会被他人或未来自己复用时固化规则。
-
-### 阶段门禁
-
-`standard` 和 `strict` 任务按阶段推进；`quick` 任务可只保留轻量状态判断。
-
-通用记录：
-
-- 每个任务都要记录 `任务类型`
-- 每个任务都要记录 `当前门禁`
-- 每个任务都要记录 `已完成门禁`
-- 每个任务都要记录 `下一门禁`
-
-规则：
-
-- 当前阶段未完成前，不得进入后续阶段。
-- 如果当前阶段被阻塞，停留在当前阶段解决，或 `rewind` / 重新 `plan`。
-- 不允许通过口头假设把“未完成”当成“已完成”。
-
-任务流程矩阵见：
-
-- [`tools/repos/codex-skills-repo/references/task-flow-matrix.md`](/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/references/task-flow-matrix.md)
-
-### 任务管理
-
-`standard` 和 `strict` 任务进入执行前，必须先归类到一个流程类型：
-
-- `analysis`：分析 / 研究 / 结论生成
-- `doc-change`：文档 / 规则 / 模板修改
-- `implementation`：实现 / 执行 / 产物生成
-- `review`：审查 / 校对 / 验证 / 打分
-- `collection`：资料收集 / 结构化录入 / 批量整理
-
-默认要求：
-
-- 需要阶段化推进的任务，未分类不进入执行
-- 任务类型变了，重新 `plan`
-- 同一线程里多个任务并行时，每个任务单独维护自己的流程状态
-
-### 主 Agent 与子 Agent 分工
-
-硬规则：
-
-- 正式 `plan` 只能由主 agent 向用户提交
-- `任务类型`、`当前门禁`、`门禁切换`、`最终交付` 只能由主 agent 确认
-- 子 agent 只能在被分配的作用域内工作，不能自行把任务推进到下一门禁
-- 当分析会明显拉长主线程上下文时，主 agent 必须优先委派子 agent
-
-详细分工规则见：
-
-- [`tools/repos/codex-skills-repo/references/agent-delegation-policy.md`](/Users/mt/Documents/Codex/tools/repos/codex-skills-repo/references/agent-delegation-policy.md)
-
-### 决策路由器
-
-`standard` 和 `strict` 任务在 `plan` 获批后，每次重大步骤前，对照以下规则（首条命中即执行）：
-
-| 条件 | 动作 |
-|---|---|
-| 同一问题连续失败 ≥ 3 次 | **rewind** |
-| 任务方向根本性偏移（变成了新目标） | **rewind** |
-| 上下文 >80% 满，或累积 ≥ 3 个失败分支 | **clear** |
-| 同任务继续，上下文 >60% 满 | **compact** |
-| 需要读 ≥ 3 个文件但不修改它们 | **subagent** |
-| 任务产生大量中间输出，主上下文只需结论 | **subagent** |
-| 验证 / 校对 / 文档生成类任务 | **subagent** |
-| 以上均不符合 | **continue** |
-
-**错误分级**（决定是 rewind 还是就地修复）：
-- 逻辑层（方向错了）→ rewind
-- 实现层（代码写错了）→ 就地修复
-- 理解层（需求没搞清楚）→ compact 后重新澄清
-
-### 各动作执行方式
-
-**rewind**：停止当前线程，不在失败分支上继续堆叠。找到最后已知正确状态，从那里重新出发。
-
-**compact**：先运行 `session-compact` skill 写入记忆，再继续。
-
-**clear**：先运行 `session-compact` skill 保存完整状态，再清空，从记忆摘要重建。
-
-**plan**：`standard` / `strict` 任务的正式起点。先给出执行方案，说明预计改动范围与风险，等用户审核后再执行。`quick` 任务可以直接回答或用一句话说明假设。
-
-**subagent**：委托时指定：精确问题 + 相关文件路径 + 输出格式（摘要 ≤ 300 token）。只把结论带回主上下文，不带过程。子任务也必须遵守自己的阶段门禁。
-
-### 记忆写入规则
-
-**强制写入时机**：重要任务结束时、形成长期约束时、compact / clear 前。
-
-**即时写入时机**：发现已确认结论或关键约束时。
-
-**禁止写入**：调试过程、失败尝试、中间输出、重复解释。
-
-### 任务收尾门禁
-
-重要任务交付前运行 `neat-freak` Skill 做轻量收尾检查。
-
-触发场景：
-
-- 文档、规则、代码、脚本、Skill、目录结构或记忆发生变更。
-- 重要分析 / 研究任务结束，并形成长期结论。
-- 任务产出了可交付文件、测试 / 评估产物或后续会复用的工作流。
-
-检查内容：
-
-- 回看本轮实际改动，区分用户原有改动和本轮改动。
-- 判断 README、`AGENTS.md` / `CLAUDE.md`、Skill、catalog 或记忆是否需要同步。
-- 检查 `.DS_Store`、缓存、临时下载、测试 / 评估产物混放等待清理项。
-- 最终回复给出简短变更摘要、验证结果和待处理项。
-
-边界：
-
-- `neat-freak` 是收尾质量门禁，不是全仓库清理命令。
-- 不自动删除用户未确认的文件。
-- 不替代任务本身的测试、lint、build、smoke check，也不替代 `session-compact`。
+Codex must not run Claude checkpoint scripts that write under `.claude/`. When Claude closeout requires such a checkpoint, Codex should run the compatible review/check steps, skip the `.claude` write, and report that boundary.
 
 ## Development Rules
 
@@ -254,7 +138,7 @@ Available Skills:
 Any time you complete a game analysis or mechanism breakdown — whether for a project knowledge base (e.g. `向僵尸开炮知识库/`) or as a standalone task — you **must also** run the `游戏机制拆解` Skill and write the results into:
 
 ```
-/Users/mt/Documents/Codex/research/资料/机制库/{游戏名}/
+/Users/mt/Documents/Codex/archive/资料/机制库/{游戏名}/
 ```
 
 The project knowledge base and the 机制库 serve different purposes and are not interchangeable:
