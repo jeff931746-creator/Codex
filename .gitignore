@@ -35,6 +35,8 @@ coverage/
 archive/方法论/立项白皮书/
 .claude/.neat-freak-checkpoint
 .claude/.impl-review-checkpoint
+.claude/.qa-checkpoint
+.claude/.neat-freak-last-notify
 
 # 脚本产物（可再生，不入版本）
 archive/tools/scripts/*_数据/
