@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 95,
+    "raw_theme": "血肉飞升修仙",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "血肉飞升修仙",
+    "culture_shell": "修仙、克苏鲁、血肉",
+    "action_cut": "肉鸽动作/RPG",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "通过肉身异化、融合、重组获得超常力量，并在失控风险中维持自我",
+    "emotion_promise": "在禁忌力量中突破极限，体验肉身超越与力量碾压的快感",
+    "conflict_structure": "力量收益与肉身失控/异化风险绑定，玩家在进化与保持人性之间平衡",
+    "user_role_position": "修炼邪功的修仙者、血肉进化者",
+    "strongest_carrier_relation": "玩家通过战斗获取血肉道果/邪功材料，投入进化树解锁新形态与技能，每次进化带来战力跃迁但也增加失控风险，循环承接'力量突破与失控恐惧并存'的心理任务",
+    "monetization_fit": "进化材料抽取、形态皮肤、技能强化付费",
+    "commercial_failure_cases": [
+      "进化结果缺乏视觉冲击力，玩家感受不到'肉身重组'的爽感——触发条件：美术资源不足，形态变化仅数值差异",
+      "失控惩罚过重导致玩家不敢进化，核心循环断裂——触发条件：风险收益比失衡，负面反馈压倒正面期待"
+    ],
+    "primary_motif": "异能爆发",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除异种进化：异种进化的核心是'创造/孵化新生命'，而本题材主循环是'自身肉身异化后技能展示与战力碾压'，符合异能爆发的'自身能力觉醒与释放'。排除改命逆袭：本题材力量来源是肉身变异而非信息差/命运规则操纵，核心循环是动作战斗而非选择推演。本题材属于v0.2.1强切边界中'血肉飞升修仙'的裁定案例——主循环是肉身异化后技能展示，归异能爆发。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

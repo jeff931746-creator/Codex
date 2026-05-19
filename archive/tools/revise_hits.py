@@ -12,21 +12,19 @@
     - 条目准确性：删除错误年份的游戏，保持 50-100 行
 """
 import argparse
-import json
 import os
 import re
-import ssl
 import sys
 import time
-import urllib.error
-import urllib.request
 from pathlib import Path
 
-try:
-    import certifi
-    _SSL_CTX = ssl.create_default_context(cafile=certifi.where())
-except ImportError:
-    _SSL_CTX = ssl.create_default_context()
+_THIS_FILE = Path(__file__).resolve()
+for _parent in _THIS_FILE.parents:
+    if (_parent / "archive" / "tools" / "lib").is_dir():
+        sys.path.insert(0, str(_parent))
+        break
+
+from archive.tools.lib.siliconflow_client import SiliconFlowError, chat_text
 
 # ---------- 路径配置 ----------
 
@@ -51,46 +49,18 @@ def load_env():
 
 # ---------- API 调用（流式）----------
 
-def call_glm(prompt: str, model: str, api_key: str, base_url: str) -> str:
+def call_glm(prompt: str, model: str) -> str:
     """流式调用 SiliconFlow Pro 模型，返回完整响应文本。"""
-    payload = {
-        "model": model,
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.2,
-        "max_tokens": 8192,
-        "stream": True,
-    }
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_key}",
-    }
-    data = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(f"{base_url}/chat/completions", data=data, headers=headers)
-    chunks = []
-    char_count = 0
     try:
-        with urllib.request.urlopen(req, timeout=TIMEOUT, context=_SSL_CTX) as resp:
-            for raw_line in resp:
-                line = raw_line.decode("utf-8").strip()
-                if not line or line == "data: [DONE]":
-                    continue
-                if line.startswith("data: "):
-                    try:
-                        obj = json.loads(line[6:])
-                        delta = obj["choices"][0]["delta"].get("content", "")
-                        if delta:
-                            chunks.append(delta)
-                            char_count += len(delta)
-                            if char_count % 3000 < len(delta):
-                                print(f"    [stream] {char_count:,} chars…", flush=True)
-                    except Exception:
-                        pass
-        return "".join(chunks)
-    except urllib.error.HTTPError as e:
-        err = e.read().decode("utf-8", "ignore")
-        print(f"    [错] HTTP {e.code}: {err[:200]}", flush=True)
-        return ""
-    except Exception as e:
+        return chat_text(
+            prompt,
+            model=model,
+            max_tokens=8192,
+            temperature=0.2,
+            timeout=TIMEOUT,
+            stream=True,
+        )
+    except SiliconFlowError as e:
         print(f"    [错] {type(e).__name__}: {e}", flush=True)
         return ""
 
@@ -181,12 +151,7 @@ def clean_output(raw: str) -> str:
 def main():
     load_env()
 
-    api_key  = os.environ.get("SILICONFLOW_API_KEY", "").strip()
-    base_url = os.environ.get("SILICONFLOW_BASE_URL", "https://api.siliconflow.cn/v1")
-    model    = os.environ.get("SILICONFLOW_MODEL", "Pro/zai-org/GLM-5.1")
-
-    if not api_key:
-        sys.exit("[错] SILICONFLOW_API_KEY 未设置，请检查 breakdown-worker/.env")
+    model = os.environ.get("SILICONFLOW_MODEL", "Pro/zai-org/GLM-5.1")
     if not FRAMEWORK_PATH.exists():
         sys.exit(f"[错] 框架文件不存在: {FRAMEWORK_PATH}")
 
@@ -216,7 +181,7 @@ def main():
         prompt = make_prompt(framework_core, content, year)
         print(f"  [prompt] {len(prompt):,} chars", flush=True)
 
-        revised = call_glm(prompt, model, api_key, base_url)
+        revised = call_glm(prompt, model)
         if not revised:
             print(f"  [失败] 跳过 {year}", flush=True)
             time.sleep(2)

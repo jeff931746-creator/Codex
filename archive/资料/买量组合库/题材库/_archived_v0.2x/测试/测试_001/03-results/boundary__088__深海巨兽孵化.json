@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 88,
+    "raw_theme": "深海巨兽孵化",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "深海巨兽孵化",
+    "culture_shell": "深海",
+    "action_cut": "孵化",
+    "feedback_channel": "",
+    "threat_pattern": "巨兽",
+    "primary_psych_task": "通过孵化、培育和进化深海巨兽，将危险生物转化为己方支配力量",
+    "emotion_promise": "从一颗卵开始，亲手养出摧毁海底城的庞然巨物，体验支配恐惧的快感",
+    "conflict_structure": "巨兽天生不可控且具有破坏性，玩家通过孵化、喂养、进化完成从恐惧对象到己方资产的转化",
+    "user_role_position": "巨兽培育者、深渊主宰",
+    "strongest_carrier_relation": "放置/卡牌循环承接“巨兽从卵到成体的成长可见性”，每次吞噬同类体型暴增就是支配感的一次兑现",
+    "monetization_fit": "抽卡获取稀有巨兽卵、加速孵化道具、限定深海巨兽皮肤",
+    "commercial_failure_cases": [
+      "巨兽成长反馈不够震撼，玩家感受不到体型暴增的爽感，导致付费意愿低——触发条件：孵化周期过长且缺乏视觉冲击",
+      "巨兽只有数值变化没有行为变化，沦为普通卡牌养成——触发条件：巨兽摧毁海底城等行为只存在于素材钩子，玩法中无法触发"
+    ],
+    "primary_motif": "巨物驯御",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除异种进化：进化对象是外部既有巨兽而非玩家自身或种群，玩家角色是培育者而非母巢意识。排除绝境守存：巨兽摧毁海底城是玩家主动释放的支配行为，不是外部灾害压迫玩家维持安全边界。排除领地开拓：核心不是建设海底秩序，而是巨兽个体的驯化和成长。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

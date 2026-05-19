@@ -4,14 +4,17 @@ import argparse
 import base64
 import json
 import os
-import ssl
 import sys
 import time
-import urllib.error
-import urllib.request
 from pathlib import Path
 
-import certifi
+_THIS_FILE = Path(__file__).resolve()
+for _parent in _THIS_FILE.parents:
+    if (_parent / "archive" / "tools" / "lib").is_dir():
+        sys.path.insert(0, str(_parent))
+        break
+
+from archive.tools.lib.gemini_client import GeminiError, generate_content, predict
 
 
 BASE_DIR = Path("/Users/mt/Documents/Codex/模块槽位塔防")
@@ -19,7 +22,6 @@ SERIES_PROMPTS = BASE_DIR / "模块槽位塔防_玩法图Prompts.md"
 LOCKED_PROMPTS = BASE_DIR / "图2-图6_布局锁定修正版Prompts.md"
 OUTPUT_DIR = BASE_DIR / "玩法图片输出_api"
 DEFAULT_MODEL = "imagen-4.0-generate-001"
-DEFAULT_API_ROOT = "https://generativelanguage.googleapis.com/v1beta/models"
 DEFAULT_GEMINI_IMAGE_MODEL = "gemini-2.5-flash-image"
 
 IMAGE_MARKERS = {
@@ -75,7 +77,6 @@ def prompt_for_image(index: int) -> str:
 
 
 def request_imagen(api_key: str, model: str, prompt: str, aspect_ratio: str, sample_count: int) -> dict:
-    url = f"{DEFAULT_API_ROOT}/{model}:predict"
     payload = {
         "instances": [{"prompt": prompt}],
         "parameters": {
@@ -83,30 +84,13 @@ def request_imagen(api_key: str, model: str, prompt: str, aspect_ratio: str, sam
             "aspectRatio": aspect_ratio,
         },
     }
-
-    request = urllib.request.Request(
-        url,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={
-            "Content-Type": "application/json",
-            "x-goog-api-key": api_key,
-        },
-        method="POST",
-    )
-
     try:
-        ssl_context = ssl.create_default_context(cafile=certifi.where())
-        with urllib.request.urlopen(request, timeout=300, context=ssl_context) as response:
-            return json.loads(response.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"Imagen API request failed: HTTP {exc.code}\n{detail}") from exc
-    except urllib.error.URLError as exc:
+        return predict(model, payload=payload, api_key=api_key, timeout=300)
+    except GeminiError as exc:
         raise RuntimeError(f"Imagen API request failed: {exc}") from exc
 
 
 def request_gemini_image(api_key: str, model: str, prompt: str) -> dict:
-    url = f"{DEFAULT_API_ROOT}/{model}:generateContent"
     payload = {
         "contents": [{
             "parts": [{"text": prompt}],
@@ -115,25 +99,9 @@ def request_gemini_image(api_key: str, model: str, prompt: str) -> dict:
             "responseModalities": ["TEXT", "IMAGE"],
         },
     }
-
-    request = urllib.request.Request(
-        url,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={
-            "Content-Type": "application/json",
-            "x-goog-api-key": api_key,
-        },
-        method="POST",
-    )
-
     try:
-        ssl_context = ssl.create_default_context(cafile=certifi.where())
-        with urllib.request.urlopen(request, timeout=300, context=ssl_context) as response:
-            return json.loads(response.read().decode("utf-8"))
-    except urllib.error.HTTPError as exc:
-        detail = exc.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"Gemini image API request failed: HTTP {exc.code}\n{detail}") from exc
-    except urllib.error.URLError as exc:
+        return generate_content(model, payload=payload, api_key=api_key, timeout=300)
+    except GeminiError as exc:
         raise RuntimeError(f"Gemini image API request failed: {exc}") from exc
 
 

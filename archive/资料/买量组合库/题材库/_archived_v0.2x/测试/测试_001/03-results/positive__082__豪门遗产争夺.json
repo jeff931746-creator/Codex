@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 82,
+    "raw_theme": "豪门遗产争夺",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "豪门遗产争夺",
+    "culture_shell": "豪门、家族",
+    "action_cut": "争夺、经营",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "在家族权力和财富结构中夺取属于自己的位置和资源",
+    "emotion_promise": "从被轻视到掌控一切，完成身份反转和复仇",
+    "conflict_structure": "多方势力争夺有限遗产和家族权力，玩家通过结盟、背叛、资源经营完成上位",
+    "user_role_position": "继承人、真假千金、隐藏家臣",
+    "strongest_carrier_relation": "玩家通过卡牌收集家族成员和资源，经营资产和人际关系，循环承接权力位置争夺和身份反转的心理任务",
+    "monetization_fit": "抽卡获取强力家族成员/资源，购买资产扩张道具，通行证解锁关键剧情选择",
+    "commercial_failure_cases": [
+      "权力争夺变成纯数值比拼，失去人际博弈感——触发条件：卡牌对战深度不足，缺乏背叛/结盟机制",
+      "身份反转节奏过慢，玩家长期处于被压制状态——触发条件：剧情节点解锁门槛过高，付费点前置不足"
+    ],
+    "primary_motif": "权争上位",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除暴富翻身：主心理任务是权力位置争夺而非单纯财富积累，核心循环是人际权力博弈而非资产扩张；排除改命逆袭：力量来源是人际经营和资源运作，而非信息差或命运规则操纵",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

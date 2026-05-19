@@ -1,0 +1,34 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 33,
+    "raw_theme": "美式丧尸末日生存",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "美式丧尸末日生存",
+    "culture_shell": "美式丧尸末日",
+    "action_cut": "搜打撤/模拟经营/塔防",
+    "feedback_channel": "",
+    "threat_pattern": "尸潮",
+    "primary_psych_task": "在丧尸末日中保住自己、队伍或据点",
+    "emotion_promise": "在绝境中守住最后的安全边界，体验资源匮乏下的生存意志",
+    "conflict_structure": "外部丧尸灾害与资源枯竭持续逼近，玩家维持安全边界",
+    "user_role_position": "幸存者、据点负责人",
+    "strongest_carrier_relation": "玩家在丧尸围城压力下搜刮资源、建造防御工事，玩法循环就是安全边界的反复加固与资源维持",
+    "monetization_fit": "避难所升级、稀有物资加速、生存特权卡",
+    "commercial_failure_cases": [
+      "搜打撤新鲜感消退后缺乏长线目标，用户7日留存断崖下跌——触发条件：避难所建造深度不足，无阶段性强敌或剧情推进",
+      "尸潮压力被数值膨胀稀释，变成无脑割草——触发条件：防御塔/武器升级曲线失控，丧尸威胁感消失"
+    ],
+    "primary_motif": "绝境守存",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [
+      "群体压境"
+    ],
+    "boundary_notes": "排除撤离夺宝：核心循环是守住据点而非进入高风险区域带出收益；排除异能爆发：主心理任务是生存维持而非自身能力觉醒碾压；群体压境裁定阶梯第1条成立（服务保护据点/资源/边界），归绝境守存",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

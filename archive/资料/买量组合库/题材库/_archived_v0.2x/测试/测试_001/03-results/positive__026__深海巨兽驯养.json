@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 26,
+    "raw_theme": "深海巨兽驯养",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "深海巨兽驯养",
+    "culture_shell": "深海",
+    "action_cut": "驯养",
+    "feedback_channel": "",
+    "threat_pattern": "巨兽",
+    "primary_psych_task": "把危险的深海巨物转化为己方可控资产",
+    "emotion_promise": "从恐惧巨物到支配巨物，获得碾压级力量感",
+    "conflict_structure": "深海巨兽不可控且危险，玩家通过捕获、驯养、契约完成支配，将恐惧对象转化为战力",
+    "user_role_position": "驯兽师、契约者、深海领主",
+    "strongest_carrier_relation": "捕获→驯养→养成→出战循环承接'恐惧对象资产化'心理任务，玩家反复经历'遭遇巨兽恐惧→驯服后获得力量'的完整弧线",
+    "monetization_fit": "巨兽抽卡获取、养成加速道具、限定巨兽皮肤/契约石付费",
+    "commercial_failure_cases": [
+      "巨兽养成线过长导致付费转化率低，触发条件：SLG长线回本周期叠加巨兽养成深度，玩家在驯养中期流失",
+      "巨兽战斗表现力不足导致素材与实机落差大，触发条件：放置化轻量SLG无法承载'巨鲸撞碎舰队'的视觉承诺，玩家失望卸载"
+    ],
+    "primary_motif": "巨物驯御",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除异种进化：驯养对象是外部既有深海巨兽，不是玩家自身或种群进化。排除领地开拓：主循环是巨兽捕获养成出战，不是空间秩序扩张，海底矿脉引发大战是资源争夺背景而非核心心理任务。排除绝境守存：巨兽是资产而非压迫性威胁，核心爽点是支配而非守存。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

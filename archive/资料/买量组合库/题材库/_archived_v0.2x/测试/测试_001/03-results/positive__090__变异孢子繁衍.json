@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 90,
+    "raw_theme": "变异孢子繁衍",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "变异孢子繁衍",
+    "culture_shell": "末日/基因变异",
+    "action_cut": "孵化/寄生/吞噬",
+    "feedback_channel": "",
+    "threat_pattern": "虫海/变异体",
+    "primary_psych_task": "通过孢子寄生与基因重组，创造并进化出更强的变异生命体",
+    "emotion_promise": "从弱小孢子成长为吞噬一切的虫群主宰",
+    "conflict_structure": "低阶生命体通过寄生、融合、重组突破位阶限制，力量增长与失控风险并存",
+    "user_role_position": "母巢意识/孢子集群操控者",
+    "strongest_carrier_relation": "玩家通过孢子寄生获取基因、重组孵化新单位，放置/SLG循环承接'进化结果期待与虫群扩张'的心理任务",
+    "monetization_fit": "抽取基因碎片、加速孵化、解锁稀有变异体",
+    "commercial_failure_cases": [
+      "进化路径单一导致玩家失去探索欲，触发条件：基因组合池过浅，玩家快速穷举所有变异体",
+      "虫群扩张缺乏反馈导致放置感空洞，触发条件：虫海吞噬防线只有数值增长，无视觉/策略反馈"
+    ],
+    "primary_motif": "异种进化",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除巨物驯御：进化对象是'孢子/虫群自身'而非外部既有巨兽，玩家扮演母巢意识而非驯兽师。排除绝境守存：虫海吞噬防线是扩张行为而非防守据点，核心循环是进化而非维持安全边界。排除异能爆发：力量来源是基因重组/寄生融合而非个体觉醒，核心循环是孵化培育而非技能释放。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

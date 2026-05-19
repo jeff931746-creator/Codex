@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 17,
+    "raw_theme": "虫族母巢进化",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "虫族母巢进化",
+    "culture_shell": "虫族、母巢、科幻",
+    "action_cut": "进化、吞噬、孵化",
+    "feedback_channel": "",
+    "threat_pattern": "虫海",
+    "primary_psych_task": "通过吞噬、融合、孵化，将低阶虫族进化为终极兵种，体验种群力量跃迁",
+    "emotion_promise": "从弱小幼虫到虫海淹没一切，感受支配性的种群力量成长",
+    "conflict_structure": "起点是弱小虫族，通过吞噬资源和基因融合突破位阶，力量收益与失控风险并存",
+    "user_role_position": "母巢意识、种群掌控者",
+    "strongest_carrier_relation": "玩家通过吞噬资源解锁新形态、孵化更强兵种，合成/进化循环承接'种群力量跃迁'的心理任务",
+    "monetization_fit": "抽取高级基因、加速孵化、解锁稀有兵种形态",
+    "commercial_failure_cases": [
+      "进化路径单一导致长线疲劳，触发条件：兵种树深度不足，玩家快速体验完所有形态",
+      "虫海战斗表现力弱导致爽感缺失，触发条件：同屏单位数少或AI表现差，淹没感无法兑现"
+    ],
+    "primary_motif": "异种进化",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除巨物驯御：进化对象是'我自己的种群/我创造的新生命'，不是外部既有巨兽；排除异能爆发：力量来源是种群融合进化而非个体觉醒；排除领地开拓：核心循环是种群进化而非空间秩序扩张",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 110,
+    "raw_theme": "末日基因改造",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "末日基因改造",
+    "culture_shell": "末日",
+    "action_cut": "搜打撤",
+    "feedback_channel": "",
+    "threat_pattern": "变异体",
+    "primary_psych_task": "在末日环境中通过基因改造获得力量，并在背叛与变异威胁中生存",
+    "emotion_promise": "在绝境中通过自我改造获得力量，体验背叛与反杀的爽感",
+    "conflict_structure": "外部变异体威胁与内部队友背叛并存，玩家通过基因改造获得力量但面临失控风险",
+    "user_role_position": "基因改造者、幸存者",
+    "strongest_carrier_relation": "搜打撤循环承接'在危险区域获取基因资源并活着带回'的心理任务，RPG成长承接'基因改造后的力量展示与进化'",
+    "monetization_fit": "基因药剂抽取、角色皮肤、战令系统",
+    "commercial_failure_cases": [
+      "基因改造后力量感不足，玩家感受不到'长出利爪反杀'的爽感，触发条件：动作表现力弱、数值反馈不明显",
+      "背叛剧情过于线性或可预测，玩家失去'被背叛后反杀'的情绪张力，触发条件：剧情分支少、背叛触发方式单一"
+    ],
+    "primary_motif": "异种进化",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除绝境守存：虽然末日环境有生存压力，但核心循环是'基因改造获得力量'而非'守住据点边界'。排除异能爆发：力量来源是外部基因药剂注射和融合，属于异种进化的'融合/突变'范畴，而非自身能力觉醒。排除撤离夺宝：虽然玩法承接搜打撤，但主心理任务是进化而非单纯撤离带出收益。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 13,
+    "raw_theme": "算命改命逆天",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "算命改命逆天",
+    "culture_shell": "玄学、算命、都市",
+    "action_cut": "算命、改命",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "利用预知信息或规则漏洞，在命运节点做出正确选择以逆转厄运",
+    "emotion_promise": "掌握天机、改写命运的掌控感与打脸快感",
+    "conflict_structure": "命运/规则压制玩家，玩家通过掌握隐藏信息（算命结果）进行选择，在关键节点逆转结果",
+    "user_role_position": "算命师、改命者、天机掌握者",
+    "strongest_carrier_relation": "玩家通过算命获取命运信息，在关键节点做出选择（RPG选择/肉鸽路线），选择结果验证并强化'我能改命'的心理任务",
+    "monetization_fit": "命运节点选择消耗道具/体力，稀有改命道具付费，角色/技能抽取",
+    "commercial_failure_cases": [
+      "失败现象：玩家对随机命运结果无感，流失；触发条件：命运节点选择缺乏可见的因果反馈，玩家感受不到'改命'效果",
+      "失败现象：付费转化率低；触发条件：改命道具定价过高或使用场景不清晰，玩家认为不付费也能通关"
+    ],
+    "primary_motif": "改命逆袭",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除异能爆发：力量来源是信息差和命运规则操纵，而非自身能力觉醒或技能爆发。排除暴富翻身：核心爽点是命运逆转而非财富积累和社会地位反转。排除镇邪收容：算命改命不涉及异常威胁的封印或收容。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

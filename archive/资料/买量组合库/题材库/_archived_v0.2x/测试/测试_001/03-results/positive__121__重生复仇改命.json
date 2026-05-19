@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 121,
+    "raw_theme": "重生复仇改命",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "重生复仇改命",
+    "culture_shell": "重生",
+    "action_cut": "",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "利用前世记忆和规则信息差，改写被压迫的命运，完成复仇和身份反转",
+    "emotion_promise": "用先知先觉碾压仇敌，把前世屈辱全部清算，获得命运掌控感",
+    "conflict_structure": "命运/阶层/仇敌压制玩家，玩家掌握前世信息差后逐步反转，每一步选择都在改写命运节点",
+    "user_role_position": "重生者、复仇者、命运改写者",
+    "strongest_carrier_relation": "玩家通过前世记忆做出关键选择、推演命运节点、规避前世陷阱，肉鸽/卡牌循环承接'信息差驱动命运改写'的心理任务",
+    "monetization_fit": "命运节点选择付费、关键道具/技能抽取、复仇路线分支解锁",
+    "commercial_failure_cases": [
+      "前世记忆信息差用完后再无新信息差，玩家失去'先知'爽感导致流失——触发条件：剧情推进到前世记忆覆盖终点后无新机制承接",
+      "复仇对象被快速清除后缺乏新目标，循环断裂——触发条件：仇敌数量有限且无新压制势力递补"
+    ],
+    "primary_motif": "改命逆袭",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除异能爆发：力量来源是前世记忆信息差和命运规则操纵，不是自身能力觉醒或技能爆发。排除暴富翻身：核心爽点是'知道规则所以能改命'而非财富积累和社会承认。排除权争上位：冲突结构是命运压制而非人际权力争夺。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 38,
+    "raw_theme": "海盗岛屿争霸",
+    "quadrant": "低获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "海盗岛屿争霸",
+    "culture_shell": "海盗、航海、黄金时代",
+    "action_cut": "海战、炮台防御、寻宝",
+    "feedback_channel": "",
+    "threat_pattern": "海军舰队包围、敌对海盗联盟",
+    "primary_psych_task": "在多方势力争夺的海洋权力结构中夺取并巩固自己的位置",
+    "emotion_promise": "从无名海盗成长为海上霸主，享受权力扩张和势力碾压的快感",
+    "conflict_structure": "有限的海域和航线资源被多方势力争夺，玩家通过结盟、背叛、资源经营和军事扩张上位",
+    "user_role_position": "海盗船长、势力头领",
+    "strongest_carrier_relation": "玩家经营岛屿据点、组建舰队、缔结或撕毁联盟，SLG循环承接'在人际权力结构中夺取位置'的心理任务",
+    "monetization_fit": "SLG标准付费模型：加速建造、抽卡获取传奇海盗/舰船、联盟战争消耗",
+    "commercial_failure_cases": [
+      "SLG回本周期过长导致中小团队现金流断裂，触发条件：前期过度依赖自然量、付费渗透率低于3%",
+      "海盗题材差异化不足被传统三国/中世纪SLG淹没，触发条件：素材钩子停留在'海战'表面、未建立海盗权力叙事的独特情绪锚点"
+    ],
+    "primary_motif": "权争上位",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除'领地开拓'：核心不是从空白空间建立秩序，而是已有势力格局中夺取位置；排除'撤离夺宝'：寻宝是手段而非核心循环，主循环是势力对抗和权力扩张；排除'暴富翻身'：财富是权力工具而非终极目标，核心爽点是'上位'而非'有钱'",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

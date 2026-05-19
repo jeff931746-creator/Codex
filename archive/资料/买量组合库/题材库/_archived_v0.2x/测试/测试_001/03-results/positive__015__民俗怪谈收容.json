@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 15,
+    "raw_theme": "民俗怪谈收容",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "民俗怪谈收容",
+    "culture_shell": "民俗怪谈",
+    "action_cut": "收容、建造",
+    "feedback_channel": "",
+    "threat_pattern": "怪谈异常",
+    "primary_psych_task": "识别并控制民俗怪谈中的异常存在，将其封印或收编，防止其突破日常秩序",
+    "emotion_promise": "将不可名状的恐惧转化为可控、可用的资产，获得秩序重建的掌控感",
+    "conflict_structure": "异常怪谈突破日常秩序，玩家通过识别规则、建造封印设施将其重新纳入控制，并利用其力量",
+    "user_role_position": "收容者、封印者、异常管理者",
+    "strongest_carrier_relation": "玩家通过建造封印塔和布置防线来收容怪谈，玩法循环就是异常被识别、控制并转化为己方资产的过程",
+    "monetization_fit": "抽取稀有怪谈、加速封印塔建造、购买特殊封印道具",
+    "commercial_failure_cases": [
+      "美术成本过高导致回本周期过长，触发条件：怪谈设计过于复杂且无法复用",
+      "收容玩法深度不足导致后期流失，触发条件：封印塔建造后缺乏持续运营内容"
+    ],
+    "primary_motif": "镇邪收容",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除禁忌探索：核心不是深入未知禁区接触危险真相，而是将已出现的异常重新纳入控制。排除领地开拓：建造封印塔不是从空白建立秩序，而是针对异常威胁的收容设施。排除绝境守存：压力不是外部灾害或资源枯竭，而是异常突破封印的失控风险。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

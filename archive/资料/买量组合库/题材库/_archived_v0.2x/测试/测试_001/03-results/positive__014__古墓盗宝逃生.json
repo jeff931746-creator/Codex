@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 14,
+    "raw_theme": "古墓盗宝逃生",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "古墓盗宝逃生",
+    "culture_shell": "古墓",
+    "action_cut": "盗宝",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "在充满致命陷阱和未知威胁的古墓中获取宝物并活着逃出",
+    "emotion_promise": "在贪婪与恐惧的极限拉扯中体验劫后余生的刺激快感",
+    "conflict_structure": "收益诱惑与致命风险同步升级，玩家在深入探索获取更高价值宝物与及时撤离保命之间持续做生死抉择",
+    "user_role_position": "盗宝者、探险队员",
+    "strongest_carrier_relation": "搜打撤循环承接收益带出压力：玩家每深入一层，宝物价值与死亡风险同步攀升，撤离决策的紧迫感成为核心心理任务的外化载体",
+    "monetization_fit": "单局消耗品（医疗包、解毒剂、钥匙）付费+撤离保险机制+稀有宝物外观/功能溢价",
+    "commercial_failure_cases": [
+      "单局体验过重导致玩家不愿重复付费：撤离失败惩罚过高，玩家产生挫败感后流失，LTV无法累积",
+      "宝物缺乏长线价值承接：宝物仅限单局使用或数值加成，玩家缺乏跨局积累动力，付费意愿随新鲜感消退断崖下跌"
+    ],
+    "primary_motif": "撤离夺宝",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除禁忌探索：题材虽有古墓未知感，但素材钩子（毒箭变僵尸、石棺二选一、石球追赶）均指向物理危险与收益抉择，无污染、诅咒、理智值等禁忌代价机制承接，核心循环是撤离决策而非深入未知接触禁忌真相。排除绝境守存：虽有逃生压力，但主循环是主动进入高风险区域拿收益，而非被动守护据点或边界",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

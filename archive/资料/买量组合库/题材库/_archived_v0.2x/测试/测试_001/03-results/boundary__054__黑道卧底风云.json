@@ -1,0 +1,34 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 54,
+    "raw_theme": "黑道卧底风云",
+    "quadrant": "低获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "黑道卧底风云",
+    "culture_shell": "现代都市黑道",
+    "action_cut": "卧底、暗杀、策反",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "在敌对权力结构中隐藏真实身份，通过欺骗和关系操纵完成渗透与颠覆",
+    "emotion_promise": "在刀尖上行走的紧张感与身份反转的爽快感",
+    "conflict_structure": "玩家身份与所处环境根本对立，暴露即死亡，通过信息差和人际操纵逐步瓦解敌方权力结构",
+    "user_role_position": "卧底、潜伏者、双重身份者",
+    "strongest_carrier_relation": "RPG选择与肉鸽的随机事件承接身份暴露风险，玩家的每个社交选择都在积累信任或暴露值，核心循环是身份边界的反复试探与维持",
+    "monetization_fit": "抽卡获取关键身份道具或人脉资源，付费解锁关键剧情分支或降低暴露风险",
+    "commercial_failure_cases": [
+      "合规风险导致无法上架或大规模下架，触发条件：题材涉及国内黑道、贩毒等敏感元素",
+      "玩家因道德压力弃坑，触发条件：剧情要求玩家做出极端暴力或背叛行为且无替代路径"
+    ],
+    "primary_motif": "权争上位",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [
+      "高压渗透"
+    ],
+    "boundary_notes": "核心是人际权力结构中的位置争夺与身份操纵，归权争上位。排除改命逆袭：虽有身份反转，但力量来源不是信息差改命，而是在权力结构中主动渗透。排除异能爆发：无自身能力觉醒，依赖的是社交欺骗和关系经营。高压渗透作为观察标签标注行动方式，但主心理任务被权争上位吸收。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

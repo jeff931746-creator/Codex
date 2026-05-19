@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 16,
+    "raw_theme": "星际矿工撤离",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "星际矿工撤离",
+    "culture_shell": "星际科幻",
+    "action_cut": "挖矿、撤离",
+    "feedback_channel": "",
+    "threat_pattern": "外星虫群",
+    "primary_psych_task": "在虫群威胁下，尽可能多地采集稀有矿石并安全撤离",
+    "emotion_promise": "满载而归的贪婪满足与死里逃生的刺激感",
+    "conflict_structure": "收益越高风险越高，玩家在贪婪采集与及时撤离之间反复抉择",
+    "user_role_position": "星际矿工、拾荒者",
+    "strongest_carrier_relation": "搜打撤循环承接收益带出压力，玩家每次下矿都在贪婪与安全之间做选择，撤离成功时的满载感是核心心理回报",
+    "monetization_fit": "撤离保险、仓库扩容、高级采矿装备抽取",
+    "commercial_failure_cases": [
+      "撤离失败惩罚过重导致玩家流失——触发条件：单次失败损失超过玩家心理承受阈值",
+      "科幻美术成本失控导致ROI崩盘——触发条件：程序化生成未能有效降低资产制作成本"
+    ],
+    "primary_motif": "撤离夺宝",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除禁忌探索：虽有外星虫群威胁，但核心循环是收益带出而非接触未知禁忌真相，无污染/诅咒/理智机制承接。排除绝境守存：玩家是主动进入矿洞掠夺资源，而非被动守护据点边界。排除异种进化：虫群是外部威胁而非玩家培育对象。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

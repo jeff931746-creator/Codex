@@ -5,10 +5,10 @@ This workspace is organized into a few stable top-level groups.
 ## Layout
 
 - `projects/`: active project folders and shared capability packs
-- `research/`: canonical knowledge base, whitepapers, and durable reference material
+- `workspace/`: active execution space for projects, playground work, and temporary files
+- `archive/`: accumulated methods, reusable materials, mechanism studies, and tools
+- `reference/`: stable standards, templates, and department rules
 - `tools/`: reusable utilities and local tool repos
-- `playground/`: ad hoc demos and experiments
-- `tmp/`: local scratch space that is ignored by Git
 
 ## Usage
 
@@ -33,33 +33,41 @@ The workspace follows the root [`CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md
 
 ## Knowledge Rule
 
-- All durable knowledge capture, notes, research, and reusable references must be stored under `research/资料/`.
-- Other top-level folders may contain project work, tools, demos, or scratch files, but not the canonical knowledge base.
-- If a task produces reusable analysis or breakdowns, archive the final output in `research/资料/`, even if the work was performed from a project folder.
+- Reusable materials, mechanism studies, external structured data, and approved reusable analysis belong under `archive/资料/`.
+- Reusable methods belong under `archive/方法论/`.
+- Stable standards and templates belong under `reference/`, and require explicit user permission before modification.
+- Execution artifacts belong under `workspace/projects/`; temporary drafts belong under `workspace/tmp/`.
+- `research/` is ignored local/deprecated space and is not the canonical knowledge base.
 
 ## Current Map
 
-### Projects
+### Workspace
 
-- `projects/10-立项预演`
-- `projects/_正式项目模板`
+- `workspace/projects`
+- `workspace/playground`
+- `workspace/tmp`
 
-### Research
+### Archive
 
-- `research/立项白皮书`
-- `research/资料`
+- `archive/资料`
+- `archive/方法论`
+- `archive/经验`
+- `archive/skills/skills`
+- `archive/tools`
+
+### Reference
+
+- `reference/部门标准`
+- `reference/模板`
 
 ### Tools
 
-- `tools/services/codex-desktop-bridge`
-- `tools/services/feishu-codex-bridge`
-- `tools/repos/codex-skills-repo`
-- `tools/repos/breakdown-worker`
-- `tools/model-tools/gemma4`
-- `tools/scripts`
+- `tools/codex-guard`
+- `tools/breakdown-worker`
+- `archive/tools/services`
+- `archive/tools/repos`
+- `archive/tools/model-tools`
+- `archive/tools/scripts`
+- `archive/skills/skills`
 
-Root-level compatibility links are kept under `tools/` for older commands and docs.
-
-### Playground
-
-- `playground/web-demo`
+Most reusable tooling now lives under `archive/tools/`; root-level `tools/` is kept for active Codex-facing guards and lightweight entrypoints.

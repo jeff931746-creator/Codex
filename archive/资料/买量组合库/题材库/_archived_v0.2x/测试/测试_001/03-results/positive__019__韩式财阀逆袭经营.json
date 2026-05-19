@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 19,
+    "raw_theme": "韩式财阀逆袭经营",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "韩式财阀逆袭经营",
+    "culture_shell": "现代都市、财阀",
+    "action_cut": "经营、炒股、收购",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "从底层通过财富积累和商业手段，在财阀体系中完成身份反转和权力获取",
+    "emotion_promise": "体验从被轻视的底层逆袭为掌控商业帝国的财阀，获得社会承认和碾压式成功",
+    "conflict_structure": "低资源身份与社会轻视 vs 财富增长与商业征服，玩家通过经营和资本运作完成阶层跃迁",
+    "user_role_position": "破产者、底层创业者、逆袭者",
+    "strongest_carrier_relation": "玩家通过经营决策和资产扩张实现财富的可见增长，财富增长直接承接社会地位反转的心理需求",
+    "monetization_fit": "通过付费加速资产积累、解锁高级商业策略或收购机会，实现持续付费",
+    "commercial_failure_cases": [
+      "财富增长曲线过于平缓，玩家无法在前期体验到身份反转的快感，导致早期流失",
+      "后期缺乏新的社会承认节点，财富数字增长失去意义，玩家失去目标而流失"
+    ],
+    "primary_motif": "暴富翻身",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "与权争上位的边界：本题材核心是财富驱动的身份反转，而非在固定权力结构中通过结盟/背叛争夺位置。虽然财阀题材涉及权力，但主心理任务是财富积累带来的社会承认，而非权力结构内的位置争夺，因此归暴富翻身而非权争上位。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 84,
+    "raw_theme": "荒野领主拓荒",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "荒野领主拓荒",
+    "culture_shell": "荒野",
+    "action_cut": "拓荒",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "在空白/弱小的空间中建立稳定秩序并扩张",
+    "emotion_promise": "从无到有建立属于自己的领地并获得掌控感与成就感",
+    "conflict_structure": "空间中有资源、威胁和竞争者，玩家通过建设与扩张建立秩序",
+    "user_role_position": "领主、城主、拓荒者",
+    "strongest_carrier_relation": "玩家从零开始建设据点、扩张领土、抵御外敌的循环，承接'空间秩序从无到有建立'的心理任务",
+    "monetization_fit": "建筑加速、资源补给、特殊兵种/英雄抽取、领地皮肤",
+    "commercial_failure_cases": [
+      "后期重复劳动导致流失：扩张到一定规模后建设循环变成纯数值堆叠，失去'从无到有'的成就感，触发条件为中期内容断层",
+      "付费墙破坏公平感：免费玩家被付费玩家碾压导致弃坑，触发条件为PVP匹配机制未分层"
+    ],
+    "primary_motif": "领地开拓",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除绝境守存：核心心理任务是'建立秩序'而非'在压迫环境中保住安全边界'，拓荒是主动扩张而非被动防守。排除暴富翻身：核心爽点是空间掌控而非财富积累与社会身份反转。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

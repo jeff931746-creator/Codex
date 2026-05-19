@@ -1,0 +1,34 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 7,
+    "raw_theme": "末世铁路王国",
+    "quadrant": "高获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "末世铁路王国",
+    "culture_shell": "末世",
+    "action_cut": "搜打撤",
+    "feedback_channel": "",
+    "threat_pattern": "变异兽群",
+    "primary_psych_task": "在末世中通过铁路连通据点，建立移动的安全边界与贸易秩序",
+    "emotion_promise": "在破碎世界里亲手连接文明，让火车成为移动的堡垒与希望",
+    "conflict_structure": "外部变异兽群与敌对势力持续威胁铁路线，玩家必须守卫、修复并扩张铁路网络以维持生存",
+    "user_role_position": "铁路王国的建造者与守护者",
+    "strongest_carrier_relation": "玩家通过修复车站、铺设铁轨、部署防御来扩张可控领土，模拟经营与塔防循环承接'安全边界被压迫后重新建立秩序'的心理任务",
+    "monetization_fit": "售卖限定火车皮肤、防御塔图纸、加速建造道具与贸易加成卡",
+    "commercial_failure_cases": [
+      "铁路连通后缺乏持续威胁，玩家失去防御动力导致留存崩塌——触发条件：变异兽群刷新频率与强度未随路网扩张而提升",
+      "贸易收益过于线性，缺乏爆发式惊喜，付费转化低迷——触发条件：贸易系统未设计稀有物资的随机暴击机制"
+    ],
+    "primary_motif": "绝境守存",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [
+      "群体压境"
+    ],
+    "boundary_notes": "排除领地开拓：核心不是从空白空间建立新秩序，而是在已有废墟上通过铁路连接幸存据点并抵御外部压迫，主心理任务是守住安全边界而非扩张空白领土。排除撤离夺宝：火车不是进入高风险区拿收益后撤离的工具，而是持续存在的移动据点。变异兽群作为威胁形态触发群体压境观察标签，但敌人消失后资源枯竭与据点维护压力仍存在，符合绝境守存判定。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

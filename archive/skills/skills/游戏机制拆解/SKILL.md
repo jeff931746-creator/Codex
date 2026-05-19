@@ -1,6 +1,6 @@
 ---
 name: 游戏机制拆解
-description: 对一款游戏做系统性机制拆解，并按机制库标准写入 `/Users/mt/Documents/Codex/reference/资料/机制库/`。触发场景：（1）用户或 agent 要对一款游戏做拆解；（2）项目知识库里已有拆解资料需要整理入机制库；（3）竞品分析结果需要沉淀为可复用知识。**重要**：无论拆解来自项目内部（如 `向僵尸开炮知识库/`）还是独立发起，结论都必须同时按本 Skill 写入机制库。两个库各有职责，不互相替代。
+description: 对一款游戏做系统性机制拆解，并按机制库标准写入 `/Users/mt/Documents/Codex/archive/资料/机制库/`。触发场景：（1）用户或 agent 要对一款游戏做拆解；（2）项目知识库里已有拆解资料需要整理入机制库；（3）竞品分析结果需要沉淀为可复用知识。**重要**：无论拆解来自项目内部（如 `向僵尸开炮知识库/`）还是独立发起，结论都必须同时按本 Skill 写入机制库。两个库各有职责，不互相替代。
 ---
 
 # 游戏机制拆解
@@ -9,7 +9,7 @@ description: 对一款游戏做系统性机制拆解，并按机制库标准写�
 
 ## 质量标准
 
-所有输出必须满足 `/Users/mt/Documents/Codex/reference/资料/机制库/拆解质量标准.md` 中的七条标准：
+所有输出必须满足 `/Users/mt/Documents/Codex/archive/资料/机制库/拆解质量标准.md` 中的七条标准：
 
 1. **机制必须可重现**：每个机制描述精确到触发条件 + 具体结果，不写感受性总结
 2. **专题问题必须可否证**：用可被反驳的命题表达，不用大类名称
@@ -22,7 +22,7 @@ description: 对一款游戏做系统性机制拆解，并按机制库标准写�
 ## 输出目录
 
 ```
-/Users/mt/Documents/Codex/reference/资料/机制库/
+/Users/mt/Documents/Codex/archive/资料/机制库/
   {游戏名}/
     00_总档.md
     01_系统结构/
@@ -35,7 +35,7 @@ description: 对一款游戏做系统性机制拆解，并按机制库标准写�
     90_结论提炼/
 ```
 
-不是所有目录都必须建，但必须根据这个游戏实际有哪些系统决定。参考 `/Users/mt/Documents/Codex/reference/资料/机制库/README.md`。
+不是所有目录都必须建，但必须根据这个游戏实际有哪些系统决定。参考 `/Users/mt/Documents/Codex/archive/资料/机制库/README.md`。
 
 ## 工作流
 
@@ -51,7 +51,7 @@ description: 对一款游戏做系统性机制拆解，并按机制库标准写�
 
 ### 第二步：写总档
 
-用 `/Users/mt/Documents/Codex/reference/资料/机制库/00_总档模板.md` 作为起点。
+用 `/Users/mt/Documents/Codex/archive/资料/机制库/00_总档模板.md` 作为起点。
 
 总档必须完成：
 - 系统总览表格：每个系统写清楚"负责什么 / 不负责什么 / 和谁联动最紧密"
@@ -75,7 +75,7 @@ description: 对一款游戏做系统性机制拆解，并按机制库标准写�
 
 ### 第四步：写每个专题文件
 
-用 `/Users/mt/Documents/Codex/reference/资料/机制库/专题模板.md` 作为起点。
+用 `/Users/mt/Documents/Codex/archive/资料/机制库/专题模板.md` 作为起点。
 
 每个专题文件必须包含：
 - **这个专题要回答什么**：可否证的具体命题
@@ -102,7 +102,7 @@ description: 对一款游戏做系统性机制拆解，并按机制库标准写�
 
 ### 第六步：更新总索引
 
-完成拆解后，更新 `/Users/mt/Documents/Codex/reference/资料/机制库/00_总索引.md`：
+完成拆解后，更新 `/Users/mt/Documents/Codex/archive/资料/机制库/00_总索引.md`：
 - 在游戏索引表格里加一行
 - 填写主目录路径和当前重点专题
 

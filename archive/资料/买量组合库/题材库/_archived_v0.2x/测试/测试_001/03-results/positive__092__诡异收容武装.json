@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 92,
+    "raw_theme": "诡异收容武装",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "诡异收容武装",
+    "culture_shell": "规则怪谈",
+    "action_cut": "收容、武装",
+    "feedback_channel": "",
+    "threat_pattern": "诡异、不可名状之物",
+    "primary_psych_task": "将异常威胁收容并转化为自身武装力量，在规则压制下反杀",
+    "emotion_promise": "掌控禁忌力量，以诡异制诡异，在绝境中完成反杀",
+    "conflict_structure": "异常存在突破日常秩序并具有秒杀规则，玩家通过识别规则、收容异常并将其转化为武器/异能，完成从被压制到反制的逆转",
+    "user_role_position": "收容员、规则破解者、异常武装使用者",
+    "strongest_carrier_relation": "搜打撤循环中，玩家在规则怪谈场景内搜索异常、识别规则、收容诡异并转化为枪械/异能武装，用收容物对抗更高级异常，循环承接'异常被控制并利用'的心理任务",
+    "monetization_fit": "收容物图鉴收集付费、稀有诡异抽取、武装强化材料购买",
+    "commercial_failure_cases": [
+      "收容物武装后战斗体验平庸，诡异只是换皮武器，失去'以诡异制诡异'的独特爽感——触发条件：武装系统设计未体现诡异特性差异",
+      "规则秒杀惩罚过于严苛导致玩家挫败流失——触发条件：规则识别窗口过短或提示不足，试错成本过高"
+    ],
+    "primary_motif": "镇邪收容",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除禁忌探索：虽然涉及规则怪谈和不可名状之物，但核心循环不是'深入未知禁区接触危险真相'，而是'识别规则后将异常收容并转化为武装'，收容后的利用是核心，符合镇邪收容的'异常被控制并利用'。排除异能爆发：力量来源是外部收容物而非自身觉醒，核心循环是收容转化而非技能释放碾压。排除撤离夺宝：虽然有搜打撤元素，但目标不是'拿收益活着带出'，而是'收容异常并反杀'。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

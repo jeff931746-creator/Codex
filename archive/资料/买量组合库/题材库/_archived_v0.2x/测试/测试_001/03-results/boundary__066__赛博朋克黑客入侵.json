@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 66,
+    "raw_theme": "赛博朋克黑客入侵",
+    "quadrant": "低获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "赛博朋克黑客入侵",
+    "culture_shell": "赛博朋克",
+    "action_cut": "黑客入侵、破解防火墙、黑入机甲",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "通过信息渗透和技术操纵，在高度监控的敌对环境里夺取控制权",
+    "emotion_promise": "以智力碾压系统和他人的掌控快感",
+    "conflict_structure": "玩家处于被监控/压制的底层，利用黑客技能突破层层防火墙和反制系统，获取数据、资产或战斗优势，同时面临被反追踪和义体反噬的风险",
+    "user_role_position": "黑客、渗透者、信息战专家",
+    "strongest_carrier_relation": "玩家通过破解节点、植入病毒、窃取数据逐步扩大信息优势，玩法循环就是信息权力的反复夺取与巩固",
+    "monetization_fit": "卡牌/RPG抽卡获取更强黑客技能和义体，通行证解锁高级渗透任务",
+    "commercial_failure_cases": [
+      "美术成本极高导致回本周期过长，即使素材吸量也无法覆盖研发成本",
+      "卡牌/RPG承接黑客题材时LTV有限，玩家付费深度不足以支撑高成本制作"
+    ],
+    "primary_motif": "改命逆袭",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除异能爆发：黑客能力是技术操纵和信息差，不是自身肉体觉醒或超能力爆发，核心循环是规则操纵而非技能碾压展示。排除权争上位：虽然涉及势力对抗，但主循环是个人技术渗透而非人际权力结构争夺。排除废械拼强：虽然赛博题材有义体改装元素，但核心不是从废料拼装战力，而是信息渗透和控制权夺取。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

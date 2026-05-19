@@ -23,6 +23,15 @@ except Exception:
 
 transcript = data.get('transcript', [])
 
+# 触发条件：代码文件被写入/编辑，或从 archive/tools/scripts/ 执行了脚本
+SCRIPT_EXEC_PATTERNS = [
+    'archive/tools/scripts/',
+    'classify_v5',
+    'build_historical',
+    'validate_',
+    'run_theme',
+]
+
 modified_code = False
 for entry in transcript:
     tool = entry.get('toolName', '') or entry.get('tool_name', '')
@@ -32,6 +41,12 @@ for entry in transcript:
         path = tool_input.get('file_path', '')
         _, ext = os.path.splitext(path)
         if ext in CODE_EXTENSIONS:
+            modified_code = True
+            break
+
+    if tool == 'Bash':
+        cmd = tool_input.get('command', '')
+        if any(p in cmd for p in SCRIPT_EXEC_PATTERNS):
             modified_code = True
             break
 

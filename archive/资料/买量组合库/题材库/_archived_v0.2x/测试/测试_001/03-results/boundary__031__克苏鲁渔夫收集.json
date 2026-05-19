@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 31,
+    "raw_theme": "克苏鲁渔夫收集",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "克苏鲁渔夫收集",
+    "culture_shell": "克苏鲁、深海",
+    "action_cut": "钓鱼、收集",
+    "feedback_channel": "",
+    "threat_pattern": "古神注视、触手变异",
+    "primary_psych_task": "在禁忌海域中捕捞未知存在，承受理智与贪婪的双重压力",
+    "emotion_promise": "每一次收竿都是对未知的赌博，收获禁忌知识或恐怖变异",
+    "conflict_structure": "深海诱惑与理智污染、身体变异风险绑定，收益越高越接近疯狂",
+    "user_role_position": "禁忌海域的渔夫、调查员",
+    "strongest_carrier_relation": "玩家每次捕捞都是对未知的探索，收集的变异鱼类和禁忌典籍不断加深理智压力，循环承接'越深入越危险'的心理任务",
+    "monetization_fit": "通过抽取特殊鱼竿/诱饵、解锁更深海域、购买理智恢复道具实现付费",
+    "commercial_failure_cases": [
+      "放置收集无法承接克苏鲁的深度情绪，玩家对变异鱼类失去新鲜感后流失，触发条件：收集图鉴缺乏养成深度和战力反馈",
+      "理智系统沦为数值惩罚而非叙事体验，玩家感到被强制付费恢复理智而弃坑，触发条件：理智消耗与收益不成正比，付费点过于粗暴"
+    ],
+    "primary_motif": "禁忌探索",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除撤离夺宝：虽然涉及'进入危险区域拿收益并带出'，但核心不是贪婪与撤离的选择，而是禁忌知识/变异带来的理智污染和未知代价，符合禁忌探索的硬要求。排除巨物驯御：虽然涉及捕捞深海生物，但核心不是将巨物资产化，而是承受禁忌探索的代价。排除异种进化：变异是禁忌探索的副作用，不是主动培育进化。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

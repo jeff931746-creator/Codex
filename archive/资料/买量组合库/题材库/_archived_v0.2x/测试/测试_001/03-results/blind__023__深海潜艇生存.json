@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "blind",
+    "table_index": 23,
+    "raw_theme": "深海潜艇生存",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "深海潜艇生存",
+    "culture_shell": "深海",
+    "action_cut": "潜艇驾驶、资源管理、遗迹探索",
+    "feedback_channel": "",
+    "threat_pattern": "海怪袭击、深海巨物",
+    "primary_psych_task": "在深海高压环境中维持潜艇和船员的生存，抵御外部威胁并探索未知",
+    "emotion_promise": "在幽闭恐惧与深海巨物威胁下，守住最后的安全空间",
+    "conflict_structure": "外部深海环境（水压、氧气、海怪）持续压迫，玩家在资源有限的情况下维持潜艇的完整性和船员存活",
+    "user_role_position": "潜艇指挥官、幸存者",
+    "strongest_carrier_relation": "玩家在每次下潜中管理氧气、修复破损、分配船员，这个循环就是安全边界被深海环境反复压迫和重建的过程",
+    "monetization_fit": "付费购买稀有资源包、加速修复、解锁更强潜艇部件或船员",
+    "commercial_failure_cases": [
+      "付费深度不足导致LTV过低：如果只卖外观和加速，缺乏数值成长线，玩家付费意愿弱",
+      "重复玩法导致流失：如果每次下潜的威胁和收益变化不够，肉鸽随机性不足，玩家会因单调而流失"
+    ],
+    "primary_motif": "绝境守存",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除禁忌探索：虽然涉及深海遗迹和未知，但核心循环是维持潜艇生存和资源管理，而非主动深入未知以接触禁忌真相或承受理智/诅咒代价。排除巨物驯御：海怪是威胁而非可驯化资产。排除撤离夺宝：核心不是进入高风险区拿收益并撤离，而是持续在压迫环境中守住据点。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

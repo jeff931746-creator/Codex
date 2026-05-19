@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 3,
+    "raw_theme": "恐龙公园经营",
+    "quadrant": "高获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "恐龙公园经营",
+    "culture_shell": "恐龙、史前、基因科技",
+    "action_cut": "经营、挖掘、麻醉、基因研究",
+    "feedback_channel": "",
+    "threat_pattern": "巨兽失控、外部破坏",
+    "primary_psych_task": "将危险的巨兽转化为可控的展示资产并持续经营",
+    "emotion_promise": "驯服史前巨兽的掌控感与经营壮大的成就感",
+    "conflict_structure": "恐龙既是核心资产也是最大威胁，玩家在吸引游客盈利与防止失控灾难之间维持平衡",
+    "user_role_position": "公园经营者、驯兽师、基因研究者",
+    "strongest_carrier_relation": "玩家通过捕获、孵化、基因改良获得新恐龙，通过围栏维护和麻醉队应对失控事件，经营循环承接'恐惧对象资产化'的心理任务",
+    "monetization_fit": "放置经营模型，通过恐龙收集、公园扩建、基因研究加速实现长线付费",
+    "commercial_failure_cases": [
+      "恐龙失控惩罚过重导致玩家不敢扩展，流失——触发条件：失控事件频率与损失不成比例",
+      "恐龙收集深度不足，玩家快速集齐后无目标——触发条件：基因变异和稀有物种内容更新滞后"
+    ],
+    "primary_motif": "巨物驯御",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除'领地开拓'：核心不是空间秩序扩张，而是对具体巨兽个体的捕获与驯化。排除'异种进化'：恐龙是外部既有生物而非玩家自身或种群进化。排除'绝境守存'：失控事件是经营风险而非持续压迫的生存环境。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

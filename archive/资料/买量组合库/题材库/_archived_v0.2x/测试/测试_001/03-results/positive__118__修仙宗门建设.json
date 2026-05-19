@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 118,
+    "raw_theme": "修仙宗门建设",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "修仙宗门建设",
+    "culture_shell": "修仙",
+    "action_cut": "宗门建设、弟子培养、灵兽捕获",
+    "feedback_channel": "",
+    "threat_pattern": "魔修攻山",
+    "primary_psych_task": "从空白/弱小的宗门空间建立稳定秩序并抵御外部威胁",
+    "emotion_promise": "从无到有建立强大宗门，获得掌控感和安全感",
+    "conflict_structure": "外部势力（魔修）和内部危机（弟子渡劫失败）持续威胁宗门，玩家通过建设、培养、捕获来扩张秩序并守住边界",
+    "user_role_position": "宗门掌门、宗主",
+    "strongest_carrier_relation": "玩家通过建设宗门设施、培养弟子、捕获守护兽来扩张宗门秩序，模拟经营循环承接'空间秩序扩张'心理任务，塔防/防守循环承接'安全边界被压迫'心理任务",
+    "monetization_fit": "建筑加速、弟子培养材料、稀有灵兽抽取、护山大阵升级",
+    "commercial_failure_cases": [
+      "建设节奏过慢导致玩家流失——触发条件：前期建筑升级时间过长，缺乏即时反馈",
+      "防守压力与建设收益失衡——触发条件：魔修攻山频率过高，玩家忙于防守无法享受建设成果"
+    ],
+    "primary_motif": "领地开拓",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除绝境守存：虽然存在魔修攻山的防守压力，但核心循环是宗门空间从空白到强大的秩序扩张，而非在压迫环境中维持安全边界。防守是秩序扩张的一部分，不是主心理任务。排除巨物驯御：灵兽捕获培养是宗门建设的一部分，不是将恐惧对象资产化的独立循环。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

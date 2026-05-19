@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 117,
+    "raw_theme": "星际殖民开拓",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "星际殖民开拓",
+    "culture_shell": "星际、科幻、殖民",
+    "action_cut": "开拓、建设、指挥作战",
+    "feedback_channel": "",
+    "threat_pattern": "外星巨兽袭击",
+    "primary_psych_task": "在未知星球上建立并扩张稳定的人类秩序",
+    "emotion_promise": "从无到有建立文明，成为星际领主",
+    "conflict_structure": "玩家在充满资源、威胁和竞争者的星球上，通过建设、科技和军事扩张建立秩序",
+    "user_role_position": "星际殖民者、基地指挥官、领主",
+    "strongest_carrier_relation": "玩家通过基地建设、科技解锁和领土扩张的循环，承接从空白空间建立稳定秩序的心理任务",
+    "monetization_fit": "加速建设、科技解锁、稀有资源获取、特殊兵种/机甲抽取",
+    "commercial_failure_cases": [
+      "建设节奏过慢导致玩家流失，触发条件：前期资源获取过于困难，玩家长时间无法看到基地扩张",
+      "付费深度不足导致ARPU低，触发条件：SLG核心玩法过于依赖时间积累，付费加速效果不明显"
+    ],
+    "primary_motif": "领地开拓",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除绝境守存：虽然素材中有外星巨兽袭击，但核心循环是建设扩张而非被动防守安全边界。排除巨物驯御：外星巨兽是威胁而非可驯化资产。排除撤离夺宝：稀有矿脉是建设资源而非带出收益。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

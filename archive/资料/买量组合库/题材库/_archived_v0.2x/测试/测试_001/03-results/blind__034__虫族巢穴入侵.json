@@ -1,0 +1,34 @@
+{
+  "sample_meta": {
+    "sample_group": "blind",
+    "table_index": 34,
+    "raw_theme": "虫族巢穴入侵",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "虫族巢穴入侵",
+    "culture_shell": "科幻/末世",
+    "action_cut": "塔防/射击",
+    "feedback_channel": "",
+    "threat_pattern": "虫潮",
+    "primary_psych_task": "在虫群持续压境中守住据点与防线",
+    "emotion_promise": "在绝境中体验以弱胜强、守住最后防线的成就感",
+    "conflict_structure": "外部虫群持续逼近，玩家维持安全边界，资源与防线不断被消耗",
+    "user_role_position": "据点指挥官/防线守卫者",
+    "strongest_carrier_relation": "玩家每波虫潮后修补防线、分配资源，玩法循环就是安全边界的反复加固与资源管理",
+    "monetization_fit": "英雄/炮塔抽卡、资源补给包、防线皮肤与通行证",
+    "commercial_failure_cases": [
+      "虫潮波次重复导致疲劳，玩家在中期流失——触发条件：波次设计缺乏新敌人机制与地形变化",
+      "付费深度不足，LTV天花板低——触发条件：仅靠塔防养成线，缺乏长线社交或赛季重置机制"
+    ],
+    "primary_motif": "绝境守存",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [
+      "群体压境"
+    ],
+    "boundary_notes": "排除异能爆发：玩家视角是守住据点而非自身能力碾压；排除异种进化：玩家不扮演虫群母巢，不进行进化孵化；排除撤离夺宝：核心循环是防守而非进入危险区域拿收益并撤离。按群体压境裁定阶梯第一条，服务保护据点/资源/边界，归绝境守存。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

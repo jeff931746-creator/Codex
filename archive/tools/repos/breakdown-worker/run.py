@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-批量拆解 worker（支持 SiliconFlow 和 Gemini）
+批量拆解 worker（支持统一 LLM provider 和 Gemini）
 
 用法:
     python3 run.py --game "游戏名"
+    python3 run.py --game "游戏名" --provider deepseek
     python3 run.py --game "游戏名" --provider gemini
     python3 run.py --game "游戏名" --model Pro/zai-org/GLM-5.1
     python3 run.py --game "游戏名" --dry-run   # 只导出 prompt 不调 API
@@ -20,16 +21,17 @@ import json
 import os
 import re
 import sys
-import ssl
-import urllib.request
-import urllib.error
 from pathlib import Path
 
-try:
-    import certifi
-    _SSL_CTX = ssl.create_default_context(cafile=certifi.where())
-except ImportError:
-    _SSL_CTX = ssl.create_default_context()
+_THIS_FILE = Path(__file__).resolve()
+for _parent in _THIS_FILE.parents:
+    if (_parent / "archive" / "tools" / "lib").is_dir():
+        sys.path.insert(0, str(_parent))
+        break
+
+from archive.tools.lib.gemini_client import GeminiError, generate_content
+from archive.tools.lib.llm_client import SUPPORTED_PROVIDERS as LLM_PROVIDERS
+from archive.tools.lib.llm_client import chat as llm_chat
 
 ROOT = Path(__file__).resolve().parent
 REPO_ROOT = ROOT.parent.parent.parent.parent  # /Users/mt/Documents/Codex
@@ -77,18 +79,6 @@ def collect_reference() -> str:
 
 # ---------- providers ----------
 
-def http_post_json(url: str, payload: dict, headers: dict, timeout: int = 1200) -> dict:
-    data = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(url, data=data, headers=headers)
-    try:
-        with urllib.request.urlopen(req, timeout=timeout, context=_SSL_CTX) as resp:
-            return json.loads(resp.read().decode("utf-8"))
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8", "ignore")
-        sys.exit(f"[错] HTTP {e.code}: {body[:800]}")
-    except urllib.error.URLError as e:
-        sys.exit(f"[错] 网络错误: {e}")
-
 def estimate_tokens(text: str) -> int:
     """粗估 token 数（中文约 1.5 chars/token，英文约 4 chars/token）"""
     return len(text) // 2
@@ -96,12 +86,7 @@ def estimate_tokens(text: str) -> int:
 TOKEN_WARN = 40_000   # 超过此值打警告
 TOKEN_ABORT = 80_000  # 超过此值直接退出，防止意外巨额消耗
 
-def call_siliconflow(model: str, system_prompt: str, user_prompt: str) -> str:
-    api_key = os.environ.get("SILICONFLOW_API_KEY")
-    base_url = os.environ.get("SILICONFLOW_BASE_URL", "https://api.siliconflow.cn/v1")
-    if not api_key:
-        sys.exit("[错] SILICONFLOW_API_KEY 未设置")
-
+def call_llm(provider: str, model: str | None, system_prompt: str, user_prompt: str) -> str:
     input_tokens = estimate_tokens(system_prompt + user_prompt)
     print(f"[tokens] 预估输入 ~{input_tokens:,} tokens（system {len(system_prompt):,} + user {len(user_prompt):,} chars）")
     if input_tokens > TOKEN_ABORT:
@@ -109,65 +94,34 @@ def call_siliconflow(model: str, system_prompt: str, user_prompt: str) -> str:
     if input_tokens > TOKEN_WARN:
         print(f"[警告] 输入超过 {TOKEN_WARN:,} tokens，请确认 prompt 没有多余内容")
 
-    url = f"{base_url}/chat/completions"
-    payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ],
-        "temperature": 0.7,
-        "max_tokens": 16384,
-        "stream": True,  # 流式避免长文生成超时
-    }
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_key}",
-    }
-    data = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(url, data=data, headers=headers)
-    chunks = []
-    char_count = 0
     try:
-        with urllib.request.urlopen(req, timeout=1200, context=_SSL_CTX) as resp:
-            for raw_line in resp:
-                line = raw_line.decode("utf-8").strip()
-                if not line or line == "data: [DONE]":
-                    continue
-                if line.startswith("data: "):
-                    try:
-                        obj = json.loads(line[6:])
-                        delta = obj["choices"][0]["delta"].get("content", "")
-                        if delta:
-                            chunks.append(delta)
-                            char_count += len(delta)
-                            if char_count % 2000 < len(delta):
-                                print(f"[stream] 已生成 {char_count:,} chars…", flush=True)
-                    except Exception:
-                        pass
-    except urllib.error.HTTPError as e:
-        body_err = e.read().decode("utf-8", "ignore")
-        sys.exit(f"[错] HTTP {e.code}: {body_err[:800]}")
-    except urllib.error.URLError as e:
-        sys.exit(f"[错] 网络错误: {e}")
-    content = "".join(chunks)
-    print(f"[tokens] 输出 {char_count:,} chars（约 {char_count//2:,} tokens）")
+        content = llm_chat(
+            [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            provider=provider,
+            model=model,
+            temperature=0.7,
+            max_tokens=16384,
+            timeout=1200,
+            stream=True,
+        )
+    except Exception as e:
+        sys.exit(f"[错] {e}")
+    print(f"[tokens] 输出 {len(content):,} chars（约 {len(content)//2:,} tokens）")
     return content
 
 def call_gemini(model: str, system_prompt: str, user_prompt: str) -> str:
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        sys.exit("[错] GEMINI_API_KEY 未设置")
-    url = (
-        f"https://generativelanguage.googleapis.com/v1beta/models/"
-        f"{model}:generateContent?key={api_key}"
-    )
     payload = {
         "systemInstruction": {"parts": [{"text": system_prompt}]},
         "contents": [{"role": "user", "parts": [{"text": user_prompt}]}],
         "generationConfig": {"temperature": 0.7, "maxOutputTokens": 16384},
     }
-    body = http_post_json(url, payload, {"Content-Type": "application/json"})
+    try:
+        body = generate_content(model, payload=payload, timeout=1200)
+    except GeminiError as e:
+        sys.exit(f"[错] {e}")
     try:
         parts = body["candidates"][0]["content"]["parts"]
         return "".join(p.get("text", "") for p in parts)
@@ -176,9 +130,14 @@ def call_gemini(model: str, system_prompt: str, user_prompt: str) -> str:
 
 PROVIDERS = {
     "siliconflow": {
-        "call": call_siliconflow,
+        "call": call_llm,
         "default_model_env": "SILICONFLOW_MODEL",
-        "default_model": "Pro/zai-org/GLM-5.1",
+        "default_model": None,
+    },
+    "deepseek": {
+        "call": call_llm,
+        "default_model_env": "DEEPSEEK_MODEL",
+        "default_model": None,
     },
     "gemini": {
         "call": call_gemini,
@@ -218,7 +177,8 @@ def write_outputs(game: str, files: list[tuple[str, str]]) -> Path:
 
 def main():
     load_env()
-    default_provider = os.environ.get("PROVIDER", "siliconflow").lower()
+    default_provider = os.environ.get("LLM_PROVIDER") or os.environ.get("PROVIDER", "siliconflow")
+    default_provider = default_provider.lower()
     ap = argparse.ArgumentParser()
     ap.add_argument("--game", required=True, help="游戏名（对应 inputs/<game>/ 目录）")
     ap.add_argument("--provider", default=default_provider, choices=list(PROVIDERS.keys()))
@@ -228,7 +188,7 @@ def main():
     args = ap.parse_args()
 
     prov = PROVIDERS[args.provider]
-    model = args.model or os.environ.get(prov["default_model_env"], prov["default_model"])
+    model = args.model or os.environ.get(prov["default_model_env"]) or prov["default_model"]
 
     game_inputs = ROOT / "inputs" / args.game
     system_prompt = read_text(ROOT / "prompts" / "system.md")
@@ -263,7 +223,7 @@ def main():
         return
 
     print(f"[i] 第 1 轮：出初稿…")
-    draft = prov["call"](model, system_prompt, user_prompt)
+    draft = prov["call"](args.provider, model, system_prompt, user_prompt) if args.provider in LLM_PROVIDERS else prov["call"](model, system_prompt, user_prompt)
     raw_dir = ROOT / "outputs" / args.game
     raw_dir.mkdir(parents=True, exist_ok=True)
     (raw_dir / "_draft_raw.md").write_text(draft, encoding="utf-8")
@@ -282,7 +242,7 @@ def main():
 # 产出
 按 system prompt 要求，输出重写后的完整拆解（用 ===FILE: xxx=== 分隔）。不要评论、不要 diff，直接给最终成品。"""
         print(f"[i] 第 2 轮：自审 + 重写…")
-        final = prov["call"](model, critique_prompt, critique_user)
+        final = prov["call"](args.provider, model, critique_prompt, critique_user) if args.provider in LLM_PROVIDERS else prov["call"](model, critique_prompt, critique_user)
         (raw_dir / "_final_raw.md").write_text(final, encoding="utf-8")
         print(f"[i] 终稿长度: {len(final)} chars，存到 _final_raw.md")
 

@@ -8,14 +8,20 @@ import concurrent.futures
 import json
 import os
 import re
-import ssl
+import sys
 import time
-import urllib.parse
 import urllib.request
 from datetime import datetime
 from pathlib import Path
 
-import certifi
+_THIS_FILE = Path(__file__).resolve()
+for _parent in _THIS_FILE.parents:
+    if (_parent / "archive" / "tools" / "lib").is_dir():
+        sys.path.insert(0, str(_parent))
+        break
+
+from archive.tools.lib.siliconflow_client import chat_text
+from archive.tools.lib.api_client import ApiError, request_json
 
 # ========== 配置 ==========
 LIBRARY_ROOT = Path(os.environ.get(
@@ -36,11 +42,6 @@ FEISHU_BRIDGE_URL = os.environ.get(
 )
 FEISHU_CHAT_ID = os.environ.get("FEISHU_TARGET_CHAT_ID", "")
 
-# ========== API keys ==========
-api_key = os.environ.get("SILICONFLOW_API_KEY", "").strip()
-if not api_key:
-    raise RuntimeError("SILICONFLOW_API_KEY 未设置")
-
 # DeepSeek Flash 与 GLM 共用同一个 SiliconFlow key
 
 # 当前 LLM backend："glm"（分析用）或 "deepseek"（收集用）
@@ -57,36 +58,24 @@ def log(msg: str):
 # ========== LLM 调用 ==========
 def _call_glm(prompt: str, max_tokens: int) -> str:
     """GLM-5.1 via SiliconFlow（分析阶段用）"""
-    url = "https://api.siliconflow.cn/v1/chat/completions"
-    payload = {
-        "model": "Pro/zai-org/GLM-5.1",
-        "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": max_tokens,
-        "temperature": 0.3
-    }
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-    ctx = ssl.create_default_context(cafile=certifi.where())
-    req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"),
-                                 headers=headers, method="POST")
-    with urllib.request.urlopen(req, context=ctx, timeout=120) as resp:
-        return json.loads(resp.read().decode("utf-8"))["choices"][0]["message"]["content"].strip()
+    return chat_text(
+        prompt,
+        model="Pro/zai-org/GLM-5.1",
+        max_tokens=max_tokens,
+        temperature=0.3,
+        timeout=120,
+    )
 
 
 def _call_deepseek(prompt: str, max_tokens: int) -> str:
     """DeepSeek-V4-Flash via SiliconFlow（收集阶段用，与 GLM 共用 key）"""
-    url = "https://api.siliconflow.cn/v1/chat/completions"
-    payload = {
-        "model": "deepseek-ai/DeepSeek-V4-Flash",
-        "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": max_tokens,
-        "temperature": 0.3
-    }
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-    ctx = ssl.create_default_context(cafile=certifi.where())
-    req = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"),
-                                 headers=headers, method="POST")
-    with urllib.request.urlopen(req, context=ctx, timeout=120) as resp:
-        return json.loads(resp.read().decode("utf-8"))["choices"][0]["message"]["content"].strip()
+    return chat_text(
+        prompt,
+        model="deepseek-ai/DeepSeek-V4-Flash",
+        max_tokens=max_tokens,
+        temperature=0.3,
+        timeout=120,
+    )
 
 
 def call_llm(prompt: str, max_tokens: int = 2000) -> str:
@@ -117,16 +106,20 @@ def fetch_itunes_market_data(keyword_cn: str, keyword_en: str = "") -> list:
 
     keywords = [kw for kw in [keyword_cn, keyword_en] if kw and kw.strip()]
     for kw in keywords:
-        url = (
-            "https://itunes.apple.com/search"
-            f"?term={urllib.parse.quote(kw)}"
-            "&entity=software&mediaType=software&limit=20&country=cn"
-        )
         try:
-            ctx = ssl.create_default_context(cafile=certifi.where())
-            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, context=ctx, timeout=10) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
+            data = request_json(
+                "itunes",
+                "search",
+                query={
+                    "term": kw,
+                    "entity": "software",
+                    "mediaType": "software",
+                    "limit": 20,
+                    "country": "cn",
+                },
+                headers={"User-Agent": "Mozilla/5.0"},
+                timeout=10,
+            )
             for app in data.get("results", []):
                 genre = app.get("primaryGenreName", "")
                 if "Game" not in genre and "游戏" not in genre:
@@ -138,7 +131,7 @@ def fetch_itunes_market_data(keyword_cn: str, keyword_en: str = "") -> list:
                         "name": name,
                         "ratings": app.get("userRatingCount", 0),
                     })
-        except Exception as e:
+        except ApiError as e:
             log(f"[enrich] iTunes API 失败（{kw}）: {e}")
         time.sleep(0.5)
 
@@ -149,17 +142,16 @@ def fetch_steam_market_data(keyword_en: str) -> list:
     """Steam Store Search API：查找相关 PC 游戏（无需 API Key）"""
     if not keyword_en or not keyword_en.strip():
         return []
-    url = (
-        "https://store.steampowered.com/api/storesearch/"
-        f"?term={urllib.parse.quote(keyword_en)}&l=english&cc=US&count=15"
-    )
     try:
-        ctx = ssl.create_default_context(cafile=certifi.where())
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, context=ctx, timeout=10) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
+        data = request_json(
+            "steam_store",
+            "api/storesearch/",
+            query={"term": keyword_en, "l": "english", "cc": "US", "count": 15},
+            headers={"User-Agent": "Mozilla/5.0"},
+            timeout=10,
+        )
         return [{"name": g["name"]} for g in data.get("items", []) if g.get("name")]
-    except Exception as e:
+    except ApiError as e:
         log(f"[enrich] Steam API 失败（{keyword_en}）: {e}")
         return []
 

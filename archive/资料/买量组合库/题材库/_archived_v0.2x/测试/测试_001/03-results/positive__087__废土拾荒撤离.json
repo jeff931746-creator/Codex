@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 87,
+    "raw_theme": "废土拾荒撤离",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "废土拾荒撤离",
+    "culture_shell": "废土",
+    "action_cut": "拾荒、撤离",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "在废土高风险区域搜刮资源，在贪婪与安全之间做出撤离抉择",
+    "emotion_promise": "背包爆满的贪婪快感与撤离点前的生死紧张交替冲击",
+    "conflict_structure": "收益越高风险越高，玩家在继续搜刮与及时撤离之间反复权衡",
+    "user_role_position": "拾荒者",
+    "strongest_carrier_relation": "搜打撤循环承接收益带出压力：玩家每次进入废土搜刮资源，背包容量和撤离点安全窗口形成倒计时压力，搜得越多越难撤离，撤离成功则收益落袋，失败则全部丢失，这个循环直接承接贪婪与恐惧的反复博弈",
+    "monetization_fit": "付费扩充安全箱容量、购买撤离保险、解锁高风险高回报区域",
+    "commercial_failure_cases": [
+      "撤离失败惩罚过重导致玩家不敢冒险搜刮，循环退化为保守拾荒，贪婪驱动力消失——触发条件：死亡全丢且无任何保底机制",
+      "搜刮收益曲线太平滑，后期背包爆满无抉择压力，撤离变成走过场——触发条件：背包容量过大或高价值物品掉率失控"
+    ],
+    "primary_motif": "撤离夺宝",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除绝境守存：核心压力不是据点被外部灾害持续压迫，而是每次进入高风险区域后的撤离抉择，敌人消失后循环仍成立（搜刮与撤离的博弈独立于敌人存在）。排除禁忌探索：废土拾荒没有污染、诅咒、理智等禁忌代价机制，未知感不进入玩法循环，只是危险地点拿收益并撤离。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

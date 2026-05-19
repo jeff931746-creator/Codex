@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 52,
+    "raw_theme": "地底矿脉争夺",
+    "quadrant": "低获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "地底矿脉争夺",
+    "culture_shell": "地下矿脉",
+    "action_cut": "挖矿/采集/防守",
+    "feedback_channel": "",
+    "threat_pattern": "敌人偷袭",
+    "primary_psych_task": "在资源枯竭和外部威胁下保住矿脉据点并持续获取收益",
+    "emotion_promise": "在绝境中守住财富来源，体验资源争夺的紧张与占有感",
+    "conflict_structure": "矿脉资源有限且逐渐枯竭，外部敌人持续威胁矿场安全，玩家必须在防守与采集之间分配资源",
+    "user_role_position": "矿场主/据点负责人",
+    "strongest_carrier_relation": "玩家持续加固防线、分配采集与防守资源，玩法循环就是安全边界被压迫后的反复维护与资源提取",
+    "monetization_fit": "加速采集、强化防御塔、解锁更深矿层，通过资源稀缺性和防守压力驱动付费",
+    "commercial_failure_cases": [
+      "矿脉枯竭后无新目标导致流失——触发条件：矿层内容消耗速度超过更新速度",
+      "防守压力不足导致玩法沦为纯放置——触发条件：敌人AI过弱或塔防深度不够，失去紧张感"
+    ],
+    "primary_motif": "绝境守存",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除撤离夺宝：核心不是进入高风险区域拿收益后撤离，而是长期守住据点持续采集。排除领地开拓：核心不是从空白空间建立秩序扩张，而是在已有据点抵御外部压迫。排除暴富翻身：财富增长是手段而非核心心理任务，核心是守住生存边界。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

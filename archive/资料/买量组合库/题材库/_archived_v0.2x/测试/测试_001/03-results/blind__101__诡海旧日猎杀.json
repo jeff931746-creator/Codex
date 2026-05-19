@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "blind",
+    "table_index": 101,
+    "raw_theme": "诡海旧日猎杀",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "诡海旧日猎杀",
+    "culture_shell": "克苏鲁/大航海",
+    "action_cut": "航海生存/动作",
+    "feedback_channel": "",
+    "threat_pattern": "旧日支配者/海怪/深渊凝视",
+    "primary_psych_task": "在充满禁忌与污染的未知海域中，通过猎杀与反向吞噬，将恐惧转化为自身力量并维持理智边界",
+    "emotion_promise": "从被恐惧支配到支配恐惧，体验以禁忌之力反噬禁忌的黑暗快感",
+    "conflict_structure": "未知海域的禁忌存在持续污染船员理智并威胁船只安全，玩家在理智崩溃风险与吞噬禁忌力量之间维持平衡",
+    "user_role_position": "船长/猎杀者/不可名状之物的驾驭者",
+    "strongest_carrier_relation": "航海探索与猎杀循环承接'深入未知→遭遇禁忌→反向吞噬→力量成长'的心理任务，每次出海都是对理智边界的考验与突破",
+    "monetization_fit": "船只部件抽取与升级、船员招募与理智管理道具、特殊猎杀许可证",
+    "commercial_failure_cases": [
+      "理智系统过于惩罚性导致玩家不敢探索深海区域，触发条件：理智值下降惩罚远大于吞噬收益",
+      "猎杀循环变成数值碾压失去禁忌感，触发条件：旧日支配者被设计成普通BOSS，缺乏污染/诅咒机制"
+    ],
+    "primary_motif": "禁忌探索",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除撤离夺宝：核心不是'拿收益并活着带出'，而是'接触禁忌真相并反向吞噬'，有明确的理智/污染机制承接。排除巨物驯御：猎杀对象是旧日支配者而非可驯化的巨兽，核心是吞噬而非驯化。排除绝境守存：压力来源是禁忌污染而非资源枯竭或外部灾害，核心循环是探索与吞噬而非守住据点。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

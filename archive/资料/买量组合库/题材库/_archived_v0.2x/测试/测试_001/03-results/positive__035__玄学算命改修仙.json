@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 35,
+    "raw_theme": "玄学算命改修仙",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "玄学算命改修仙",
+    "culture_shell": "修仙",
+    "action_cut": "算命",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "利用信息差和规则操纵改写失败命运",
+    "emotion_promise": "我知道规则，所以能改命",
+    "conflict_structure": "命运/阶层/规则压制玩家，玩家掌握隐藏规则后反转",
+    "user_role_position": "改命者、算命师",
+    "strongest_carrier_relation": "玩家通过卡牌选择、命盘推演、命运节点改写完成命运反转，玩法循环就是规则操纵与命运反转的反复验证",
+    "monetization_fit": "抽卡获取神卡/命格，付费解锁关键命运节点或渡劫资源",
+    "commercial_failure_cases": [
+      "内容产出效率低导致玩家流失：卡牌/RPG内容更新跟不上消耗速度，回本周期过长",
+      "算命情绪与修仙长线割裂：前期算命改命吸量强，但后期修仙养成循环无法承接改命爽感，付费转化断崖"
+    ],
+    "primary_motif": "改命逆袭",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除异能爆发：力量来源是信息差和规则操纵，不是自身能力觉醒或技能爆发。排除暴富翻身：核心爽点是命运改写而非财富积累和社会身份反转。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

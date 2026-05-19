@@ -46,6 +46,17 @@ is_protected_path() {
   esac
 }
 
+is_deprecated_research_path() {
+  local raw="$1"
+  local absolute
+
+  absolute=$(to_absolute_path "$raw")
+  case "$absolute" in
+    /Users/mt/Documents/Codex/research|/Users/mt/Documents/Codex/research/*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
 if [ "$#" -eq 0 ]; then
   usage
   exit 64
@@ -56,11 +67,15 @@ for path in "$@"; do
   if is_protected_path "$path"; then
     printf 'Blocked Codex write target: %s\n' "$path" >&2
     blocked=1
+  elif is_deprecated_research_path "$path"; then
+    printf 'Blocked deprecated Codex write target: %s\n' "$path" >&2
+    printf 'Use workspace/tmp for drafts, workspace/projects for project work, or archive/ for reusable materials.\n' >&2
+    blocked=1
   fi
 done
 
 if [ "$blocked" -ne 0 ]; then
-  printf 'Codex must treat .claude paths as read-only. Ask the user or use a Codex-owned file instead.\n' >&2
+  printf 'Codex write target check failed. Ask the user or choose a valid workspace path.\n' >&2
   exit 1
 fi
 

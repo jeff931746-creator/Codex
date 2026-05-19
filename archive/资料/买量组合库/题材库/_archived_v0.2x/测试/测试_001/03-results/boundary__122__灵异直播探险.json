@@ -1,0 +1,34 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 122,
+    "raw_theme": "灵异直播探险",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "灵异直播探险",
+    "culture_shell": "现代都市灵异",
+    "action_cut": "直播、探险、拍摄、收集、封印",
+    "feedback_channel": "粉丝打赏",
+    "threat_pattern": "鬼物、恶灵",
+    "primary_psych_task": "在直播反馈驱动下深入灵异禁区，收集鬼物并封印恶灵，同时获取观众打赏收益",
+    "emotion_promise": "在粉丝见证下征服恐惧、收获财富与掌控感",
+    "conflict_structure": "未知灵异威胁与直播收益绑定，越深入越危险但打赏越高，玩家在恐惧与贪婪间平衡",
+    "user_role_position": "灵异主播、探险者",
+    "strongest_carrier_relation": "搜打撤循环承接'深入禁区获取收益并安全返回'的心理任务，放置循环承接'收集鬼物并封印'的长期掌控感",
+    "monetization_fit": "直播打赏转化为游戏内资源，鬼物收集解锁付费封印道具，探险装备与护符付费",
+    "commercial_failure_cases": [
+      "直播反馈与探险风险脱钩，打赏只是数值显示而无实际资源意义，触发条件：打赏系统与核心循环无耦合",
+      "鬼物收集沦为普通图鉴，封印无策略深度，触发条件：收集物无差异化能力或威胁，封印变成一键操作"
+    ],
+    "primary_motif": "镇邪收容",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [
+      "观众反馈"
+    ],
+    "boundary_notes": "排除禁忌探索：虽有'深入禁区'元素，但核心循环是'收集鬼物并封印'而非'接触未知真相并承受污染/诅咒代价'，直播打赏是反馈通道而非禁忌代价机制。排除撤离夺宝：收益不是'带出宝物'而是'封印异常并获取打赏'，主心理任务是控制异常而非掠夺资源。观众反馈标签仅标记直播通道，不改变主归类。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

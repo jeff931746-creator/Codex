@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 119,
+    "raw_theme": "赘婿翻身商战",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "赘婿翻身商战",
+    "culture_shell": "现代都市商战",
+    "action_cut": "经营收购",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "通过财富积累和商业手段完成社会身份反转，获得尊重与承认",
+    "emotion_promise": "从被轻视到碾压所有人的爽感，用财富证明价值",
+    "conflict_structure": "低身份被家族/社会轻视，玩家通过商业经营和资产扩张完成财富跃迁与社会地位反转",
+    "user_role_position": "赘婿、被轻视者、创业者",
+    "strongest_carrier_relation": "模拟经营循环承接财富可见增长，卡牌/策略选择承接商战博弈中的身份反转节点",
+    "monetization_fit": "资产扩张的数值成长线天然适合付费加速，商业收购和身份进阶节点可做付费卡点",
+    "commercial_failure_cases": [
+      "商战博弈过于复杂导致轻度用户流失，触发条件：策略深度超过模拟经营用户承受阈值",
+      "身份反转节奏过慢导致爽感断裂，触发条件：从被轻视到第一次打脸超过30分钟游戏时长"
+    ],
+    "primary_motif": "暴富翻身",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除改命逆袭：核心循环是财富经营和资产扩张，不是信息差/命运规则操纵；排除权争上位：主承诺是财富带来的身份反转，不是权力结构中的人际博弈上位",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

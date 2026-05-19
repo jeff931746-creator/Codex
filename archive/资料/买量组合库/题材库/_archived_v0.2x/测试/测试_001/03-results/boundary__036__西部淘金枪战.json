@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 36,
+    "raw_theme": "西部淘金枪战",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "西部淘金枪战",
+    "culture_shell": "西部",
+    "action_cut": "淘金、枪战、劫案",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "在危险环境中获取财富并安全撤离，通过财富积累实现身份反转",
+    "emotion_promise": "从一无所有的淘金者变成西部传奇，体验暴富的快感和枪战决斗的刺激",
+    "conflict_structure": "高风险淘金区域中，财富收益与生存威胁并存，玩家在贪婪与安全撤离之间反复抉择",
+    "user_role_position": "淘金者、赏金猎人、西部冒险者",
+    "strongest_carrier_relation": "搜打撤循环承接财富获取与安全撤离的心理压力，玩家每次进入淘金区域都面临收益越高风险越大的抉择，带出黄金的瞬间释放暴富情绪",
+    "monetization_fit": "轻量搜打撤模式，通过装备升级、保险箱扩容、特殊武器皮肤等道具付费，适合中小团队做中频次低单价的商业化",
+    "commercial_failure_cases": [
+      "付费深度不足导致LTV过低：如果只卖外观和基础装备，缺乏数值成长线和社交竞争，玩家付费意愿弱，ARPU长期低迷",
+      "搜打撤循环单调导致留存崩盘：如果淘金区域缺乏变化、枪战手感差、撤离失败惩罚过重，玩家挫败感累积后快速流失"
+    ],
+    "primary_motif": "撤离夺宝",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除暴富翻身：虽然题材有暴富情绪，但核心循环是进入危险区域拿收益并活着带出，而非通过经营/资产扩张完成社会身份反转。排除绝境守存：玩家是主动进入风险区域获取财富，而非在压迫环境中被动守住据点或资源边界。排除权争上位：虽然有酒吧决斗等西部元素，但核心不是人际权力结构中的位置争夺，而是财富获取与撤离。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

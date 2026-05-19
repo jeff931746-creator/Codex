@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 2,
+    "raw_theme": "鬼怪公寓经营",
+    "quadrant": "高获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "鬼怪公寓经营",
+    "culture_shell": "民俗怪谈、都市灵异",
+    "action_cut": "经营、镇压、藏匿",
+    "feedback_channel": "",
+    "threat_pattern": "恶鬼砸店、驱魔师突袭",
+    "primary_psych_task": "将异常鬼怪纳入日常秩序，通过安置和管控将其转化为经营资产",
+    "emotion_promise": "掌控恐惧对象并从中获利，享受猎奇反差带来的支配感与经营成就感",
+    "conflict_structure": "异常存在（鬼怪）既是经营资源又是失控威胁，玩家在收容利用与防止暴露/失控之间维持平衡",
+    "user_role_position": "鬼怪公寓房东、异常收容者",
+    "strongest_carrier_relation": "玩家安置鬼怪入住、用符咒镇压失控、利用鬼怪能力服务经营，循环承接'异常被控制并利用'的心理任务",
+    "monetization_fit": "轻量模拟经营+塔防，通过租客付费、鬼怪服务产出、道具符咒消耗实现持续付费",
+    "commercial_failure_cases": [
+      "猎奇新鲜感消退后留存断崖，触发条件：鬼怪种类和事件重复，缺乏长线目标",
+      "经营深度不足导致付费意愿低，触发条件：数值膨胀过快或鬼怪养成线太浅，玩家无长期投入动力"
+    ],
+    "primary_motif": "镇邪收容",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除暴富翻身：核心不是估值交易和财富反杀，而是异常管控与利用。排除领地开拓：经营对象是异常存在而非空间秩序扩张。排除禁忌探索：主循环是安置管控而非深入未知禁区接触禁忌代价。符合镇邪收容的经营承接条件：经营对象是被收容的鬼怪，收益来自异常被控制后的利用，威胁来自异常失控和驱魔师突袭。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

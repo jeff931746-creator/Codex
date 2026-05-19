@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 6,
+    "raw_theme": "天师镇邪收鬼",
+    "quadrant": "高获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "天师镇邪收鬼",
+    "culture_shell": "中式民俗",
+    "action_cut": "收服鬼怪",
+    "feedback_channel": "",
+    "threat_pattern": "鬼怪",
+    "primary_psych_task": "将异常鬼怪威胁重新纳入控制并转化为己方力量",
+    "emotion_promise": "从被鬼怪威胁到掌控鬼怪、让鬼怪为自己服务的力量感",
+    "conflict_structure": "异常鬼怪突破日常秩序，玩家通过符咒、法器识别规则并封印/收编，威胁转化为资产",
+    "user_role_position": "天师、收服者、驱魔者",
+    "strongest_carrier_relation": "玩家通过符咒阵困住鬼怪、收服鬼怪当小弟、法器升级秒杀群鬼，玩法循环就是异常被控制并利用的反复验证",
+    "monetization_fit": "法器升级、符咒抽取、鬼怪收集养成，通过抽卡和养成线实现可持续付费",
+    "commercial_failure_cases": [
+      "鬼怪收集后缺乏持续利用场景，玩家收服后无事可做导致流失——触发条件：收服系统与战斗循环脱节",
+      "塔防/割草玩法同质化严重，缺乏中式民俗差异化体验——触发条件：符咒和法器系统只是数值换皮，没有规则识别和封印的策略深度"
+    ],
+    "primary_motif": "镇邪收容",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除禁忌探索：本题材核心是控制收编鬼怪而非深入未知禁区接触危险真相，没有污染/诅咒/理智机制承接。排除异能爆发：力量来源是符咒法器等外部工具而非自身能力觉醒，核心循环是封印收编而非技能展示碾压。排除巨物驯御：收服对象是鬼怪异常存在而非巨兽/妖兽，且核心是镇邪收容逻辑而非驯化支配。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

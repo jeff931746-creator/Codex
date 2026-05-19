@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 127,
+    "raw_theme": "都市异能觉醒",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "都市异能觉醒",
+    "culture_shell": "都市",
+    "action_cut": "觉醒异能、碾压反派、暗战、收集能量、超能力对决",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "普通身份获得自身超常能力并释放压抑",
+    "emotion_promise": "从被压制到碾压一切，体验力量觉醒后的绝对优势",
+    "conflict_structure": "普通人被压制，觉醒可见能力后完成战力跃迁",
+    "user_role_position": "觉醒者、异能者",
+    "strongest_carrier_relation": "玩家通过技能释放和流派成长展示觉醒后的战力，割草/RPG循环承接能力进化与碾压快感",
+    "monetization_fit": "抽卡获取新异能、养成异能等级、皮肤/特效付费",
+    "commercial_failure_cases": [
+      "异能展示缺乏视觉冲击力，玩家感受不到碾压快感，触发条件：技能特效和打击感投入不足",
+      "觉醒过程过于漫长，玩家在获得能力前流失，触发条件：前期引导节奏拖沓，未快速给到核心异能体验"
+    ],
+    "primary_motif": "异能爆发",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除改命逆袭：力量来源是自身能力觉醒而非信息差或命运规则操纵；核心循环是技能释放和战力展示而非命运节点改写。排除绝境守存：冲突结构是个人战力跃迁而非据点/资源保护。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

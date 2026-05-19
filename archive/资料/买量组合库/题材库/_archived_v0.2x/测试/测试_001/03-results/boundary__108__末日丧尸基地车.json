@@ -1,0 +1,34 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 108,
+    "raw_theme": "末日丧尸基地车",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "末日丧尸基地车",
+    "culture_shell": "末日废土",
+    "action_cut": "搜打撤/模拟经营/肉鸽",
+    "feedback_channel": "",
+    "threat_pattern": "尸潮",
+    "primary_psych_task": "在丧尸围城和资源枯竭的压迫环境中保住移动基地和车内幸存者",
+    "emotion_promise": "在绝境中守住最后的安全堡垒，体验移动家园的坚韧与成长",
+    "conflict_structure": "外部尸潮和资源短缺持续逼近，玩家维持并升级基地车的安全边界",
+    "user_role_position": "基地车指挥官/幸存者领袖",
+    "strongest_carrier_relation": "玩家在移动基地内管理资源、修补防线、升级车间，玩法循环就是安全边界的反复加固与扩张",
+    "monetization_fit": "基地车外观/功能部件付费、幸存者角色抽取、资源包与加速道具",
+    "commercial_failure_cases": [
+      "基地车升级线过短，玩家满级后失去目标导致流失——触发条件：内容消耗速度远超更新速度",
+      "尸潮压力设计失衡，过于简单导致丧失绝境感，过于困难导致挫败弃坑——触发条件：难度曲线未做分层测试"
+    ],
+    "primary_motif": "绝境守存",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [
+      "群体压境"
+    ],
+    "boundary_notes": "排除撤离夺宝：核心不是进入高风险区拿收益并撤离，而是保住移动据点本身。排除领地开拓：基地是移动的而非固定领土扩张。尸潮是威胁形态而非核心冲突结构，按群体压境裁定阶梯第一条，服务保护据点归绝境守存。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

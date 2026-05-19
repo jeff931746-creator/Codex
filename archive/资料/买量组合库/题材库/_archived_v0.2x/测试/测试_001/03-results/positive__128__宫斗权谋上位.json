@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 128,
+    "raw_theme": "宫斗权谋上位",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "宫斗权谋上位",
+    "culture_shell": "古代宫廷",
+    "action_cut": "宫斗、陷害、培养势力",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "在封闭的人际权力结构中，通过结盟、背叛和资源经营，从低位夺取最高权力位置",
+    "emotion_promise": "从被轻视的宫女逆袭为掌控后宫的女主人，体验权力碾压的快感",
+    "conflict_structure": "多方势力争夺有限的后宫权力，玩家通过结盟、陷害、资源经营逐步上位",
+    "user_role_position": "宫女、低位妃嫔、权力争夺者",
+    "strongest_carrier_relation": "卡牌养成和势力经营循环承接'在权力结构中逐步夺取位置'的心理任务，每张卡牌代表一个可结盟或可陷害的角色，经营循环模拟资源积累和势力扩张",
+    "monetization_fit": "抽卡获取强力妃嫔/谋士角色，购买资源加速势力培养，解锁关键剧情选择",
+    "commercial_failure_cases": [
+      "权力晋升节奏过慢，玩家在宫女阶段停留过久失去耐心——触发条件：前期缺乏可见的地位变化反馈",
+      "陷害和结盟机制过于简单，变成纯数值比拼——触发条件：缺乏真实的人际博弈感和剧情分支"
+    ],
+    "primary_motif": "权争上位",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除改命逆袭：核心不是利用信息差或命运规则改写，而是在人际权力结构中通过结盟和背叛夺取位置。排除暴富翻身：核心不是财富积累和社会身份反转，而是权力位置争夺。排除领地开拓：核心不是空间秩序建设，而是封闭结构内的人际权力博弈。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

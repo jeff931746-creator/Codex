@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 60,
+    "raw_theme": "异能觉醒都市",
+    "quadrant": "低获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "异能觉醒都市",
+    "culture_shell": "都市异能",
+    "action_cut": "觉醒、战斗",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "普通身份获得自身超常能力并释放压抑",
+    "emotion_promise": "从被压抑的普通人突然变成拥有碾压性力量的强者",
+    "conflict_structure": "普通人被社会/敌人压制，觉醒可见异能后完成战力跃迁与身份反转",
+    "user_role_position": "觉醒者、异能者",
+    "strongest_carrier_relation": "玩家通过抽卡/战斗获得新异能并释放技能，循环承接'突然变强后碾压对手'的心理任务",
+    "monetization_fit": "抽卡获取异能/角色，养成深度与技能组合驱动持续付费",
+    "commercial_failure_cases": [
+      "异能展示缺乏视觉冲击力，素材无法在3秒内抓住用户——触发条件：技能特效平庸、打击感弱",
+      "RPG养成线过浅，玩家抽到S级异能后快速失去目标——触发条件：内容消耗速度远超产能"
+    ],
+    "primary_motif": "异能爆发",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除改命逆袭：力量来源是自身能力觉醒而非信息差/命运规则操纵；排除异种进化：进化对象是自身异能而非创造新生命/种群",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

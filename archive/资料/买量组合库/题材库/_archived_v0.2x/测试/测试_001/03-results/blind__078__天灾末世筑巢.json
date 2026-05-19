@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "blind",
+    "table_index": 78,
+    "raw_theme": "天灾末世筑巢",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "天灾末世筑巢",
+    "culture_shell": "末日、极寒",
+    "action_cut": "筑巢、搜刮",
+    "feedback_channel": "",
+    "threat_pattern": "天灾、资源枯竭",
+    "primary_psych_task": "在极端天灾和资源匮乏中保住自己与据点",
+    "emotion_promise": "在绝境中亲手建立安全堡垒的掌控感与成就感",
+    "conflict_structure": "外部灾害与资源枯竭持续逼近，玩家维持并升级安全边界",
+    "user_role_position": "幸存者、据点负责人",
+    "strongest_carrier_relation": "玩家通过模拟经营循环建设避难所、通过塔防循环抵御外部威胁，两个循环共同承接安全边界被压迫的心理任务",
+    "monetization_fit": "加速建造、稀有建材、强力防御塔、特殊幸存者抽取",
+    "commercial_failure_cases": [
+      "建造节奏过慢导致玩家在前期反复死亡流失，触发条件：初期资源获取与建造消耗比例失衡",
+      "后期内容匮乏导致玩家失去目标，触发条件：避难所满级后无新威胁或新区域解锁"
+    ],
+    "primary_motif": "绝境守存",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除领地开拓：领地开拓的核心是从空白空间建立秩序并扩张，而本题材的核心是在已有压迫环境中守住安全边界，更符合绝境守存的定义。排除撤离夺宝：本题材无进入高风险区域拿收益并带出的循环，而是固守据点。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

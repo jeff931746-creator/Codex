@@ -1,0 +1,36 @@
+{
+  "sample_meta": {
+    "sample_group": "blind",
+    "table_index": 123,
+    "raw_theme": "神医妙手回春",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "神医妙手回春",
+    "culture_shell": "现代都市/中医",
+    "action_cut": "治病/炼丹",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "用超凡医术逆转他人命运，从而获得社会地位和财富的跃迁",
+    "emotion_promise": "被轻视的专家用实力打脸，获得尊重和财富",
+    "conflict_structure": "主角拥有超凡医术但身份低微，通过治愈权贵/绝症完成身份反转",
+    "user_role_position": "神医/炼丹师",
+    "strongest_carrier_relation": "玩家通过诊断、治疗、炼丹的循环，将医术转化为财富和声望，承接'用专业能力完成身份反转'的心理任务",
+    "monetization_fit": "病人付费治疗、丹药售卖、医馆经营升级",
+    "commercial_failure_cases": [
+      "治疗循环过于简单重复，缺乏病情难度递进，导致玩家失去挑战感——触发条件：病情设计无层次，所有病人用同一套解法",
+      "身份反转爽感不足，打脸情节薄弱——触发条件：NPC反应平淡，缺乏从轻视到震惊的情绪转变弧线"
+    ],
+    "primary_motif": "暴富翻身",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [
+      "专家身份"
+    ],
+    "observer_tags": [
+      "专家身份"
+    ],
+    "boundary_notes": "排除改命逆袭：改命逆袭的核心是'用信息差/规则操纵改写命运'，而本题材的核心是'用医术能力换取财富和地位'，属于暴富翻身的'通过专业资产完成身份反转'路径。排除异能爆发：异能爆发的核心是'自身能力觉醒后碾压敌人'，本题材的能力是医术而非战斗能力，且核心循环是财富积累而非战力展示。专家身份作为二级切口挂靠暴富翻身。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

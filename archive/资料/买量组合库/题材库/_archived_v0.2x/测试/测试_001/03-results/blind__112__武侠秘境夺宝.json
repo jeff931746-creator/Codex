@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "blind",
+    "table_index": 112,
+    "raw_theme": "武侠秘境夺宝",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "武侠秘境夺宝",
+    "culture_shell": "武侠",
+    "action_cut": "夺宝",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "在充满背叛与诱惑的秘境中，获取高价值宝物并安全脱身",
+    "emotion_promise": "在贪婪与风险之间做出正确选择，获得超额收益的爽感",
+    "conflict_structure": "秘境中宝物价值越高，来自环境、机关、同行的威胁越大，玩家在贪婪与撤离之间反复权衡",
+    "user_role_position": "夺宝者、探险者",
+    "strongest_carrier_relation": "玩家每次进入秘境都面临收益与风险的动态权衡，搜刮越多风险越高，撤离时机的判断循环直接承接'收益带出压力'的心理任务",
+    "monetization_fit": "抽卡获取更强装备/技能以挑战更高风险秘境，或购买撤离保险/复活次数",
+    "commercial_failure_cases": [
+      "撤离失败惩罚过重导致玩家不敢冒险，核心循环断裂——触发条件：死亡掉落全部收益且无保底机制",
+      "宝物价值感不足，玩家觉得不值得冒险——触发条件：奖励与主线/日常产出差距过小"
+    ],
+    "primary_motif": "撤离夺宝",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除禁忌探索：素材钩子虽有'密室二选一'的抉择感，但核心循环是收益与撤离的权衡，没有污染、诅咒、理智等禁忌代价机制承接。排除权争上位：虽有'反杀师父'的人际冲突，但主循环不是权力结构争夺，而是夺宝撤离。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

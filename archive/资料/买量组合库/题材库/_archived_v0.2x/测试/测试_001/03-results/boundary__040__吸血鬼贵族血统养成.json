@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 40,
+    "raw_theme": "吸血鬼贵族血统养成",
+    "quadrant": "低获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "吸血鬼贵族血统养成",
+    "culture_shell": "吸血鬼、血族、哥特",
+    "action_cut": "初拥转化、议会席位争夺",
+    "feedback_channel": "",
+    "threat_pattern": "猎魔人突袭",
+    "primary_psych_task": "通过血统纯化和权力经营，在血族社会中攀升地位并抵御外部威胁",
+    "emotion_promise": "从低阶血族成长为掌握权力与永生秘密的高贵存在",
+    "conflict_structure": "血族内部权力争夺与外部猎魔人威胁并存，玩家通过血统强化和势力经营完成地位跃迁",
+    "user_role_position": "血族贵族、血统继承者",
+    "strongest_carrier_relation": "玩家通过初拥转化仆从、经营血族议会关系、抵御猎魔人袭击的循环，承接在封闭权力结构中攀升地位的心理任务",
+    "monetization_fit": "卡牌抽取血统能力、放置资源积累、血族议会席位解锁付费",
+    "commercial_failure_cases": [
+      "血统养成线过于线性，缺乏权力博弈的策略深度，导致玩家流失——触发条件：议会席位争夺简化为数值比拼",
+      "猎魔人突袭变成重复性日常，失去威胁感——触发条件：外部威胁设计为固定波次，无动态难度"
+    ],
+    "primary_motif": "权争上位",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除巨物驯御：虽有仆从转化，但核心不是驯服外部巨物，而是血族内部权力攀升。排除绝境守存：猎魔人突袭是权力争夺的外部干扰，不是生存边界压迫的主循环。排除异种进化：血统养成服务于权力地位，不是创造新生命形态。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 43,
+    "raw_theme": "废土机甲改装",
+    "quadrant": "低获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "废土机甲改装",
+    "culture_shell": "废土",
+    "action_cut": "捡零件组装机甲",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "从废料和残件中拼出强战力",
+    "emotion_promise": "从捡垃圾到造机甲碾压BOSS的落差爽感",
+    "conflict_structure": "起点贫弱、资源破碎，玩家靠改装获得战力跃迁",
+    "user_role_position": "拾荒者、机甲工程师",
+    "strongest_carrier_relation": "玩家在废土中收集零件、组装升级机甲，改装循环承接'从废料中拼出强战力'的心理任务",
+    "monetization_fit": "零件收集与机甲改装的长线养成，适合抽卡获取稀有部件、战令推进改装进度",
+    "commercial_failure_cases": [
+      "改装后战力提升不明显，BOSS战无碾压爽感，玩家失去改装动力——触发条件：数值设计未拉开改装前后的战力差距",
+      "零件收集过于随机或重复，玩家长期无法完成目标改装，产生疲劳——触发条件：掉落池过深且无保底机制"
+    ],
+    "primary_motif": "废械拼强",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除'绝境守存'：核心循环不是守住据点或安全边界，而是改装机甲获得战力跃迁；排除'撤离夺宝'：虽有搜打撤玩法承接，但主心理任务是拼装变强而非带出收益；排除'异能爆发'：力量来源是外部零件拼装，不是自身能力觉醒",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

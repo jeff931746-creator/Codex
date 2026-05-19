@@ -1,0 +1,36 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 22,
+    "raw_theme": "鉴宝捡漏暴富",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "鉴宝捡漏暴富",
+    "culture_shell": "古董/鉴宝/收藏界",
+    "action_cut": "鉴宝/捡漏/搜刮",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "通过专业知识或信息差，以极低成本获取被低估的高价值物品，实现财富和身份跃迁",
+    "emotion_promise": "凭借眼光和运气，在无人识货的角落发现惊天宝藏，体验一夜暴富和打脸众人的爽感",
+    "conflict_structure": "低资源/低认知身份与高价值隐藏资产之间的信息不对称，玩家通过鉴定和冒险打破这种不对称",
+    "user_role_position": "捡漏者、鉴定师、寻宝人",
+    "strongest_carrier_relation": "搜打撤循环承接“高风险区域寻宝并安全变现”的心理任务；模拟经营循环承接“财富积累后身份提升和资产扩张”的心理任务",
+    "monetization_fit": "通过抽取/购买鉴定道具、解锁高级寻宝地图、加速资产经营来商业化",
+    "commercial_failure_cases": [
+      "古董资产制作成本过高，导致内容更新缓慢，用户流失——触发条件：美术资产生产效率无法匹配用户消耗速度",
+      "变现过于依赖抽卡/赌博机制，导致用户对公平性产生质疑——触发条件：核心玩法从“眼光鉴定”退化为纯概率赌博"
+    ],
+    "primary_motif": "暴富翻身",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [
+      "专家身份"
+    ],
+    "observer_tags": [
+      "专家身份"
+    ],
+    "boundary_notes": "核心是“低买高卖”的财富跃迁和身份反转，归暴富翻身。与撤离夺宝的区别在于：撤离夺宝的核心是“活着带出”，而本题材的核心是“估值反转”和“财富增长”。与改命逆袭的区别在于：本题材不依赖重生/预知/规则操纵，而是依赖专业眼光和运气。专家身份作为二级切口挂靠。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

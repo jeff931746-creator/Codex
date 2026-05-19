@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 133,
+    "raw_theme": "赛博修仙卡牌",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "赛博修仙卡牌",
+    "culture_shell": "赛博修仙",
+    "action_cut": "卡牌对战",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "通过卡牌组合与策略选择，释放自身觉醒的赛博修仙能力，在战斗中展示压倒性战力",
+    "emotion_promise": "我觉醒了独特的赛博修仙能力，通过精妙的卡牌组合瞬间爆发，碾压一切敌人",
+    "conflict_structure": "玩家拥有觉醒的异能，通过卡牌策略将能力最大化释放，敌人是战力展示的标靶而非生存威胁",
+    "user_role_position": "觉醒者、赛博修仙者",
+    "strongest_carrier_relation": "卡牌构筑与回合释放循环承接'异能觉醒后的战力展示与能力进化'心理任务，每次出牌都是觉醒能力的可视化宣泄",
+    "monetization_fit": "卡牌抽取与养成付费，新卡牌代表新觉醒能力或法宝，战力跃迁驱动持续抽卡",
+    "commercial_failure_cases": [
+      "卡牌强度膨胀失控，新卡完全碾压旧卡，玩家失去构筑策略乐趣而流失——触发条件：数值策划缺乏长线规划",
+      "赛博修仙题材沦为纯皮，卡牌战斗与修仙/赛博改造无机制关联，玩家感受不到'觉醒'差异——触发条件：题材与玩法脱节，卡牌只是换皮"
+    ],
+    "primary_motif": "异能爆发",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除改命逆袭：素材钩子虽有'灵根被篡改'，但核心循环是卡牌展示觉醒能力而非命运节点改写。排除废械拼强：虽有赛博改造元素，但起点不是贫弱拼装，而是觉醒后战力释放。排除异种进化：进化对象是自身能力而非种群或创造新生命。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

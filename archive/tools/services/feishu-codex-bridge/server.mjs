@@ -5,10 +5,16 @@ import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "
 import fs from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath, URL } from "node:url";
+import {
+  askSiliconFlowChat,
+  resolveSiliconFlowConfig
+} from "../../lib/siliconflow-client.mjs";
+import { apiJson, apiUrl, jsonHeaders } from "../../lib/api-client.mjs";
 
 const scriptFile = fileURLToPath(import.meta.url);
 const scriptDir = dirname(scriptFile);
 const defaultPort = Number(process.env.PORT || 3000);
+const siliconFlowConfig = resolveSiliconFlowConfig();
 
 const config = {
   port: defaultPort,
@@ -52,11 +58,9 @@ const config = {
     process.env.CODEX_BRIDGE_WORKDIR || "/Users/mt/Documents/Codex",
   openaiApiKey: process.env.OPENAI_API_KEY || "",
   openaiModel: process.env.OPENAI_MODEL || "gpt-5-mini",
-  siliconflowApiKey: process.env.SILICONFLOW_API_KEY || "",
-  siliconflowModel:
-    process.env.SILICONFLOW_MODEL || "deepseek-ai/DeepSeek-V3",
-  siliconflowBaseUrl:
-    process.env.SILICONFLOW_BASE_URL || "https://api.siliconflow.cn/v1",
+  siliconflowApiKey: siliconFlowConfig.apiKey,
+  siliconflowModel: siliconFlowConfig.model,
+  siliconflowBaseUrl: siliconFlowConfig.baseUrl,
   anthropicApiKey: process.env.ANTHROPIC_API_KEY || "",
   anthropicModel:
     process.env.ANTHROPIC_MODEL || "claude-3-5-haiku-latest",
@@ -720,7 +724,7 @@ async function addMessageReaction(messageId) {
 
   const tenantToken = await getTenantAccessToken();
   const response = await fetch(
-    `https://open.feishu.cn/open-apis/im/v1/messages/${encodeURIComponent(messageId)}/reactions`,
+    apiUrl("feishu", `im/v1/messages/${encodeURIComponent(messageId)}/reactions`),
     {
       method: "POST",
       headers: {
@@ -1246,7 +1250,7 @@ function isOwnerMessage(payload) {
 async function fetchFeishuDocPlainText(documentId) {
   const tenantToken = await getTenantAccessToken();
   const response = await fetch(
-    `https://open.feishu.cn/open-apis/docx/v1/documents/${encodeURIComponent(documentId)}/raw_content`,
+    apiUrl("feishu", `docx/v1/documents/${encodeURIComponent(documentId)}/raw_content`),
     {
       method: "GET",
       headers: {
@@ -1409,7 +1413,7 @@ async function requestFeishuChatHistory({
   const pageSize = 50;
 
   while (messages.length < maxMessages) {
-    const url = new URL("https://open.feishu.cn/open-apis/im/v1/messages");
+    const url = new URL(apiUrl("feishu", "im/v1/messages"));
     url.searchParams.set("container_id_type", containerIdType);
     url.searchParams.set("container_id", chatId);
     if (useTimeWindow) {
@@ -1539,7 +1543,7 @@ async function listFeishuVisibleChats() {
   const pageSize = 50;
 
   while (chats.length < maxChats) {
-    const url = new URL("https://open.feishu.cn/open-apis/im/v1/chats");
+    const url = new URL(apiUrl("feishu", "im/v1/chats"));
     url.searchParams.set("page_size", String(Math.min(pageSize, maxChats - chats.length)));
     url.searchParams.set("user_id_type", "open_id");
     if (pageToken) {
@@ -1908,7 +1912,7 @@ async function getTenantAccessToken() {
   }
 
   const response = await fetch(
-    "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal",
+    apiUrl("feishu", "auth/v3/tenant_access_token/internal"),
     {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -1943,7 +1947,7 @@ async function getAppAccessToken() {
   }
 
   const response = await fetch(
-    "https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal",
+    apiUrl("feishu", "auth/v3/app_access_token/internal"),
     {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -1982,7 +1986,7 @@ async function getUserAuthAppAccessToken() {
   }
 
   const response = await fetch(
-    "https://open.feishu.cn/open-apis/auth/v3/app_access_token/internal",
+    apiUrl("feishu", "auth/v3/app_access_token/internal"),
     {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -2012,7 +2016,7 @@ async function getUserAuthAppAccessToken() {
 }
 
 async function fetchFeishuUserInfo(accessToken) {
-  const response = await fetch("https://open.feishu.cn/open-apis/authen/v1/user_info", {
+  const response = await fetch(apiUrl("feishu", "authen/v1/user_info"), {
     method: "GET",
     headers: {
       Authorization: `Bearer ${accessToken}`
@@ -2036,7 +2040,7 @@ async function fetchFeishuUserInfo(accessToken) {
 
 async function exchangeUserAccessToken(code) {
   const appAccessToken = await getUserAuthAppAccessToken();
-  const response = await fetch("https://open.feishu.cn/open-apis/authen/v1/oidc/access_token", {
+  const response = await fetch(apiUrl("feishu", "authen/v1/oidc/access_token"), {
     method: "POST",
     headers: {
       Authorization: `Bearer ${appAccessToken}`,
@@ -2090,7 +2094,7 @@ async function refreshUserAccessToken() {
   }
 
   const appAccessToken = await getUserAuthAppAccessToken();
-  const response = await fetch("https://open.feishu.cn/open-apis/authen/v1/oidc/refresh_access_token", {
+  const response = await fetch(apiUrl("feishu", "authen/v1/oidc/refresh_access_token"), {
     method: "POST",
     headers: {
       Authorization: `Bearer ${appAccessToken}`,
@@ -2165,7 +2169,7 @@ async function sendFeishuMessage(chatId, content) {
   console.log(`[feishu] replying to ${chatId}: ${content.slice(0, 200)}`);
   const tenantToken = await getTenantAccessToken();
   const response = await fetch(
-    "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=chat_id",
+    `${apiUrl("feishu", "im/v1/messages")}?receive_id_type=chat_id`,
     {
       method: "POST",
       headers: {
@@ -2209,11 +2213,11 @@ async function sendFeishuMessage(chatId, content) {
 }
 
 async function askOpenAI(userText) {
-  const response = await fetch("https://api.openai.com/v1/responses", {
+  const data = await apiJson("openai", "responses", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${config.openaiApiKey}`,
-      "content-type": "application/json"
+      ...jsonHeaders()
     },
     body: JSON.stringify({
       model: config.openaiModel,
@@ -2229,12 +2233,6 @@ async function askOpenAI(userText) {
       ]
     })
   });
-
-  if (!response.ok) {
-    throw new Error(`OpenAI request failed: HTTP ${response.status}`);
-  }
-
-  const data = await response.json();
   const textOutput = data.output_text?.trim();
   if (textOutput) {
     return textOutput;
@@ -2252,68 +2250,22 @@ async function askOpenAI(userText) {
 }
 
 async function askSiliconFlow(userText) {
-  const response = await fetch(
-    `${config.siliconflowBaseUrl.replace(/\/$/, "")}/chat/completions`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${config.siliconflowApiKey}`,
-        "content-type": "application/json"
-      },
-      body: JSON.stringify({
-        model: config.siliconflowModel,
-        messages: [
-          {
-            role: "system",
-            content: config.systemPrompt
-          },
-          {
-            role: "user",
-            content: userText
-          }
-        ]
-      })
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error(`SiliconFlow request failed: HTTP ${response.status}`);
-  }
-
-  const data = await response.json();
-  const choice = data.choices?.[0];
-  const message = choice?.message;
-  const content = message?.content;
-
-  if (typeof content === "string" && content.trim()) {
-    return content.trim();
-  }
-
-  if (Array.isArray(content)) {
-    const textOutput = content
-      .filter((item) => item?.type === "text" && item.text)
-      .map((item) => String(item.text).trim())
-      .filter(Boolean)
-      .join("\n\n");
-    if (textOutput) {
-      return textOutput;
-    }
-  }
-
-  if (typeof message?.reasoning_content === "string" && message.reasoning_content.trim()) {
-    return message.reasoning_content.trim();
-  }
-
-  throw new Error(`No model output text: ${JSON.stringify(data)}`);
+  return askSiliconFlowChat({
+    userText,
+    systemPrompt: config.systemPrompt,
+    apiKey: config.siliconflowApiKey,
+    model: config.siliconflowModel,
+    baseUrl: config.siliconflowBaseUrl
+  });
 }
 
 async function askAnthropic(userText) {
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
+  const data = await apiJson("anthropic", "messages", {
     method: "POST",
     headers: {
       "x-api-key": config.anthropicApiKey,
       "anthropic-version": "2023-06-01",
-      "content-type": "application/json"
+      ...jsonHeaders()
     },
     body: JSON.stringify({
       model: config.anthropicModel,
@@ -2322,12 +2274,6 @@ async function askAnthropic(userText) {
       messages: [{ role: "user", content: userText }]
     })
   });
-
-  if (!response.ok) {
-    throw new Error(`Anthropic request failed: HTTP ${response.status}`);
-  }
-
-  const data = await response.json();
   logAnthropicUsage(data.usage, {
     model: data.model,
     label: "feishu-codex-bridge"

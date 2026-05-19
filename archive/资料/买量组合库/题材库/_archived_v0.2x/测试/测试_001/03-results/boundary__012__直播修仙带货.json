@@ -1,0 +1,34 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 12,
+    "raw_theme": "直播修仙带货",
+    "quadrant": "高获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "直播修仙带货",
+    "culture_shell": "修仙",
+    "action_cut": "直播",
+    "feedback_channel": "弹幕、打赏、火箭",
+    "threat_pattern": "",
+    "primary_psych_task": "通过直播展示修仙过程，利用观众打赏和反馈获取资源，实现自身实力和财富的双重跃迁",
+    "emotion_promise": "被围观中逆袭，观众见证我从穷主播到飞升大能的爽感",
+    "conflict_structure": "低资源修仙者面临炼丹失败/修为瓶颈，观众打赏和礼物提供关键资源，形成'展示风险-观众救场-实力跃迁'循环",
+    "user_role_position": "修仙主播、炼丹师",
+    "strongest_carrier_relation": "玩家通过直播展示修仙进程，观众打赏转化为修炼资源，资源推动实力增长，实力增长吸引更多观众打赏，形成'展示-反馈-成长-再展示'的循环，承接'被围观中逆袭改命'的心理任务",
+    "monetization_fit": "游戏内直播打赏系统与修仙资源挂钩，观众礼物可转化为付费道具，形成'观看付费-资源获取-实力展示'的商业闭环",
+    "commercial_failure_cases": [
+      "直播互动沦为纯数值加成，观众反馈缺乏即时可见性，玩家感受不到'被围观逆袭'的爽感，导致付费意愿低——触发条件：打赏效果延迟或不可见",
+      "修仙成长线过重，直播沦为附属功能，核心循环断裂——触发条件：直播与修仙系统耦合度低，玩家可绕过直播直接成长"
+    ],
+    "primary_motif": "改命逆袭",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [
+      "观众反馈"
+    ],
+    "boundary_notes": "排除暴富翻身：核心不是财富积累和社会身份反转，而是利用观众反馈改写修仙命运；排除异能爆发：力量来源是外部观众资源而非自身觉醒；观众反馈在此作为核心循环的驱动引擎，但主心理任务仍是'用信息差/规则操纵改写命运'，直播是改命的规则通道而非独立母题",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

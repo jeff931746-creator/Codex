@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 28,
+    "raw_theme": "极寒末世囤货",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "极寒末世囤货",
+    "culture_shell": "极寒末世",
+    "action_cut": "囤货、搜刮、抢修",
+    "feedback_channel": "",
+    "threat_pattern": "暴风雪、资源枯竭",
+    "primary_psych_task": "在极寒末日环境中，通过囤积物资、维护供暖和搜刮资源，保住自己和据点的生存安全",
+    "emotion_promise": "在绝境中通过精打细算和未雨绸缪获得掌控感与安全感",
+    "conflict_structure": "外部极寒灾害与资源持续枯竭不断逼近，玩家必须维持物资储备与供暖系统的安全边界",
+    "user_role_position": "幸存者、据点负责人",
+    "strongest_carrier_relation": "玩家通过囤积物资、抢修供暖、搜刮资源的循环，反复加固生存安全边界，模拟经营承接'安全边界被外部灾害压迫'的心理任务",
+    "monetization_fit": "通过稀有物资礼包、供暖设备升级、据点扩展和外观装饰实现可持续付费",
+    "commercial_failure_cases": [
+      "囤货循环过于简单导致长线无聊，触发条件：物资获取曲线太平滑，缺乏稀缺性波动",
+      "付费深度不足导致LTV过低，触发条件：模拟经营缺乏深度追求目标，玩家囤满后失去付费动力"
+    ],
+    "primary_motif": "绝境守存",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除撤离夺宝：核心是守住据点而非进入高风险区域带出收益；排除领地开拓：核心是维持现有安全边界而非从空白建立秩序；排除废械拼强：虽有搜刮但主循环是生存维持而非战力拼装",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

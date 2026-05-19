@@ -1,0 +1,62 @@
+[
+  {
+    "family_name": "末世SLG族",
+    "expected_position": "末世/废土题材壳 + SLG玩法承接的中重度产品族,代表产品有率土末世皮、Last Shelter等",
+    "hint_representatives": "Last Shelter: Survival、State of Survival、Puzzles & Survival(部分)、末日:黎明",
+    "adjacent_families": "三国SLG族(题材壳不同)、末世生存基建族(单局生存非势力扩张)"
+  },
+  {
+    "family_name": "末世生存基建族",
+    "expected_position": "末世/极寒/废土题材壳 + 据点经营/生存养成玩法,代表产品有明日之后/Frostpunk/七日杀",
+    "hint_representatives": "明日之后、Frostpunk、七日杀(7 Days to Die)、RimWorld、Project Zomboid",
+    "adjacent_families": "末世SLG族(势力扩张非据点维护)、末世搜打撤族(单局风险收益非长线据点)"
+  },
+  {
+    "family_name": "末世搜打撤族",
+    "expected_position": "末世/废土/科幻题材壳 + 搜打撤玩法,代表产品有暗区突围/逃离塔科夫",
+    "hint_representatives": "暗区突围、逃离塔科夫(Escape from Tarkov)、Hunt: Showdown、Marauders",
+    "adjacent_families": "末世生存基建族(长线据点而非单局)、末世SLG族(势力对抗而非搜刮撤离)"
+  },
+  {
+    "family_name": "三国SLG族",
+    "expected_position": "三国/古风战国题材壳 + 大型SLG玩法,代表产品有率土之滨/三国志战略版",
+    "hint_representatives": "率土之滨、三国志战略版、卧龙吟、新三国志",
+    "adjacent_families": "末世SLG族(题材壳不同)、修仙宗门SLG族(题材壳不同)"
+  },
+  {
+    "family_name": "修仙放置族",
+    "expected_position": "修仙/玄幻题材壳 + 挂机放置玩法,代表产品有一念逍遥/我的御剑日记",
+    "hint_representatives": "一念逍遥、想不想修真、我的御剑日记、寻道大千",
+    "adjacent_families": "修仙宗门SLG族(强势力博弈而非个人破境)、二次元卡牌养成族(题材壳与系统不同)"
+  },
+  {
+    "family_name": "修仙宗门SLG族",
+    "expected_position": "修仙/玄幻题材壳 + 宗门/势力SLG玩法,代表产品有寻仙问道类SLG",
+    "hint_representatives": "寻仙问道、九霄修仙(此类型SLG)、修仙宗门题材的策略产品",
+    "adjacent_families": "三国SLG族(题材壳不同)、修仙放置族(个人放置而非宗门博弈)"
+  },
+  {
+    "family_name": "卡通宠物收集族",
+    "expected_position": "卡通/萌系题材壳 + 宠物收集养成玩法,代表产品有宝可梦/一起来捉妖",
+    "hint_representatives": "宝可梦GO、一起来捉妖、洛克王国、宝可梦朱紫",
+    "adjacent_families": "二次元卡牌养成族(角色非宠物)、巨物驯御类(已淘汰,无直接相邻)"
+  },
+  {
+    "family_name": "二次元卡牌养成族",
+    "expected_position": "二次元/动漫题材壳 + 角色卡牌收集养成战斗玩法,代表产品有原神/崩坏3/明日方舟",
+    "hint_representatives": "原神、崩坏:星穹铁道、明日方舟、阴阳师、碧蓝档案",
+    "adjacent_families": "卡通宠物收集族(宠物而非角色)、修仙放置族(玩法不同)"
+  },
+  {
+    "family_name": "恐龙生存族",
+    "expected_position": "恐龙/史前题材壳 + 沙盒生存玩法,代表产品有方舟生存进化",
+    "hint_representatives": "方舟:生存进化、Path of Titans、The Isle、侏罗纪世界:进化(经营向变体)",
+    "adjacent_families": "末世生存基建族(题材壳不同)、卡通宠物收集族(玩法不同)"
+  },
+  {
+    "family_name": "克苏鲁恐怖探索族",
+    "expected_position": "克苏鲁/旧日支配者题材壳 + 探索/解谜/肉鸽玩法,代表产品有Call of Cthulhu/Sunless Sea",
+    "hint_representatives": "Call of Cthulhu、Sunless Sea/Skies、Darkest Dungeon(克苏鲁元素)、The Sinking City",
+    "adjacent_families": "末世搜打撤族(玩法相邻但题材壳差异)、二次元卡牌养成族(题材壳不同)"
+  }
+]

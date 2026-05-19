@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 79,
+    "raw_theme": "基因异兽融合",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "基因异兽融合",
+    "culture_shell": "基因、异兽、神话",
+    "action_cut": "合成、融合、变异",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "通过融合不同生物基因创造超常生命力量",
+    "emotion_promise": "见证低阶生物融合突破位阶，获得意外强大的新生命",
+    "conflict_structure": "融合收益与变异失控风险并存，玩家在追求更强生命与避免暴走之间平衡",
+    "user_role_position": "实验者、培育者、基因操控者",
+    "strongest_carrier_relation": "合成/融合循环承接进化结果期待，每次融合都是对未知生命形态的探索与力量跃迁的赌博",
+    "monetization_fit": "稀有基因材料抽取、融合加速道具、变异保护道具付费",
+    "commercial_failure_cases": [
+      "融合结果过于随机导致挫败感强，玩家流失——触发条件：变异失败率过高且无保底机制",
+      "融合产物同质化严重，缺乏收集驱动力——触发条件：基因组合池过浅，高阶异兽缺乏独特性"
+    ],
+    "primary_motif": "异种进化",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除巨物驯御：融合对象是玩家创造的新生命而非驯服外部既有巨兽；排除废械拼强：核心是生物基因融合而非机械零件拼装；排除异能爆发：力量来源是外部生物融合实验而非自身觉醒",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

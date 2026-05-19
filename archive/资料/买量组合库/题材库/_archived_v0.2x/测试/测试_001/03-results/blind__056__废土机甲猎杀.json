@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "blind",
+    "table_index": 56,
+    "raw_theme": "废土机甲猎杀",
+    "quadrant": "低获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "废土机甲猎杀",
+    "culture_shell": "废土",
+    "action_cut": "搜打撤",
+    "feedback_channel": "",
+    "threat_pattern": "巨兽",
+    "primary_psych_task": "在废土环境中用回收零件拼装并驾驶机甲，猎杀巨兽并活着撤离",
+    "emotion_promise": "用自己亲手拼装的残破机甲战胜庞然大物，获得以弱胜强的爽感",
+    "conflict_structure": "玩家起点资源破碎、机甲残破，面对巨兽威胁，通过搜刮零件改装强化机甲，在猎杀收益与撤离安全之间做选择",
+    "user_role_position": "废土机甲驾驶员、拾荒工程师",
+    "strongest_carrier_relation": "搜打撤循环承接'收益带出压力'，模块改装循环承接'部件变强可见性'，两者共同服务于'从废料中拼出强战力并猎杀巨物'的心理任务",
+    "monetization_fit": "机甲部件抽取与改装材料付费，撤离保险与仓库扩容订阅",
+    "commercial_failure_cases": [
+      "搜打撤节奏过慢导致撤离失败惩罚过重，玩家挫败流失——触发条件：撤离点刷新机制不合理或巨兽堵门频率过高",
+      "机甲改装深度不足导致战力成长感知弱，付费意愿低——触发条件：部件词条池过浅或改装效果同质化"
+    ],
+    "primary_motif": "废械拼强",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除巨物驯御：巨兽是猎杀目标而非驯化对象，主循环是'拼装强化机甲'而非'捕获驯服巨物'。排除撤离夺宝：虽然搜打撤是玩法承接，但主心理任务是'从废料拼强战力'而非单纯'进入危险区域拿收益并带出'，废械拼强更匹配核心冲突结构。排除绝境守存：主循环是主动猎杀而非被动防守据点。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

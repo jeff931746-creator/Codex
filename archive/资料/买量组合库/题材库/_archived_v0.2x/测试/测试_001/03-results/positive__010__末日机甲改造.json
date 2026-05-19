@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 10,
+    "raw_theme": "末日机甲改造",
+    "quadrant": "高获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "末日机甲改造",
+    "culture_shell": "末日废土",
+    "action_cut": "搜刮、改装、战斗",
+    "feedback_channel": "",
+    "threat_pattern": "变异巨兽",
+    "primary_psych_task": "在资源匮乏的末日废土中，通过收集废料和残件拼装、升级机甲，获得压倒性战力",
+    "emotion_promise": "从废铁到神兵，亲手拼出的机甲一拳打爆巨兽的极致爽感与成长满足",
+    "conflict_structure": "起点资源极度匮乏，外部巨兽威胁持续存在，玩家通过搜刮、改装、战斗循环，将破碎资源转化为碾压性战力",
+    "user_role_position": "拾荒者兼机甲工程师",
+    "strongest_carrier_relation": "搜刮废料→拼装/升级机甲→战力验证（打爆巨兽）→获取更稀有资源，这个循环承接了'从贫弱到碾压'的战力跃迁心理任务",
+    "monetization_fit": "稀有合金/核心部件抽卡、加速改装时间、机甲皮肤与特效",
+    "commercial_failure_cases": [
+      "机甲成长线过平，改装后战力提升感知弱，玩家失去搜刮动力——触发条件：部件替换缺乏视觉/数值的跃迁感",
+      "搜刮过程重复枯燥，资源焦虑变成纯体力劳动——触发条件：资源点分布不合理，缺乏争夺/意外事件"
+    ],
+    "primary_motif": "废械拼强",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除'绝境守存'：核心循环不是维护据点安全边界，而是通过改装实现战力跃迁，巨兽是战力验证对象而非持续压迫的生存威胁。排除'异能爆发'：力量来源是外部拼装与改造，而非自身能力觉醒。排除'巨物驯御'：巨兽是敌人而非驯化对象。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

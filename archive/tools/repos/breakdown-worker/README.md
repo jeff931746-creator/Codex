@@ -1,6 +1,6 @@
 # breakdown-worker
 
-用大模型批量产出游戏机制拆解初稿，Claude 审校后落到 `机制库/`。支持 **SiliconFlow（默认）** 和 **Gemini**。
+用大模型批量产出游戏机制拆解初稿，Claude 审校后落到 `机制库/`。支持统一 LLM provider（**SiliconFlow 默认 / DeepSeek**）和 **Gemini**。
 
 This workflow follows the root workspace session protocol in [`/Users/mt/Documents/Codex/CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md).
 
@@ -11,7 +11,7 @@ This workflow follows the root workspace session protocol in [`/Users/mt/Documen
 mkdir -p inputs/某游戏
 cp ~/Downloads/*.md inputs/某游戏/
 
-# 2. 出初稿（默认走 SiliconFlow + GLM-5.1）
+# 2. 出初稿（默认走 LLM_PROVIDER，未设置时走 SiliconFlow）
 python3 run.py --game "某游戏"
 
 # 3. 跟 Claude 说："审校 某游戏"
@@ -20,6 +20,7 @@ python3 run.py --game "某游戏"
 
 ## 选项
 
+- `--provider deepseek`：切到 DeepSeek 官方 API
 - `--provider gemini`：切到 Gemini
 - `--model Pro/zai-org/GLM-4.5`：覆盖默认模型
 - `--dry-run`：只导出完整 prompt 到 `_dryrun_<game>.txt`，不调 API
@@ -29,14 +30,27 @@ python3 run.py --game "某游戏"
 `.env` 里放：
 
 ```
-PROVIDER=siliconflow                        # 或 gemini
+LLM_PROVIDER=siliconflow                    # 或 deepseek
+PROVIDER=siliconflow                        # 兼容旧配置；Gemini 用 PROVIDER=gemini 或 --provider gemini
 
 SILICONFLOW_API_KEY=sk-...
 SILICONFLOW_MODEL=Pro/zai-org/GLM-5.1
 SILICONFLOW_BASE_URL=https://api.siliconflow.cn/v1
 
+DEEPSEEK_API_KEY=sk-...
+DEEPSEEK_MODEL=deepseek-v4-flash
+
 GEMINI_API_KEY=AIza...
 GEMINI_MODEL=gemini-2.5-pro
+```
+
+如果 key 已经集中放在桥接服务的 runtime `.env`，不需要复制到这里；启动前加载即可：
+
+```bash
+set -a
+source "$HOME/Library/Application Support/FeishuCodexBridge/bridge/.env"
+set +a
+python3 run.py --game "某游戏" --provider deepseek
 ```
 
 ## 工作原理

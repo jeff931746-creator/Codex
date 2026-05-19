@@ -1,0 +1,34 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 98,
+    "raw_theme": "锦衣绣春暗杀",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "锦衣绣春暗杀",
+    "culture_shell": "锦衣卫/朝堂武侠",
+    "action_cut": "暗杀/潜行/劫狱",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "在严密监控的权力结构中，通过伪装、暗杀和劫掠完成高风险目标并全身而退",
+    "emotion_promise": "在刀尖上行走，以弱胜强，体验身份伪装与一击必杀的紧张快感",
+    "conflict_structure": "玩家作为潜伏者，在权力网络的缝隙中行动，每次暗杀或劫掠都面临暴露和追杀的风险，收益与风险高度绑定",
+    "user_role_position": "伪装者/暗杀者/劫狱者",
+    "strongest_carrier_relation": "潜行暗杀循环承接身份伪装与高风险目标达成的心理任务，搜打撤循环承接劫掠收益与追杀逃脱的紧张感",
+    "monetization_fit": "抽取或购买更强力的暗杀技能、伪装身份、逃脱道具，以及解锁新的暗杀目标与剧情线",
+    "commercial_failure_cases": [
+      "暗杀操作过于简单或重复，缺乏身份伪装的策略深度，导致玩家迅速失去紧张感而流失",
+      "追杀压力设计不当，要么过于频繁让玩家没有喘息空间，要么过于松散让高风险承诺落空"
+    ],
+    "primary_motif": "撤离夺宝",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [
+      "高压渗透"
+    ],
+    "boundary_notes": "核心循环是进入高风险区域（贪官府邸、天牢）执行任务并获取收益（金山、刀法、圣女）后撤离，符合撤离夺宝的贪婪与撤离选择结构。排除权争上位，因为玩家并非在权力结构中争夺位置，而是作为外部破坏者进行渗透和劫掠；排除禁忌探索，因为风险主要来自人为追杀而非未知诅咒或理智代价。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

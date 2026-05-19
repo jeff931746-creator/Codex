@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 109,
+    "raw_theme": "神话妖兽契约",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "神话妖兽契约",
+    "culture_shell": "神话",
+    "action_cut": "抓宠",
+    "feedback_channel": "",
+    "threat_pattern": "巨兽",
+    "primary_psych_task": "把危险巨物转化为己方资产",
+    "emotion_promise": "驯服强大妖兽的征服感与养成成就感",
+    "conflict_structure": "既有巨物不可控，玩家通过捕获/契约/养成完成支配",
+    "user_role_position": "驯兽师、契约者",
+    "strongest_carrier_relation": "玩家通过捕获、契约、养成将不可控的巨兽转化为可控战力，养成循环承接恐惧对象资产化的心理任务",
+    "monetization_fit": "稀有妖兽抽取、养成资源购买、契约道具付费",
+    "commercial_failure_cases": [
+      "妖兽养成线过短，玩家快速毕业失去目标——触发条件：妖兽进化阶段不足3阶",
+      "捕获概率过低导致挫败感，玩家流失——触发条件：稀有妖兽基础捕获率低于1%且无保底机制"
+    ],
+    "primary_motif": "巨物驯御",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除异种进化：进化对象是外部既有神话妖兽而非玩家自身或种群；排除撤离夺宝：核心循环是驯服养成而非进入危险区域拿收益带出；排除领地开拓：妖兽是资产而非空间秩序扩张",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

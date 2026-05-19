@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "blind",
+    "table_index": 57,
+    "raw_theme": "荒野猎人复仇",
+    "quadrant": "低获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "荒野猎人复仇",
+    "culture_shell": "西部/荒野",
+    "action_cut": "搜打撤+肉鸽",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "在荒野中追踪并猎杀仇人，完成复仇",
+    "emotion_promise": "亲手制裁仇人，获得正义伸张的满足感",
+    "conflict_structure": "玩家是复仇者，仇人及其势力是障碍，荒野环境是额外压力，玩家在追踪、设伏、正面冲突中逐步接近并消灭目标",
+    "user_role_position": "复仇猎人",
+    "strongest_carrier_relation": "搜打撤循环承接追踪与猎杀压力，肉鸽循环承接每次复仇行动的不确定性和风险递增",
+    "monetization_fit": "角色成长、装备升级、复仇路线解锁付费",
+    "commercial_failure_cases": [
+      "写实画风导致CPI过高，买量成本无法回收——触发条件：美术风格过于写实血腥，平台审核受限且用户点击意愿低",
+      "复仇叙事线性过强，肉鸽重复可玩性不足——触发条件：复仇目标固定，玩家通关后缺乏重玩动力，留存断崖"
+    ],
+    "primary_motif": "绝境守存",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除撤离夺宝：核心循环是追踪猎杀仇人而非进入高风险区域拿收益并带出，复仇是终点而非手段。排除权争上位：冲突是个人恩怨而非权力结构争夺。归绝境守存是因为荒野环境压迫+追踪猎杀构成安全边界维持，复仇是守存的具体叙事壳。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

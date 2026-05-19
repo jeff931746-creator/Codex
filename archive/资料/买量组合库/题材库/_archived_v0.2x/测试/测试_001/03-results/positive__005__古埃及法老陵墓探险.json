@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 5,
+    "raw_theme": "古埃及法老陵墓探险",
+    "quadrant": "高获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "古埃及法老陵墓探险",
+    "culture_shell": "古埃及",
+    "action_cut": "探险",
+    "feedback_channel": "",
+    "threat_pattern": "木乃伊大军",
+    "primary_psych_task": "深入未知禁区，接触危险真相或禁忌收益",
+    "emotion_promise": "在致命陷阱与诅咒中揭开古老秘密，获得超凡宝藏",
+    "conflict_structure": "未知诱惑与诅咒、陷阱、木乃伊威胁绑定，越深入越危险",
+    "user_role_position": "探险者",
+    "strongest_carrier_relation": "玩家每次深入陵墓都面临更强的诅咒与更致命的陷阱，搜打撤循环承接'越深入越危险'的心理任务",
+    "monetization_fit": "付费解锁新陵墓区域、购买抗诅咒道具、抽取稀有古物装备",
+    "commercial_failure_cases": [
+      "陷阱设计重复导致探索疲劳，触发条件：陵墓层数超过10层后无新机制",
+      "诅咒系统惩罚过重导致玩家不敢深入，触发条件：死亡惩罚超过收益的2倍"
+    ],
+    "primary_motif": "禁忌探索",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除撤离夺宝：题材明确有诅咒、木乃伊复活等禁忌代价机制，不是单纯的'危险地点拿宝物并撤离'。排除绝境守存：核心不是守住据点，而是主动深入未知区域。排除镇邪收容：玩家是探险者而非收容者，不涉及将异常重新纳入控制。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

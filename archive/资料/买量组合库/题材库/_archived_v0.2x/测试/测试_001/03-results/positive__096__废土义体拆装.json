@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 96,
+    "raw_theme": "废土义体拆装",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "废土义体拆装",
+    "culture_shell": "废土/赛博朋克",
+    "action_cut": "拆装义体/黑市交易",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "从废料和残件中拼出强战力",
+    "emotion_promise": "从破烂中拼出碾压级战力，体验部件变强的可见成长",
+    "conflict_structure": "起点贫弱、资源破碎，玩家靠拆解/改装/拼凑义体获得战力跃迁",
+    "user_role_position": "拾荒者/义体改装师",
+    "strongest_carrier_relation": "玩家通过拆解敌人义体、拼装自身部件获得战力提升，循环就是'获取废件→改装强化→验证战力→获取更强废件'，承接'从废料中拼出强战力'的心理任务",
+    "monetization_fit": "义体部件抽取/稀有义体保底/改装材料礼包/义体槽位扩展",
+    "commercial_failure_cases": [
+      "义体部件同质化严重，改装后战力差异不明显，玩家失去拼装动力——触发条件：部件词条设计缺乏差异化",
+      "拆解获取过于随机，核心部件长期无法凑齐，玩家挫败感累积流失——触发条件：掉落池过深且无定向获取途径"
+    ],
+    "primary_motif": "废械拼强",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除异能爆发：力量来源是外部义体拼装而非自身能力觉醒，核心循环是'获取废件→改装强化'而非'技能释放→战力展示'。排除撤离夺宝：虽有黑市交易元素，但主循环不是'进入高风险区域拿收益并活着带出'，而是'拆解→拼装→变强'的部件成长循环。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

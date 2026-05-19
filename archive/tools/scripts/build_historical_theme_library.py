@@ -9,12 +9,17 @@ import concurrent.futures
 import json
 import os
 import re
-import ssl
-import urllib.request
+import sys
 from datetime import datetime
 from pathlib import Path
 
-import certifi
+_THIS_FILE = Path(__file__).resolve()
+for _parent in _THIS_FILE.parents:
+    if (_parent / "archive" / "tools" / "lib").is_dir():
+        sys.path.insert(0, str(_parent))
+        break
+
+from archive.tools.lib.llm_client import RetryPolicy, chat_text
 
 # ========== 配置 ==========
 OUTPUT_ROOT = Path(os.environ.get(
@@ -25,10 +30,6 @@ RAW_DIR = OUTPUT_ROOT / "_raw"
 CLUSTER_DIR = OUTPUT_ROOT / "题材聚类"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
-api_key = os.environ.get("SILICONFLOW_API_KEY", "").strip()
-if not api_key:
-    raise RuntimeError("SILICONFLOW_API_KEY 未设置")
-
 MODEL = os.environ.get("DEEPSEEK_FLASH_MODEL", "deepseek-ai/DeepSeek-V4-Flash")
 
 # ========== 日志 ==========
@@ -38,38 +39,16 @@ def log(msg: str):
 
 # ========== LLM 调用 ==========
 def call_llm(prompt: str, max_tokens: int = 8000, retries: int = 3) -> str:
-    url = "https://api.siliconflow.cn/v1/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json"
-    }
-    payload = {
-        "model": MODEL,
-        "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": max_tokens,
-        "temperature": 0.3
-    }
-    ctx = ssl.create_default_context(cafile=certifi.where())
-    for attempt in range(1, retries + 1):
-        req = urllib.request.Request(
-            url,
-            data=json.dumps(payload).encode("utf-8"),
-            headers=headers,
-            method="POST"
-        )
-        try:
-            with urllib.request.urlopen(req, context=ctx, timeout=180) as resp:
-                result = json.loads(resp.read().decode("utf-8"))
-                return result["choices"][0]["message"]["content"].strip()
-        except Exception as e:
-            log(f"LLM 调用失败 (attempt {attempt}/{retries}): {e}")
-            if attempt < retries:
-                import time
-                wait_time = attempt * 2  # 递增等待：2s, 4s, 6s
-                log(f"  等待 {wait_time}s 后重试...")
-                time.sleep(wait_time)
-            else:
-                return ""
+    return chat_text(
+        prompt,
+        model=MODEL,
+        max_tokens=max_tokens,
+        temperature=0.3,
+        timeout=180,
+        retry_policy=RetryPolicy(retries=retries, base_delay=2),
+        logger=log,
+        return_empty_on_error=True,
+    )
 
 def _parse_json(text: str):
     text = text.strip()

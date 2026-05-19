@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 24,
+    "raw_theme": "克苏鲁深海恐怖探索",
+    "quadrant": "高获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "克苏鲁深海恐怖探索",
+    "culture_shell": "克苏鲁、深海",
+    "action_cut": "探索",
+    "feedback_channel": "",
+    "threat_pattern": "深海巨兽",
+    "primary_psych_task": "在未知深海中探索遗迹，面对不可名状的恐怖与理智侵蚀，获取禁忌知识或收益",
+    "emotion_promise": "在恐惧与好奇的边界上，体验接触未知真相的颤栗快感",
+    "conflict_structure": "未知诱惑与污染、诅咒、理智风险绑定，越深入越危险",
+    "user_role_position": "探险者、调查员、潜航员",
+    "strongest_carrier_relation": "玩家每次下潜探索更深区域，理智值持续下降、遭遇更恐怖的存在，探索循环就是'越深入越危险'的心理任务反复执行",
+    "monetization_fit": "付费购买理智恢复道具、特殊潜水装备、解锁更深层遗迹区域",
+    "commercial_failure_cases": [
+      "理智值惩罚过重导致玩家不敢深入探索，留存率断崖下跌——触发条件：理智值归零后永久损失进度或装备",
+      "深海巨兽出现频率过高导致恐怖感疲劳，素材点击率下降——触发条件：每局必出巨兽且无新鲜感变化"
+    ],
+    "primary_motif": "禁忌探索",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除撤离夺宝：虽然涉及'进入危险区域拿收益并带出'，但核心机制有理智值、诅咒、未知真相的禁忌代价承接，符合禁忌探索的硬要求。排除绝境守存：压力来源是未知恐怖而非资源枯竭或据点防守。排除巨物驯御：深海巨兽是威胁而非驯化对象。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

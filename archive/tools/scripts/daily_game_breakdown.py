@@ -8,14 +8,20 @@ import json
 import os
 import random
 import re
-import ssl
-import urllib.request
+import sys
+import time
 from datetime import date, datetime
 from pathlib import Path
 
-import certifi
+_THIS_FILE = Path(__file__).resolve()
+for _parent in _THIS_FILE.parents:
+    if (_parent / "archive" / "tools" / "lib").is_dir():
+        sys.path.insert(0, str(_parent))
+        break
 
-LIBRARY_ROOT = Path("/Users/mt/Documents/Codex/reference/资料/机制库")
+from archive.tools.lib.siliconflow_client import chat
+
+LIBRARY_ROOT = Path("/Users/mt/Documents/Codex/archive/资料/机制库")
 INDEX_FILE = LIBRARY_ROOT / "00_总索引.md"
 STATE_FILE = Path("/tmp/daily_game_breakdown_state.json")
 STATE_TTL_HOURS = 24
@@ -33,11 +39,6 @@ ENUM_品类 = {"放置卡牌", "Roguelike构筑", "SLG", "塔防", "模拟经营
              "修仙放置", "射击肉鸽", "MMO", "卡牌对战", "其他"}
 ENUM_平台 = {"微信小游戏", "Steam", "App手游", "多平台"}
 ENUM_变现 = {"IAP", "买断", "IAA", "IAP+IAA"}
-
-# ========== API key ==========
-api_key = os.environ.get("SILICONFLOW_API_KEY", "").strip()
-if not api_key:
-    raise RuntimeError("SILICONFLOW_API_KEY 未设置")
 
 # ========== 已拆游戏列表 ==========
 existing_games = sorted([
@@ -389,37 +390,16 @@ If 构筑组件槽位限制在 5 个[推测]且单局循环时长小于 30 分�
 <<<END>>>
 """
 
-# ========== API 调用 ==========
-import threading, time
 def call_api(messages, max_tokens=16384):
-    payload = {
-        "model": "Pro/zai-org/GLM-5.1",
-        "messages": messages,
-        "max_tokens": max_tokens,
-        "temperature": 0.5,
-    }
-    req = urllib.request.Request(
-        "https://api.siliconflow.cn/v1/chat/completions",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"},
-        method="POST",
-    )
-    ssl_context = ssl.create_default_context(cafile=certifi.where())
-    stop = threading.Event()
-    def _heartbeat():
-        t0 = time.time()
-        while not stop.wait(15):
-            print(f"[api] waiting... {int(time.time()-t0)}s", flush=True)
-    hb = threading.Thread(target=_heartbeat, daemon=True)
     print(f"[api] request start (max_tokens={max_tokens})", flush=True)
     t0 = time.time()
-    hb.start()
-    try:
-        with urllib.request.urlopen(req, timeout=420, context=ssl_context) as resp:
-            content = json.loads(resp.read().decode("utf-8"))["choices"][0]["message"]["content"]
-    finally:
-        stop.set()
-        hb.join(timeout=1)
+    content = chat(
+        messages,
+        model="Pro/zai-org/GLM-5.1",
+        max_tokens=max_tokens,
+        temperature=0.5,
+        timeout=420,
+    )
     print(f"[api] done ({int(time.time()-t0)}s, {len(content)} chars)", flush=True)
     return content
 
@@ -684,7 +664,7 @@ if patch_m and INDEX_FILE.exists():
         gc = cols[0]
         if not (gc.startswith("《") and gc.endswith("》")):
             gc = f"《{gc}》"
-        dc = f"`research/资料/机制库/{game_name}/`"
+        dc = f"`archive/资料/机制库/{game_name}/`"
         fc = cols[2]
         patch_line = f"| {gc} | {dc} | {fc} |"
 

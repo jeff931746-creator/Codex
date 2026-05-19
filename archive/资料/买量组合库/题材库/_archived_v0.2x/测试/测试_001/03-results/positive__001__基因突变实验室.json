@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 1,
+    "raw_theme": "基因突变实验室",
+    "quadrant": "高获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "基因突变实验室",
+    "culture_shell": "科幻实验室",
+    "action_cut": "基因融合",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "通过基因融合与突变实验，创造并培育超常生命力量",
+    "emotion_promise": "从普通基因开始，融合突变出碾压对手的怪物，获得创造主宰的掌控感",
+    "conflict_structure": "低阶基因起点贫弱，玩家通过融合/突变/升级实验室突破位阶，力量收益与失控风险并存",
+    "user_role_position": "实验室科学家、基因培育者",
+    "strongest_carrier_relation": "玩家反复进行基因融合实验并等待突变结果，放置/收集循环承接对进化结果不确定性的期待与惊喜",
+    "monetization_fit": "加速基因融合时间、购买稀有基因碎片、解锁高级实验室槽位",
+    "commercial_failure_cases": [
+      "融合结果过于随机导致挫败感强，玩家流失——触发条件：突变失败率过高且无保底机制",
+      "后期基因组合同质化严重，缺乏策略深度——触发条件：基因池过浅且无克制关系设计"
+    ],
+    "primary_motif": "异种进化",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除巨物驯御：进化对象是玩家自己创造的基因突变怪物，不是外部既有生物；排除异能爆发：核心循环是实验室培育与融合等待，不是自身能力觉醒后的技能展示",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

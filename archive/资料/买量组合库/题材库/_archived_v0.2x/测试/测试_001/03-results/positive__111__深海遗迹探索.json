@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "positive",
+    "table_index": 111,
+    "raw_theme": "深海遗迹探索",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "深海遗迹探索",
+    "culture_shell": "深海",
+    "action_cut": "搜打撤",
+    "feedback_channel": "",
+    "threat_pattern": "巨型章鱼、鲨鱼群",
+    "primary_psych_task": "在高压深海环境中探索未知遗迹，获取宝藏并安全返回",
+    "emotion_promise": "在窒息般的压力下发现惊人秘密并带着财富逃出生天",
+    "conflict_structure": "深海环境的物理压迫与未知生物威胁持续存在，玩家在贪婪探索与氧气/安全撤离之间做选择",
+    "user_role_position": "深海探险者、潜航员",
+    "strongest_carrier_relation": "玩家每次下潜都在氧气限制内搜索遗迹，搜打撤循环直接承接'收益越大风险越大'的撤离压力",
+    "monetization_fit": "装备升级、潜水器改造、氧气扩容等数值成长线付费",
+    "commercial_failure_cases": [
+      "深海压迫感只停留在素材文案，实际玩法是普通刷宝副本，用户发现'深海'只是皮，流失——触发条件：玩法循环未绑定氧气/压力机制",
+      "撤离失败惩罚过重导致玩家不敢深入探索，核心循环断裂——触发条件：风险收益比失衡，玩家只做安全区浅层搜刮"
+    ],
+    "primary_motif": "撤离夺宝",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除禁忌探索：素材中有深海巨物和未知感，但核心循环是'拿宝藏并活着带出'，没有污染/诅咒/理智等禁忌代价机制承接。排除绝境守存：主循环不是守住据点或维持安全边界，而是主动进入高风险区域获取收益后撤离。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

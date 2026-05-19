@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "blind",
+    "table_index": 45,
+    "raw_theme": "废土载具战争",
+    "quadrant": "低获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "废土载具战争",
+    "culture_shell": "废土",
+    "action_cut": "改装、抢夺、探索",
+    "feedback_channel": "",
+    "threat_pattern": "沙暴、埋伏",
+    "primary_psych_task": "在资源枯竭的废土上，通过改装和掠夺载具来维持车队生存并扩张势力",
+    "emotion_promise": "在残酷的废土上，用智慧和暴力将一堆废铁打造成移动堡垒，碾碎一切敌人",
+    "conflict_structure": "外部资源极度匮乏且充满敌对势力，玩家必须不断搜刮、改装和战斗，以维持车队的存续和优势",
+    "user_role_position": "车队领袖、军阀",
+    "strongest_carrier_relation": "玩家通过搜刮资源、改装载具、指挥战斗的循环，来承接在压迫性环境中保住并壮大己方势力的心理任务",
+    "monetization_fit": "通过抽卡获取稀有载具部件、高级燃料或强力乘员，以及售卖加速建造和资源包实现商业化",
+    "commercial_failure_cases": [
+      "SLG长线回本周期过长，前期获量成本无法被覆盖，导致项目亏损",
+      "素材钩子（如跳帮抢夺）与核心SLG玩法脱节，玩家因货不对板大量流失，导致付费率极低"
+    ],
+    "primary_motif": "绝境守存",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "核心是保住车队和据点，符合绝境守存。虽然涉及改装，但改装是手段而非目的，不归废械拼强；虽然涉及扩张，但首要任务是生存，不归领地开拓。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "blind",
+    "table_index": 46,
+    "raw_theme": "魔法学院经营",
+    "quadrant": "低获量+高ROI"
+  },
+  "classification": {
+    "raw_theme": "魔法学院经营",
+    "culture_shell": "魔法学院、奇幻",
+    "action_cut": "经营、培养、指挥战斗",
+    "feedback_channel": "",
+    "threat_pattern": "黑暗军团围攻",
+    "primary_psych_task": "在外部威胁和内部竞争中，建设并守护一个魔法教育据点",
+    "emotion_promise": "从零打造传奇学院，培养强大法师，抵御外敌并赢得声望",
+    "conflict_structure": "外部有黑暗军团等势力持续威胁学院安全，内部有资源限制和宿敌学院竞争，玩家需在建设、培养和防御之间分配资源",
+    "user_role_position": "学院院长、管理者、导师",
+    "strongest_carrier_relation": "玩家通过建造设施、招收培养学徒、指挥防御战来反复加固学院的安全边界和声望地位，模拟经营循环直接承接据点守护与秩序扩张的心理任务",
+    "monetization_fit": "抽卡获取稀有学徒/法术书，购买加速建设道具，通行证解锁赛季联赛内容",
+    "commercial_failure_cases": [
+      "战斗与经营割裂导致玩家只玩一边就流失——触发条件：防御战奖励不影响经营效率，或经营产出对战斗无加成",
+      "学院成长反馈太慢导致前期流失——触发条件：建筑升级和学徒培养周期过长，缺乏阶段性实力验证节点"
+    ],
+    "primary_motif": "领地开拓",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除绝境守存：虽然素材有黑暗军团围攻，但核心循环是建设扩张而非单纯守住据点，敌人消失后学院经营循环依然成立。排除权争上位：虽然有宿敌学院竞争，但主循环是空间建设而非人际权力结构争夺。排除异能爆发：学徒释放魔法是经营产出而非玩家自身能力觉醒。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

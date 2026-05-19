@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "boundary",
+    "table_index": 89,
+    "raw_theme": "阴阳当铺赎魂",
+    "quadrant": "未知"
+  },
+  "classification": {
+    "raw_theme": "阴阳当铺赎魂",
+    "culture_shell": "民俗、阴阳、灵异",
+    "action_cut": "典当、估价、经营",
+    "feedback_channel": "",
+    "threat_pattern": "诡异当客、阴物",
+    "primary_psych_task": "在异常交易中识别价值、控制风险，将诡异物品和魂魄转化为可控资产",
+    "emotion_promise": "在诡异世界中靠眼力和规则稳赚不赔，把别人的恐惧变成自己的财富",
+    "conflict_structure": "诡异当客带来高价值阴物与潜在失控风险，玩家在估价、交易、镇压之间维持当铺秩序并积累财富",
+    "user_role_position": "当铺掌柜、阴阳商人",
+    "strongest_carrier_relation": "玩家每笔交易需判断阴物真伪与风险，收当后镇压或利用阴物产生收益，经营循环承接'异常资产化'的心理任务",
+    "monetization_fit": "稀有阴物抽取、当铺装饰、赎魂道具付费",
+    "commercial_failure_cases": [
+      "当铺经营沦为普通模拟经营，诡异感仅停留在文案，玩家失去风险判断的紧张感——触发条件：阴物失控机制太弱或惩罚不足",
+      "典当玩法过于复杂导致劝退，玩家无法建立'估价-收益'的正反馈——触发条件：阴物价值判断规则不透明或随机性过强"
+    ],
+    "primary_motif": "镇邪收容",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除暴富翻身：核心不是'低身份通过财富打脸'，而是'异常存在被识别价值后收当利用'，符合镇邪收容的'异常被控制并利用'结构。排除禁忌探索：玩家不是深入未知禁区，而是在固定据点被动接收诡异来客，风险来自交易判断而非探索深入。排除改命逆袭：没有命运节点改写或信息差操纵命运的核心循环。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}

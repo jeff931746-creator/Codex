@@ -9,7 +9,7 @@
     1. DuckDuckGo HTML 搜索（无需 API key）× 2 个查询
     2. urllib 抓取前 2-3 个结果页，strip HTML，截取前 6000 chars/页
     3. 拼成原始文本（最多 15,000 chars）
-    4. 调 SiliconFlow 小模型摘要，输出 ≤ 2000 字结构化资料
+    4. 调统一 LLM provider 做摘要，输出 ≤ 2000 字结构化资料
     5. 写入 inputs/<游戏名>/网络资料.md
 
 退出码:
@@ -17,7 +17,6 @@
     1 = 失败（无法获取任何资料）
 """
 import argparse
-import json
 import os
 import re
 import ssl
@@ -27,6 +26,15 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
+
+_THIS_FILE = Path(__file__).resolve()
+for _parent in _THIS_FILE.parents:
+    if (_parent / "archive" / "tools" / "lib").is_dir():
+        sys.path.insert(0, str(_parent))
+        break
+
+from archive.tools.lib.api_client import api_url
+from archive.tools.lib.llm_client import chat
 
 try:
     import certifi
@@ -114,7 +122,7 @@ def search_duckduckgo(query: str, max_results: int = 3) -> list[str]:
     用 DuckDuckGo HTML 搜索，返回结果 URL 列表。
     不需要 API key。
     """
-    search_url = "https://html.duckduckgo.com/html/?" + urllib.parse.urlencode({"q": query})
+    search_url = api_url("duckduckgo_html", "html/", {"q": query})
     headers = {
         "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
         "Accept-Language": "zh-CN,zh;q=0.9",
@@ -149,61 +157,33 @@ def search_duckduckgo(query: str, max_results: int = 3) -> list[str]:
     return clean
 
 
-def call_siliconflow_summary(raw_text: str, model: str) -> str:
+def call_llm_summary(raw_text: str, model: str | None) -> str:
     """
-    调 SiliconFlow 模型做摘要。
+    调统一 LLM provider 做摘要。
     失败时返回空字符串（调用方决定降级策略）。
     """
-    api_key = os.environ.get("SILICONFLOW_API_KEY", "").strip()
-    base_url = os.environ.get("SILICONFLOW_BASE_URL", "https://api.siliconflow.cn/v1")
-    if not api_key:
-        print("[summary] SILICONFLOW_API_KEY 未设置，跳过摘要", flush=True)
-        return ""
-
     # 截断原始文本
     truncated = raw_text[:MAX_RAW_CHARS]
     user_msg = SUMMARY_PROMPT.format(raw=truncated)
 
-    payload = {
-        "model": model,
-        "messages": [
-            {"role": "system", "content": SUMMARY_SYSTEM},
-            {"role": "user", "content": user_msg},
-        ],
-        "temperature": 0.3,
-        "max_tokens": 1024,
-        "stream": True,  # 流式防止慢模型超时
-    }
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {api_key}",
-    }
-    data = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(f"{base_url}/chat/completions", data=data, headers=headers)
-
-    print(f"[summary] 发送 ~{len(truncated):,} chars 给 {model}…", flush=True)
-    chunks = []
+    provider = os.environ.get("LLM_PROVIDER") or os.environ.get("PROVIDER", "siliconflow")
+    model_label = model or "(provider default)"
+    print(f"[summary] provider={provider} model={model_label}，发送 ~{len(truncated):,} chars…", flush=True)
     try:
-        with urllib.request.urlopen(req, timeout=SUMMARY_TIMEOUT, context=_SSL_CTX) as resp:
-            for raw_line in resp:
-                line = raw_line.decode("utf-8").strip()
-                if not line or line == "data: [DONE]":
-                    continue
-                if line.startswith("data: "):
-                    try:
-                        obj = json.loads(line[6:])
-                        delta = obj["choices"][0]["delta"].get("content", "")
-                        if delta:
-                            chunks.append(delta)
-                    except Exception:
-                        pass
-        content = "".join(chunks)
+        content = chat(
+            [
+                {"role": "system", "content": SUMMARY_SYSTEM},
+                {"role": "user", "content": user_msg},
+            ],
+            provider=provider,
+            model=model,
+            temperature=0.3,
+            max_tokens=1024,
+            timeout=SUMMARY_TIMEOUT,
+            stream=True,
+        )
         print(f"[summary] 完成，输出 {len(content):,} chars", flush=True)
         return content
-    except urllib.error.HTTPError as e:
-        err = e.read().decode("utf-8", "ignore")
-        print(f"[summary] HTTP {e.code}: {err[:200]}", flush=True)
-        return ""
     except Exception as e:
         print(f"[summary] 摘要失败: {e}", flush=True)
         return ""
@@ -213,8 +193,8 @@ def call_siliconflow_summary(raw_text: str, model: str) -> str:
 
 def main():
     load_env()
-    # 收集任务用非推理模型，避免浪费推理 tokens
-    summary_model = os.environ.get("COLLECT_MODEL", "Qwen/Qwen2.5-72B-Instruct")
+    # 收集任务可用独立小模型；未配置时交给当前 provider client 使用自己的默认模型。
+    summary_model = os.environ.get("COLLECT_MODEL")
 
     ap = argparse.ArgumentParser()
     ap.add_argument("--game", required=True, help="游戏名（对应 inputs/<game>/ 目录）")
@@ -267,7 +247,7 @@ def main():
     print(f"[i] 原始文本总计 {len(raw_text):,} chars", flush=True)
 
     # --- Step 3: 摘要 ---
-    summary = call_siliconflow_summary(raw_text, summary_model)
+    summary = call_llm_summary(raw_text, summary_model)
 
     if summary:
         final_content = f"# {game} — 网络资料（自动搜集）\n\n{summary}\n"

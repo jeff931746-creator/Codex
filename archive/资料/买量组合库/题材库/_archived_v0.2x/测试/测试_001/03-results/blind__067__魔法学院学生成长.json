@@ -1,0 +1,32 @@
+{
+  "sample_meta": {
+    "sample_group": "blind",
+    "table_index": 67,
+    "raw_theme": "魔法学院学生成长",
+    "quadrant": "低获量+低ROI"
+  },
+  "classification": {
+    "raw_theme": "魔法学院学生成长",
+    "culture_shell": "魔法学院",
+    "action_cut": "分院、学习魔法、决斗",
+    "feedback_channel": "",
+    "threat_pattern": "",
+    "primary_psych_task": "在学院环境中通过学习、竞争和成长，从普通学生晋升为顶尖法师",
+    "emotion_promise": "从被低估到被认可，体验魔法天赋觉醒和学院地位攀升的爽感",
+    "conflict_structure": "学院内部等级制度与竞争压力 vs 玩家天赋觉醒和成长突破",
+    "user_role_position": "魔法学院学生、觉醒者",
+    "strongest_carrier_relation": "玩家通过课程学习解锁新技能、通过决斗验证战力成长，RPG成长循环承接天赋觉醒和地位攀升的心理任务",
+    "monetization_fit": "抽卡获取稀有魔法/装备，通行证推进学期进度，皮肤/时装满足学院身份展示",
+    "commercial_failure_cases": [
+      "获量成本过高导致回收困难：魔法学院题材竞争拥挤，素材同质化严重，CPI居高不下，触发条件为未做差异化表达（如黑深残反套路或女性向切口）",
+      "成长节奏失衡导致留存崩塌：前期课程过于枯燥或成长线过长，玩家在体验到学院杯决斗高潮前流失，触发条件为放置挂机占比过高且缺乏阶段性战力验证节点"
+    ],
+    "primary_motif": "异能爆发",
+    "unassigned_reason": "",
+    "secondary_cut_cluster": [],
+    "observer_tags": [],
+    "boundary_notes": "排除改命逆袭：虽然涉及从低位到高位的身份反转，但核心循环是魔法天赋觉醒和技能展示（异能爆发），而非通过信息差或命运规则操纵改写结局。排除权争上位：学院杯决斗虽有竞争元素，但主心理任务是自身能力成长而非在人际权力结构中夺取位置。排除领地开拓：学院是既定场景而非玩家从空白建立秩序的空间。",
+    "test_result": "pass"
+  },
+  "validation_errors": []
+}
