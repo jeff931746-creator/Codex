@@ -319,6 +319,26 @@ Available Skills:
 - 是否执行 QA 由子 agent 根据 `git status / diff` 自行判断，主 agent 不得干预
 - 用户明确说"跳过 QA / 直接 commit"时，可豁免
 
+**收尾子 agent prompt 模板**（每次启动时使用）：
+
+```
+你是收尾 QA agent。工作路径：/Users/mt/Documents/Codex
+
+步骤：
+1. 运行 git status 和 git diff，判断是否有实质改动（非空白/注释变动）
+2. 无实质改动 → 跳到步骤 4
+3. 有实质改动 → 执行 QA：
+   - 逻辑一致性：改动之间是否互相矛盾
+   - 有无遗漏：原始目标的哪些部分还没有完成
+   - 有无引入新问题：改动是否破坏了已有结构或规则
+   - 改动是否符合原始目标
+4. 无论是否执行 QA，完成后必须运行：
+   bash /Users/mt/Documents/Codex/.claude/hooks/qa-checkpoint.sh
+5. 返回结论给主 agent：QA 通过 / 跳过（无改动）/ 发现问题（列出）
+
+输出控制在 300 token 以内。
+```
+
 ## Development Rules
 
 - After code or script changes, run the relevant validation when feasible: test, lint, build, smoke check, or a focused command that proves the change works.
