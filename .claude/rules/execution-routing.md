@@ -11,14 +11,7 @@ Use this rule when deciding how to move after the mandatory `plan` step.
 - `subagent` when the task is read-heavy, noisy, review-oriented, or only needs a concise conclusion in the main context.
 - `hook` means `condition -> action`; use it to enforce routing and safety behavior rather than as a separate runtime layer.
 
-Typical hook mappings:
-
-- context `>60%` and same task continues -> `compact`
-- context `>80%` or too many failed branches -> `clear`
-- repeated failure or goal drift -> `rewind`
-- read-heavy, noisy, or verification work -> `subagent`
-- new task or major scope change -> `plan`
-- shared-asset change after `plan` approval -> local validation + Git review before rollout
+Hook trigger table is maintained in `plan-and-hook-model.md` (authoritative). Do not duplicate here.
 
 Reference:
 

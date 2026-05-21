@@ -150,10 +150,15 @@ If the task direction changes materially after approval, the agent should stop a
 Certain words in the user request signal that the task is most likely a long-term asset, not a one-off document. When any of these appear in the request, the default classification is `knowledge-asset` at `strict` intensity:
 
 - `标准` / `规范`
-- `库` (when referring to a knowledge base, not a single file)
 - `流程` / `体系` / `框架`
 - `方法论`
 - `沉淀` / `长期管理` / `长期演进`
+- `库`：仅当指知识库类资产时触发，即以下具体短语：
+  `知识库` / `机制库` / `题材库` / `方法论库` / `人群库` / `竞品库` / `买量组合库` / `复盘库` / `建立 XX 库` / `维护 XX 库`
+
+**不触发的情况**（明确排除）：
+- `代码库` / `依赖库` / `库函数` / `标准库`（指软件库，非知识资产）
+- 单次查询或临时收集，用户明确说"不需要长期维护"
 
 Behavior:
 
@@ -207,7 +212,7 @@ They should also be assigned a scoped `task type` and `current gate`.
 |---|---|
 | New task or material scope change | `plan` |
 | Task not yet classified | classify task flow |
-| Request mentions `标准 / 库 / 流程 / 体系 / 框架 / 方法论 / 沉淀 / 长期管理` | default to `knowledge-asset` + `strict`; require `governance-design` gate |
+| Request mentions `标准 / 流程 / 体系 / 框架 / 方法论 / 沉淀 / 长期管理`，或"知识库/机制库/题材库"等知识资产类库 | default to `knowledge-asset` + `strict`; require `governance-design` gate |
 | `knowledge-asset` plan without the 3 scan lists (existing assets / READMEs / scripts) | reject the plan, stay in `plan` gate |
 | Classification turns out wrong mid-task | rewind to `intake`, downgrade in-progress artifacts to `draft` |
 | Current gate not complete | stay in gate |
