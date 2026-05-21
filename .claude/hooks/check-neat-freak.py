@@ -11,7 +11,7 @@ import time
 import subprocess
 
 WORKSPACE = '/Users/mt/Documents/Codex'
-QA_CHECKPOINT = os.path.join(WORKSPACE, '.claude/.neat-freak-checkpoint')
+NEAT_FREAK_CHECKPOINT = os.path.join(WORKSPACE, '.claude/.neat-freak-checkpoint')
 LAST_NOTIFY_FILE = os.path.join(WORKSPACE, '.claude/.neat-freak-last-notify')
 MAX_AGE = 1800       # QA 检查点有效期：30 分钟
 NOTIFY_COOLDOWN = 1800  # 通知冷却：30 分钟内不重复发
@@ -83,7 +83,7 @@ def notify_cooldown_ok():
     except Exception:
         return True
 
-qa_ok, qa_reason = checkpoint_valid(QA_CHECKPOINT)
+qa_ok, qa_reason = checkpoint_valid(NEAT_FREAK_CHECKPOINT)
 
 if not qa_ok:
     reason_str = '缺失' if qa_reason == 'missing' else f'已过期（{qa_reason}）' if 'expired' in qa_reason else '损坏'
