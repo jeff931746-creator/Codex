@@ -11,7 +11,7 @@ import time
 import subprocess
 
 WORKSPACE = '/Users/mt/Documents/Codex'
-QA_CHECKPOINT = os.path.join(WORKSPACE, '.claude/.qa-checkpoint')
+QA_CHECKPOINT = os.path.join(WORKSPACE, '.claude/.neat-freak-checkpoint')
 LAST_NOTIFY_FILE = os.path.join(WORKSPACE, '.claude/.neat-freak-last-notify')
 MAX_AGE = 1800       # QA 检查点有效期：30 分钟
 NOTIFY_COOLDOWN = 1800  # 通知冷却：30 分钟内不重复发
@@ -40,15 +40,37 @@ if not has_write:
 now = int(time.time())
 
 # 检查 QA 检查点是否有效
+# 新格式：timestamp:diff_hash（工作树状态未变则永久有效，变了则回退到时间窗口）
 def checkpoint_valid(path):
     if not os.path.exists(path):
         return False, 'missing'
     try:
-        ts = int(open(path).read().strip())
-        age = now - ts
-        if age > MAX_AGE:
-            return False, f'expired ({age // 60} 分钟前)'
-        return True, 'ok'
+        raw = open(path).read().strip()
+        if ':' in raw:
+            ts_str, saved_hash = raw.split(':', 1)
+            ts = int(ts_str)
+            # 取当前工作树 diff hash
+            import hashlib, subprocess as _sp
+            r = _sp.run(
+                ['git', '-C', WORKSPACE, 'diff', 'HEAD'],
+                capture_output=True, text=True
+            )
+            import hashlib
+            cur_hash = hashlib.md5(r.stdout.encode()).hexdigest() if r.returncode == 0 else 'nodiff'
+            if cur_hash == saved_hash:
+                return True, 'ok'   # 工作树未变，检查点永久有效
+            # 工作树已改变，回退到时间窗口
+            age = now - ts
+            if age > MAX_AGE:
+                return False, f'expired ({age // 60} 分钟前)'
+            return True, 'ok'
+        else:
+            # 旧格式：纯时间戳
+            ts = int(raw)
+            age = now - ts
+            if age > MAX_AGE:
+                return False, f'expired ({age // 60} 分钟前)'
+            return True, 'ok'
     except Exception:
         return False, 'corrupt'
 
@@ -65,7 +87,7 @@ qa_ok, qa_reason = checkpoint_valid(QA_CHECKPOINT)
 
 if not qa_ok:
     reason_str = '缺失' if qa_reason == 'missing' else f'已过期（{qa_reason}）' if 'expired' in qa_reason else '损坏'
-    print(f'⚠️  收尾 QA：本轮有文件写操作，但 QA 检查点{reason_str}。请启动收尾子 agent，完成后运行 .claude/hooks/qa-checkpoint.sh', flush=True)
+    print(f'⚠️  收尾 QA：本轮有文件写操作，但 QA 检查点{reason_str}。请运行 neat-freak Skill，完成后运行 .claude/hooks/neat-freak-checkpoint.sh', flush=True)
 
     if notify_cooldown_ok():
         subprocess.run([
