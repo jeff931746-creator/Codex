@@ -216,8 +216,8 @@ They should also be assigned a scoped `task type` and `current gate`.
 | `knowledge-asset` plan without the 3 scan lists (existing assets / READMEs / scripts) | reject the plan, stay in `plan` gate |
 | Classification turns out wrong mid-task | rewind to `intake`, downgrade in-progress artifacts to `draft` |
 | Current gate not complete | stay in gate |
-| Same task, context usage above 60% | `compact` |
-| Context usage above 80% or too many failed branches | `clear` |
+| Same task, context usage above 30% | `compact` |
+| Context usage above 60% or too many failed branches | `clear` |
 | Repeated failure on the same problem | `rewind` |
 | Goal drift into a new task | `rewind` |
 | Read-heavy, noisy, or verification-only work | `subagent` |
