@@ -4,12 +4,11 @@
 from __future__ import annotations
 
 import json
-import os
 import sys
 from pathlib import Path
 from typing import Any, Callable, Iterable
 
-from archive.tools.lib.api_client import API_BASE_URLS, ApiError, request
+from archive.tools.lib.api_client import API_BASE_URLS, ApiError, env_value, request
 from archive.tools.lib.llm_common import (
     RetryPolicy,
     call_with_retry,
@@ -38,18 +37,18 @@ def ensure_repo_import_path(current_file: str | Path) -> None:
 
 
 def get_api_key(required: bool = True) -> str:
-    api_key = os.environ.get("SILICONFLOW_API_KEY", "").strip()
+    api_key = env_value("SILICONFLOW_API_KEY", "").strip()
     if required and not api_key:
         raise RuntimeError("SILICONFLOW_API_KEY 未设置")
     return api_key
 
 
 def get_base_url() -> str:
-    return os.environ.get("SILICONFLOW_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
+    return env_value("SILICONFLOW_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
 
 
 def get_model(env_name: str = "SILICONFLOW_MODEL", default: str = DEFAULT_MODEL) -> str:
-    return os.environ.get(env_name, default)
+    return env_value(env_name, default)
 
 
 def _request_json(

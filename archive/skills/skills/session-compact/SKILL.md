@@ -77,7 +77,13 @@ type: project
 
 ### Step 4：更新 MEMORY.md 索引
 
-在 `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md` 末尾追加：
+先扫描再写入：
+
+1. **扫描现有任务条目**：检查 MEMORY.md 任务状态区的每个 `task_*.md` 条目，判断对应任务是否已完成（文件内无待办项、无"下一步"）。
+   - 已完成 → 将文件移入 `memory/archived/`，从索引删除对应条目
+   - 有待办项 → 保留
+
+2. **追加新条目**（如本次 compact 产生了新任务状态文件）：
 
 ```
 - [Task State — {任务名}](task_{任务名}.md) — {任务一句话描述}，compact 于 {日期}

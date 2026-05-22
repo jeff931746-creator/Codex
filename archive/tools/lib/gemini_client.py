@@ -3,10 +3,9 @@
 
 from __future__ import annotations
 
-import os
 from typing import Any
 
-from archive.tools.lib.api_client import ApiError, request_json
+from archive.tools.lib.api_client import ApiError, env_value, request_json
 
 
 class GeminiError(RuntimeError):
@@ -14,7 +13,7 @@ class GeminiError(RuntimeError):
 
 
 def get_gemini_api_key(required: bool = True) -> str:
-    api_key = os.environ.get("GEMINI_API_KEY", "").strip()
+    api_key = env_value("GEMINI_API_KEY", "").strip()
     if required and not api_key:
         raise RuntimeError("GEMINI_API_KEY 未设置")
     return api_key

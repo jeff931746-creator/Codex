@@ -1,0 +1,7545 @@
+{
+  "黄金太阳": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "炼金术"
+    ]
+  },
+  "马里奥赛车Advance": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "瓦里奥大陆4": {
+    "primary_shell": "奇幻遗迹",
+    "secondary_shells": [
+      "寻宝"
+    ]
+  },
+  "最终幻想战略版Advance": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "水晶幻想"
+    ]
+  },
+  "恶魔城 月之轮回": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "超级机器人大战A": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "洛克人EXE": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "都市异能"
+    ]
+  },
+  "索尼克Advance": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "科幻"
+    ]
+  },
+  "高级战争": {
+    "primary_shell": "现代军事",
+    "secondary_shells": []
+  },
+  "魔法假期": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "龙战士II": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "风之克罗诺亚 梦之帝国": {
+    "primary_shell": "梦境奇幻",
+    "secondary_shells": []
+  },
+  "铁拳Advance": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "格斗"
+    ]
+  },
+  "侏罗纪公园III 公园建造者": {
+    "primary_shell": "恐龙",
+    "secondary_shells": [
+      "公园"
+    ]
+  },
+  "拿破仑": {
+    "primary_shell": "拿破仑战争",
+    "secondary_shells": []
+  },
+  "超级马里奥Advance": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "瓦力欧大陆Advance": {
+    "primary_shell": "奇幻废土",
+    "secondary_shells": [
+      "寻宝"
+    ]
+  },
+  "转转棒": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "真·女神转生 恶魔之子 黑之书/赤之书": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "恶魔"
+    ]
+  },
+  "游戏王 怪兽决斗6 EX2": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "埃及神话"
+    ]
+  },
+  "黄金太阳：失落的时代": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "炼金术"
+    ]
+  },
+  "银河战士：融合": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "异形"
+    ]
+  },
+  "塞尔达传说：众神的三角力量与四人之剑": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "火焰之纹章：封印之剑": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "恶魔城:白夜协奏曲": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "超级马力欧世界:超级马力欧Advance 2": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "恐龙"
+    ]
+  },
+  "洛克人Zero": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "星之卡比:梦之泉物语": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "逆转裁判2": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "风之克罗诺亚:梦之帝国": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "游戏王:永恒斗士之魂": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "卡牌对决"
+    ]
+  },
+  "哈利·波特与密室": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": []
+  },
+  "火焰之纹章 封印之剑": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "超级马力欧Advance": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "马力欧卡丁车 超级巡回赛": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "瓦力欧大陆4": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "遗迹"
+    ]
+  },
+  "龙战士II 使命之子": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "实况足球": {
+    "primary_shell": "足球",
+    "secondary_shells": []
+  },
+  "耀西岛:超级马力欧Advance 3": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "蘑菇王国"
+    ]
+  },
+  "真·女神转生 恶魔之子:光之书/暗之书": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "恶魔"
+    ]
+  },
+  "鬼眼狂刀:京": {
+    "primary_shell": "战国",
+    "secondary_shells": [
+      "武士"
+    ]
+  },
+  "鬼武者 战略版": {
+    "primary_shell": "战国",
+    "secondary_shells": [
+      "鬼族"
+    ]
+  },
+  "洛克人EXE 3": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": []
+  },
+  "恶魔城 白夜协奏曲": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "黄金太阳 失落的时代": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "炼金术"
+    ]
+  },
+  "星之卡比 梦之泉DX": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "超级马力欧世界 超级马力欧USA": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "耀西岛 超级马力欧USA 3": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "蘑菇王国"
+    ]
+  },
+  "真·女神转生 恶魔之子 光之书/暗之书": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "恶魔"
+    ]
+  },
+  "风之克罗诺亚 梦见帝国": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "露娜传奇": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "沉默的遗迹 四狂神战记外传": {
+    "primary_shell": "遗迹",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "马里奥与路易吉RPG": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "火焰之纹章 烈火之剑": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "黄金太阳2 失落的时代": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "遗迹"
+    ]
+  },
+  "王国之心 记忆之链": {
+    "primary_shell": "迪士尼",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "约束之地 利维艾拉": {
+    "primary_shell": "北欧神话",
+    "secondary_shells": [
+      "末日仙境"
+    ]
+  },
+  "钢之炼金术师 迷走的轮舞曲": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "炼金术"
+    ]
+  },
+  "约束之地": {
+    "primary_shell": "北欧神话",
+    "secondary_shells": [
+      "末日仙境"
+    ]
+  },
+  "火焰之纹章：圣魔之光石": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "超级机器人大战J": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "塞尔达传说：不可思议的帽子": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "恶魔城：苍月十字架": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "逆转裁判3": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "洛克人Zero 4": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "瓦力欧制造：大回旋": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "传说的斯塔菲4": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "深海"
+    ]
+  },
+  "口袋妖怪不可思议的迷宫：赤之救助队": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "龙珠Z：舞空斗剧": {
+    "primary_shell": "龙珠",
+    "secondary_shells": [
+      "武道"
+    ]
+  },
+  "死神：获选之魂": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "死神"
+    ]
+  },
+  "召唤之夜 铸剑物语 起源之石": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "西幻精灵"
+    ]
+  },
+  "龙珠Z 舞空斗剧": {
+    "primary_shell": "龙珠",
+    "secondary_shells": [
+      "武道"
+    ]
+  },
+  "星之卡比 镜之大迷宫": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "镜中世界"
+    ]
+  },
+  "恶魔城 晓月圆舞曲": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "瓦力欧制造 大回转": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "最终幻想V Advance": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "最终幻想VI Advance": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "水晶幻想"
+    ]
+  },
+  "塞尔达传说：众神的三角力量与四支剑": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "宝可梦不可思议的迷宫：赤之救助队": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "逆转裁判：复苏的逆转": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "节奏天国": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "铸剑物语3：起源之石": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "西幻精灵"
+    ]
+  },
+  "恶魔城：废墟的肖像": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "洛克人Zero 2": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "机甲",
+      "电子精灵"
+    ]
+  },
+  "瓦力欧制造": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "忍者神龟": {
+    "primary_shell": "忍者",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "索尼克Advance 2": {
+    "primary_shell": "现代奇幻",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "超级大金刚": {
+    "primary_shell": "丛林冒险",
+    "secondary_shells": [
+      "工业"
+    ]
+  },
+  "战术食人魔外传 罗迪斯的骑士": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "光明之魂2": {
+    "primary_shell": "龙与地下城",
+    "secondary_shells": []
+  },
+  "我们的太阳": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼",
+      "末世"
+    ]
+  },
+  "宝可梦 红宝石/蓝宝石": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "塞尔达传说 众神的三角力量与四人之剑": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "超级马力欧Advance 4": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "马力欧与路易吉RPG": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "星之卡比 梦之泉物语": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "高级战争2 黑洞升起": {
+    "primary_shell": "现代军事",
+    "secondary_shells": [
+      "近未来"
+    ]
+  },
+  "真·女神转生II": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "恶魔",
+      "赛博朋克"
+    ]
+  },
+  "鬼武者战略版": {
+    "primary_shell": "战国",
+    "secondary_shells": [
+      "魔幻"
+    ]
+  },
+  "超级大金刚2": {
+    "primary_shell": "丛林冒险",
+    "secondary_shells": [
+      "工业"
+    ]
+  },
+  "塞尔达传说：缩小帽": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "微观世界"
+    ]
+  },
+  "宝可梦 火红／叶绿": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "银河战士：零点任务": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "外星遗迹"
+    ]
+  },
+  "星之卡比：镜之大迷宫": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "镜中世界"
+    ]
+  },
+  "马里奥对大金刚": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "玩具"
+    ]
+  },
+  "最终幻想I·II Advance": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "王国之心：记忆之链": {
+    "primary_shell": "迪士尼",
+    "secondary_shells": [
+      "暗黑奇幻",
+      "现代都市"
+    ]
+  },
+  "转转棒天堂": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "通灵王：精神大师": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "通灵"
+    ]
+  },
+  "续·我们的太阳": {
+    "primary_shell": "吸血鬼",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "传说的斯塔菲3": {
+    "primary_shell": "海底王国",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "魔法假期：五星连珠之时": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "太空殖民"
+    ]
+  },
+  "塞尔达传说 缩小帽": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "火焰之纹章 圣魔之光石": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "宝可梦不可思议的迷宫 赤之救助队": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "最终幻想IV Advance": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "恶魔城 苍月十字架": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "马力欧与路易吉RPG 2": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "任天狗": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "宠物"
+    ]
+  },
+  "押忍！战斗！应援团": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "高级战争 双重打击": {
+    "primary_shell": "现代战争",
+    "secondary_shells": []
+  },
+  "逆转裁判 复苏的逆转": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "陨石大战": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": []
+  },
+  "动物森友会 野生世界": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "动物村庄"
+    ]
+  },
+  "脑锻炼": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "侠盗猎车手 自由城故事": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "黑帮"
+    ]
+  },
+  "塞尔达传说 不可思议的帽子": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "特鲁尼克大冒险3 不思议的迷宫": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "银河战士 零点任务": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "洛克人Zero 3": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "F-Zero 高潮": {
+    "primary_shell": "赛车",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "我们的太阳 Django & Sabata": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "地球冒险3": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "乡村"
+    ]
+  },
+  "塞尔达传说 众神的三角力量与四支剑": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "超级马里奥Advance 4": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "精灵宝可梦 不可思议的迷宫 赤之救助队": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "铸剑物语2": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "耀西岛DS": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "我们的太阳 Django与Sabata": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "魔法老师涅吉！ 私人授课2": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": []
+  },
+  "真·女神转生 恶魔之子 冰之书/炎之书": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "恶魔"
+    ]
+  },
+  "模拟人生2 宠物": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "宠物"
+    ]
+  },
+  "降世神通 最后的气宗": {
+    "primary_shell": "东方奇幻",
+    "secondary_shells": [
+      "武道修行"
+    ]
+  },
+  "料理妈妈2": {
+    "primary_shell": "料理",
+    "secondary_shells": []
+  },
+  "史酷比 恐怖城堡": {
+    "primary_shell": "哥特恐怖",
+    "secondary_shells": [
+      "侦探",
+      "怪物"
+    ]
+  },
+  "夏洛特的网": {
+    "primary_shell": "田园农场",
+    "secondary_shells": [
+      "动物"
+    ]
+  },
+  "迪斯尼公主 魔法之旅": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "公主"
+    ]
+  },
+  "变形金刚 动画版": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "哈利·波特与凤凰社": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": []
+  },
+  "加勒比海盗3 世界尽头": {
+    "primary_shell": "海盗",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "怪物屋": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "恐怖活屋"
+    ]
+  },
+  "蜜蜂总动员": {
+    "primary_shell": "昆虫",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "公主同盟": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "公主"
+    ]
+  },
+  "我们的太阳DS": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "天外魔境：第四默示录": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "东方神话"
+    ]
+  },
+  "CIMA：敌人": {
+    "primary_shell": "太空殖民",
+    "secondary_shells": [
+      "异形"
+    ]
+  },
+  "鬼太郎：妖怪大冒险": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "妖怪"
+    ]
+  },
+  "料理鼠王": {
+    "primary_shell": "料理",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "史瑞克三世": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "蜘蛛侠3": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "变形金刚": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "模拟人生2 生存游戏": {
+    "primary_shell": "荒岛",
+    "secondary_shells": []
+  },
+  "蜡笔小新 呼唤风暴 蜡笔涂鸦大作战": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "二次元"
+    ]
+  },
+  "索尼克大冒险2 战斗": {
+    "primary_shell": "科幻都市",
+    "secondary_shells": [
+      "高速竞速"
+    ]
+  },
+  "疯狂出租车": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "星球大战 侠盗中队II：侠盗领袖": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "太空战机"
+    ]
+  },
+  "路易吉洋馆": {
+    "primary_shell": "哥特恐怖",
+    "secondary_shells": [
+      "鬼怪"
+    ]
+  },
+  "皮克敏": {
+    "primary_shell": "异星",
+    "secondary_shells": [
+      "精灵"
+    ]
+  },
+  "动物森友会+": {
+    "primary_shell": "田园生活",
+    "secondary_shells": [
+      "动物村庄"
+    ]
+  },
+  "任天堂明星大乱斗DX": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "生化危机": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": []
+  },
+  "马里奥派对4": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "派对竞技"
+    ]
+  },
+  "实况足球6 最终进化版": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "潜龙谍影：孪蛇": {
+    "primary_shell": "军事谍战",
+    "secondary_shells": [
+      "近未来"
+    ]
+  },
+  "生化危机4": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "欧洲村庄"
+    ]
+  },
+  "银河战士Prime 2：回声": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "异星探索"
+    ]
+  },
+  "塞尔达传说：四人之剑+": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "纸片马力欧：千年之门": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "皮克敏2": {
+    "primary_shell": "异星探索",
+    "secondary_shells": [
+      "微观世界"
+    ]
+  },
+  "火焰之纹章：苍炎之轨迹": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "马力欧力量网球": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "运动"
+    ]
+  },
+  "红侠乔伊2": {
+    "primary_shell": "特摄",
+    "secondary_shells": [
+      "超级英雄"
+    ]
+  },
+  "红侠乔伊": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "美式卡通"
+    ]
+  },
+  "星际火狐：突击": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "大玉": {
+    "primary_shell": "战国",
+    "secondary_shells": []
+  },
+  "永恒黑暗：心灵悲歌": {
+    "primary_shell": "克苏鲁",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "杀手7": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "超现实悬疑"
+    ]
+  },
+  "牧场物语：美妙人生": {
+    "primary_shell": "牧场",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "塞尔达传说 风之杖": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "海洋冒险"
+    ]
+  },
+  "银河战士 Prime": {
+    "primary_shell": "异星探索",
+    "secondary_shells": [
+      "科幻装甲"
+    ]
+  },
+  "生化危机 代号：维罗妮卡 完全版": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "孤岛"
+    ]
+  },
+  "灵魂能力 II": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "F-Zero GX": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "马里奥赛车 双重冲击！！": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "星球大战：旧共和国武士": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": []
+  },
+  "超越善恶": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "间谍"
+    ]
+  },
+  "杀手2：沉默刺客": {
+    "primary_shell": "杀手",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "波斯王子：时之砂": {
+    "primary_shell": "东方神话",
+    "secondary_shells": []
+  },
+  "细胞分裂": {
+    "primary_shell": "间谍",
+    "secondary_shells": [
+      "特种部队"
+    ]
+  },
+  "红海 2": {
+    "primary_shell": "虫族",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "生化危机0": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "病毒泄露"
+    ]
+  },
+  "合金装备 孪蛇": {
+    "primary_shell": "军事谍战",
+    "secondary_shells": [
+      "近未来科幻"
+    ]
+  },
+  "永恒的阿卡迪亚 传说之章": {
+    "primary_shell": "天空海盗",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "瓦力欧世界": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "超级猴子球": {
+    "primary_shell": "卡通奇幻",
+    "secondary_shells": []
+  },
+  "FIFA足球2002": {
+    "primary_shell": "足球",
+    "secondary_shells": []
+  },
+  "托尼·霍克职业滑板3": {
+    "primary_shell": "滑板",
+    "secondary_shells": [
+      "街头文化"
+    ]
+  },
+  "动物森友会": {
+    "primary_shell": "田园生活",
+    "secondary_shells": [
+      "动物村庄"
+    ]
+  },
+  "合金装备：孪蛇": {
+    "primary_shell": "军事谍战",
+    "secondary_shells": [
+      "近未来科幻"
+    ]
+  },
+  "星球大战：侠盗中队II 侠盗领袖": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "太空战争"
+    ]
+  },
+  "NBA街头篮球": {
+    "primary_shell": "篮球",
+    "secondary_shells": [
+      "街头文化"
+    ]
+  },
+  "密特罗德 究极": {
+    "primary_shell": "异星探索",
+    "secondary_shells": [
+      "科幻装甲"
+    ]
+  },
+  "超级马力欧阳光": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "热带海岛"
+    ]
+  },
+  "生化危机 重制版": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "洋馆恐怖"
+    ]
+  },
+  "永恒黑暗 理智的安魂曲": {
+    "primary_shell": "克苏鲁",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "星际火狐大冒险": {
+    "primary_shell": "恐龙星球",
+    "secondary_shells": [
+      "兽化变身"
+    ]
+  },
+  "阳光马力欧": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "热带海岛"
+    ]
+  },
+  "超级猴子球2": {
+    "primary_shell": "卡通奇幻",
+    "secondary_shells": []
+  },
+  "梦幻之星在线 章节I&II": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "沙滩排球": {
+    "primary_shell": "热带海岛",
+    "secondary_shells": [
+      "排球"
+    ]
+  },
+  "荣誉勋章 前线": {
+    "primary_shell": "二战",
+    "secondary_shells": []
+  },
+  "詹姆斯邦德007 夜火": {
+    "primary_shell": "间谍",
+    "secondary_shells": [
+      "现代军事"
+    ]
+  },
+  "永恒的黑暗：理智的安魂曲": {
+    "primary_shell": "克苏鲁",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "塞尔达传说 风之律动": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "海洋冒险"
+    ]
+  },
+  "梦幻之星在线 第一章&第二章": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "索尼克大冒险 DX": {
+    "primary_shell": "卡通科幻",
+    "secondary_shells": [
+      "高速冒险"
+    ]
+  },
+  "动物森友会 e+": {
+    "primary_shell": "动物村庄",
+    "secondary_shells": [
+      "田园生活"
+    ]
+  },
+  "仙乐传说": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "精灵契约"
+    ]
+  },
+  "最终幻想 水晶编年史": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "末世奇幻"
+    ]
+  },
+  "潜龙谍影 孪蛇": {
+    "primary_shell": "军事谍战",
+    "secondary_shells": [
+      "近未来"
+    ]
+  },
+  "宝可梦圆形竞技场": {
+    "primary_shell": "宝可梦",
+    "secondary_shells": [
+      "近未来"
+    ]
+  },
+  "索尼克大冒险DX": {
+    "primary_shell": "卡通科幻",
+    "secondary_shells": [
+      "高速冒险"
+    ]
+  },
+  "比利海灵顿的古怪冒险": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "卡通世界"
+    ]
+  },
+  "1080° 雪崩": {
+    "primary_shell": "极限滑雪",
+    "secondary_shells": [
+      "街头潮流"
+    ]
+  },
+  "星球大战：侠盗中队III - 反叛打击": {
+    "primary_shell": "星战科幻",
+    "secondary_shells": [
+      "太空空战"
+    ]
+  },
+  "卡比飞天赛车": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "卡通竞速"
+    ]
+  },
+  "星际火狐：突袭": {
+    "primary_shell": "太空科幻",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "瓦力欧制造：大派对": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "大金刚：丛林节拍": {
+    "primary_shell": "丛林",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "无尽的任务：诺拉斯勇士": {
+    "primary_shell": "龙与地下城",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "波斯王子：武者之心": {
+    "primary_shell": "波斯神话",
+    "secondary_shells": [
+      "时空穿梭"
+    ]
+  },
+  "异度传说 一章&二章": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "机甲",
+      "末世科幻"
+    ]
+  },
+  "霸天开拓史：永恒之翼与失落之海": {
+    "primary_shell": "浮空大陆",
+    "secondary_shells": [
+      "卡牌奇幻"
+    ]
+  },
+  "塞尔达传说 黄昏公主": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "火焰之纹章 苍炎之轨迹": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "王国战争"
+    ]
+  },
+  "超级马力欧 棒球": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "运动竞技"
+    ]
+  },
+  "星际火狐 突袭": {
+    "primary_shell": "太空科幻",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "宝可梦XD 暗之旋风 黑暗洛奇亚": {
+    "primary_shell": "宝可梦",
+    "secondary_shells": [
+      "暗黑净化"
+    ]
+  },
+  "蝙蝠侠 开战时刻": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "哥谭市"
+    ]
+  },
+  "金刚": {
+    "primary_shell": "巨兽",
+    "secondary_shells": [
+      "孤岛",
+      "原始丛林"
+    ]
+  },
+  "极品飞车 最高通缉": {
+    "primary_shell": "街头赛车",
+    "secondary_shells": [
+      "警匪追逐"
+    ]
+  },
+  "半熟英雄4 ～7人的半熟英雄～": {
+    "primary_shell": "恶搞奇幻",
+    "secondary_shells": [
+      "蛋兽召唤"
+    ]
+  },
+  "大合奏!乐团兄弟": {
+    "primary_shell": "音乐",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "电子浮游生物": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "露娜 龙之歌": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "洛克人EXE 5 DS 双生领袖": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "网络科幻"
+    ]
+  },
+  "死神 获选之魂": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "死神"
+    ]
+  },
+  "幻侠乔伊 摩擦": {
+    "primary_shell": "特摄英雄",
+    "secondary_shells": [
+      "电影世界"
+    ]
+  },
+  "马里奥与路易吉RPG2": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "时空穿越"
+    ]
+  },
+  "川岛隆太教授监修 大人的脑力锻炼": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "任天狗 腊肠犬与朋友们": {
+    "primary_shell": "宠物",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "马里奥赛车DS": {
+    "primary_shell": "赛车",
+    "secondary_shells": [
+      "蘑菇王国"
+    ]
+  },
+  "幻彩恋曲": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "恋爱"
+    ]
+  },
+  "桃源郷物語": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "失落的魔法": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "史莱姆总动员 冲击的尾巴团": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "史莱姆"
+    ]
+  },
+  "滚滚吃豆": {
+    "primary_shell": "科幻",
+    "secondary_shells": [
+      "迷宫"
+    ]
+  },
+  "钻子先生 钻魂": {
+    "primary_shell": "地下矿洞",
+    "secondary_shells": [
+      "地心世界"
+    ]
+  },
+  "泡泡龙 双重射击": {
+    "primary_shell": "奇幻世界",
+    "secondary_shells": []
+  },
+  "动物园大亨DS": {
+    "primary_shell": "动物园",
+    "secondary_shells": []
+  },
+  "黄金眼 黑帮情报员": {
+    "primary_shell": "间谍",
+    "secondary_shells": [
+      "冷战"
+    ]
+  },
+  "宝可梦 钻石／珍珠": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "新超级马力欧兄弟": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "最终幻想III": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "塞尔达传说 幻影沙漏": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "海盗",
+      "海岛"
+    ]
+  },
+  "勇者斗恶龙IX 星空的守护者": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "马里奥篮球 3对3": {
+    "primary_shell": "篮球",
+    "secondary_shells": [
+      "蘑菇王国"
+    ]
+  },
+  "逆转裁判4": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "法庭",
+      "侦探"
+    ]
+  },
+  "索尼克 暗影": {
+    "primary_shell": "科幻高速世界",
+    "secondary_shells": [
+      "动物战队"
+    ]
+  },
+  "牧场物语 美妙人生 女生版": {
+    "primary_shell": "牧场",
+    "secondary_shells": [
+      "田园",
+      "恋爱"
+    ]
+  },
+  "FIFA 06": {
+    "primary_shell": "足球",
+    "secondary_shells": []
+  },
+  "乐高星球大战": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "乐高积木"
+    ]
+  },
+  "使命召唤2 红一纵队": {
+    "primary_shell": "二战",
+    "secondary_shells": [
+      "特种部队"
+    ]
+  },
+  "超级马力欧足球": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "足球"
+    ]
+  },
+  "宝可梦XD：暗之旋风 黑暗洛奇亚": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "荒漠"
+    ]
+  },
+  "超级猴子球 豪华版": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "迷宫"
+    ]
+  },
+  "牧场物语：美妙人生 女孩版": {
+    "primary_shell": "牧场",
+    "secondary_shells": [
+      "田园",
+      "恋爱"
+    ]
+  },
+  "蝙蝠侠：开战时刻": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "超级英雄"
+    ]
+  },
+  "极品飞车：最高通缉": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "金刚鼓 丛林节拍": {
+    "primary_shell": "丛林",
+    "secondary_shells": [
+      "音乐"
+    ]
+  },
+  "时空分裂者：完美未来": {
+    "primary_shell": "时空穿越",
+    "secondary_shells": [
+      "科幻"
+    ]
+  },
+  "机甲战士 4：复仇": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "科幻"
+    ]
+  },
+  "荣誉勋章：欧洲强袭": {
+    "primary_shell": "二战",
+    "secondary_shells": [
+      "特种部队"
+    ]
+  },
+  "超级纸片马力欧": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "赤铁": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "黑帮"
+    ]
+  },
+  "索尼克滑板": {
+    "primary_shell": "科幻高速世界",
+    "secondary_shells": [
+      "竞速"
+    ]
+  },
+  "乐高星球大战2：原创三部曲": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "乐高积木"
+    ]
+  },
+  "疯狂橄榄球07": {
+    "primary_shell": "橄榄球",
+    "secondary_shells": []
+  },
+  "降世神通：最后的气宗": {
+    "primary_shell": "东方奇幻",
+    "secondary_shells": [
+      "武术"
+    ]
+  },
+  "汽车总动员": {
+    "primary_shell": "赛车",
+    "secondary_shells": [
+      "西部"
+    ]
+  },
+  "冰河世纪2：消融": {
+    "primary_shell": "史前",
+    "secondary_shells": [
+      "动物"
+    ]
+  },
+  "超执刀：第二意见": {
+    "primary_shell": "近未来科幻",
+    "secondary_shells": [
+      "医疗"
+    ]
+  },
+  "巴洛克": {
+    "primary_shell": "末世废土",
+    "secondary_shells": [
+      "地下城",
+      "暗黑奇幻"
+    ]
+  },
+  "钻地小子DS": {
+    "primary_shell": "地下矿洞",
+    "secondary_shells": []
+  },
+  "宝可梦冲刺赛": {
+    "primary_shell": "宝可梦",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "模拟人生 上流社会": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "疯狂出租车 客源争夺战": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "出租车"
+    ]
+  },
+  "老虎伍兹PGA巡回赛2005": {
+    "primary_shell": "高尔夫",
+    "secondary_shells": []
+  },
+  "沥青都市GT": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "泡泡龙DS": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "动物园管理员": {
+    "primary_shell": "动物园",
+    "secondary_shells": []
+  },
+  "太空侵略者DS": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "外星入侵"
+    ]
+  },
+  "直感一笔": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "老虎伍兹PGA巡回赛": {
+    "primary_shell": "高尔夫",
+    "secondary_shells": []
+  },
+  "极品飞车：地下狂飙2": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "触摸卡比": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "索尼克冲刺": {
+    "primary_shell": "科幻",
+    "secondary_shells": [
+      "高速世界"
+    ]
+  },
+  "为你而生": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "恋爱"
+    ]
+  },
+  "宝可梦冲刺": {
+    "primary_shell": "宝可梦世界",
+    "secondary_shells": []
+  },
+  "双重记忆": {
+    "primary_shell": "悬疑",
+    "secondary_shells": [
+      "庄园"
+    ]
+  },
+  "迷失蔚蓝": {
+    "primary_shell": "荒岛",
+    "secondary_shells": [
+      "求生"
+    ]
+  },
+  "牧场物语 精灵驿站": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "精灵"
+    ]
+  },
+  "钢之炼金术师 双重共鸣": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "炼金术"
+    ]
+  },
+  "钻地小子 钻魂": {
+    "primary_shell": "地下矿洞",
+    "secondary_shells": []
+  },
+  "马力欧卡丁车DS": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "应援团": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "触摸瓦里奥制造": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "恶搞"
+    ]
+  },
+  "超级马力欧64 DS": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "宝可梦不可思议的迷宫 青之救助队": {
+    "primary_shell": "宝可梦",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "索尼克 冲刺": {
+    "primary_shell": "科幻",
+    "secondary_shells": [
+      "高速世界"
+    ]
+  },
+  "触摸耀西": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "钻地先生 钻魂": {
+    "primary_shell": "地下矿洞",
+    "secondary_shells": []
+  },
+  "霸天开拓史2": {
+    "primary_shell": "天空文明",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "超级纸片马里奥": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "霸天开拓史2 永恒之翼与失落之海": {
+    "primary_shell": "天空文明",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "索尼克 滑板": {
+    "primary_shell": "科幻竞速",
+    "secondary_shells": []
+  },
+  "乐高星球大战2 原始三部曲": {
+    "primary_shell": "太空歌剧",
+    "secondary_shells": [
+      "乐高积木"
+    ]
+  },
+  "托尼·霍克滑板 下坡": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "极限运动"
+    ]
+  },
+  "冰河世纪2 消融": {
+    "primary_shell": "史前冰河",
+    "secondary_shells": [
+      "动物冒险"
+    ]
+  },
+  "牧场物语 魔法旋律": {
+    "primary_shell": "田园牧场",
+    "secondary_shells": [
+      "魔法小镇"
+    ]
+  },
+  "查理与巧克力工厂": {
+    "primary_shell": "奇幻工厂",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "触摸瓦力欧制造": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "大合奏！乐团兄弟": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "直感一笔画": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "实习医生 天堂独太": {
+    "primary_shell": "现代医院",
+    "secondary_shells": [
+      "医疗推理"
+    ]
+  },
+  "为你而死": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "恋爱喜剧"
+    ]
+  },
+  "模拟人生：上流社会": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "蜘蛛侠2": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "超级英雄"
+    ]
+  },
+  "山脊赛车DS": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "街头竞速"
+    ]
+  },
+  "愿为你死": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "恋爱喜剧"
+    ]
+  },
+  "疯狂出租车：乘客战争": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "动物园大亨": {
+    "primary_shell": "动物园",
+    "secondary_shells": []
+  },
+  "恶魔城 废墟的肖像": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "超执刀": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "医院"
+    ]
+  },
+  "圣剑传说DS 玛娜之子": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "风雨传说": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "兽人"
+    ]
+  },
+  "魔法假期 五星连珠之时": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "精灵"
+    ]
+  },
+  "怪盗卢梭": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "怪盗"
+    ]
+  },
+  "终极蜘蛛侠": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "超级英雄"
+    ]
+  },
+  "星际火狐 指令": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "勇者斗恶龙 怪兽篇 Joker": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "接触": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": []
+  },
+  "陆行鸟与魔法绘本": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "宝可梦 不可思议的迷宫 青之救助队": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "死神 驰骋苍天的命运": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "死神"
+    ]
+  },
+  "天诛 暗影": {
+    "primary_shell": "战国",
+    "secondary_shells": [
+      "忍者"
+    ]
+  },
+  "宝可梦 钻石/珍珠": {
+    "primary_shell": "精灵",
+    "secondary_shells": []
+  },
+  "脑锻炼 大人的DS训练": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "俄罗斯方块DS": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "怪盗鲁邦 传承的秘宝": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "怪盗"
+    ]
+  },
+  "魔法老师 课外授业 少女的心跳": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "幽游白书DS 暗黑武术会篇": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "灵界"
+    ]
+  },
+  "怪盗瓦里奥 变相七杰": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "怪盗"
+    ]
+  },
+  "宝可梦不可思议的迷宫 时之探险队/暗之探险队": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "北欧女神 负罪者": {
+    "primary_shell": "北欧神话",
+    "secondary_shells": []
+  },
+  "心灵传说": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "最终幻想IV": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "星之卡比 超究极豪华版": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "马里奥与路易RPG3!!!": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "高级战争 毁灭之日": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "军事"
+    ]
+  },
+  "陆行鸟与魔法绘本 魔女与少女与五位勇者": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "思乡之风": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": []
+  },
+  "西格玛和声": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "毁灭世界": {
+    "primary_shell": "末世",
+    "secondary_shells": []
+  },
+  "北欧女神：负罪者": {
+    "primary_shell": "北欧神话",
+    "secondary_shells": []
+  },
+  "火焰之纹章：新暗黑龙与光之剑": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "高级战争：毁灭之日": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "军事"
+    ]
+  },
+  "洛克人ZX Advent": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "近未来科幻"
+    ]
+  },
+  "恶魔城：被夺走的刻印": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "勇者斗恶龙V：天空的新娘": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "陆行鸟与魔法绘本：魔女与少女与五位勇者": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "创世法典": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "英雄战记：烈焰之剑": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "来自深渊": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "超时空之轮": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "时空穿越"
+    ]
+  },
+  "无限边界：超级机器人大战OG传说": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "二次元"
+    ]
+  },
+  "陆行鸟与魔法绘本：魔女与少女与5名勇者": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "宝可梦 心金/魂银": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "塞尔达传说 大地的汽笛": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "王国之心 358/2天": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "逆转检事": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "雷顿教授与魔神之笛": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "雷顿教授与不可思议的小镇": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "最终幻想XII 亡灵之翼": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "天空大陆"
+    ]
+  },
+  "美妙世界": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "都市异能"
+    ]
+  },
+  "勇者斗恶龙IV 被引导的人们": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "马里奥派对DS": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "流星洛克人2 狂战士×忍者/狂战士×恐龙": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "都市异能"
+    ]
+  },
+  "富豪街DS": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "蘑菇王国"
+    ]
+  },
+  "心跳回忆 Girl's Side 2nd Season": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "应援团2": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "忍者龙剑传 龙剑": {
+    "primary_shell": "忍者",
+    "secondary_shells": [
+      "战国"
+    ]
+  },
+  "真·三国无双DS 斗士之战": {
+    "primary_shell": "三国",
+    "secondary_shells": []
+  },
+  "雷顿教授与恶魔之箱": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "口袋妖怪不可思议的迷宫 时之探险队": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "流星洛克人2 狂战士×恐龙": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "都市异能"
+    ]
+  },
+  "太鼓达人DS 触摸演奏": {
+    "primary_shell": "音乐",
+    "secondary_shells": []
+  },
+  "前线任务 2089 疯狂边界": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "最终幻想战略版A2 封穴的魔法书": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "西幻精灵"
+    ]
+  },
+  "太鼓达人DS 触控音乐祭": {
+    "primary_shell": "音乐",
+    "secondary_shells": []
+  },
+  "超级机器人大战W": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "圣洁传说": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "家庭教师HITMAN REBORN! DS 火焰决战 骸之超能力": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "勇者斗恶龙V 天空的新娘": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "火焰之纹章 新·暗黑龙与光之剑": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙与地下城"
+    ]
+  },
+  "时空之轮": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "节奏天国 黄金版": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "雷顿教授与最后的时间旅行": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "恶魔城 被夺走的刻印": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "精灵宝可梦 白金": {
+    "primary_shell": "精灵",
+    "secondary_shells": []
+  },
+  "侠盗猎车手 血战唐人街": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "黑帮"
+    ]
+  },
+  "符文工厂3": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "无尽航路": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": []
+  },
+  "斯隆与马克海尔的谜之物语": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "立体绘图方块": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "巴哈姆特之血": {
+    "primary_shell": "高奇幻史诗",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "七日死游戏": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "诅咒"
+    ]
+  },
+  "真·女神转生 奇幻之旅": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "恶魔"
+    ]
+  },
+  "塞尔达传说 灵魂轨迹": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "口袋妖怪 心金/魂银": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "沙迦2 秘宝传说 命运女神": {
+    "primary_shell": "高奇幻史诗",
+    "secondary_shells": []
+  },
+  "光之4战士 最终幻想外传": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "真·女神转生 奇妙之旅": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "恶魔"
+    ]
+  },
+  "无限航路": {
+    "primary_shell": "太空歌剧",
+    "secondary_shells": []
+  },
+  "女神异闻录 恶魔幸存者": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "末世",
+      "恶魔"
+    ]
+  },
+  "符文工房3": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "马里奥与路易吉RPG3!!!": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "斯隆与马克贝尔的谜之物语": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "心跳回忆 Girl's Side 3rd Story": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "精灵宝可梦 心金/魂银": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "幽灵诡计": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "逆转检察官2": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "黄金太阳 漆黑的黎明": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "勇者斗恶龙怪兽篇 Joker 2": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "最后的故事": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "大神传 小小太阳": {
+    "primary_shell": "东方神话",
+    "secondary_shells": []
+  },
+  "光辉物语": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "符文工厂 海洋": {
+    "primary_shell": "田园奇幻",
+    "secondary_shells": [
+      "海洋冒险"
+    ]
+  },
+  "恶魔幸存者 2": {
+    "primary_shell": "末日东京",
+    "secondary_shells": [
+      "恶魔契约"
+    ]
+  },
+  "超级机器人大战L": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "卡比 群星大集合": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "七日死 目": {
+    "primary_shell": "都市传说",
+    "secondary_shells": [
+      "诅咒"
+    ]
+  },
+  "集合！卡比": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "勇者斗恶龙怪兽篇Joker 2 专家版": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "闪电十一人3 王牙": {
+    "primary_shell": "足球",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "符文工房 海洋": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "田园农耕"
+    ]
+  },
+  "七日死游戏 目": {
+    "primary_shell": "都市传说",
+    "secondary_shells": [
+      "诅咒"
+    ]
+  },
+  "海贼王 巨人战争2 新世界": {
+    "primary_shell": "海盗",
+    "secondary_shells": [
+      "异能"
+    ]
+  },
+  "宝可梦 信长的野望": {
+    "primary_shell": "战国",
+    "secondary_shells": [
+      "精灵"
+    ]
+  },
+  "极限脱出ADV 善人死亡": {
+    "primary_shell": "密室逃脱",
+    "secondary_shells": [
+      "赛博朋克"
+    ]
+  },
+  "塞尔达传说 四支剑 25周年纪念版": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "绘图方块3D": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "怪物猎人日记 暖洋洋的猫猫村G": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "勇者斗恶龙怪兽篇 Joker 2 专家版": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "符文工房4": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "牧场"
+    ]
+  },
+  "伊苏 塞尔塞塔的树海": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "古代文明"
+    ]
+  },
+  "超级机器人大战OG传说 魔装机神 元素领主": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "异世界"
+    ]
+  },
+  "海猫鸣泣之时 散 ～真实与幻想的夜想曲～": {
+    "primary_shell": "孤岛",
+    "secondary_shells": [
+      "魔女"
+    ]
+  },
+  "苍翼默示录 连续变幻2": {
+    "primary_shell": "科幻",
+    "secondary_shells": [
+      "魔幻科技"
+    ]
+  },
+  "幻想水浒传 编织百年时光": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "武侠"
+    ]
+  },
+  "沙迦3 时空之霸者 暗影或光明": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "时空穿越"
+    ]
+  },
+  "第七龙神2020": {
+    "primary_shell": "末日东京",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "弹波战机 爆裂": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "恶魔幸存者2": {
+    "primary_shell": "末日",
+    "secondary_shells": [
+      "恶魔契约"
+    ]
+  },
+  "沙迦3 时空之霸者 黑暗与光明": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "时空穿越"
+    ]
+  },
+  "世界树迷宫III 星海的访客": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "航海"
+    ]
+  },
+  "绘心教室": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "超级涂鸦冒险家": {
+    "primary_shell": "绘本",
+    "secondary_shells": []
+  },
+  "勇者斗恶龙怪兽篇Joker 2": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "最后之窗 真夜中的约束": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "极限脱出 9小时9人9扇门": {
+    "primary_shell": "密室逃脱",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "重装机兵3": {
+    "primary_shell": "废土",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "世界树迷宫3 星海的来访者": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "航海"
+    ]
+  },
+  "王国之心 Re:coded": {
+    "primary_shell": "迪士尼",
+    "secondary_shells": [
+      "二次元"
+    ]
+  },
+  "爱相随+": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "病房2": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "恐怖"
+    ]
+  },
+  "蓝龙 异界巨兽": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "四狂神战记": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "勇者斗恶龙 怪兽篇 Joker 2": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "无限边境 超级机器人大战OG传说 超越": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "异世界"
+    ]
+  },
+  "索尼克 色彩": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "牧场物语 双子村": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "牧场"
+    ]
+  },
+  "宝可梦 黑／白": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "雷顿教授与奇迹假面": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "勇者斗恶龙怪兽篇 Joker 2 专业版": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "诺拉与时间工房 雾之森的魔女": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "侦探神宫寺三郎 复仇之轮舞": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "宝可梦打字练习DS": {
+    "primary_shell": "精灵",
+    "secondary_shells": []
+  },
+  "怪盗鲁邦 史上最大头脑战": {
+    "primary_shell": "怪盗",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "激斗！自制机器人": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "宝可梦 黑2／白2": {
+    "primary_shell": "精灵",
+    "secondary_shells": []
+  },
+  "勇气默示录": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": []
+  },
+  "新光神话 帕尔提娜之镜": {
+    "primary_shell": "希腊神话",
+    "secondary_shells": []
+  },
+  "火焰之纹章 觉醒": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "王国之心 3D 梦降深处": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "符文工厂4": {
+    "primary_shell": "西幻精灵",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "新超级马力欧兄弟2": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "纸片马力欧 贴纸之星": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "雷顿教授VS逆转裁判": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "口袋妖怪 不可思议迷宫 玛格纳之门与无限迷宫": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "战国无双 编年史2nd": {
+    "primary_shell": "战国",
+    "secondary_shells": []
+  },
+  "女孩RPG 灰姑娘生活": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "夜店"
+    ]
+  },
+  "节奏怪盗R 拿破仑的遗产": {
+    "primary_shell": "怪盗",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "卡片战斗先导者 冲向胜利": {
+    "primary_shell": "卡牌竞技",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "宝可梦+信长的野望": {
+    "primary_shell": "战国",
+    "secondary_shells": [
+      "精灵"
+    ]
+  },
+  "新·光神话 帕尔提娜之镜": {
+    "primary_shell": "希腊神话",
+    "secondary_shells": []
+  },
+  "勇者斗恶龙怪兽篇 特瑞仙境3D": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "精灵"
+    ]
+  },
+  "口袋妖怪 黑2/白2": {
+    "primary_shell": "精灵",
+    "secondary_shells": []
+  },
+  "幻想生活": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "电波人间RPG 2": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "王国之心3D 梦降深处": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "世界树迷宫IV 传承的巨神": {
+    "primary_shell": "龙与地下城",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "恶魔召唤师 灵魂骇客": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "恶魔"
+    ]
+  },
+  "名侦探柯南 木偶交响曲": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "美食的俘虏 美食生存战": {
+    "primary_shell": "美食狩猎",
+    "secondary_shells": [
+      "异世界"
+    ]
+  },
+  "新光神话 帕露蒂娜之镜": {
+    "primary_shell": "希腊神话",
+    "secondary_shells": []
+  },
+  "卡片战斗先导者 骑士王的荣耀": {
+    "primary_shell": "卡牌竞技",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "太鼓之达人 小龙与神秘宝珠": {
+    "primary_shell": "和风奇幻",
+    "secondary_shells": [
+      "音乐"
+    ]
+  },
+  "精灵宝可梦 X／Y": {
+    "primary_shell": "精灵",
+    "secondary_shells": []
+  },
+  "怪物猎人4": {
+    "primary_shell": "原始狩猎",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "塞尔达传说 众神的三角力量2": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "动物之森 新叶": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "路易吉洋馆2": {
+    "primary_shell": "鬼屋",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "逆转裁判5": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "马里奥与路易吉RPG4 梦境冒险": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "新·世界树的迷宫 千年少女": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "真·女神转生IV": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "末日",
+      "恶魔"
+    ]
+  },
+  "蒸汽世界 挖掘": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "地心",
+      "机器人"
+    ]
+  },
+  "妖怪手表": {
+    "primary_shell": "妖怪",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "雷顿教授与超文明A的遗产": {
+    "primary_shell": "考古",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "纸片马里奥 贴纸之星": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "闪乱神乐 爆裂 红莲的少女们": {
+    "primary_shell": "忍者",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "交叉领域计划": {
+    "primary_shell": "跨界",
+    "secondary_shells": [
+      "机甲",
+      "奇幻"
+    ]
+  },
+  "怪物猎人3G": {
+    "primary_shell": "原始荒野",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "口袋妖怪不可思议的迷宫 玛格纳之门与无限迷宫": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "勇者斗恶龙VII 伊甸的战士们": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "真女神转生IV": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "恶魔",
+      "赛博朋克"
+    ]
+  },
+  "新光神话 帕鲁迪娜之镜": {
+    "primary_shell": "希腊神话",
+    "secondary_shells": []
+  },
+  "火焰纹章 觉醒": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "马里奥与路易RPG4 梦境冒险": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "星之卡比 三重豪华": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "新世界树迷宫 千年少女": {
+    "primary_shell": "龙与地下城",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "恶魔幸存者2 断码": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "光辉物语 完美编年史": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "超级机器人大战UX": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "卡片战斗先导者 胜利之路": {
+    "primary_shell": "校园",
+    "secondary_shells": []
+  },
+  "Wii Sports": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "疯狂兔子 派对": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "超级猴子球 香蕉闪电战": {
+    "primary_shell": "卡通",
+    "secondary_shells": []
+  },
+  "创伤中心 第二意见": {
+    "primary_shell": "科幻医疗",
+    "secondary_shells": []
+  },
+  "龙珠Z 电光火石 NEO": {
+    "primary_shell": "二次元",
+    "secondary_shells": [
+      "格斗"
+    ]
+  },
+  "使命召唤3": {
+    "primary_shell": "二战",
+    "secondary_shells": []
+  },
+  "Elebits": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "精灵"
+    ]
+  },
+  "极品飞车 卡本峡谷": {
+    "primary_shell": "街头赛车",
+    "secondary_shells": []
+  },
+  "瓦里奥制造 平滑移动": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "激情大卡车": {
+    "primary_shell": "越野赛车",
+    "secondary_shells": []
+  },
+  "魔法飞球 Wii": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "运动"
+    ]
+  },
+  "SD高达 疾袭流星锤": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "缘日的达人": {
+    "primary_shell": "日式庙会",
+    "secondary_shells": []
+  },
+  "雷曼 疯狂兔子": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "恶搞"
+    ]
+  },
+  "Trauma Center: Second Opinion": {
+    "primary_shell": "科幻医疗",
+    "secondary_shells": []
+  },
+  "WarioWare: Smooth Moves": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "Excite Truck": {
+    "primary_shell": "越野赛车",
+    "secondary_shells": []
+  },
+  "GT Pro Series": {
+    "primary_shell": "赛车",
+    "secondary_shells": []
+  },
+  "Far Cry Vengeance": {
+    "primary_shell": "孤岛",
+    "secondary_shells": [
+      "丛林"
+    ]
+  },
+  "Marvel: Ultimate Alliance": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": []
+  },
+  "Call of Duty 3": {
+    "primary_shell": "二战",
+    "secondary_shells": []
+  },
+  "Tony Hawk's Downhill Jam": {
+    "primary_shell": "滑板",
+    "secondary_shells": [
+      "街头"
+    ]
+  },
+  "Madden NFL 07": {
+    "primary_shell": "橄榄球",
+    "secondary_shells": []
+  },
+  "Need for Speed: Carbon": {
+    "primary_shell": "街头赛车",
+    "secondary_shells": [
+      "改装车"
+    ]
+  },
+  "Metal Slug Anthology": {
+    "primary_shell": "现代战争",
+    "secondary_shells": []
+  },
+  "激情卡车": {
+    "primary_shell": "越野赛车",
+    "secondary_shells": []
+  },
+  "御姐玫瑰X 忌血的继承者": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "Necro-Nesia": {
+    "primary_shell": "荒岛",
+    "secondary_shells": [
+      "虫族",
+      "恐怖"
+    ]
+  },
+  "翼之骑士": {
+    "primary_shell": "海岛",
+    "secondary_shells": [
+      "休闲"
+    ]
+  },
+  "魔法飞球": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "高尔夫"
+    ]
+  },
+  "GT职业赛车": {
+    "primary_shell": "赛车",
+    "secondary_shells": []
+  },
+  "蜡笔小新 最强家族春日部之王": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "日常"
+    ]
+  },
+  "BLEACH 死神 Wii 白刃闪耀轮舞曲": {
+    "primary_shell": "死神",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "SD高达 疾速流星锤": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "科幻"
+    ]
+  },
+  "转转球迷宫": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "超级马力欧银河": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "银河战士Prime 3 堕落": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "赏金猎人"
+    ]
+  },
+  "生化危机4 Wii版": {
+    "primary_shell": "丧尸",
+    "secondary_shells": [
+      "欧洲乡村"
+    ]
+  },
+  "Wii Fit": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "马里奥与索尼克在北京奥运会": {
+    "primary_shell": "奥运会",
+    "secondary_shells": []
+  },
+  "大神": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "和风"
+    ]
+  },
+  "火焰之纹章 晓之女神": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "西幻精灵"
+    ]
+  },
+  "宝岛Z 巴尔巴罗斯的秘宝": {
+    "primary_shell": "海盗",
+    "secondary_shells": [
+      "奇幻"
+    ]
+  },
+  "英雄不再": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "杀手"
+    ]
+  },
+  "勇者斗恶龙 神剑 假面女王与镜之塔": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "灵魂能力 传奇": {
+    "primary_shell": "历史奇幻",
+    "secondary_shells": [
+      "刀剑"
+    ]
+  },
+  "生化危机 安布雷拉历代记": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "生化危机",
+      "特种部队"
+    ]
+  },
+  "马里奥派对8": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "派对竞技"
+    ]
+  },
+  "宝岛Z：红胡子的秘宝": {
+    "primary_shell": "海盗",
+    "secondary_shells": []
+  },
+  "生化危机：安布雷拉历代记": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "生化危机",
+      "特种部队"
+    ]
+  },
+  "火焰之纹章：晓之女神": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "西幻精灵"
+    ]
+  },
+  "雷曼：疯狂兔子2": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "恶搞"
+    ]
+  },
+  "灵魂能力：传奇": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "冷兵器"
+    ]
+  },
+  "勇者斗恶龙：神剑 假面女王与镜之塔": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "陆行鸟的不可思议迷宫：忘却时间的迷宫": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "荣誉勋章：英雄2": {
+    "primary_shell": "二战",
+    "secondary_shells": [
+      "特种部队"
+    ]
+  },
+  "古墓丽影：周年纪念版": {
+    "primary_shell": "考古探险",
+    "secondary_shells": [
+      "失落文明"
+    ]
+  },
+  "吉他英雄3：摇滚传奇": {
+    "primary_shell": "音乐",
+    "secondary_shells": [
+      "摇滚"
+    ]
+  },
+  "实况足球2008": {
+    "primary_shell": "足球",
+    "secondary_shells": []
+  },
+  "我的模拟人生": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "城镇建造"
+    ]
+  },
+  "生化危机：安布雷拉编年史": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "生化危机",
+      "特种部队"
+    ]
+  },
+  "陆行鸟不可思议迷宫：忘却时间的迷宫": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "勇者斗恶龙 神剑：假面女王与镜之塔": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "银河战士Prime 3：堕落": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "任天堂明星大乱斗X": {
+    "primary_shell": "二次元",
+    "secondary_shells": [
+      "跨界竞技"
+    ]
+  },
+  "马里奥赛车Wii": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "动物森友会 城市大家庭": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "动物小镇"
+    ]
+  },
+  "零～月蚀的假面～": {
+    "primary_shell": "和风恐怖",
+    "secondary_shells": [
+      "民俗怪谈"
+    ]
+  },
+  "丧尸围城 丧尸的祭品": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "商场"
+    ]
+  },
+  "陆行鸟与魔法绘本 魔女与少女与5勇者": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "风来的西林3 机关屋的睡美人": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "和风"
+    ]
+  },
+  "仙乐传说 -拉塔特斯克的骑士-": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "符文工房 边境": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "田园",
+      "地下城"
+    ]
+  },
+  "天灾 危机之日": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "瓦里奥大陆 摇晃": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "寻宝"
+    ]
+  },
+  "雷曼 疯狂兔子 电视聚会": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "综艺"
+    ]
+  },
+  "天灾：危机之日": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "瓦里奥大陆：摇摆": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "寻宝"
+    ]
+  },
+  "符文工房：边境": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "风来的西林3：机关屋的睡美人": {
+    "primary_shell": "战国",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "仙乐传说：拉塔特斯克的骑士": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "精灵"
+    ]
+  },
+  "国王物语": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "428：被封锁的涩谷": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "丧尸围城：丧尸的祭品": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "商场"
+    ]
+  },
+  "雷曼：疯狂兔子电视派对": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "综艺"
+    ]
+  },
+  "迷失之风": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "精灵"
+    ]
+  },
+  "新超级马里奥兄弟Wii": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "Wii运动 度假胜地": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "怪物猎人3": {
+    "primary_shell": "原始荒野",
+    "secondary_shells": [
+      "巨兽狩猎"
+    ]
+  },
+  "疯狂世界": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "死亡游戏"
+    ]
+  },
+  "胧村正": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "江户时代",
+      "妖刀"
+    ]
+  },
+  "银河战士Prime 三部曲": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "死亡空间 血统": {
+    "primary_shell": "太空殖民",
+    "secondary_shells": [
+      "丧尸末世"
+    ]
+  },
+  "罪与罚 宇宙的后继者": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "机甲",
+      "末世"
+    ]
+  },
+  "生化危机 暗黑编年史": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "最终幻想水晶编年史 水晶信使": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": []
+  },
+  "弧光幻想曲": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "异色代码 R 记忆之门": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "太鼓达人Wii 咚咚和二代目": {
+    "primary_shell": "和风太鼓",
+    "secondary_shells": [
+      "音乐"
+    ]
+  },
+  "陆行鸟与魔法绘本 魔女与少女与5名勇者": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "风之克罗诺亚 通往幻梦界之门": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "天诛4": {
+    "primary_shell": "忍者",
+    "secondary_shells": [
+      "战国"
+    ]
+  },
+  "牧场物语 欢乐动物进行曲": {
+    "primary_shell": "牧场",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "零 ～月蚀的假面～": {
+    "primary_shell": "日式恐怖",
+    "secondary_shells": [
+      "孤岛"
+    ]
+  },
+  "428 ～被封锁的涩谷～": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "悬疑"
+    ]
+  },
+  "彩虹队长": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": []
+  },
+  "噬魂师 单调公主": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "死神"
+    ]
+  },
+  "家庭滑雪": {
+    "primary_shell": "滑雪",
+    "secondary_shells": []
+  },
+  "死亡之屋：赶尽杀绝": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": []
+  },
+  "罪与罚：宇宙的后继者": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "机甲",
+      "末世"
+    ]
+  },
+  "异色代码：双重记忆": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "超自然"
+    ]
+  },
+  "最终幻想水晶编年史：时之回声": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": []
+  },
+  "生化危机：暗黑编年史": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "生化"
+    ]
+  },
+  "寂静岭：破碎的记忆": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "现代都市",
+      "心理惊悚"
+    ]
+  },
+  "太鼓达人Wii：咚咚和二代目": {
+    "primary_shell": "和风太鼓",
+    "secondary_shells": [
+      "音乐"
+    ]
+  },
+  "凉宫春日的并列": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "平行世界"
+    ]
+  },
+  "勇者斗恶龙 怪兽战斗之路 胜利": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "小小国王与约定之国：最终幻想水晶编年史": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "王国"
+    ]
+  },
+  "死亡之屋 赶尽杀绝": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": []
+  },
+  "最终幻想水晶编年史 时之回声": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": []
+  },
+  "小小国王与约定之国 最终幻想水晶编年史": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "王国"
+    ]
+  },
+  "寂静岭 破碎的记忆": {
+    "primary_shell": "心理恐怖",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "致命生物": {
+    "primary_shell": "昆虫",
+    "secondary_shells": [
+      "西部"
+    ]
+  },
+  "宝岛Z 巴尔巴洛斯的秘宝": {
+    "primary_shell": "海盗",
+    "secondary_shells": []
+  },
+  "阿瓦隆代码": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "预言"
+    ]
+  },
+  "超级马力欧银河2": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "度假胜地": {
+    "primary_shell": "热带海岛",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "塞尔达传说 天空之剑": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "高奇幻史诗"
+    ]
+  },
+  "舞力全开3": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "星之卡比Wii": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "异度之刃": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "科幻"
+    ]
+  },
+  "超级马里奥3D收藏辑": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "雷曼 起源": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "马里奥与索尼克在伦敦2012奥运会": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "乐高星球大战3：克隆战争": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": []
+  },
+  "疯狂兔子 活力出击": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "潘多拉之塔 直到重回你身边": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "诅咒古堡"
+    ]
+  },
+  "节奏天国 发烧": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "Wii派对": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "去度假": {
+    "primary_shell": "热带海岛",
+    "secondary_shells": []
+  },
+  "007黄金眼 重装上阵": {
+    "primary_shell": "间谍",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "星之卡比 Wii": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "勇者斗恶龙25周年纪念 勇者斗恶龙I·II·III": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "闪电十一人 强袭者": {
+    "primary_shell": "足球",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "战国BASARA3 宴": {
+    "primary_shell": "战国",
+    "secondary_shells": []
+  },
+  "丧尸围城2 绝密档案": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "疯狂世界2 辛迪加": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "去月球": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "英雄不再 红色地带": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "米奇 幻影城堡": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "富豪街Wii": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "大家的庙会": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "Wii游乐场 运动胜地": {
+    "primary_shell": "热带海岛",
+    "secondary_shells": []
+  },
+  "乐高星球大战3 克隆战争": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": []
+  },
+  "潘多拉之塔": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "诅咒古堡"
+    ]
+  },
+  "勇者斗恶龙X 觉醒的五种族 Online": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "舞力全开4": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "乐高蝙蝠侠2：DC超级英雄": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "乐高积木"
+    ]
+  },
+  "星之卡比 20周年特别收藏集": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "马里奥派对9": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "零：真红之蝶": {
+    "primary_shell": "日式恐怖",
+    "secondary_shells": [
+      "民俗怪谈"
+    ]
+  },
+  "符文工房：海洋": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "海岛",
+      "牧场"
+    ]
+  },
+  "塞尔达传说：天空之剑": {
+    "primary_shell": "高奇幻史诗",
+    "secondary_shells": [
+      "浮空岛"
+    ]
+  },
+  "节奏天国 发烧版": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "潘多拉之塔 直到你身边": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "诅咒古堡"
+    ]
+  },
+  "零 ～真红之蝶～": {
+    "primary_shell": "日式恐怖",
+    "secondary_shells": [
+      "民俗怪谈"
+    ]
+  },
+  "星之卡比 20周年特别合集": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "乐高蝙蝠侠2 DC超级英雄": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "乐高积木"
+    ]
+  },
+  "小龙斯派罗 巨人": {
+    "primary_shell": "西幻精灵",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "史诗米奇2 双重力量": {
+    "primary_shell": "迪士尼",
+    "secondary_shells": [
+      "废土"
+    ]
+  },
+  "FIFA 13": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "NBA 2K13": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "乐高指环王": {
+    "primary_shell": "高奇幻史诗",
+    "secondary_shells": [
+      "乐高积木"
+    ]
+  },
+  "小龙斯派罗：巨人": {
+    "primary_shell": "西幻精灵",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "史诗米奇2：双重力量": {
+    "primary_shell": "迪士尼",
+    "secondary_shells": [
+      "废土"
+    ]
+  },
+  "大金刚国度 回归": {
+    "primary_shell": "热带丛林",
+    "secondary_shells": []
+  },
+  "星之卡比 毛线传说": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "毛线世界"
+    ]
+  },
+  "索尼克 缤纷色彩": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "游乐园"
+    ]
+  },
+  "银河战士 另一个M": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "异形"
+    ]
+  },
+  "英雄不再2 负隅顽抗": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "杀手"
+    ]
+  },
+  "赤铁2": {
+    "primary_shell": "西部拓荒",
+    "secondary_shells": [
+      "科幻",
+      "武士"
+    ]
+  },
+  "丧尸围城": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "商场"
+    ]
+  },
+  "毛线卡比 毛线传说": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "毛线世界"
+    ]
+  },
+  "迪士尼 史诗米奇": {
+    "primary_shell": "废土",
+    "secondary_shells": [
+      "迪士尼",
+      "童话"
+    ]
+  },
+  "黄金眼007": {
+    "primary_shell": "间谍",
+    "secondary_shells": [
+      "冷战"
+    ]
+  },
+  "英雄不再2：负隅顽抗": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "杀手"
+    ]
+  },
+  "毛线卡比": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "毛线世界"
+    ]
+  },
+  "索尼克色彩": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "游乐园"
+    ]
+  },
+  "大神传 ～小小太阳～": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "水墨风"
+    ]
+  },
+  "银河战士：另一个M": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "异形"
+    ]
+  },
+  "马里奥大运动会": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "运动"
+    ]
+  },
+  "大金刚国度：回归": {
+    "primary_shell": "热带丛林",
+    "secondary_shells": []
+  },
+  "超级马里奥银河2": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "索尼克：色彩": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "游乐园"
+    ]
+  },
+  "塞尔达传说 时之笛 3D": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "超级马力欧 3D乐园": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "马力欧卡丁车7": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "生化危机 启示录": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": []
+  },
+  "推拉方块": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "任天猫狗": {
+    "primary_shell": "宠物",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "战国无双 编年史": {
+    "primary_shell": "战国",
+    "secondary_shells": []
+  },
+  "深渊传说": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "星际火狐64 3D": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "合金装备 食蛇者3D": {
+    "primary_shell": "间谍",
+    "secondary_shells": [
+      "特种部队"
+    ]
+  },
+  "飞行俱乐部 度假胜地": {
+    "primary_shell": "海岛",
+    "secondary_shells": [
+      "运动"
+    ]
+  },
+  "超级口袋妖怪大乱战": {
+    "primary_shell": "精灵",
+    "secondary_shells": []
+  },
+  "蜡笔小新：呼风唤雨大作战": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "二次元"
+    ]
+  },
+  "双笔运动": {
+    "primary_shell": "运动",
+    "secondary_shells": [
+      "海岛"
+    ]
+  },
+  "立体忍者": {
+    "primary_shell": "忍者",
+    "secondary_shells": [
+      "战国"
+    ]
+  },
+  "生化危机 雇佣兵 3D": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": []
+  },
+  "钢铁机师": {
+    "primary_shell": "深海",
+    "secondary_shells": [
+      "潜艇"
+    ]
+  },
+  "毁灭英雄": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "吃豆人与小蜜蜂 维度": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "模拟人生3 宠物": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "宠物"
+    ]
+  },
+  "沥青都市 3D": {
+    "primary_shell": "赛车",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "俄罗斯方块 轴": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "梦幻马戏团 3D": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "鱼眼3D": {
+    "primary_shell": "深海",
+    "secondary_shells": [
+      "宠物"
+    ]
+  },
+  "纸片马力欧 超级贴纸": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "新超级马力欧兄弟U": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "僵尸U": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": []
+  },
+  "任天堂乐园": {
+    "primary_shell": "主题乐园",
+    "secondary_shells": [
+      "任天堂"
+    ]
+  },
+  "无双大蛇2 超越": {
+    "primary_shell": "三国",
+    "secondary_shells": [
+      "战国",
+      "东方神话"
+    ]
+  },
+  "暗黑血统2": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "蝙蝠侠：阿卡姆之城 武装版": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "现代都市",
+      "侦探"
+    ]
+  },
+  "刺客信条3": {
+    "primary_shell": "美国独立战争",
+    "secondary_shells": [
+      "刺客"
+    ]
+  },
+  "使命召唤：黑色行动2": {
+    "primary_shell": "现代军事",
+    "secondary_shells": [
+      "近未来科幻"
+    ]
+  },
+  "索尼克与世嘉全明星赛车 变形": {
+    "primary_shell": "赛车",
+    "secondary_shells": [
+      "世嘉"
+    ]
+  },
+  "铁拳TT2 Wii U版": {
+    "primary_shell": "现代格斗",
+    "secondary_shells": []
+  },
+  "质量效应3 特别版": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "极品飞车：最高通缉U": {
+    "primary_shell": "街头赛车",
+    "secondary_shells": [
+      "警匪追逐"
+    ]
+  },
+  "你的塑身：进化版2013": {
+    "primary_shell": "健身",
+    "secondary_shells": []
+  },
+  "疯兔乐园": {
+    "primary_shell": "主题乐园",
+    "secondary_shells": [
+      "疯兔"
+    ]
+  },
+  "歌唱聚会": {
+    "primary_shell": "音乐",
+    "secondary_shells": [
+      "派对"
+    ]
+  },
+  "忍者龙剑传3：刀锋边缘": {
+    "primary_shell": "忍者",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "无双大蛇2 Hyper": {
+    "primary_shell": "三国",
+    "secondary_shells": [
+      "战国",
+      "东方神话"
+    ]
+  },
+  "疯狂兔子乐园": {
+    "primary_shell": "主题乐园",
+    "secondary_shells": [
+      "疯兔"
+    ]
+  },
+  "三位一体2：导演剪辑版": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "超级马力欧3D世界": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "塞尔达传说 风之杖 HD": {
+    "primary_shell": "海岛",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "皮克敏3": {
+    "primary_shell": "异星",
+    "secondary_shells": [
+      "微观世界"
+    ]
+  },
+  "神奇101": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "乐高都市 卧底风云": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "警察",
+      "乐高"
+    ]
+  },
+  "怪物猎人3G HD版": {
+    "primary_shell": "原始荒野",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "新超级路易吉U": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "雷曼 传奇": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "音乐"
+    ]
+  },
+  "索尼克 失落世界": {
+    "primary_shell": "浮空岛",
+    "secondary_shells": [
+      "外星"
+    ]
+  },
+  "刺客信条4 黑旗": {
+    "primary_shell": "海盗",
+    "secondary_shells": [
+      "刺客"
+    ]
+  },
+  "勇气默示录 完全版": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "口袋妖怪 X/Y": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "来吧！动物之森": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "动物"
+    ]
+  },
+  "塞尔达传说 众神的三角神力2": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "精灵宝可梦 X/Y": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "妖怪手表2 元祖/本家": {
+    "primary_shell": "妖怪",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "任天堂明星大乱斗 for 3DS": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "塞尔达无双": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "三国"
+    ]
+  },
+  "女神异闻录Q 迷宫暗影": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "最终幻想 探求者": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": []
+  },
+  "世界树与不可思议的迷宫": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "徽章战士8 甲虫版/锹形虫版": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "苍蓝雷霆 刚巴尔特": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "都市异能"
+    ]
+  },
+  "电波人间RPG Free!": {
+    "primary_shell": "二次元",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "海贼王 超巨人战争X": {
+    "primary_shell": "海盗",
+    "secondary_shells": [
+      "奇幻"
+    ]
+  },
+  "卡片战斗先导者 锁定胜利": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "二次元"
+    ]
+  },
+  "勇气默示录：飞舞的妖精": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "战国无双 编年史3": {
+    "primary_shell": "战国",
+    "secondary_shells": []
+  },
+  "英雄银行": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "金融"
+    ]
+  },
+  "禁忌的玛格娜": {
+    "primary_shell": "西幻精灵",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "蝙蝠侠 阿卡姆起源": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "侦探",
+      "都市犯罪"
+    ]
+  },
+  "杀出重围 人类革命 导演剪辑版": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "义体改造",
+      "黑客"
+    ]
+  },
+  "极品飞车 最高通缉 U": {
+    "primary_shell": "街头赛车",
+    "secondary_shells": [
+      "警匪追逐"
+    ]
+  },
+  "小龙斯派罗 交换力量": {
+    "primary_shell": "龙族",
+    "secondary_shells": [
+      "奇幻冒险"
+    ]
+  },
+  "乐高都市：卧底风云": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "警匪"
+    ]
+  },
+  "怪物猎人3G 高清版": {
+    "primary_shell": "原始生态",
+    "secondary_shells": [
+      "怪兽",
+      "狩猎"
+    ]
+  },
+  "索尼克：失落世界": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "奇幻冒险"
+    ]
+  },
+  "雷曼：传奇": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "音乐"
+    ]
+  },
+  "生化危机：启示录 高清版": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "生化危机"
+    ]
+  },
+  "杀出重围3：人类革命 导演剪辑版": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "义体改造",
+      "黑客"
+    ]
+  },
+  "蝙蝠侠：阿卡姆起源": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "侦探",
+      "都市犯罪"
+    ]
+  },
+  "刺客信条4：黑旗": {
+    "primary_shell": "海盗",
+    "secondary_shells": [
+      "加勒比",
+      "刺客"
+    ]
+  },
+  "小龙斯派罗：交换力量": {
+    "primary_shell": "龙族",
+    "secondary_shells": [
+      "奇幻冒险"
+    ]
+  },
+  "迪士尼无限": {
+    "primary_shell": "二次元",
+    "secondary_shells": [
+      "沙盒"
+    ]
+  },
+  "任天堂大陆": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "马力欧卡丁车8": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "任天堂明星大乱斗 for Wii U": {
+    "primary_shell": "二次元",
+    "secondary_shells": [
+      "格斗"
+    ]
+  },
+  "猎天使魔女2": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "魔女",
+      "都市异能"
+    ]
+  },
+  "大金刚 热带寒流": {
+    "primary_shell": "热带岛屿",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "森喜刚 热带寒流": {
+    "primary_shell": "热带岛屿",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "前进！奇诺比奥队长": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "箱庭"
+    ]
+  },
+  "铲子骑士": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "超凡双生": {
+    "primary_shell": "灵异",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "光之子": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "推拉方块世界": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "零：濡鸦之巫女": {
+    "primary_shell": "日式灵异",
+    "secondary_shells": [
+      "巫女"
+    ]
+  },
+  "看门狗": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "黑客",
+      "都市犯罪"
+    ]
+  },
+  "乐高蝙蝠侠3：飞跃哥谭市": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "太空",
+      "卡通"
+    ]
+  },
+  "闪乱神乐 Burst 红莲的少女们": {
+    "primary_shell": "忍者学院",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "超级街头霸王IV 3D EDITION": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "格斗擂台"
+    ]
+  },
+  "雷顿教授与奇迹的假面": {
+    "primary_shell": "欧洲复古",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "生化危机 佣兵 3D": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": []
+  },
+  "模拟人生3": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "立体忍者 影之章": {
+    "primary_shell": "战国",
+    "secondary_shells": [
+      "忍者"
+    ]
+  },
+  "吃豆人与小蜜蜂 3D": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "疯狂兔子 时空旅行": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "穿越"
+    ]
+  },
+  "沥青都市 喷射": {
+    "primary_shell": "赛车",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "来吧！动物森友会": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "动物"
+    ]
+  },
+  "卡片召唤师": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "闪乱神乐Burst 红莲的少女们": {
+    "primary_shell": "忍者学院",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "世界树迷宫4 传承的巨神": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "终极军团": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "校园",
+      "星际科幻"
+    ]
+  },
+  "宝可梦 X/Y": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "塞尔达传说：众神的三角力量2": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "火焰纹章：觉醒": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "路易吉洋楼2": {
+    "primary_shell": "鬼屋",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "马里奥与路易吉RPG4：梦境冒险": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "梦境"
+    ]
+  },
+  "新·世界树迷宫：千年王国的少女": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "蒸汽世界：挖掘": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "废土",
+      "机器人"
+    ]
+  },
+  "纸片马里奥：贴纸之星": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "新·世界树的迷宫 千年王国的少女": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "口袋妖怪 X·Y": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "初音未来 未来计划2": {
+    "primary_shell": "虚拟偶像",
+    "secondary_shells": [
+      "音乐"
+    ]
+  },
+  "新·世界树迷宫 千年王国的少女": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "勇气默示录 飞天仙子": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "魔界战记5 完整版": {
+    "primary_shell": "魔界",
+    "secondary_shells": [
+      "恶魔"
+    ]
+  },
+  "神巫女": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "妖怪"
+    ]
+  },
+  "优雅爆破": {
+    "primary_shell": "太空科幻",
+    "secondary_shells": []
+  },
+  "蛇道": {
+    "primary_shell": "奇幻",
+    "secondary_shells": []
+  },
+  "过气英雄": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "极速赛车RMX": {
+    "primary_shell": "科幻赛车",
+    "secondary_shells": []
+  },
+  "洞穴物语+": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "科幻"
+    ]
+  },
+  "我是刹那": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "极寒末世"
+    ]
+  },
+  "无夜之国2：新月的新娘": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "百合"
+    ]
+  },
+  "海之号角：神秘海怪": {
+    "primary_shell": "奇幻海洋",
+    "secondary_shells": [
+      "海岛"
+    ]
+  },
+  "乐高城市：卧底风云": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "警匪"
+    ]
+  },
+  "终极街头霸王2：最后的挑战者": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "格斗"
+    ]
+  },
+  "命运石之门 精英": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "时间穿越"
+    ]
+  },
+  "生化危机：启示录 揭幕版": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "邮轮"
+    ]
+  },
+  "生化危机：启示录2": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "孤岛"
+    ]
+  },
+  "龙珠：超宇宙2": {
+    "primary_shell": "龙珠",
+    "secondary_shells": [
+      "多元宇宙"
+    ]
+  },
+  "蒸汽世界2": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "超惑星战记零": {
+    "primary_shell": "异星科幻",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "洞窟物语+": {
+    "primary_shell": "奇幻",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "铲子骑士：磨难之灵": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "Fast RMX": {
+    "primary_shell": "科幻赛车",
+    "secondary_shells": []
+  },
+  "宝可梦铁拳锦标赛DX": {
+    "primary_shell": "宝可梦",
+    "secondary_shells": [
+      "格斗"
+    ]
+  },
+  "火焰纹章无双": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "高奇幻史诗"
+    ]
+  },
+  "超惑星战记 Zero": {
+    "primary_shell": "异星科幻",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "优雅爆机": {
+    "primary_shell": "太空科幻",
+    "secondary_shells": []
+  },
+  "火箭联盟": {
+    "primary_shell": "科幻",
+    "secondary_shells": [
+      "足球",
+      "赛车"
+    ]
+  },
+  "黑色洛城": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "挺进地牢": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "枪械"
+    ]
+  },
+  "神奇小子：龙之陷阱": {
+    "primary_shell": "奇幻",
+    "secondary_shells": [
+      "兽人"
+    ]
+  },
+  "蘑菇队长 宝藏追踪": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "箱庭世界"
+    ]
+  },
+  "超凡双生 导演剪辑版": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "零 濡鸦之巫女": {
+    "primary_shell": "日式灵异",
+    "secondary_shells": [
+      "巫女"
+    ]
+  },
+  "乐高蝙蝠侠3 飞跃哥谭市": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "太空",
+      "乐高"
+    ]
+  },
+  "索尼克音爆 太古的秘宝": {
+    "primary_shell": "远古遗迹",
+    "secondary_shells": [
+      "科幻奇幻"
+    ]
+  },
+  "迪士尼无限 2.0": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "迪士尼",
+      "玩具"
+    ]
+  },
+  "天空斯派罗 陷阱别动队": {
+    "primary_shell": "玩具",
+    "secondary_shells": [
+      "奇幻"
+    ]
+  },
+  "忍者龙剑传 刀锋边缘": {
+    "primary_shell": "忍者",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "绘心教室 速写版": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "塞尔达传说 旷野之息": {
+    "primary_shell": "后启示录",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "超级马力欧 奥德赛": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "环球旅行"
+    ]
+  },
+  "异度神剑2": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "巨神兽"
+    ]
+  },
+  "斯普拉遁2": {
+    "primary_shell": "潮流都市",
+    "secondary_shells": [
+      "乌贼"
+    ]
+  },
+  "马力欧卡丁车8 豪华版": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "赛车"
+    ]
+  },
+  "ARMS": {
+    "primary_shell": "近未来",
+    "secondary_shells": [
+      "格斗"
+    ]
+  },
+  "1-2-Switch": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "火焰之纹章无双": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "你裁我剪！斯尼帕": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "噗哟噗哟俄罗斯方块": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "铲子骑士：无主珍宝": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "我的世界：Switch版": {
+    "primary_shell": "方块世界",
+    "secondary_shells": []
+  },
+  "星露谷物语": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "牧场"
+    ]
+  },
+  "索尼克狂热": {
+    "primary_shell": "科幻奇幻",
+    "secondary_shells": [
+      "复古"
+    ]
+  },
+  "以撒的结合：胎衣+": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "神臂斗士": {
+    "primary_shell": "近未来",
+    "secondary_shells": [
+      "格斗"
+    ]
+  },
+  "魔界战记5 完全版": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "恶魔"
+    ]
+  },
+  "上古卷轴5：天际": {
+    "primary_shell": "北欧神话",
+    "secondary_shells": [
+      "中世纪奇幻",
+      "龙族"
+    ]
+  },
+  "生化危机 启示录 合集": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "孤岛"
+    ]
+  },
+  "高尔夫物语": {
+    "primary_shell": "高尔夫",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "无夜之国2：新月的花嫁": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "美少女",
+      "使魔"
+    ]
+  },
+  "任天堂明星大乱斗 特别版": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "超级马力欧派对": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "精灵宝可梦 Let's Go！皮卡丘／Let's Go！伊布": {
+    "primary_shell": "宠物",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "星之卡比 新星同盟": {
+    "primary_shell": "梦幻星球",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "马力欧网球 王牌": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "网球"
+    ]
+  },
+  "歧路旅人": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "异度神剑2 黄金之国伊拉": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "古代战争"
+    ]
+  },
+  "空洞骑士": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "虫族",
+      "暗黑奇幻"
+    ]
+  },
+  "死亡细胞": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "蔚蓝": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "传说之下": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "堡垒之夜": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "暗黑破坏神III 永恒之战版": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "文明VI": {
+    "primary_shell": "人类文明",
+    "secondary_shells": []
+  },
+  "煮糊了2": {
+    "primary_shell": "料理",
+    "secondary_shells": []
+  },
+  "怪物猎人XX 国际版": {
+    "primary_shell": "原始狩猎",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "太鼓之达人 Nintendo Switch版！": {
+    "primary_shell": "音乐",
+    "secondary_shells": [
+      "和风"
+    ]
+  },
+  "战场女武神4": {
+    "primary_shell": "架空二战",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "马里奥网球 王牌": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "网球"
+    ]
+  },
+  "黑暗之魂 重制版": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "洛克人11": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "近未来"
+    ]
+  },
+  "龙珠 斗士Z": {
+    "primary_shell": "动漫风",
+    "secondary_shells": [
+      "格斗"
+    ]
+  },
+  "文明6": {
+    "primary_shell": "人类文明",
+    "secondary_shells": []
+  },
+  "暗黑破坏神3 永恒之战版": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "太鼓之达人 Nintendo Switch版": {
+    "primary_shell": "音乐",
+    "secondary_shells": [
+      "和风"
+    ]
+  },
+  "怪物猎人XX": {
+    "primary_shell": "原始蛮荒",
+    "secondary_shells": [
+      "巨型怪兽",
+      "狩猎"
+    ]
+  },
+  "龙之死印": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "堕落军团：荣耀崛起": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "战争"
+    ]
+  },
+  "伊苏VIII：丹娜的陨涕日": {
+    "primary_shell": "孤岛",
+    "secondary_shells": [
+      "古代文明"
+    ]
+  },
+  "信使": {
+    "primary_shell": "忍者",
+    "secondary_shells": [
+      "像素风",
+      "时空穿越"
+    ]
+  },
+  "陷阵之志": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "怪兽",
+      "末世"
+    ]
+  },
+  "八方旅人": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "精灵宝可梦 Let's Go！皮卡丘/伊布": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "说谎公主与盲眼王子": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "神之战 完整传奇": {
+    "primary_shell": "东方神话",
+    "secondary_shells": []
+  },
+  "少女与战车 梦幻大会战": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "旗帜传说3": {
+    "primary_shell": "北欧神话",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "堕落军团 荣耀崛起": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "战争"
+    ]
+  },
+  "永恒边缘": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "深渊狂猎": {
+    "primary_shell": "地下城",
+    "secondary_shells": []
+  },
+  "佣兵传说 编年史": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "幻想国物语 艾尔内亚王国": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "点心世界 黄金版": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "光明之响 龙奏回音": {
+    "primary_shell": "龙族",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "夜勤人": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "洛克人11 命运的齿轮": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "赛博朋克"
+    ]
+  },
+  "SNK女中豪杰 狂暴双打": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "美妙世界 最终混音": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "都市异能"
+    ]
+  },
+  "尤库的小岛速递": {
+    "primary_shell": "海岛",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "火焰纹章：风花雪月": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "中世纪奇幻",
+      "战争"
+    ]
+  },
+  "宝可梦 剑／盾": {
+    "primary_shell": "精灵",
+    "secondary_shells": []
+  },
+  "超级马力欧创作家 2": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "异界锁链": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "警察"
+    ]
+  },
+  "路易吉洋馆3": {
+    "primary_shell": "鬼屋",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "马里奥与索尼克在东京奥运会": {
+    "primary_shell": "奥运竞技",
+    "secondary_shells": [
+      "卡通明星"
+    ]
+  },
+  "二之国：白色圣灰的女王": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "最终幻想XII：黄道纪元": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "帝国战争"
+    ]
+  },
+  "逆转裁判123 成步堂精选集": {
+    "primary_shell": "法庭推理",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "空洞骑士：丝之歌（预告影响力）": {
+    "primary_shell": "虫族王国",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "符文工厂4 豪华版": {
+    "primary_shell": "田园奇幻",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "二之国 白色圣灰的女王": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "宵星传奇 重制版": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "水晶幻想"
+    ]
+  },
+  "露露亚的炼金工房 ～亚兰德之炼金术士4～": {
+    "primary_shell": "炼金工房",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "勇者斗恶龙 创世小玩家2 破坏神席德与空荡岛": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "方块世界"
+    ]
+  },
+  "路易吉洋楼3": {
+    "primary_shell": "鬼屋",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "莱莎的炼金工房 ～常暗女王与秘密藏身处～": {
+    "primary_shell": "炼金工房",
+    "secondary_shells": [
+      "田园奇幻"
+    ]
+  },
+  "俄罗斯方块99": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "集合啦！动物森友会": {
+    "primary_shell": "无人岛",
+    "secondary_shells": [
+      "田园生活"
+    ]
+  },
+  "哈迪斯": {
+    "primary_shell": "希腊神话",
+    "secondary_shells": [
+      "冥界"
+    ]
+  },
+  "异度神剑 终极版": {
+    "primary_shell": "科幻末世",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "纸片马力欧：折纸国王": {
+    "primary_shell": "纸片世界",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "塞尔达无双 灾厄启示录": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "皮克敏3 豪华版": {
+    "primary_shell": "外星荒野",
+    "secondary_shells": [
+      "微型世界"
+    ]
+  },
+  "幻影异闻录#FE Encore": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "偶像演艺"
+    ]
+  },
+  "宝可梦 剑/盾 扩展票": {
+    "primary_shell": "精灵宝可梦",
+    "secondary_shells": [
+      "荒野"
+    ]
+  },
+  "女神异闻录5 乱战：魅影攻手": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "怪盗"
+    ]
+  },
+  "世界游戏大全51": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "健身环大冒险": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "天穗之咲稻姬": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "田园农耕"
+    ]
+  },
+  "桃太郎电铁 昭和平成令和定番": {
+    "primary_shell": "铁道",
+    "secondary_shells": [
+      "日本现代"
+    ]
+  },
+  "搭档任务 秘密搜查组": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "狂野之心": {
+    "primary_shell": "西幻精灵",
+    "secondary_shells": [
+      "神秘森林"
+    ]
+  },
+  "塞尔达传说：织梦岛": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "孤岛"
+    ]
+  },
+  "异度神剑2：黄金之国伊拉": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "云海世界"
+    ]
+  },
+  "勇者斗恶龙XI S：寻觅逝去的时光": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "星之卡比 超级豪华版": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": []
+  },
+  "新超级马力欧兄弟U 豪华版": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "耀西的手工世界": {
+    "primary_shell": "绘本",
+    "secondary_shells": [
+      "手工世界"
+    ]
+  },
+  "漫威终极联盟3：黑暗教团": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "哆啦A梦：大雄的牧场物语": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "动漫风"
+    ]
+  },
+  "血污：夜之仪式": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "哥特"
+    ]
+  },
+  "节奏海拉鲁": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "机甲战魔": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "科幻"
+    ]
+  },
+  "泰拉瑞亚": {
+    "primary_shell": "像素风",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "茶杯头": {
+    "primary_shell": "卡通",
+    "secondary_shells": []
+  },
+  "塞尔达传说 织梦岛": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "孤岛"
+    ]
+  },
+  "超级马力欧创作家2": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "火焰之纹章 风花雪月": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "宝可梦 剑/盾": {
+    "primary_shell": "精灵",
+    "secondary_shells": []
+  },
+  "勇者斗恶龙XI S 寻觅逝去的时光": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "马力欧网球 Ace": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "森喜刚 热带冻结": {
+    "primary_shell": "热带丛林",
+    "secondary_shells": [
+      "海岛"
+    ]
+  },
+  "漫威终极联盟3 黑暗教团": {
+    "primary_shell": "超级英雄",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "哆啦A梦 大雄的牧场物语": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "动漫风"
+    ]
+  },
+  "武士 零": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "忍者"
+    ]
+  },
+  "勇者斗恶龙 创世小玩家2": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "杀戮尖塔": {
+    "primary_shell": "高塔迷宫",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "超级机器人大战T": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "露露亚的炼金工房": {
+    "primary_shell": "炼金术",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "蒸汽世界冒险：吉尔伽美什之手": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": []
+  },
+  "怪物猎人物语2：毁灭之翼": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪物共斗"
+    ]
+  },
+  "迷托邦": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "Famicom侦探俱乐部 消失的继承人": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "昭和日本"
+    ]
+  },
+  "Famicom侦探俱乐部 站在身后的少女": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "校园",
+      "都市传说"
+    ]
+  },
+  "马力欧高尔夫 超级冲冲冲": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "运动"
+    ]
+  },
+  "宝可梦 晶灿钻石": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代奇幻"
+    ]
+  },
+  "宝可梦 明亮珍珠": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代奇幻"
+    ]
+  },
+  "超级机器人大战30": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "心跳文学部Plus！": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "心理恐怖"
+    ]
+  },
+  "邪恶国王与杰出勇者": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "绘本"
+    ]
+  },
+  "真女神转生V": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "现代都市",
+      "神话"
+    ]
+  },
+  "塞尔达无双 灾厄启示录 扩展票": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "死亡终局 轮回试炼2": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "塞尔达无双：灾厄启示录 扩充票": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "真女神转生5": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "现代都市",
+      "神话"
+    ]
+  },
+  "死亡之门": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "灵魂界域"
+    ]
+  },
+  "终焉之莉莉：骑士寂夜": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "公理边缘2": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "异星"
+    ]
+  },
+  "水晶传说": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "暴走大鹅": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "西部"
+    ]
+  },
+  "遗忘之城": {
+    "primary_shell": "罗马神话",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "风来之国": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "宝可梦 晶灿钻石/明亮珍珠": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代奇幻"
+    ]
+  },
+  "蓝色反射：帝": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "异世界"
+    ]
+  },
+  "循环勇者": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": []
+  },
+  "宝可梦传说 阿尔宙斯": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "古代奇幻"
+    ]
+  },
+  "宝可梦 朱/紫": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "斯普拉遁3": {
+    "primary_shell": "后末日",
+    "secondary_shells": [
+      "潮流都市"
+    ]
+  },
+  "妖精的尾巴": {
+    "primary_shell": "魔法公会",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "灾厄逆刃": {
+    "primary_shell": "废土",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "太空熊": {
+    "primary_shell": "太空科幻",
+    "secondary_shells": []
+  },
+  "孤山速降": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "超级食肉男孩 永恒": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "海之号角2：失落王国的骑士": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "海岛"
+    ]
+  },
+  "终结降临": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "死亡游戏"
+    ]
+  },
+  "魔界战记4 回归": {
+    "primary_shell": "魔界",
+    "secondary_shells": [
+      "恶搞"
+    ]
+  },
+  "螃蟹大战": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "动物"
+    ]
+  },
+  "怪物猎人 崛起": {
+    "primary_shell": "和风幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "密特罗德 生存恐惧": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "外星"
+    ]
+  },
+  "真·女神转生V": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "神魔"
+    ]
+  },
+  "宝可梦 晶灿钻石／明亮珍珠": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "现代奇幻"
+    ]
+  },
+  "超级马力欧3D世界 + 狂怒世界": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "怪物猎人物语2 毁灭之翼": {
+    "primary_shell": "怪兽",
+    "secondary_shells": [
+      "奇幻"
+    ]
+  },
+  "勇气默示录2": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "新美妙世界": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "都市异能",
+      "死亡游戏"
+    ]
+  },
+  "塞尔达传说 御天之剑 HD": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "天空"
+    ]
+  },
+  "马力欧派对 超级巨星": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "派对"
+    ]
+  },
+  "分享同乐！瓦力欧制造": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "符文工厂5": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "牧场物语 橄榄镇与希望的大地": {
+    "primary_shell": "牧场",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "英雄不再3": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "宅文化"
+    ]
+  },
+  "罪恶装备 -奋战-": {
+    "primary_shell": "魔幻",
+    "secondary_shells": [
+      "摇滚"
+    ]
+  },
+  "蜡笔小新 我与博士的暑假": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "Famicom侦探俱乐部 重制版": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "心跳文学部 Plus！": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "心理恐怖"
+    ]
+  },
+  "邪恶冥刻": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "密室"
+    ]
+  },
+  "魔界战记6": {
+    "primary_shell": "魔界",
+    "secondary_shells": [
+      "恶搞"
+    ]
+  },
+  "灵魂摆渡人": {
+    "primary_shell": "冥界",
+    "secondary_shells": [
+      "海洋"
+    ]
+  },
+  "怒之铁拳4": {
+    "primary_shell": "街头",
+    "secondary_shells": [
+      "近未来"
+    ]
+  },
+  "奥日与萤火意志": {
+    "primary_shell": "西幻精灵",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "生化危机3 重制版": {
+    "primary_shell": "丧尸末世",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "凯瑟琳 Full Body": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "噩梦"
+    ]
+  },
+  "塞尔达无双：灾厄启示录": {
+    "primary_shell": "高奇幻史诗",
+    "secondary_shells": []
+  },
+  "超级马力欧3D收藏辑": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "勇气默示录II": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "莱莎的炼金工房2": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "海岛"
+    ]
+  },
+  "不思议的皇冠": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "致命预感2": {
+    "primary_shell": "克苏鲁",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "凯瑟琳：浓郁口感": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "噩梦"
+    ]
+  },
+  "圣剑传说3 重制版": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "桃太郎电铁 ～昭和 平成 令和也是定番！～": {
+    "primary_shell": "现代都市",
+    "secondary_shells": []
+  },
+  "宝可梦不可思议迷宫 救助队DX": {
+    "primary_shell": "精灵",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "初音未来 Project DIVA MEGA39's": {
+    "primary_shell": "二次元",
+    "secondary_shells": [
+      "音乐"
+    ]
+  },
+  "健身拳击2": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "灵魂旅人": {
+    "primary_shell": "冥界",
+    "secondary_shells": [
+      "海洋"
+    ]
+  },
+  "黑帝斯": {
+    "primary_shell": "希腊神话",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "幻想大陆战记：卢纳基亚传说": {
+    "primary_shell": "高奇幻史诗",
+    "secondary_shells": []
+  },
+  "深世海": {
+    "primary_shell": "深海",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "九龙妖魔学园纪 ORIGIN OF ADVENTURE": {
+    "primary_shell": "学院",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "伊苏：起源": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "狂野星球之旅": {
+    "primary_shell": "太空殖民",
+    "secondary_shells": []
+  },
+  "黑书": {
+    "primary_shell": "斯拉夫神话",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "彼岸花": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": []
+  },
+  "密不可分": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "武士杰克：时空之战": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "时空穿越"
+    ]
+  },
+  "异度神剑3": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "末世",
+      "机甲"
+    ]
+  },
+  "星之卡比 探索发现": {
+    "primary_shell": "后启示录",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "火焰之纹章无双 风花雪月": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "中世纪奇幻",
+      "三国"
+    ]
+  },
+  "蓓优妮塔3": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "多元宇宙"
+    ]
+  },
+  "三角战略": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "三国"
+    ]
+  },
+  "马力欧+疯狂兔子 星耀之愿": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "Nintendo Switch 运动": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "卡比的美食节": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "十三机兵防卫圈": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "末世",
+      "校园"
+    ]
+  },
+  "时空勇士": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "像素风"
+    ]
+  },
+  "尼尔：自动人形 The End of YoRHa Edition": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "女神异闻录5 皇家版": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "都市异能"
+    ]
+  },
+  "怪物猎人崛起：曙光": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "太鼓之达人 咚咚雷音祭": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "双点校园": {
+    "primary_shell": "校园",
+    "secondary_shells": []
+  },
+  "无人深空": {
+    "primary_shell": "太空殖民",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "师父": {
+    "primary_shell": "武侠",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "马力欧激战前锋 战斗联赛": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "足球"
+    ]
+  },
+  "春逝百年抄": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "AI：梦境档案 涅槃肇始": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "赛博朋克"
+    ]
+  },
+  "太阁立志传V DX": {
+    "primary_shell": "战国",
+    "secondary_shells": []
+  },
+  "夜回三": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "神领编年史": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "热血硬派国夫君外传 热血少女2": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "勇者斗恶龙 寻宝探险团 蓝色眼眸与天空罗盘": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "海盗"
+    ]
+  },
+  "格林魔书 OnceMore": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": []
+  },
+  "卡牌之声 残次的巫女": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "桌面游戏"
+    ]
+  },
+  "收获之星": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "农场"
+    ]
+  },
+  "火焰纹章无双 风花雪月": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "中世纪奇幻",
+      "三国"
+    ]
+  },
+  "莱莎的炼金工房3 ～终结之炼金术士与秘密钥匙～": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "炼金术"
+    ]
+  },
+  "刀剑乱舞无双": {
+    "primary_shell": "战国",
+    "secondary_shells": [
+      "刀剑拟人"
+    ]
+  },
+  "鬼灭之刃 火之神血风谭": {
+    "primary_shell": "大正时代",
+    "secondary_shells": [
+      "鬼族"
+    ]
+  },
+  "茶杯头 最后的美味": {
+    "primary_shell": "卡通",
+    "secondary_shells": []
+  },
+  "塞尔达传说 王国之泪": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "科技创造"
+    ]
+  },
+  "超级马力欧兄弟 惊奇": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": []
+  },
+  "皮克敏4": {
+    "primary_shell": "微观世界",
+    "secondary_shells": [
+      "异星"
+    ]
+  },
+  "火焰之纹章 Engage": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙与地下城"
+    ]
+  },
+  "星之卡比 Wii 豪华版": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "梦幻世界"
+    ]
+  },
+  "歧路旅人II": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "蒸汽朋克"
+    ]
+  },
+  "蓓优妮塔 起源": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "童话奇幻",
+      "魔女"
+    ]
+  },
+  "密特罗德 究极 复刻版": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "高级战争 1+2 Re-Boot Camp": {
+    "primary_shell": "现代军事",
+    "secondary_shells": []
+  },
+  "牧场物语 Welcome！美丽人生": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "牧场"
+    ]
+  },
+  "符文工厂3 豪华版": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "超侦探事件簿 雾雨谜宫": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "女神异闻录4 黄金版": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "都市异能"
+    ]
+  },
+  "女神异闻录3 携带版": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "都市异能"
+    ]
+  },
+  "英雄传说 黎之轨迹Ⅱ": {
+    "primary_shell": "科幻都市",
+    "secondary_shells": [
+      "东方剑术",
+      "间谍"
+    ]
+  },
+  "仙乐传说 复刻版": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "西幻精灵"
+    ]
+  },
+  "世界树迷宫 起源合集": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "龙与地下城"
+    ]
+  },
+  "Fate/Samurai Remnant": {
+    "primary_shell": "江户时代",
+    "secondary_shells": [
+      "英灵召唤"
+    ]
+  },
+  "潜水员戴夫": {
+    "primary_shell": "深海",
+    "secondary_shells": [
+      "料理"
+    ]
+  },
+  "幽灵诡计：幻影侦探": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "超侦探事件簿 雾雨迷宫": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "蓓优妮塔 起源：瑟蕾莎与迷失的恶魔": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  },
+  "歧路旅人 II": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "蒸汽朋克"
+    ]
+  },
+  "皮克敏 4": {
+    "primary_shell": "微观世界",
+    "secondary_shells": [
+      "外星探索"
+    ]
+  },
+  "佩妮大逃脱": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "街头嘻哈",
+      "电视秀"
+    ]
+  },
+  "星之海": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "逆转裁判456 王泥喜精选集": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "法庭",
+      "侦探"
+    ]
+  },
+  "千变的迷宫 风来的希炼6 蛇蜷岛探险录": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "妖怪"
+    ]
+  },
+  "马力欧vs咚奇刚": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "玩具"
+    ]
+  },
+  "异色代码 回忆录": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "侦探",
+      "幽灵"
+    ]
+  },
+  "创神之阿尔斯马格纳": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": [
+      "炼金术"
+    ]
+  },
+  "Library of Ruina": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "图书馆"
+    ]
+  },
+  "英雄传说 黎之轨迹Ⅱ -绯红原罪-": {
+    "primary_shell": "科幻都市",
+    "secondary_shells": [
+      "东方剑术",
+      "间谍"
+    ]
+  },
+  "天使之王 梅塔特隆的飞升 高清复刻版": {
+    "primary_shell": "圣经神话",
+    "secondary_shells": [
+      "天使"
+    ]
+  },
+  "佩妮的大逃亡": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "街头运动"
+    ]
+  },
+  "蒸汽世界 建造": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "地下城",
+      "机器人"
+    ]
+  },
+  "神箱": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "创世"
+    ]
+  },
+  "兔兔秘密花园": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "酒吧"
+    ]
+  },
+  "真女神转生V Vengeance": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "东方神话",
+      "恶魔"
+    ]
+  },
+  "路易吉洋馆2 HD": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "幽灵",
+      "洋馆"
+    ]
+  },
+  "Another Code 回忆录：两种记忆／记忆之门": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "孤岛",
+      "侦探"
+    ]
+  },
+  "斯普拉遁3 扩充票：秩序篇": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "街头嘻哈"
+    ]
+  },
+  "幻想水浒传I&II HD复刻版": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "武侠"
+    ]
+  },
+  "雷顿教授与蒸汽新世界": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "英雄传说 黎之轨迹II -CRIMSON SiN-": {
+    "primary_shell": "科幻都市",
+    "secondary_shells": [
+      "东方剑术",
+      "间谍"
+    ]
+  },
+  "超级猴子球 香蕉大乱斗": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "雷纳提斯": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "魔法"
+    ]
+  },
+  "千变的迷宫 风来的希炼6": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "妖怪"
+    ]
+  },
+  "幻想水浒传 I&II HD 复刻版": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "武侠"
+    ]
+  },
+  "桃太郎电铁世界 ～地球带着希望转！～": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "铁道"
+    ]
+  },
+  "任天堂世界锦标赛 NES版": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "史力奇：姆明谷的旋律": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "宝可梦传说 Z-A": {
+    "primary_shell": "都市",
+    "secondary_shells": [
+      "精灵",
+      "近未来"
+    ]
+  },
+  "密特罗德 究极4 穿越未知": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "异星"
+    ]
+  },
+  "异度神剑X 终极版": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "机甲",
+      "异星"
+    ]
+  },
+  "勇气默示录 高清重制版": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": []
+  },
+  "符文工房 龙之天地": {
+    "primary_shell": "和风奇幻",
+    "secondary_shells": [
+      "田园",
+      "龙族"
+    ]
+  },
+  "优米雅的炼金工房": {
+    "primary_shell": "炼金术",
+    "secondary_shells": []
+  },
+  "幻想水浒传 I&II 高清复刻版": {
+    "primary_shell": "东方奇幻",
+    "secondary_shells": [
+      "水浒"
+    ]
+  },
+  "咚奇刚 归来 HD": {
+    "primary_shell": "丛林",
+    "secondary_shells": [
+      "海岛"
+    ]
+  },
+  "卡普空格斗合集2": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "格斗场"
+    ]
+  },
+  "文明7": {
+    "primary_shell": "人类文明",
+    "secondary_shells": []
+  },
+  "幻想生活 i 转转龙与偷时间的少女": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "田园",
+      "海岛"
+    ]
+  },
+  "波斯王子：失落的王冠": {
+    "primary_shell": "波斯神话",
+    "secondary_shells": []
+  },
+  "超侦探事件簿 雾雨迷宫+": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "符文工厂 龙之天地": {
+    "primary_shell": "和风奇幻",
+    "secondary_shells": [
+      "田园",
+      "龙族"
+    ]
+  },
+  "优米雅的炼金工房 ～追忆之炼金术士与幻创之地～": {
+    "primary_shell": "炼金术",
+    "secondary_shells": []
+  },
+  "英雄传说 界之轨迹 -告别塞姆利亚-": {
+    "primary_shell": "导力科技",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "无主之地4": {
+    "primary_shell": "废土",
+    "secondary_shells": [
+      "星际科幻"
+    ]
+  },
+  "圣恩传说f 复刻版": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "百英雄传": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "勇者斗恶龙I&II HD-2D重制版": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "银河战士Prime 4 超越": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "异星探索"
+    ]
+  },
+  "大金刚国度 归来 HD": {
+    "primary_shell": "丛林",
+    "secondary_shells": [
+      "海岛"
+    ]
+  },
+  "百日战记 -最终防卫学园-": {
+    "primary_shell": "末日",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "雷顿教授与蒸气新世界": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "心跳回忆 forever with you 情感版": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "无限机兵": {
+    "primary_shell": "末日",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "幻想生活i 转圈圈的龙和偷取时间的少女": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "幻想生活i 转转龙与偷时间的少女": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "时空穿越"
+    ]
+  },
+  "超级马力欧 RPG": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "桃太郎电铁世界～地球带着希望转！": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "铁路经营"
+    ]
+  },
+  "时尚造梦": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "时尚"
+    ]
+  },
+  "符文工厂 3 豪华版": {
+    "primary_shell": "西幻精灵",
+    "secondary_shells": [
+      "田园"
+    ]
+  },
+  "女神异闻录 5 战略版": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "异世界"
+    ]
+  },
+  "勇者斗恶龙 怪物仙境 3": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "名侦探皮卡丘 闪电回归": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "侦探",
+      "精灵"
+    ]
+  },
+  "芙蕾德利卡": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "玛莉的炼金工房 重制版": {
+    "primary_shell": "魔法学院",
+    "secondary_shells": []
+  },
+  "幽灵诡计 幻影侦探": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "侦探",
+      "幽灵"
+    ]
+  },
+  "世界树的迷宫 HD 三部曲": {
+    "primary_shell": "龙与地下城",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "恸哭之星": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "异世界"
+    ]
+  },
+  "伊苏回忆录 菲尔盖纳之誓约": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "英雄传说 零之轨迹 改": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "英雄传说 碧之轨迹 改": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "洛克人EXE 合集": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "黑客"
+    ]
+  },
+  "高级战争 1+2 重制版": {
+    "primary_shell": "现代军事",
+    "secondary_shells": []
+  },
+  "火焰纹章 Engage": {
+    "primary_shell": "高奇幻史诗",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "歧路旅人2": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "星之海洋 第二个故事 R": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "桃太郎电铁世界": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "铁路经营"
+    ]
+  },
+  "勇者斗恶龙 怪物仙境3": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪兽"
+    ]
+  },
+  "玛鲁王国的人偶公主 天使演奏的爱歌": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "音乐"
+    ]
+  },
+  "拉比哩比 白金版": {
+    "primary_shell": "二次元",
+    "secondary_shells": [
+      "弹幕"
+    ]
+  },
+  "恐怖美术馆 重制版": {
+    "primary_shell": "日式怪谈",
+    "secondary_shells": [
+      "密室逃脱"
+    ]
+  },
+  "本所七大不可思议": {
+    "primary_shell": "都市传说",
+    "secondary_shells": [
+      "诅咒"
+    ]
+  },
+  "火焰纹章 契约": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "龙族"
+    ]
+  },
+  "蓓优妮塔 起源 瑟蕾莎与迷失的恶魔": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "恶魔"
+    ]
+  },
+  "世界树的迷宫 高清复刻合集": {
+    "primary_shell": "龙与地下城",
+    "secondary_shells": [
+      "地下城"
+    ]
+  },
+  "超级舞动 瓦力欧制造": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "闪电十一人 英雄们的胜利之路": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "足球",
+      "二次元"
+    ]
+  },
+  "百英雄传2": {
+    "primary_shell": "高奇幻史诗",
+    "secondary_shells": [
+      "战争"
+    ]
+  },
+  "牧场物语 小小农场主": {
+    "primary_shell": "牧场",
+    "secondary_shells": [
+      "童话"
+    ]
+  },
+  "塞尔达传说 智慧的再现": {
+    "primary_shell": "高奇幻史诗",
+    "secondary_shells": []
+  },
+  "超级马力欧派对 空前盛会": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "马力欧与路易吉RPG 兄弟齐航": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "海盗"
+    ]
+  },
+  "逆转检察官1&2 御剑精选集": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "桃太郎电铁世界 地球带着希望转": {
+    "primary_shell": "铁道",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "实况野球2024-2025": {
+    "primary_shell": "棒球",
+    "secondary_shells": []
+  },
+  "心跳回忆 Girl's Side 4th Heart": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "真·女神转生V Vengeance": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "东方神话"
+    ]
+  },
+  "蜡笔小新 煤炭镇的小白": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "昭和"
+    ]
+  },
+  "DECAPOLICE": {
+    "primary_shell": "赛博朋克",
+    "secondary_shells": [
+      "侦探",
+      "虚拟现实"
+    ]
+  },
+  "勇者斗恶龙 I&II HD-2D 重制版": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "密特罗德 究极4 超越": {
+    "primary_shell": "星际科幻",
+    "secondary_shells": [
+      "异星"
+    ]
+  },
+  "斯普拉遁3 秩序篇": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "街头潮流"
+    ]
+  },
+  "勇气默示录 高清复刻": {
+    "primary_shell": "水晶幻想",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "卡比的美食节 豪华版": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "美食"
+    ]
+  },
+  "圣恩传说f 高清版": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": []
+  },
+  "空之轨迹 1st Chapter": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "日式幻想"
+    ]
+  },
+  "英雄传说 界之轨迹 -Farewell, O Zemuria-": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "日式幻想",
+      "战争"
+    ]
+  },
+  "桃太郎电铁 ～昭和 平成 令和 定番！～": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "铁道"
+    ]
+  },
+  "心跳回忆 Girl's Side 4": {
+    "primary_shell": "校园",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "实况力量棒球2026": {
+    "primary_shell": "棒球",
+    "secondary_shells": [
+      "校园"
+    ]
+  },
+  "逆转裁判7": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "幻想水浒传 I&II HD复刻版": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "战争"
+    ]
+  },
+  "符文工房6": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "田园",
+      "地下城"
+    ]
+  },
+  "牧场物语 新作": {
+    "primary_shell": "田园",
+    "secondary_shells": [
+      "牧场"
+    ]
+  },
+  "空洞骑士 丝之歌": {
+    "primary_shell": "虫族",
+    "secondary_shells": [
+      "暗黑奇幻",
+      "地下城"
+    ]
+  },
+  "大金刚 新作": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "丛林"
+    ]
+  },
+  "星之卡比 新作": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "卡通"
+    ]
+  },
+  "火焰之纹章 新作": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "战争"
+    ]
+  },
+  "异度神剑 新作": {
+    "primary_shell": "科幻奇幻",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "斯普拉遁 新作": {
+    "primary_shell": "现代都市",
+    "secondary_shells": [
+      "街头"
+    ]
+  },
+  "真·女神转生V 复仇 完全版": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "现代都市",
+      "恶魔"
+    ]
+  },
+  "百英雄传 崛起2": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": [
+      "城镇"
+    ]
+  },
+  "大金刚 蕉力全开": {
+    "primary_shell": "卡通",
+    "secondary_shells": [
+      "丛林"
+    ]
+  },
+  "异度神剑 新章": {
+    "primary_shell": "科幻奇幻",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "真·女神转生VI": {
+    "primary_shell": "末世",
+    "secondary_shells": [
+      "现代都市",
+      "恶魔"
+    ]
+  },
+  "世界树的迷宫VI": {
+    "primary_shell": "地下城",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "幽灵诡计2": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "侦探"
+    ]
+  },
+  "勇者斗恶龙XII 被选中的命运之炎": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "暗黑奇幻"
+    ]
+  },
+  "圣剑传说 新章": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "西幻精灵"
+    ]
+  },
+  "桃太郎电铁 世界篇": {
+    "primary_shell": "铁道",
+    "secondary_shells": [
+      "现代都市"
+    ]
+  },
+  "桃太郎电铁世界 地球带着希望转！": {
+    "primary_shell": "铁路经营",
+    "secondary_shells": [
+      "全球地理"
+    ]
+  },
+  "勇者斗恶龙 怪物仙境3 魔族王子与精灵的旅程": {
+    "primary_shell": "日式幻想",
+    "secondary_shells": [
+      "怪物收集"
+    ]
+  },
+  "女神异闻录5 战略版": {
+    "primary_shell": "都市异能",
+    "secondary_shells": [
+      "异世界"
+    ]
+  },
+  "拉比哩比": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "兔耳娘"
+    ]
+  },
+  "恐怖美术馆": {
+    "primary_shell": "诡异美术馆",
+    "secondary_shells": []
+  },
+  "宿命残响": {
+    "primary_shell": "机甲",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "神之天平": {
+    "primary_shell": "东方神话",
+    "secondary_shells": [
+      "时空轮回"
+    ]
+  },
+  "恐怖的世界": {
+    "primary_shell": "克苏鲁",
+    "secondary_shells": [
+      "末世"
+    ]
+  },
+  "巴别塔圣歌": {
+    "primary_shell": "希腊神话",
+    "secondary_shells": []
+  },
+  "八方旅人2": {
+    "primary_shell": "蒸汽朋克",
+    "secondary_shells": [
+      "中世纪奇幻"
+    ]
+  },
+  "异度神剑3 崭新的未来": {
+    "primary_shell": "科幻末世",
+    "secondary_shells": [
+      "机甲"
+    ]
+  },
+  "碧姬公主 表演时刻！": {
+    "primary_shell": "童话奇幻",
+    "secondary_shells": [
+      "舞台剧"
+    ]
+  },
+  "马力欧与路易吉RPG 兄弟齐航！": {
+    "primary_shell": "蘑菇王国",
+    "secondary_shells": [
+      "航海"
+    ]
+  },
+  "纸片马力欧RPG": {
+    "primary_shell": "绘本",
+    "secondary_shells": [
+      "蘑菇王国"
+    ]
+  },
+  "圣兽之王": {
+    "primary_shell": "中世纪奇幻",
+    "secondary_shells": []
+  },
+  "恶魔城 多米纳斯合集": {
+    "primary_shell": "暗黑奇幻",
+    "secondary_shells": [
+      "吸血鬼"
+    ]
+  },
+  "北海道连续杀人事件 消失在鄂霍次克": {
+    "primary_shell": "侦探",
+    "secondary_shells": [
+      "昭和"
+    ]
+  },
+  "有氧拳击 feat. 初音未来": {
+    "primary_shell": "虚拟偶像",
+    "secondary_shells": [
+      "健身"
+    ]
+  },
+  "粘粘世界2": {
+    "primary_shell": "无题材壳",
+    "secondary_shells": []
+  },
+  "勇敢小骑士": {
+    "primary_shell": "绘本",
+    "secondary_shells": [
+      "童话奇幻"
+    ]
+  }
+}

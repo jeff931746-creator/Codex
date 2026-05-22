@@ -1,0 +1,139 @@
+```json
+[
+  {
+    "title": "《怪物猎人 崛起》",
+    "world_setting": ["古代奇幻"],
+    "ip_skin": "怪物猎人",
+    "core_verb": "狩猎+装备制作",
+    "core_object": "巨龙/巨兽",
+    "narrative_core": "组队狩猎巨兽并剥取素材制作装备的共斗动作游戏",
+    "art_style": "日式 3D 写实"
+  },
+  {
+    "title": "《牧场物语 橄榄镇与希望的大地》",
+    "world_setting": ["现代都市", "乡村"],
+    "ip_skin": "牧场物语",
+    "core_verb": "经营+种植+恋爱",
+    "core_object": "农场/邻居",
+    "narrative_core": "开拓农场、种植作物并与小镇居民恋爱结婚的慢生活模拟游戏",
+    "art_style": "Q 版萌系"
+  },
+  {
+    "title": "《火焰之纹章 觉醒》",
+    "world_setting": ["古代奇幻"],
+    "ip_skin": "火焰之纹章",
+    "core_verb": "战棋指挥+结婚生子",
+    "core_object": "敌军单位/同伴",
+    "narrative_core": "指挥单位进行网格战棋对战并通过羁绊系统结婚生子与次代继承的策略角色扮演游戏",
+    "art_style": "日式 2D 动漫"
+  },
+  {
+    "title": "《塞尔达传说 王国之泪》",
+    "world_setting": ["古代奇幻", "开放世界"],
+    "ip_skin": "塞尔达传说",
+    "core_verb": "探索+解谜+建造",
+    "core_object": "神庙/敌人/地形",
+    "narrative_core": "利用究极手等能力建造载具与武器并在海拉鲁大陆自由探索解谜的开放世界动作冒险游戏",
+    "art_style": "日式 3D 动漫"
+  },
+  {
+    "title": "《宝可梦 朱/紫》",
+    "world_setting": ["现代都市", "校园"],
+    "ip_skin": "宝可梦",
+    "core_verb": "收集+培育+对战",
+    "core_object": "宝可梦/训练家",
+    "narrative_core": "在开放世界中捕捉收集宝可梦并进行回合制对战与培育交换的收集养成游戏",
+    "art_style": "日式 3D 动漫"
+  },
+  {
+    "title": "《暗杀教室 杀老师大决战》",
+    "world_setting": ["现代都市", "校园"],
+    "ip_skin": "暗杀教室",
+    "core_verb": "派对小游戏+角色扮演",
+    "core_object": "杀老师/同班同学",
+    "narrative_core": "以动漫 IP 包装的多人派对小游戏合集，包含多种迷你游戏玩法",
+    "art_style": "日式 2D 动漫"
+  },
+  {
+    "title": "《火影忍者 究极风暴 4》",
+    "world_setting": ["古代奇幻", "忍者世界"],
+    "ip_skin": "火影忍者",
+    "core_verb": "3D 格斗对战",
+    "core_object": "同 IP 角色",
+    "narrative_core": "用火影忍者动漫 IP 包装的传统 3D 格斗对战游戏",
+    "art_style": "日式 3D 动漫"
+  },
+  {
+    "title": "《一拳超人 无名英雄》",
+    "world_setting": ["现代都市", "超级英雄"],
+    "ip_skin": "一拳超人",
+    "core_verb": "3D 格斗对战",
+    "core_object": "同 IP 角色",
+    "narrative_core": "用一拳超人动漫 IP 包装的传统 3D 格斗对战游戏",
+    "art_style": "日式 3D 动漫"
+  },
+  {
+    "title": "《我的英雄学院 唯我正义》",
+    "world_setting": ["现代都市", "校园", "超级英雄"],
+    "ip_skin": "我的英雄学院",
+    "core_verb": "3D 格斗对战",
+    "core_object": "同 IP 角色",
+    "narrative_core": "用我的英雄学院动漫 IP 包装的传统 3D 格斗对战游戏",
+    "art_style": "日式 3D 动漫"
+  },
+  {
+    "title": "《鬼灭之刃 火之神血风谭》",
+    "world_setting": ["古代奇幻", "大正时代"],
+    "ip_skin": "鬼灭之刃",
+    "core_verb": "3D 格斗对战",
+    "core_object": "同 IP 角色/鬼",
+    "narrative_core": "用鬼灭之刃动漫 IP 包装的传统 3D 格斗对战游戏",
+    "art_style": "日式 3D 动漫"
+  },
+  {
+    "title": "《巫师 3 狂猎 完整版》",
+    "world_setting": ["中世纪奇幻"],
+    "ip_skin": "巫师",
+    "core_verb": "狩猎+探索+角色扮演",
+    "core_object": "怪物/人类敌人",
+    "narrative_core": "扮演猎魔人在开放世界中接取委托、狩猎怪物并进行道德抉择的动作角色扮演游戏",
+    "art_style": "美式 3D 写实"
+  },
+  {
+    "title": "《指环王 双塔奇兵》",
+    "world_setting": ["中世纪奇幻"],
+    "ip_skin": "指环王",
+    "core_verb": "动作砍杀+角色扮演",
+    "core_object": "兽人/强兽人",
+    "narrative_core": "用指环王电影 IP 包装的线性动作砍杀游戏",
+    "art_style": "美式 3D 写实"
+  },
+  {
+    "title": "《异形 隔离》",
+    "world_setting": ["科幻", "太空"],
+    "ip_skin": "异形",
+    "core_verb": "潜行+生存恐怖",
+    "core_object": "异形/人造人",
+    "narrative_core": "在太空站中躲避异形追猎并利用道具生存逃脱的第一人称生存恐怖游戏",
+    "art_style": "美式 3D 写实"
+  },
+  {
+    "title": "《哈利波特 魔法觉醒》",
+    "world_setting": ["现代都市", "校园", "魔法世界"],
+    "ip_skin": "哈利波特",
+    "core_verb": "卡牌构筑+决斗",
+    "core_object": "巫师/魔法生物",
+    "narrative_core": "用哈利波特 IP 包装的即时卡牌对战游戏，包含角色收集与校园探索",
+    "art_style": "日式 2D 动漫"
+  },
+  {
+    "title": "《宝可梦+信长的野望》",
+    "world_setting": ["古代奇幻", "战国"],
+    "ip_skin": "宝可梦",
+    "core_verb": "战棋指挥+收集",
+    "core_object": "宝可梦/战国武将",
+    "narrative_core": "融合宝可梦收集与信长的野望战棋玩法的跨界策略角色扮演游戏",
+    "art_style": "日式 2D 动漫"
+  }
+]
+```

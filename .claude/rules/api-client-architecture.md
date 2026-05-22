@@ -58,6 +58,7 @@ provider 选型默认:
 | 快速批量收集 / 列表归类 | `deepseek` | `deepseek-v4-flash` | 速度成本优先 |
 | 大批量摘要 / 长文本 | `siliconflow` | `Pro/zai-org/GLM-5.1` | 上下文长 |
 | 多模态 / 视觉 | `gemini` | `gemini-2.5-pro` | 图像支持 |
+| 联网搜索（先搜后整） | `tavily` | — | 1000 免费 credits/月，basic=1，advanced=2 |
 
 不要把 key 放到业务 `.env`、不要复制到项目目录、不要在脚本里写 fallback 默认值。如果桥接服务 `.env` 缺 key,补到桥接服务那一份,而不是另开一份。
 
@@ -80,10 +81,27 @@ provider 选型默认:
 | provider 切换要改业务脚本代码 | 切 DeepSeek 要 grep 替换 import | 业务脚本统一走 `llm_client`,切换只改 `.env` |
 | 新增同类 provider 没登记 base URL | base URL 散落在多处 | 在 `api_client.py` 的 `API_BASE_URLS` 登记 |
 
+## 先搜后整入口
+
+`llm_client.search_and_analyze()` 是"先搜后整"的一站式入口：
+
+```python
+from archive.tools.lib.llm_client import search_and_analyze
+
+result = search_and_analyze(
+    search_queries=["寻道大千 灵兽系统", "寻道大千 PVP斗法"],
+    analysis_prompt="请基于以上资料，列出该游戏的所有战斗相关系统。",
+    provider="deepseek",
+)
+```
+
+流程：Tavily 搜索 → 结果作为上下文 → DeepSeek 分析。搜索结果只存在于 DeepSeek 的一次性上下文中，不占用 Claude 的长期上下文。
+
 ## 相关文件
 
 - `archive/tools/lib/api_client.py` — 底层 HTTP + provider base URL 登记
 - `archive/tools/lib/llm_common.py` — RetryPolicy / call_with_retry / extract_chat_content / parse_stream
-- `archive/tools/lib/llm_client.py` — LLM 统一入口,按 `LLM_PROVIDER` 路由
+- `archive/tools/lib/llm_client.py` — LLM 统一入口,按 `LLM_PROVIDER` 路由 + `search_and_analyze` 先搜后整入口
+- `archive/tools/lib/tavily_client.py` — Tavily 搜索 API 客户端
 - `archive/tools/lib/siliconflow_client.py` — SiliconFlow provider 实现
 - `archive/tools/lib/deepseek_client.py` — DeepSeek 官方 provider 实现

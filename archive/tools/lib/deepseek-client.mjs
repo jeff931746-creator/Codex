@@ -1,11 +1,11 @@
-import { apiJson, apiFetch, jsonHeaders } from "./api-client.mjs";
+import { apiJson, apiFetch, envValue, jsonHeaders } from "./api-client.mjs";
 
 export const DEFAULT_DEEPSEEK_MODEL = "deepseek-v4-flash";
 
 export function resolveDeepSeekConfig(env = process.env) {
   return {
-    apiKey: env.DEEPSEEK_API_KEY || "",
-    model: env.DEEPSEEK_MODEL || DEFAULT_DEEPSEEK_MODEL
+    apiKey: envValue("DEEPSEEK_API_KEY", "", env),
+    model: envValue("DEEPSEEK_MODEL", DEFAULT_DEEPSEEK_MODEL, env)
   };
 }
 

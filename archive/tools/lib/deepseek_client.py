@@ -4,10 +4,9 @@
 from __future__ import annotations
 
 import json
-import os
 from typing import Any, Callable, Iterable
 
-from archive.tools.lib.api_client import ApiError, request
+from archive.tools.lib.api_client import ApiError, env_value, request
 from archive.tools.lib.llm_common import (
     RetryPolicy,
     call_with_retry,
@@ -24,14 +23,14 @@ class DeepSeekError(RuntimeError):
 
 
 def get_deepseek_api_key(required: bool = True) -> str:
-    api_key = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+    api_key = env_value("DEEPSEEK_API_KEY", "").strip()
     if required and not api_key:
         raise RuntimeError("DEEPSEEK_API_KEY 未设置")
     return api_key
 
 
 def get_deepseek_model(default: str = DEFAULT_DEEPSEEK_MODEL) -> str:
-    return os.environ.get("DEEPSEEK_MODEL", default)
+    return env_value("DEEPSEEK_MODEL", default)
 
 
 def chat(

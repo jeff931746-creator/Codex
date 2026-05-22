@@ -1,0 +1,139 @@
+```json
+[
+  {
+    "title": "《末世铁路王国》",
+    "world_setting": ["末世"],
+    "ip_skin": "",
+    "core_verb": "铁路经营+生存策略",
+    "core_object": "铁路/列车/幸存者",
+    "narrative_core": "在末世背景下经营铁路列车并管理幸存者生存的策略游戏",
+    "art_style": "美式 3D 写实"
+  },
+  {
+    "title": "《塞尔达无双 灾厄启示录》",
+    "world_setting": ["古代奇幻"],
+    "ip_skin": "塞尔达",
+    "core_verb": "割草无双+据点压制",
+    "core_object": "海量敌兵/巨型魔兽",
+    "narrative_core": "以塞尔达旷野之息世界观包装的无双割草动作游戏",
+    "art_style": "日式 3D 动漫"
+  },
+  {
+    "title": "《异度神剑 2》",
+    "world_setting": ["云海", "科幻奇幻"],
+    "ip_skin": "异度神剑",
+    "core_verb": "JRPG 战斗+异刃收集羁绊",
+    "core_object": "巨神兽/异刃/敌人",
+    "narrative_core": "在云海巨神兽上展开的 JRPG 冒险，核心为异刃收集与羁绊养成",
+    "art_style": "日式 3D 动漫"
+  },
+  {
+    "title": "《奇异人生 Switch 版》",
+    "world_setting": ["现代都市", "校园"],
+    "ip_skin": "奇异人生",
+    "core_verb": "剧情选择+时间回溯",
+    "core_object": "关键抉择/人际关系",
+    "narrative_core": "通过时间回溯能力影响剧情走向的互动叙事冒险游戏",
+    "art_style": "美式 3D 写实"
+  },
+  {
+    "title": "《雷顿教授与新解的奇怪村》",
+    "world_setting": ["古代奇幻", "欧洲乡村"],
+    "ip_skin": "雷顿教授",
+    "core_verb": "解谜+探索调查",
+    "core_object": "谜题/案件/村民",
+    "narrative_core": "以解谜为核心驱动的冒险游戏，通过解决大量谜题推进剧情",
+    "art_style": "童话绘本"
+  },
+  {
+    "title": "《心跳文学部 Plus！》",
+    "world_setting": ["虚拟世界", "校园"],
+    "ip_skin": "心跳文学部",
+    "core_verb": "文字恋爱+心理恐怖",
+    "core_object": "文学部部员/游戏文件",
+    "narrative_core": "伪装成恋爱模拟的元叙事心理恐怖游戏，打破第四面墙",
+    "art_style": "日式 2D 动漫"
+  },
+  {
+    "title": "《死亡细胞》",
+    "world_setting": ["中世纪奇幻", "孤岛"],
+    "ip_skin": "",
+    "core_verb": "横版动作+Roguelite 闯关",
+    "core_object": "怪物/守卫/Boss",
+    "narrative_core": "像素风横版动作 Roguelite 游戏，死亡后重新挑战随机生成的地牢",
+    "art_style": "美式像素"
+  },
+  {
+    "title": "《逆转裁判 6》",
+    "world_setting": ["现代都市", "异国"],
+    "ip_skin": "逆转裁判",
+    "core_verb": "法庭辩论+证据调查",
+    "core_object": "法庭案件/证人/检察官",
+    "narrative_core": "扮演律师在法庭上通过证据和逻辑推理为委托人辩护的冒险游戏",
+    "art_style": "日式 2D 动漫"
+  },
+  {
+    "title": "《女神异闻录 5 皇家版》",
+    "world_setting": ["现代都市", "校园", "异世界"],
+    "ip_skin": "女神异闻录",
+    "core_verb": "回合制 JRPG+社交养成+怪盗潜行",
+    "core_object": "阴影/Palace 主人/心之怪盗团",
+    "narrative_core": "白天校园社交养成与夜晚异世界怪盗潜行结合的回合制 JRPG",
+    "art_style": "日式 2D 动漫"
+  },
+  {
+    "title": "《模拟人生 4》",
+    "world_setting": ["现代都市"],
+    "ip_skin": "模拟人生",
+    "core_verb": "生活模拟+建造装修",
+    "core_object": "模拟市民/房屋/社区",
+    "narrative_core": "控制模拟市民日常生活、建造房屋并管理人际关系的沙盒模拟游戏",
+    "art_style": "美式 3D 写实"
+  },
+  {
+    "title": "《任天狗 + 猫》",
+    "world_setting": ["现代都市"],
+    "ip_skin": "任天狗",
+    "core_verb": "宠物养成+触控互动",
+    "core_object": "小狗/小猫",
+    "narrative_core": "通过触控和语音与虚拟宠物互动并照顾其成长的养成模拟游戏",
+    "art_style": "Q 版萌系"
+  },
+  {
+    "title": "《大金刚 丛林节拍》",
+    "world_setting": ["丛林", "奇幻岛屿"],
+    "ip_skin": "大金刚",
+    "core_verb": "节奏动作+平台跳跃",
+    "core_object": "大金刚/障碍/敌人",
+    "narrative_core": "配合节奏拍打鼓点控制器来操控大金刚进行平台跳跃的动作游戏",
+    "art_style": "美式 3D 卡通"
+  },
+  {
+    "title": "《押忍! 战斗! 应援团》",
+    "world_setting": ["现代都市"],
+    "ip_skin": "",
+    "core_verb": "音乐节奏+触控点击",
+    "core_object": "节拍点/应援对象",
+    "narrative_core": "跟随音乐节奏触控屏幕为陷入困境的人们应援助威的音乐节奏游戏",
+    "art_style": "日式 2D 动漫"
+  },
+  {
+    "title": "《八方旅人 2》",
+    "world_setting": ["中世纪奇幻"],
+    "ip_skin": "八方旅人",
+    "core_verb": "回合制 JRPG+多主角叙事",
+    "core_object": "八位旅人/怪物/Boss",
+    "narrative_core": "以八位主角各自的故事线展开的回合制 JRPG，采用 HD-2D 像素风格",
+    "art_style": "日式像素"
+  },
+  {
+    "title": "《集合啦! 动物森友会》",
+    "world_setting": ["孤岛"],
+    "ip_skin": "动物森友会",
+    "core_verb": "生活经营+岛屿建设+收集社交",
+    "core_object": "岛屿/村民邻居/家具生物",
+    "narrative_core": "在无人岛上自由建设家园、与动物邻居互动并随现实时间同步生活的模拟游戏",
+    "art_style": "Q 版萌系"
+  }
+]
+```

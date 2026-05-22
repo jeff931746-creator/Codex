@@ -5,11 +5,13 @@ from __future__ import annotations
 
 import gzip
 import json
+import os
 import ssl
 import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 try:
@@ -22,10 +24,68 @@ API_BASE_URLS = {
     "siliconflow": "https://api.siliconflow.cn/v1",
     "deepseek": "https://api.deepseek.com",
     "gemini": "https://generativelanguage.googleapis.com/v1beta/models",
+    "tavily": "https://api.tavily.com",
     "itunes": "https://itunes.apple.com",
     "steam_store": "https://store.steampowered.com",
     "duckduckgo_html": "https://html.duckduckgo.com",
 }
+
+RUNTIME_ENV_PATH = (
+    Path.home() / "Library/Application Support/FeishuCodexBridge/bridge/.env"
+)
+_RUNTIME_ENV_LOADED = False
+
+
+def _runtime_env_path() -> Path:
+    override = os.environ.get("CODEX_RUNTIME_ENV_PATH", "").strip()
+    if override:
+        return Path(override).expanduser()
+    return RUNTIME_ENV_PATH
+
+
+def _parse_env_line(line: str) -> tuple[str, str] | None:
+    stripped = line.strip()
+    if not stripped or stripped.startswith("#") or "=" not in stripped:
+        return None
+    if stripped.startswith("export "):
+        stripped = stripped[len("export ") :].lstrip()
+    key, _, value = stripped.partition("=")
+    key = key.strip()
+    if not key or not key.replace("_", "").isalnum() or key[0].isdigit():
+        return None
+    value = value.strip()
+    if (
+        len(value) >= 2
+        and value[0] == value[-1]
+        and value[0] in {"'", '"'}
+    ):
+        value = value[1:-1]
+    return key, value
+
+
+def load_runtime_env() -> None:
+    """Load the centralized bridge runtime .env once without overwriting env vars."""
+    global _RUNTIME_ENV_LOADED
+    if _RUNTIME_ENV_LOADED:
+        return
+    _RUNTIME_ENV_LOADED = True
+
+    path = _runtime_env_path()
+    if not path.exists():
+        return
+
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        parsed = _parse_env_line(raw_line)
+        if parsed is None:
+            continue
+        key, value = parsed
+        if value and key not in os.environ:
+            os.environ[key] = value
+
+
+def env_value(name: str, default: str = "") -> str:
+    load_runtime_env()
+    return os.environ.get(name, default)
 
 
 class ApiError(RuntimeError):
@@ -51,9 +111,11 @@ def ssl_context() -> ssl.SSLContext:
 
 
 def api_url(provider: str, path: str = "", query: dict[str, Any] | None = None) -> str:
+    load_runtime_env()
     if provider not in API_BASE_URLS:
         raise KeyError(f"Unknown API provider: {provider}")
-    base = API_BASE_URLS[provider].rstrip("/")
+    provider_env = provider.upper().replace("-", "_")
+    base = os.environ.get(f"{provider_env}_BASE_URL", API_BASE_URLS[provider]).rstrip("/")
     if path:
         url = f"{base}/{path.lstrip('/')}"
     else:

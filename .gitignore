@@ -38,6 +38,14 @@ archive/方法论/立项白皮书/
 .claude/.qa-checkpoint
 .claude/.neat-freak-last-notify
 
+# Office 文档（本地产物，不入版本）
+*.docx
+*.xlsx
+*.pptx
+
+# Playground 临时项目
+workspace/playground/cbg-monitor/
+
 # 脚本产物（可再生，不入版本）
 archive/tools/scripts/*_数据/
 **/_logs/

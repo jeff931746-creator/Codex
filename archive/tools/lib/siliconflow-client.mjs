@@ -1,13 +1,13 @@
-import { API_BASE_URLS, apiJson, jsonHeaders } from "./api-client.mjs";
+import { API_BASE_URLS, apiJson, envValue, jsonHeaders } from "./api-client.mjs";
 
 export const DEFAULT_SILICONFLOW_BASE_URL = API_BASE_URLS.siliconflow;
 export const DEFAULT_SILICONFLOW_MODEL = "deepseek-ai/DeepSeek-V3";
 
 export function resolveSiliconFlowConfig(env = process.env) {
   return {
-    apiKey: env.SILICONFLOW_API_KEY || "",
-    model: env.SILICONFLOW_MODEL || DEFAULT_SILICONFLOW_MODEL,
-    baseUrl: (env.SILICONFLOW_BASE_URL || DEFAULT_SILICONFLOW_BASE_URL).replace(/\/$/, "")
+    apiKey: envValue("SILICONFLOW_API_KEY", "", env),
+    model: envValue("SILICONFLOW_MODEL", DEFAULT_SILICONFLOW_MODEL, env),
+    baseUrl: envValue("SILICONFLOW_BASE_URL", DEFAULT_SILICONFLOW_BASE_URL, env).replace(/\/$/, "")
   };
 }
 
