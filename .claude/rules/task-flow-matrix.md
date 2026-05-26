@@ -77,7 +77,7 @@ Completion standard:
 
 - `target-inspection` is complete only when the affected files and current wording are known
 - `edit` is complete only when the intended text changes are applied
-- `self-review` is complete only when wording conflicts, scope drift, and logic coverage are checked — **for design documents (system design, feature requirements, combat systems, and similar), `self-review` must be executed by a subagent, not inline; this is mandatory, not preferred**
+- `self-review` is complete only when wording conflicts, scope drift, and logic coverage are checked — **for design documents (system design, feature requirements, combat systems, and similar), `self-review` must be executed by a subagent, not inline; this is mandatory, not preferred**; the subagent must evaluate using the three criteria in `reference/部门标准/策划/GDD写作标准.md`: (1) every feature has an explicit experience promise, (2) each mechanic passes the deletion test, (3) implementation details are in 开发自决区 not 必须锁定区 — any blocking issue found returns the task to `edit` gate
 - `validation` is complete only when local checks for the affected assets have run, when available
 
 ### `implementation`
