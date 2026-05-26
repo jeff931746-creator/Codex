@@ -232,7 +232,7 @@ They should also be assigned a scoped `task type` and `current gate`.
 | Request mentions `标准 / 流程 / 体系 / 框架 / 方法论 / 沉淀 / 长期管理`，或"知识库/机制库/题材库"等知识资产类库 | default to `knowledge-asset` + `strict`; require `governance-design` gate |
 | `knowledge-asset` plan without the 3 scan lists (existing assets / READMEs / scripts) | reject the plan, stay in `plan` gate |
 | `doc-change` or `implementation` plan without explicit gate sequence section | reject the plan, stay in `plan` gate |
-| `doc-change` edit produces a design document but `self-review` was not delegated to a subagent | block delivery, run subagent review before proceeding |
+| `doc-change` edit produces a design document but `self-review` was not delegated to a subagent | block delivery, run subagent review before proceeding; subagent must use the three criteria in `reference/部门标准/策划/GDD写作标准.md` |
 | Classification turns out wrong mid-task | rewind to `intake`, downgrade in-progress artifacts to `draft` |
 | Current gate not complete | stay in gate |
 | Same task, context usage above 30% | `compact` |
