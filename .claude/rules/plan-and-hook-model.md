@@ -69,6 +69,23 @@ For every new task, the agent should:
 
 Small and reversible tasks still need `plan`, but the plan can be extremely short.
 
+### Plan Gate Sequence Requirement
+
+Every `doc-change` and `implementation` plan must include an explicit gate execution sequence section. A plan that only describes content or structure without naming the gates is incomplete and must be rejected.
+
+Required format:
+
+```
+## 执行 gate 序列
+1. target-inspection — [what will be read]
+2. edit — [what will be written]
+3. self-review — subagent（设计文档强制）
+4. validation — [what will be checked]
+5. delivery
+```
+
+A plan without this section is an unqualified plan. The user should reject it and ask the agent to rewrite before approving.
+
 ### Task Flow
 
 Every task must also be assigned a flow type before execution begins.
@@ -214,6 +231,8 @@ They should also be assigned a scoped `task type` and `current gate`.
 | Task not yet classified | classify task flow |
 | Request mentions `标准 / 流程 / 体系 / 框架 / 方法论 / 沉淀 / 长期管理`，或"知识库/机制库/题材库"等知识资产类库 | default to `knowledge-asset` + `strict`; require `governance-design` gate |
 | `knowledge-asset` plan without the 3 scan lists (existing assets / READMEs / scripts) | reject the plan, stay in `plan` gate |
+| `doc-change` or `implementation` plan without explicit gate sequence section | reject the plan, stay in `plan` gate |
+| `doc-change` edit produces a design document but `self-review` was not delegated to a subagent | block delivery, run subagent review before proceeding |
 | Classification turns out wrong mid-task | rewind to `intake`, downgrade in-progress artifacts to `draft` |
 | Current gate not complete | stay in gate |
 | Same task, context usage above 30% | `compact` |
