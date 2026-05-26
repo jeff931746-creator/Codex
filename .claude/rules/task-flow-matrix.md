@@ -61,6 +61,7 @@ Use for:
 - README updates
 - template changes
 - workflow documentation changes
+- game / feature / system design documents
 
 Gate order:
 
@@ -76,7 +77,7 @@ Completion standard:
 
 - `target-inspection` is complete only when the affected files and current wording are known
 - `edit` is complete only when the intended text changes are applied
-- `self-review` is complete only when wording conflicts and scope drift are checked
+- `self-review` is complete only when wording conflicts, scope drift, and logic coverage are checked — **for design documents (system design, feature requirements, combat systems, and similar), `self-review` must be executed by a subagent, not inline; this is mandatory, not preferred**
 - `validation` is complete only when local checks for the affected assets have run, when available
 
 ### `implementation`
