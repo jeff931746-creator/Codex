@@ -47,8 +47,28 @@ In short:
 - the final declaration that the whole task is complete
 - scope changes for the parent task
 - direct replacement of the main agent's user-facing conclusion
+- review criteria definition — a subagent performing a `findings` gate must never define its own review dimensions; the applicable standard must be located by the main agent and passed explicitly in the prompt
 
 Subagents may propose a local sub-plan, but it is only advisory until the main agent adopts it.
+
+## Review Delegation Requirements
+
+These rules apply whenever the main agent delegates a `findings` gate to a subagent.
+
+Before writing the subagent prompt, the main agent must:
+
+1. Complete `standard-check`: locate the applicable standard in `reference/部门标准/` (check both the current worktree path and the main repo path `/Users/mt/Documents/Codex/reference/`)
+2. Confirm the standard with the user or proceed only if the standard is unambiguous
+3. Include the standard content or its exact file path in the subagent prompt
+4. Instruct the subagent explicitly to apply the provided standard — not to define its own criteria
+
+A subagent prompt for `findings` that does not include a confirmed standard is invalid. The main agent must not send it.
+
+If no standard exists:
+
+- The main agent must stop at `standard-check` gate
+- Report the gap to the user: "需要 [X] 能力的审核标准，当前 `reference/部门标准/` 下暂无，是否建立？"
+- Do not proceed to `target-inspection` or `findings` until the user provides explicit direction
 
 ## Mandatory Delegation Triggers
 

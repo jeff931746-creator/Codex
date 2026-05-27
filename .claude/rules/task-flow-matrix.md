@@ -120,15 +120,17 @@ Gate order:
 
 1. `intake`
 2. `plan`
-3. `target-inspection`
-4. `findings`
-5. `cross-check`
-6. `delivery`
+3. `standard-check`
+4. `target-inspection`
+5. `findings`
+6. `cross-check`
+7. `delivery`
 
 Completion standard:
 
-- `target-inspection` is complete only when the thing being reviewed is fully identified **and** the relevant standard files have been read from both the worktree and the main repo (`/Users/mt/Documents/Codex/reference/部门标准/`); a list of paths actually read must be produced — if no standard exists, this must be stated explicitly before proceeding
-- `findings` is complete only when concrete issues or a no-findings result is produced
+- `standard-check` is complete only when the applicable review standard has been located in `reference/部门标准/` (both the current worktree path and the main repo path `/Users/mt/Documents/Codex/reference/` must be checked), confirmed by the main agent, and ready to be passed explicitly into the subagent prompt for `findings`; if no standard exists, the main agent must report the gap to the user and receive explicit instruction before proceeding — the task must not advance to `target-inspection` until a standard is confirmed or the user explicitly authorizes custom criteria with documented rationale
+- `target-inspection` is complete only when the thing being reviewed is fully identified
+- `findings` is complete only when concrete issues or a no-findings result is produced against the confirmed standard
 - `cross-check` is complete only when findings are tied back to evidence
 
 ### `collection`
