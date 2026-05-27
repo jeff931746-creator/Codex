@@ -63,6 +63,25 @@ The main agent should delegate when any of the following is true:
 - the main thread already has enough context to synthesize, but not enough room to also keep all exploration detail
 - the current gate is one where evidence, inspection, or cross-checking is the main work
 
+## 委派约束
+
+与 Mandatory Delegation Triggers 配套：前者说"何时必须委派"，后者说"委派时的禁止行为"。
+
+### 套娃禁止
+
+委托前先问：**我对这个问题有结论了吗？**
+
+- 有结论 → 本地完成，不委托
+- 无结论 → 给子 agent 开放问题，prompt 里不预埋方向、不列"重点检查 X"
+
+"主 agent 有结论 + 委托子 agent 验证" = 套娃，无条件禁止。
+
+### 设计文档审核
+
+**主 agent 本轮写过或改过的设计文档**，审核必须走子 agent。
+
+豁免：clear 后 / 全新 session 且本轮未参与写作或修改（无先验上下文，与子 agent 起点相同）。
+
 ## Main Agent Should Usually Stay Local When
 
 - presenting the formal `plan`
@@ -165,6 +184,15 @@ Every subagent task should specify:
 - the current gate
 - the desired output format
 - the maximum summary length, unless structured output is better
+
+### Standard-First Rule for review and doc-change
+
+When the subagent task type is `review` or `doc-change`, the prompt must include an explicit instruction to read the relevant standard files before executing. Specifically:
+
+- the prompt must name the standard paths to read: both the worktree path and the main repo path (`/Users/mt/Documents/Codex/reference/部门标准/`)
+- the subagent must read and confirm the standard before applying any evaluation criteria
+- self-defined evaluation dimensions are not allowed unless the subagent has confirmed no relevant standard exists in either location
+- if no standard exists, the subagent must state this explicitly and halt, not substitute a self-defined framework
 
 Preferred return formats:
 
