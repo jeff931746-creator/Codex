@@ -127,7 +127,7 @@ Gate order:
 
 Completion standard:
 
-- `target-inspection` is complete only when the thing being reviewed is fully identified
+- `target-inspection` is complete only when the thing being reviewed is fully identified **and** the relevant standard files have been read from both the worktree and the main repo (`/Users/mt/Documents/Codex/reference/部门标准/`); a list of paths actually read must be produced — if no standard exists, this must be stated explicitly before proceeding
 - `findings` is complete only when concrete issues or a no-findings result is produced
 - `cross-check` is complete only when findings are tied back to evidence
 
