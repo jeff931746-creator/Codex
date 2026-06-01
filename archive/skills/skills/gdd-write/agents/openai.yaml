@@ -1,0 +1,4 @@
+interface:
+  display_name: "gdd-write"
+  short_description: "AI 辅助写系统 GDD，按写作标准四层框架逐步推导"
+  default_prompt: "用 gdd-write Skill 帮我写 [系统名称] 的 GDD"

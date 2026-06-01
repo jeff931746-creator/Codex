@@ -1,0 +1,4 @@
+interface:
+  display_name: "gdd-review"
+  short_description: "按 GDD 写作标准五项判据审核 GDD 文档，输出通过/blocking issue 结论"
+  default_prompt: "用 gdd-review Skill 审核 [文档路径]"
