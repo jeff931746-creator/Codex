@@ -75,9 +75,9 @@ Gate order:
 
 Completion standard:
 
-- `target-inspection` is complete only when the affected files and current wording are known; **for strategy / system / gameplay / combat design documents (系统设计/玩法设计/战斗设计 and similar), this also requires that `reference/部门标准/策划/gdd/GDD写作标准.md` has been read in this session — do not advance to `edit` until this is confirmed**
+- `target-inspection` is complete only when the affected files and current wording are known; **for 需求 GDD（功能需求文档）, this also requires that `reference/部门标准/策划/gdd/GDD写作标准.md` has been read in this session — do not advance to `edit` until this is confirmed**
 - `edit` is complete only when the intended text changes are applied
-- `self-review` is complete only when wording conflicts, scope drift, and logic coverage are checked — **for design documents (system design, feature requirements, combat systems, and similar), `self-review` must be executed by a subagent, not inline; this is mandatory, not preferred**; the subagent must evaluate using the Self-Review 评审判据 in `reference/部门标准/策划/gdd/GDD写作标准.md` — any blocking issue found returns the task to `edit` gate
+- `self-review` is complete only when wording conflicts, scope drift, and logic coverage are checked — **for 需求 GDD, `self-review` must be executed via `gdd-review` Skill, not inline; this is mandatory, not preferred**; gdd-review evaluates using the Self-Review 评审判据 in `reference/部门标准/策划/gdd/GDD写作标准.md` — any blocking issue found returns the task to `edit` gate
 - `validation` is complete only when local checks for the affected assets have run, when available
 
 ### `implementation`
