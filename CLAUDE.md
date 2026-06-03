@@ -101,10 +101,6 @@ Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/arch
 - **即时写入**：发现已确认结论或关键约束时
 - **禁止写入**：调试过程、失败尝试、中间输出、重复解释
 
-### 框架沉淀硬规则
-
-产出可跨任务复用的框架 / 判据 / 定义时，**必须先沉淀再继续**：标准/规则/字段 → `reference/部门标准/`；方法论/推导过程 → `archive/方法论/`。禁止先做事后沉淀。触发条件详见 `workflow-chain.md`。
-
 ### 任务收尾门禁
 
 有文件 / 规则 / 记忆变更，或重要分析结束时，交付前运行 `neat-freak` Skill。
