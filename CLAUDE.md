@@ -45,7 +45,7 @@ Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/arch
 
 | 场景 | 入口 | 不要做什么 |
 |---|---|---|
-| 对一款游戏做机制拆解 / 系统穷举 | `游戏机制拆解` | 不要直接写分析绕过 Skill，机制库需要标准化结构 |
+| 对一款游戏做分析 / 机制拆解 / 竞品研究，或项目知识库内有游戏拆解需入库 | `游戏机制拆解` | 不要直接写分析绕过 Skill，机制库需要标准化结构 |
 | 跨平台收集竞品 / 产品信息 | `产品收集` | 不要自定义字段后录入，schema 必须先确认 |
 | 下载 Forevernine 指定来源素材 | `forevernine-material-downloader` | 不要手动逐个处理 |
 | 评估买量素材组合 | `买量组合评估` | 不要跳过证据链给主观评分 |
@@ -118,8 +118,3 @@ Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/arch
 - 不自动运行 `git push`。只在用户明确要求时 push。
 - 部署按项目自身文档的命令执行，不把 `git push` 当部署。
 
----
-
-## Game Breakdown Rules
-
-游戏分析或机制拆解完成后（含项目知识库内的拆解），必须同时写入 `archive/资料/机制库/`。规则详见 `游戏机制拆解` Skill。
