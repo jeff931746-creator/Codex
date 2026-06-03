@@ -105,10 +105,6 @@ Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/arch
 
 产出可跨任务复用的框架 / 判据 / 定义时，**必须先沉淀再继续**：标准/规则/字段 → `reference/部门标准/`；方法论/推导过程 → `archive/方法论/`。禁止先做事后沉淀。触发条件详见 `workflow-chain.md`。
 
-### 三位一体框架引用规则
-
-引用 `reference/部门标准/立项/三位一体框架/` 下标准时，**必须从 `current/` 读取**，禁止裸路径。修订协议详见 `workflow-chain.md`。
-
 ### 任务收尾门禁
 
 有文件 / 规则 / 记忆变更，或重要分析结束时，交付前运行 `neat-freak` Skill。
