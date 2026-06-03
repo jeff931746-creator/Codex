@@ -1,6 +1,6 @@
 # [功能名称]
 
-> 适用标准：`reference/部门标准/策划/gdd/GDD写作标准.md`（v17）
+> 适用标准：`reference/部门标准/策划/gdd/GDD写作标准.md`（v18）
 
 ---
 
