@@ -1,265 +1,90 @@
 # Plan And Hook Model
 
-This document defines a lightweight control model for how the workspace should move from mandatory plan review into execution, delegation, and state-control actions.
+运行时控制模型：从强制 plan 审批到执行、委派和状态控制动作。
 
-It is meant to complement the existing session protocol in [`/Users/mt/Documents/Codex/CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md) and the agent-role guidance in [`/Users/mt/Documents/Codex/archive/skills/docs/agent-skill-topology.md`](/Users/mt/Documents/Codex/tools/codex-skills-repo/docs/agent-skill-topology.md).
-
-## Why This Exists
-
-The current workspace already has strong routing for `subagent`, `compact`, `clear`, and `rewind`, but it does not yet have a single place that explains:
-
-- why the main agent should delegate bounded work
-- how subagent work should stay out of the main context
-- why every task must present a plan before execution
-- what a `hook` means in this system
-
-This file fills that gap without introducing a heavy framework.
-
-It works together with the task flow matrix in [`task-flow-matrix.md`](/Users/mt/Documents/Codex/.claude/rules/task-flow-matrix.md).
-
-For detailed main-agent vs subagent rules, see [`agent-delegation-policy.md`](/Users/mt/Documents/Codex/.claude/rules/agent-delegation-policy.md).
+配套文件：[`task-flow-matrix.md`](task-flow-matrix.md) · [`agent-delegation-policy.md`](agent-delegation-policy.md) · [`hook-table.md`](hook-table.md)
 
 ## Core Definitions
 
 ### Main Agent
 
-The main agent owns:
-
-- understanding the user request
-- decomposing the task
-- deciding whether to continue locally or delegate
-- enforcing the plan review gate before execution
-- integrating results and presenting the final answer
-
-The main agent should not dump every intermediate exploration step into the shared context.
-The main agent also owns the only formal channel for user approval.
+主 agent 拥有：请求理解、任务分解、本地执行 vs 委派决策、plan 审批门禁执行、结果整合与最终交付。不应把中间探索步骤堆入共享上下文。主 agent 是用户审批的唯一渠道。
 
 ### Subagent
 
-A subagent is an execution boundary for bounded work.
+子 agent 是有边界工作的执行隔离单元。
 
-Use a subagent when:
+使用时机：读 ≥ 3 个文件但不编辑、产生大量中间输出、执行审核/验证/文档起草、工作可隔离后返回简短结论。
 
-- the task needs to read many files without editing them
-- the task produces a lot of intermediate output
-- the task is review, verification, or document drafting
-- the work can be isolated and reported back as a short conclusion
-
-The contract is:
-
-- the main agent sends a precise question
-- the subagent works in isolated context
-- the subagent returns only the conclusion, not the whole process
-
-This keeps the main thread usable and reduces context pollution.
-Subagents can support the plan, but they do not own the task-level formal plan.
+合约：主 agent 发出精确问题 → 子 agent 在隔离上下文中执行 → 只返回结论，不返回过程。子 agent 可辅助 plan，但不拥有任务级正式 plan。
 
 ### Plan
 
-`plan` is the mandatory first step for every new task.
+`plan` 是每个新任务的强制第一步，防止直接跳入执行。
 
-Its job is to prevent the system from jumping straight into execution and to force an explicit agreement on the approach before work begins.
+每次新任务必须：1) 概述预期方式；2) 点名可能改动的文件/系统/行为；3) 说明非显然的权衡或风险；4) 等待用户批准后再执行。
 
-For every new task, the agent should:
-
-1. summarize the intended approach
-2. name the files, systems, or behaviors likely to change
-3. surface non-obvious tradeoffs or risks
-4. wait for user approval before executing
-
-Small and reversible tasks still need `plan`, but the plan can be extremely short.
-
-### Plan Gate Sequence Requirement
-
-Every `doc-change` and `implementation` plan must include an explicit gate execution sequence section. A plan that only describes content or structure without naming the gates is incomplete and must be rejected.
-
-Required format:
+每个 `doc-change` 和 `implementation` plan 必须包含 gate 执行序列小节：
 
 ```
 ## 执行 gate 序列
-1. target-inspection — [what will be read]
-2. edit — [what will be written]
+1. target-inspection — [读什么]
+2. edit — [写什么]
 3. self-review — subagent（设计文档强制）
-4. validation — [what will be checked]
+4. validation — [检查什么]
 5. delivery
 ```
 
-A plan without this section is an unqualified plan. The user should reject it and ask the agent to rewrite before approving.
-
-### Task Flow
-
-Every task must also be assigned a flow type before execution begins.
-
-The default shared flow types are:
-
-- `analysis`
-- `doc-change`
-- `implementation`
-- `review`
-- `collection`
-- `knowledge-asset`
-
-The flow type determines which mandatory gates must be completed in order.
-
-`knowledge-asset` is the dedicated flow for long-term reusable assets — standards, libraries, methodologies, frameworks. It exists because `doc-change` does not force the agent to reason about main data, lifecycle, and integration before writing. See [`task-flow-matrix.md`](/Users/mt/Documents/Codex/.claude/rules/task-flow-matrix.md) for the gate order and the 5-field governance design checklist.
+无此小节的 plan 视为不合格，应拒绝并要求重写。任务方向实质变化后，必须重新 `plan`。
 
 ### Hook
 
-A `hook` is a condition-action trigger:
-
-`if condition -> perform action`
-
-In this workspace, hooks are best understood as control logic, not as a separate platform runtime.
-
-Examples:
-
-- if context usage becomes high, trigger `compact`
-- if the task becomes noisy, trigger `subagent`
-- if the goal drifts, trigger `rewind`
-- if the task affects shared assets, trigger `plan` and review gates
+hook 是条件—动作触发器：`if condition -> perform action`。在本工作区中是控制逻辑，不是平台运行时。可操作的触发表见 [`hook-table.md`](hook-table.md)。
 
 ## Default Operating Model
 
-Use the following sequence:
+1. 理解请求
+2. 提交 `plan`，选择任务流类型
+3. 等待批准
+4. 按批准的 plan 逐 gate 执行
+5. 边界工作委派给子 agent
+6. 让 hook 在触发条件满足时强制执行压缩、委派、rewind 或审核行为
 
-1. Understand the request.
-2. Present `plan`.
-3. Choose the task flow.
-4. Wait for approval.
-5. Execute gate by gate within the approved plan and chosen flow.
-6. Delegate bounded work to subagents when it improves context isolation.
-7. Let hooks enforce compaction, delegation, rewind, or review behavior when trigger conditions are met.
-
-This gives the system a clear bias:
-
-- do not skip the alignment step
-- do not skip task classification
-- do not skip unfinished gates
-- keep trivial-task plans short
-- do not overfill the main context with exploratory noise
-- do not execute broad changes without an approval gate
-
-## Runtime Consistency
-
-This model is runtime-agnostic.
-
-If the request is being handled through a Claude-oriented entrypoint, the same process still applies:
-
-- Claude calls should follow the same `plan -> continue / rewind / compact / clear / subagent` routing model.
-- Claude-specific entry files should not skip the mandatory `plan` gate just because the runtime is different.
-- Claude-specific entry files should not skip task classification or mandatory stage gates.
-- Claude should use the same subagent isolation standard: send bounded work out, keep process noise out of the main context, and bring back concise conclusions only.
-- Claude runtime mappings may change exposure and wiring, but they should not change the control semantics unless an explicit override is documented.
-
-## When To Use `plan`
-
-`plan` is always required for a new task.
-
-The difference is only how long the `plan` needs to be:
-
-- use a short `plan` when the task is tiny, reversible, and obvious
-- use a fuller `plan` when the task is multi-step, high-impact, shared-asset, or hard to undo
-
-If the task direction changes materially after approval, the agent should stop and re-enter `plan`.
+系统偏好：不跳过对齐步骤；不跳过任务分类；不跳过未完成的 gate；小任务 plan 保持简短；不向主上下文堆入探索噪声；不在无审批 gate 的情况下执行大范围改动。
 
 ## Trigger-Word Routing
 
-Certain words in the user request signal that the task is most likely a long-term asset, not a one-off document. When any of these appear in the request, the default classification is `knowledge-asset` at `strict` intensity:
+以下词语出现时，默认分类为 `knowledge-asset` + `strict`：
 
-- `标准` / `规范`
-- `流程` / `体系` / `框架`
-- `方法论`
-- `沉淀` / `长期管理` / `长期演进`
-- `库`：仅当指知识库类资产时触发，即以下具体短语：
-  `知识库` / `机制库` / `题材库` / `方法论库` / `人群库` / `竞品库` / `买量组合库` / `复盘库` / `建立 XX 库` / `维护 XX 库`
+- `标准` / `规范` / `流程` / `体系` / `框架` / `方法论` / `沉淀` / `长期管理` / `长期演进`
+- `库`：仅限知识资产类短语：`知识库` / `机制库` / `题材库` / `方法论库` / `人群库` / `竞品库` / `买量组合库` / `复盘库` / `建立 XX 库` / `维护 XX 库`
 
-**不触发的情况**（明确排除）：
-- `代码库` / `依赖库` / `库函数` / `标准库`（指软件库，非知识资产）
-- 单次查询或临时收集，用户明确说"不需要长期维护"
+**不触发**：`代码库` / `依赖库` / `库函数` / `标准库`；用户明确说"不需要长期维护"的单次收集。
 
-Behavior:
+行为：主 agent 必须先跑 `governance-design` gate 再写任何产物；降级到 `doc-change` 仅在用户明确说"一次性、无需长期治理"时允许；若触发词出现但最终分类为 `doc-change`，plan 必须说明为何不适用长期治理。
 
-- the main agent must classify as `knowledge-asset` and run the `governance-design` gate before writing any artifact
-- downgrade to `doc-change` is only allowed if the user explicitly says "this is a one-off, no need for long-term governance" (or equivalent)
-- if the trigger word appears but the classification ends up being `doc-change`, the plan must explicitly state why long-term governance does not apply
-
-This rule exists because the typical failure is: user says "建立 X 标准/库/流程", agent jumps to template design without first scanning existing assets and defining main data ownership. Trigger-word routing makes this jump structurally impossible.
+根本原因：典型失败是用户说"建立 X 标准/库/流程"，agent 直接跳到模板设计而不先扫现有资产和定义数据所有权。触发词路由让这个跳跃结构上不可能发生。
 
 ## Plan-Stage Scan Requirement For `knowledge-asset`
 
-A `knowledge-asset` plan is not acceptable unless it explicitly reports:
+`knowledge-asset` plan 必须显式列出：
+- 已搜索的同类现有资产（路径列表，即使为空）
+- 已读取的 README 和规则文件（路径 + 内容摘要）
+- 已检查的自动化脚本入口（路径列表）
 
-- existing same-kind assets searched (list of paths searched, even if empty)
-- existing READMEs and rule files read (list of paths, with content summarized)
-- existing automation script entry points inspected (list of paths)
-
-A plan without these three lists is an unqualified plan and the user should reject it. The hook table below treats this as a planning-gate failure.
+缺少这三项的 plan 视为不合格，用户应拒绝并要求重写。
 
 ## Mandatory Stage Gates
 
-Every flow is gate-based.
+- 下一个 gate 在当前 gate 完成前不得开始
+- gate 阻断时，停在当前 gate，解决阻塞、`rewind` 或重新 `plan`
+- 子 agent 继承有范围的任务类型和当前 gate；不得跳过 gate
+- 任务状态始终显示：任务类型 · 当前 gate · 已完成 gate · 下一 gate
 
-Rules:
+## When To Trigger Subagent
 
-- the next gate cannot begin until the current gate is complete
-- if the current gate is blocked, stay in that gate and resolve the blockage, `rewind`, or re-`plan`
-- subagents do not weaken gate discipline; they inherit a scoped flow and current gate
-- task state should always show `task type`, `current gate`, `completed gates`, and `next gate`
+优先使用子 agent：读 ≥ 3 个文件但不编辑、产生大量中间分析、主线程只需简短答案、验证/评分/起草可并行完成。
 
-## When To Trigger `subagent`
+子 agent 分配必须包含：精确问题、相关文件路径、输出约束（≤300 tokens 摘要 / bullet findings / JSON）、有范围的任务类型 + 当前 gate。
 
-Prefer `subagent` when:
-
-- reading three or more files without editing is likely
-- the task produces long intermediate analysis
-- the main thread only needs a short answer or decision
-- verification, scoring, or drafting can be done in parallel
-
-Subagents should be assigned with:
-
-- a precise question
-- the relevant file paths
-- an output constraint such as a short summary or structured result
-
-They should also be assigned a scoped `task type` and `current gate`.
-
-## Recommended Hook Table
-
-| Condition | Action |
-|---|---|
-| New task or material scope change | `plan` |
-| Task not yet classified | classify task flow |
-| Request mentions `标准 / 流程 / 体系 / 框架 / 方法论 / 沉淀 / 长期管理`，或"知识库/机制库/题材库"等知识资产类库 | default to `knowledge-asset` + `strict`; require `governance-design` gate |
-| `knowledge-asset` plan without the 3 scan lists (existing assets / READMEs / scripts) | reject the plan, stay in `plan` gate |
-| `doc-change` or `implementation` plan without explicit gate sequence section | reject the plan, stay in `plan` gate |
-| `doc-change` target is a 需求 GDD（功能需求文档）but `GDD写作标准.md` has not been read before `edit` gate | block `edit` gate; read `reference/部门标准/策划/gdd/GDD写作标准.md` first, then re-enter `target-inspection` completion check |
-| `doc-change` edit produces a 需求 GDD but `gdd-review` was not called for `self-review` | block delivery, call `gdd-review` Skill before proceeding; apply Self-Review 评审判据 in `reference/部门标准/策划/gdd/GDD写作标准.md` |
-| Classification turns out wrong mid-task | rewind to `intake`, downgrade in-progress artifacts to `draft` |
-| Current gate not complete | stay in gate |
-| Same task, context usage above 30% | `compact` |
-| Context usage above 60% or too many failed branches | `clear` |
-| Repeated failure on the same problem | `rewind` |
-| Goal drift into a new task | `rewind` |
-| Read-heavy, noisy, or verification-only work | `subagent` |
-| Shared-asset change after editing | local validation + Git review before rollout |
-
-## Boundaries And Non-Goals
-
-- A hook is not the same thing as a skill.
-- A hook is not the same thing as a runtime profile.
-- `profiles/` should continue to describe runtime exposure and mapping, not control policy.
-- Runtime-specific mappings such as Claude should preserve the shared routing semantics unless a documented override says otherwise.
-- Do not create a new agent for every workflow just because a hook exists.
-- Do not turn trivial-task plans into long essays; the rule is mandatory planning, not mandatory verbosity.
-- Do not treat gate transitions as implicit; they should be explicit and inspectable.
-- Do not let subagents take over main-agent responsibilities such as formal plan submission, gate transition approval, or final delivery ownership.
-
-## Recommended Wording
-
-Use the following short-form language when describing the model:
-
-- `Agent defines ownership and execution boundary.`
-- `Main agent delegates bounded work to subagents.`
-- `Subagents run in isolated context and return only concise conclusions.`
-- `Plan is the mandatory approval gate: draft first, review first, execute after approval.`
-- `Hooks are condition-action triggers that enforce routing, approval, compaction, and safety behavior.`
+套娃禁止：主 agent 已有结论再委派子 agent 确认，零可靠性。委派前强制自检：「我对这个问题有结论了吗？」有 → 本地完成；无 → 给子 agent 开放问题。

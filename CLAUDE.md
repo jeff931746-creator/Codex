@@ -13,13 +13,7 @@ This workspace is for workflow-related assets only.
 
 ## Operating Principles
 
-- User experience outranks technical preference.
-- Design for the user's goal, not for feature inventory.
-- Let the system carry complexity: automate repeated work, infer safe defaults, keep visible interaction simple.
-- Use progressive disclosure: essential result first, details when useful.
-- Feedback should guide the next action: "what happened + what to do next" over raw error reporting.
-- Repeated work should become automation.
-- Rules exist to reduce repeated decisions; use the smallest process that still preserves safety.
+用户目标优先于技术偏好；系统承载复杂度，可见交互保持简单；重复工作变自动化；规则的价值是减少决策，不是增加流程。
 
 ## Scope
 
@@ -49,10 +43,29 @@ Available Skills:
 - `产品收集` — 跨平台收集产品信息并做结构化录入
 - `forevernine-material-downloader` — 下载指定来源的素材资料
 - `买量组合评估` — 评估买量素材组合的蓝海度、可玩性与 IAP 变现潜力
+- `gdd-write` — AI 辅助写功能需求 GDD，按写作标准框架逐步推导，每步暂停确认
+- `gdd-review` — 按 GDD 写作标准审核设计文档，输出通过/blocking issue 结论
 - `session-router` — 按 `quick` / `standard` / `strict` 判断流程强度，再决定是否 plan、继续执行、委托或上下文控制
 - `session-compact` — 压缩当前会话状态并写入记忆库，compact 或 clear 前必须运行
 - `session-resume` — 新会话开始时恢复指定任务的上下文，让对话从正确状态继续
 - `neat-freak` — 任务结束前的轻量收尾门禁，对齐改动、文档、规则、记忆和交付摘要
+
+### 入口选择
+
+先查这张表再选 Skill。命中第一行即停，不要同时触发多个入口。
+
+| 场景 | 入口 | 不要做什么 |
+|---|---|---|
+| 对一款游戏做机制拆解 / 系统穷举 | `游戏机制拆解` | 不要直接写分析绕过 Skill，机制库需要标准化结构 |
+| 跨平台收集竞品 / 产品信息 | `产品收集` | 不要自定义字段后录入，schema 必须先确认 |
+| 下载 Forevernine 指定来源素材 | `forevernine-material-downloader` | 不要手动逐个处理 |
+| 评估买量素材组合 | `买量组合评估` | 不要跳过证据链给主观评分 |
+| 写一份功能需求 GDD | `gdd-write` | 不要直接输出完整文档，应逐步确认每一步 |
+| 审核 / Self-Review 一份 GDD | `gdd-review` | 不要内联审核，设计文档审核必须走 Skill |
+| 判断当前任务流程强度 | `session-router` | 不要直接执行跳过路由判断 |
+| compact 或 clear 前 | `session-compact` | 不要先压缩再补写记忆，顺序不能反 |
+| 新会话续接已有任务 | `session-resume` | 不要从 MEMORY.md 手动推断状态 |
+| 任务交付前收尾检查 | `neat-freak` | 不要只写交付摘要，门禁需要逐项确认 |
 
 ## Session Management Protocol
 
@@ -76,6 +89,8 @@ Available Skills:
 | API 调用规则 | `.claude/rules/api-client-architecture.md` |
 | LLM 事实性信息处理 | `.claude/rules/llm-fact-checking.md` |
 | 部门标准 | `reference/部门标准/` |
+| Hook 触发表 | `.claude/rules/hook-table.md` |
+| 子 agent 模型默认配置 | `.claude/rules/model-defaults.md` |
 
 ### 流程强度分级
 
@@ -89,21 +104,7 @@ Available Skills:
 
 ### 决策路由器
 
-`plan` 获批后，每次重大步骤前按顺序匹配（命中第一条即执行）：
-
-| 条件 | 动作 |
-|---|---|
-| 游戏分析 / 立项推演 / 竞品对比类任务 | **subagent** |
-| 需要读 ≥ 3 个文件但不修改它们 | **subagent** |
-| 任务产生大量中间输出，主上下文只需结论 | **subagent** |
-| 验证 / 校对 / 文档生成类任务 | **subagent** |
-| 同一问题连续失败 ≥ 3 次 | **rewind** |
-| 任务方向根本性偏移 | **rewind** |
-| 上下文 >60% 满，或累积 ≥ 3 个失败分支 | **clear** |
-| 同任务继续，上下文 >30% 满 | **compact** |
-| 以上均不符合 | **continue** |
-
-错误分级：逻辑层（方向错了）→ rewind；实现层（代码写错了）→ 就地修复；理解层（需求没搞清楚）→ compact 后重新澄清。
+读密集 / 分析 / 验证类 → **subagent**；连续失败 / 方向偏移 → **rewind**；上下文 >60% → **clear**；>30% → **compact**；否则 **continue**。错误分级：逻辑层 → rewind；实现层 → 就地修复；理解层 → compact 后重新澄清。完整触发条件见 `plan-and-hook-model.md`。
 
 ### 记忆写入规则
 
@@ -113,34 +114,15 @@ Available Skills:
 
 ### 框架沉淀硬规则
 
-主对话中达成下列任一类共识时，**必须在继续下一步工作前**沉淀到 `reference/` 或 `archive/方法论`：
-
-- 新的概念框架（公分母、第一性维度、基础结构）
-- 第一性推演结论（从底层重新论证后的维度定义、易混判据）
-- 跨任务复用的判据 / 方法
-- 用户多次反复纠正后形成的定义
-- 新建的层次结构 / 接口规则
-
-| 类型 | 位置 |
-|---|---|
-| 标准 / 规则 / 字段定义 | `reference/部门标准/` |
-| 方法论 / 推导过程 / 判据集 | `archive/方法论/` |
-
-❌ 禁止：先做事、事后再沉淀。框架必须先于数据存在。用户问"沉淀了吗"才补写意味着系统失职。
+产出可跨任务复用的框架 / 判据 / 定义时，**必须先沉淀再继续**：标准/规则/字段 → `reference/部门标准/`；方法论/推导过程 → `archive/方法论/`。禁止先做事后沉淀。触发条件详见 `workflow-chain.md`。
 
 ### 三位一体框架引用规则
 
-引用 `reference/部门标准/立项/三位一体框架/` 下任何标准时：
-
-- **必须从 `current/` 读取**：`reference/部门标准/立项/三位一体框架/current/{标准名}.md`
-- **禁止裸路径**（升级后路径失效）
-- **`history/` 仅作历史追溯**，不在业务流程或 Skill 中引用
-
-修订时：复制到 `history/{标准名}/v{X}_{日期}.md` → 覆盖 `current/` → 更新 yaml 元数据 → 更新 README 索引。
+引用 `reference/部门标准/立项/三位一体框架/` 下标准时，**必须从 `current/` 读取**，禁止裸路径。修订协议详见 `workflow-chain.md`。
 
 ### 任务收尾门禁
 
-文档 / 规则 / 代码 / Skill / 记忆有变更，或重要分析结束，交付前运行 `neat-freak` Skill。边界：不是全仓库清理命令，不替代测试 / `session-compact`。
+有文件 / 规则 / 记忆变更，或重要分析结束时，交付前运行 `neat-freak` Skill。
 
 ## Development Rules
 
