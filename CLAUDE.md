@@ -18,7 +18,7 @@ This workspace is for workflow-related assets only.
 ## Scope
 
 - Keep only files, scripts, notes, research, prompts, and tools that directly support the active workflow.
-- Prefer: `workspace/projects/`, `workspace/playground/`, `workspace/tmp/`.
+- Prefer: `workspace/projects/`, `workspace/playground/`, `workspace/tmp/`. `tmp/` is scratch — remove artifacts after use. Reusable scripts live in `archive/tools/`.
 - `reference/` is the core knowledge base — AI must not modify files here without explicit user permission.
 - `archive/` holds accumulated methods and tools. `reference/` holds stable standards and research.
 
@@ -28,14 +28,7 @@ This workspace is for workflow-related assets only.
 - If a task can be completed with existing system tools, prefer that path.
 - If new software appears necessary, stop and ask before installing.
 
-## Cleanup
-
-- `tmp/` is scratch space. Remove temporary artifacts after use.
-- Reusable scripts or tool repos live in `archive/tools/`.
-
 ## Skills
-
-Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/archive/skills/skills/`. Before starting any task that matches a Skill's description, read the corresponding `SKILL.md` and follow its workflow exactly.
 
 以 `archive/skills/skills/` 为准，读对应 `SKILL.md` 并按其工作流执行。
 
@@ -100,10 +93,6 @@ Reusable task workflows are defined as Skills in `/Users/mt/Documents/Codex/arch
 - **强制写入**：重要任务结束时、形成长期约束时、compact / clear 前
 - **即时写入**：发现已确认结论或关键约束时
 - **禁止写入**：调试过程、失败尝试、中间输出、重复解释
-
-### 任务收尾门禁
-
-有文件 / 规则 / 记忆变更，或重要分析结束时，交付前运行 `neat-freak` Skill。
 
 ## Development Rules
 
