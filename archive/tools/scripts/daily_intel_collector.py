@@ -310,34 +310,51 @@ value_score 评分标准（严格执行，宁可漏收不可滥收）：
 
 
 def analyze_article(title: str, content: str, source_name: str) -> dict | None:
-    """用 DeepSeek 分析文章，返回结构化数据。"""
+    """用 DeepSeek 分析文章，返回结构化数据。最多重试 3 次。"""
     prompt = f"来源：{source_name}\n标题：{title}\n\n正文（截取前 3000 字）：\n{content[:3000]}"
 
-    try:
-        result = chat_text(
-            prompt,
-            system=ANALYSIS_SYSTEM,
-            provider="deepseek",
-            max_tokens=2000,
-            temperature=0.1,
-        )
-        # 提取 JSON
-        result = result.strip()
-        if result.startswith("```"):
-            result = re.sub(r"^```\w*\n?", "", result)
-            result = re.sub(r"\n?```$", "", result)
-        return json.loads(result)
-    except Exception as e:
-        print(f"  ⚠️ DeepSeek 分析失败: {e}")
-        return None
+    for attempt in range(3):
+        if attempt > 0:
+            time.sleep(3)
+        try:
+            result = chat_text(
+                prompt,
+                system=ANALYSIS_SYSTEM,
+                provider="deepseek",
+                max_tokens=2000,
+                temperature=0.1,
+            )
+            result = result.strip()
+            if result.startswith("```"):
+                result = re.sub(r"^```\w*\n?", "", result)
+                result = re.sub(r"\n?```$", "", result)
+            parsed = json.loads(result)
+
+            strategy = parsed.get("strategy")
+            if strategy and not strategy.get("core_thesis") and not strategy.get("key_points"):
+                print(f"  ⚠️ DeepSeek 返回 strategy 但关键字段为空 (attempt {attempt+1}/3)")
+                continue
+
+            return parsed
+        except json.JSONDecodeError as e:
+            print(f"  ⚠️ JSON 解析失败 (attempt {attempt+1}/3): {e}")
+        except Exception as e:
+            print(f"  ⚠️ DeepSeek 分析失败 (attempt {attempt+1}/3): {e}")
+
+    print(f"  ❌ DeepSeek 分析最终失败（3 次均失败）: {title[:30]}...")
+    return None
 
 
 # ── 写入文件 ──────────────────────────────────────────
 
 def write_strategy_entry(article: dict, analysis: dict, source_name: str) -> Path | None:
     """写入战略库条目。"""
-    strategy = analysis if analysis.get("type") == "strategy" else analysis.get("strategy", {})
+    strategy = analysis.get("strategy") or analysis
     if not strategy:
+        return None
+
+    # 内容质量校验：核心论点和要点不能全空
+    if not strategy.get("core_thesis") and not strategy.get("key_points"):
         return None
 
     value_score = strategy.get("value_score", 3)
@@ -503,6 +520,9 @@ def process_source(source: dict, max_articles: int = 5) -> dict:
         stats["errors"] = 1
         return stats
 
+    # API 可能返回超过请求数量的文章，截断到 max_articles
+    if len(articles) > max_articles:
+        articles = articles[:max_articles]
     stats["fetched"] = len(articles)
     print(f"  获取 {len(articles)} 篇文章")
 
@@ -563,8 +583,8 @@ def process_source(source: dict, max_articles: int = 5) -> dict:
                 stats["product"] += 1
                 print(f"    ✅ 竞品库: {path.name} ({prod.get('newness_reason', '')})")
 
-        # 限速：避免 API 频率限制
-        time.sleep(1)
+        # 限速：避免 DeepSeek 频率限制
+        time.sleep(2)
 
     return stats
 
@@ -600,6 +620,7 @@ def main():
             continue
         stats = process_source(source, max_articles=max_articles)
         all_stats.append(stats)
+        time.sleep(3)
 
     # 汇总
     print(f"\n{'='*50}")
