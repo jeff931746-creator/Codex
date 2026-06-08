@@ -468,6 +468,14 @@ def write_product_entry(product: dict, article: dict, source_name: str) -> Path 
         print(f"    ⏭️ 竞品库跳过: 非正式名称 '{name}'")
         return None
 
+    # 入库门槛：核心玩法和品类必须有实质信息
+    gameplay = product.get("core_gameplay", "")
+    category = product.get("category_primary", "")
+    reject_values = {"", "待确认", "未知", "文章未提供", "文章未提供详细玩法描述"}
+    if gameplay.strip() in reject_values or category.strip() in reject_values:
+        print(f"    ⏭️ 竞品库跳过: 信息不足 '{name}' (gameplay={gameplay[:20]})")
+        return None
+
     weight = product.get("weight", "中度")
     if weight not in ("轻度", "中度", "重度"):
         weight = "中度"
