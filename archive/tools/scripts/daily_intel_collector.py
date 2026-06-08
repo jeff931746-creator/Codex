@@ -169,6 +169,14 @@ BLACKLISTED_KEYWORDS_STRATEGY = {
     "收购艺画", "灵笼",
 }
 
+# 非游戏行业关键词：标题命中则整篇跳过（不进战略库也不进竞品库的 DeepSeek 分析）
+NON_GAME_KEYWORDS = {
+    "录音笔", "智能硬件", "AI硬件", "耳机", "音箱",
+    "跨境电商", "跨境营销", "外贸", "物流", "供应链",
+    "房地产", "金融理财", "保险", "医疗",
+    "设计大奖", "design award",
+}
+
 
 def _is_blacklisted_product(prod: dict) -> bool:
     """硬过滤：大厂产品、3A、超休闲。"""
@@ -199,7 +207,18 @@ def _is_blacklisted_strategy(title: str) -> bool:
     return False
 
 
-ANALYSIS_SYSTEM = """你是一个游戏行业信息分析助手。根据文章内容，判断信息类型并输出结构化 JSON。
+def _is_non_game_content(title: str, content_preview: str) -> bool:
+    """硬过滤：非游戏行业内容，整篇跳过。"""
+    text = f"{title} {content_preview[:500]}".lower()
+    for kw in NON_GAME_KEYWORDS:
+        if kw.lower() in text:
+            return True
+    return False
+
+
+ANALYSIS_SYSTEM = """你是一个游戏行业信息分析助手。只处理与游戏行业直接相关的内容（手游、小游戏、PC/Steam 游戏、游戏行业市场数据、游戏买量投放）。如果文章与游戏行业无关（如硬件产品、电商、金融、通用营销），返回 {"info_types": [], "strategy": null, "new_products": []}。
+
+根据文章内容，判断信息类型并输出结构化 JSON。
 
 ## 信息类型判断
 
@@ -280,25 +299,39 @@ value_score 评分标准（严格执行，宁可漏收不可滥收）：
 - 打螺丝小游戏 → ❌ X3
 - 某三消装修游戏 → ❌ X2
 
+⚠️ 产品命名规则（严格执行）：
+- name 必须是游戏的正式名称（中文名或英文名均可），如"沙画消消"、"Last Asylum"、"墨境"
+- 禁止使用描述性名称，如"微恐蔚蓝Like新品"、"DW Like新品"、"某款塔防游戏"
+- 如果文章没有明确提到游戏名称，不要收录这个产品
+
+⚠️ 信息提取规则（尽量填充，只有文章确实没提到才写空）：
+- developer/publisher：从文章中尽力提取。文章提到"XX团队开发"、"由XX发行"、"XX出品"、"XX推出"等都算
+- release_date：文章提到任何时间信息都要填（"近期"、"6月"、"2025年Q2"等）
+- monetization：从玩法和平台推断（微信小游戏多为IAA或混合，Steam多为买断，手游多为IAP或混合）
+- art_style：从文章描述或截图提取（像素、3D写实、二次元、卡通、水墨等）
+- similar_games：文章中提到的对标/类似产品
+
 ```json
 [
   {
-    "name": "产品名",
+    "name": "游戏正式名称（必填，不接受描述性名称）",
     "is_genuinely_new": true,
     "newness_reason": "为什么认为这是新品",
     "weight": "轻度|中度|重度",
-    "platform": ["平台"],
-    "category_primary": "主品类（如塔防/卡牌/Roguelite/放置/SLG等）",
-    "category_tags": ["标签"],
-    "developer": "开发商或未知",
-    "publisher": "发行商或未知",
+    "platform": ["iOS", "Android", "Steam", "微信小游戏", "抖音小游戏"],
+    "category_primary": "主品类（如塔防/卡牌/Roguelite/放置/SLG/二合/消除等）",
+    "category_tags": ["玩法标签1", "玩法标签2"],
+    "developer": "开发商（从文章中提取，实在没有才写未知）",
+    "publisher": "发行商（从文章中提取，实在没有才写未知）",
     "release_status": "已上线|测试中|预约中|已公布|待确认",
-    "release_date": "日期或待确认",
+    "release_date": "尽量填具体日期或时间段，实在没有才写待确认",
     "region": ["地区"],
-    "core_gameplay": "核心玩法一句话",
-    "monetization": "IAA|IAP|混合|买断|待确认",
-    "chart_info": "榜单信息或空",
-    "summary": "一句话概述"
+    "core_gameplay": "核心玩法2-3句话描述，包含核心循环和差异化点",
+    "monetization": "IAA|IAP|混合|买断（根据平台和玩法推断，不要轻易写待确认）",
+    "art_style": "美术风格（像素/3D写实/卡通/二次元/水墨/低多边形等，从文章描述提取）",
+    "similar_games": "文章中提到的对标或类似产品（如'类似XX'、'XX-like'），没有则为空字符串",
+    "chart_info": "榜单/收入/下载量数据，没有则为空字符串",
+    "summary": "一句话概述，突出这个产品的独特卖点"
   }
 ]
 ```
@@ -428,6 +461,13 @@ def write_product_entry(product: dict, article: dict, source_name: str) -> Path 
     if not name:
         return None
 
+    # 拒绝描述性名称（非正式游戏名）
+    reject_patterns = ["新品", "like新品", "未知", "未命名", "某款", "一款"]
+    name_lower = name.lower()
+    if any(p in name_lower for p in reject_patterns):
+        print(f"    ⏭️ 竞品库跳过: 非正式名称 '{name}'")
+        return None
+
     weight = product.get("weight", "中度")
     if weight not in ("轻度", "中度", "重度"):
         weight = "中度"
@@ -440,62 +480,74 @@ def write_product_entry(product: dict, article: dict, source_name: str) -> Path 
     filepath = weight_dir / f"{today}_{slug}.md"
 
     if filepath.exists():
-        # 追加到信息时间线
+        # 追加到信息时间线（按 URL 去重，避免同文章多次追加）
         existing = filepath.read_text(encoding="utf-8")
+        article_url = article.get("link", "")
+        if article_url and article_url in existing:
+            return filepath
         timeline_entry = f"- [{today}] [{source_name}] {article['title']}: {product.get('summary', '')}"
-        if timeline_entry not in existing:
-            # 在"## 信息时间线"后追加
-            if "## 信息时间线" in existing:
-                existing = existing.replace(
-                    "## 信息时间线\n",
-                    f"## 信息时间线\n{timeline_entry}\n",
-                )
-                filepath.write_text(existing, encoding="utf-8")
+        if "## 信息时间线" in existing:
+            existing = existing.replace(
+                "## 信息时间线\n",
+                f"## 信息时间线\n{timeline_entry}\n",
+            )
+            filepath.write_text(existing, encoding="utf-8")
         return filepath
 
-    # 新建条目
+    # 新建条目 —— 重要信息优先
+    dev = product.get("developer", "")
+    pub = product.get("publisher", "")
+    gameplay = product.get("core_gameplay", "")
+    art = product.get("art_style", "")
+    similar = product.get("similar_games", "")
+
     yaml_block = f"""---
-entry_id: PROD-{today}-{int(time.time()) % 10000:04d}
 title: "{name}"
-date: "{today}"
-source_name: "{source_name}"
-url: "{article.get('link', '')}"
 weight: "{weight}"
 platform: {json.dumps(product.get('platform', []), ensure_ascii=False)}
-category_primary: "{product.get('category_primary', '待确认')}"
+core_gameplay: "{gameplay}"
+category_primary: "{product.get('category_primary', '')}"
 category_tags: {json.dumps(product.get('category_tags', []), ensure_ascii=False)}
-developer: "{product.get('developer', '未知')}"
-publisher: "{product.get('publisher', '未知')}"
-release_status: "{product.get('release_status', '待确认')}"
-release_date: "{product.get('release_date', '待确认')}"
-region: {json.dumps(product.get('region', ['待确认']), ensure_ascii=False)}
-core_gameplay: "{product.get('core_gameplay', '')}"
-monetization: "{product.get('monetization', '待确认')}"
-revenue_tier: "{product.get('revenue_tier', '待确认')}"
+art_style: "{art}"
+similar_games: "{similar}"
+developer: "{dev}"
+publisher: "{pub}"
+monetization: "{product.get('monetization', '')}"
+release_status: "{product.get('release_status', '')}"
+release_date: "{product.get('release_date', '')}"
+region: {json.dumps(product.get('region', []), ensure_ascii=False)}
 chart_info: "{product.get('chart_info', '')}"
-ad_activity: ""
-source_credibility: "中"
-bias_note: ""
-user_rating: null
-user_note: ""
+entry_id: PROD-{today}-{int(time.time()) % 10000:04d}
+source_name: "{source_name}"
+url: "{article.get('link', '')}"
 collected_date: "{today}"
 last_updated: "{today}"
-update_sources: ["{article.get('link', '')}"]
+user_rating: null
+user_note: ""
 ---"""
+
+    # 正文也按重要性排列
+    dev_pub = ""
+    if dev:
+        dev_pub += f"开发商: {dev}"
+    if pub:
+        dev_pub += f" | 发行商: {pub}" if dev_pub else f"发行商: {pub}"
 
     body = f"""{yaml_block}
 
-## 产品概述
-{product.get('summary', name)}
+## {name}
+
+{product.get('summary', '')}
+
+{f'**{dev_pub}**' if dev_pub else ''}
+{f'**美术风格**: {art}' if art else ''}
+{f'**对标产品**: {similar}' if similar else ''}
 
 ## 信息时间线
 - [{today}] [{source_name}] {article['title']}: {product.get('summary', '')}
 
-## 玩法/系统
-（待补充）
-
 ## 市场表现
-{f"榜单: {product['chart_info']}" if product.get('chart_info') else '（待补充）'}
+{f"榜单: {product['chart_info']}" if product.get('chart_info') else '（暂无数据）'}
 """
 
     filepath.write_text(body, encoding="utf-8")
@@ -537,6 +589,12 @@ def process_source(source: dict, max_articles: int = 5) -> dict:
         if not content or len(content) < 100:
             print(f"  → ⚠️ {title[:30]}... 内容过短，跳过")
             stats["errors"] += 1
+            continue
+
+        # 2.5 非游戏内容硬过滤（在 DeepSeek 调用前拦截，节省 API 费用）
+        if _is_non_game_content(title, content):
+            print(f"  → 🚫 非游戏内容: {title[:30]}...")
+            stats["filtered"] += 1
             continue
 
         # 3. DeepSeek 分析（分类 + 提取一步完成）
