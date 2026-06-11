@@ -13,9 +13,8 @@
 
 1. `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md` — 记忆索引
 2. `/Users/mt/Documents/Codex/CLAUDE.md` — 项目主入口（入口选择表、流程强度分级、决策路由器）
-3. `/Users/mt/Documents/Codex/.claude/rules/task-flow-matrix.md` — 任务流类型与 gate 顺序
-4. `/Users/mt/Documents/Codex/.claude/rules/hook-table.md` — 条件—动作触发表
-5. 按任务需要，继续读 `.claude/rules/` 下相关规则（agent-delegation-policy / workflow-chain / git-hygiene / llm-fact-checking / api-client-architecture / model-defaults / plan-and-hook-model）
+3. `/Users/mt/Documents/Codex/.claude/rules/task-flow.md` — 任务流类型、gate 顺序、委派规则、Hook 触发表
+4. 按任务需要，继续读 `.claude/rules/quality-gates.md`（LLM 事实性处理 + Git 卫生）、`.claude/rules/workflow-chain.md`（工作流层级）、`.claude/references/`（API 调用规则、工作流详细参考）
 
 若 Claude 规则与更高优先级的 Codex 运行时规则冲突，遵守更高优先级规则，并显式报告偏差。
 

@@ -1,6 +1,6 @@
 # 工作流链路规则
 
-工作流层级架构与能力查找协议。详细流程文档见 [`workflow-chain-reference.md`](workflow-chain-reference.md)。
+工作流层级架构与能力查找协议。详细流程文档见 [`.claude/references/workflow-chain-reference.md`](../references/workflow-chain-reference.md)。
 
 ---
 
