@@ -30,6 +30,7 @@ description: 会话路由决策器。先按 quick / standard / strict 判断流�
 - `implementation`
 - `review`
 - `collection`
+- `knowledge-asset`（触发词：标准/规范/流程/体系/框架/方法论/沉淀/长期管理，或知识库/机制库/题材库等知识资产类库）
 
 需要阶段化推进的任务如果没有完成归类，不进入执行。`quick` 任务可只做轻量状态判断。
 
@@ -141,3 +142,9 @@ description: 会话路由决策器。先按 quick / standard / strict 判断流�
 3. 指定子任务的流程类型和当前门禁
 4. 只把结论带回主上下文，不带过程
 5. 子 agent 不得代表整个任务提交正式 `plan`，也不得自行宣布进入下一门禁
+
+## 踩坑记录
+
+记录执行本 Skill 时的历史执行偏差，不引入新规则，只标注哪些步骤容易出错。
+
+格式：`[N次] §步骤 描述`。同一条记录累计 ≥3 次时，在 neat-freak Step 6 触发升格到 body 的判断。

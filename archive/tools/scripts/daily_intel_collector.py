@@ -37,7 +37,10 @@ FILTER_LOG = STRATEGY_DIR / "过滤日志.md"
 
 sys.path.insert(0, str(CODEX_ROOT))
 
-from archive.tools.lib.llm_client import chat_text  # noqa: E402
+from archive.tools.lib.llm_client import chat_text, chat_with_images  # noqa: E402
+
+import base64
+import urllib.request
 
 
 # ── 配置 ──────────────────────────────────────────────
@@ -100,41 +103,172 @@ def get_article_list(fakeid: str, count: int = 5) -> list[dict]:
     return data.get("articles", [])
 
 
-def fetch_article_content(url: str) -> str:
-    """用 url-md + 微信 UA 读取文章全文（Markdown 格式）。"""
+def _extract_images_from_html(raw: str) -> list[str]:
+    """从 HTML 中提取有价值的图片 URL（过滤小图标和装饰图）。"""
+    images: list[str] = []
+    # 提取 cover_url（文章封面）
+    m = re.search(r'cover_url:\s*(https?://[^\s]+)', raw)
+    cover = m.group(1).strip() if m else ""
+
+    # 提取 <img> 标签中的 src（只保留 mmbiz.qpic.cn 的实质图片）
+    for tag in re.finditer(r'<img[^>]+src="(https?://mmbiz\.qpic\.cn/[^"]+)"[^>]*>', raw, re.S):
+        src = tag.group(1).replace("&amp;", "&")
+        # 用 data-w 过滤：原始宽度 >= 500px 才是正文配图
+        w_match = re.search(r'data-w="(\d+)"', tag.group(0))
+        if w_match and int(w_match.group(1)) < 500:
+            continue
+        if src not in images:
+            images.append(src)
+
+    # 如果正文没有提取到图片，用封面兜底
+    if not images and cover:
+        images.append(cover)
+    return images[:20]  # 最多 20 张
+
+
+def _download_image_as_base64(url: str) -> tuple[str, str] | None:
+    """用 curl 下载图片并返回 (base64_str, media_type)，失败返回 None。"""
+    try:
+        result = subprocess.run(
+            ["curl", "-sL", "--max-time", "8",
+             "-H", f"User-Agent: {WX_UA}",
+             "-H", "Referer: https://mp.weixin.qq.com/",
+             url],
+            capture_output=True, timeout=12,
+        )
+        data = result.stdout
+        if not data or len(data) < 1000:
+            return None
+        # 简单判断 MIME：JPEG 以 FFD8 开头，PNG 以 89504E47 开头
+        if data[:2] == b'\xff\xd8':
+            mime = "image/jpeg"
+        elif data[:4] == b'\x89PNG':
+            mime = "image/png"
+        elif data[:4] == b'RIFF':
+            mime = "image/webp"
+        else:
+            mime = "image/jpeg"
+        return base64.b64encode(data).decode("ascii"), mime
+    except Exception:
+        return None
+
+
+def assign_images_to_products(
+    product_names: list[str],
+    image_urls: list[str],
+) -> dict[str, list[int]]:
+    """用 DeepSeek Vision 把图片精确分配给对应产品。
+
+    Returns:
+        {产品名: [图片索引列表]}
+    """
+    if not product_names or not image_urls:
+        return {}
+
+    # 单产品：所有图片都给它
+    if len(product_names) == 1:
+        return {product_names[0]: list(range(len(image_urls)))}
+
+    # 多产品：下载图片 → Vision 分类
+    image_data: list[tuple[str, str]] = []
+    valid_indices: list[int] = []
+    for i, url in enumerate(image_urls[:12]):  # 最多 12 张，控制 token 用量
+        b64 = _download_image_as_base64(url)
+        if b64:
+            image_data.append(b64)
+            valid_indices.append(i)
+
+    if not image_data:
+        return {}
+
+    products_list = "\n".join(f"{i+1}. {name}" for i, name in enumerate(product_names))
+    prompt = (
+        f"以下是从一篇游戏行业文章中提取的产品列表和文章配图。\n\n"
+        f"产品列表：\n{products_list}\n\n"
+        f"共 {len(image_data)} 张图片（按顺序编号 0-{len(image_data)-1}）。\n"
+        f"请判断每张图片最可能属于哪个产品。\n\n"
+        f"输出纯 JSON 数组，长度等于图片数量，每个元素是产品编号（1-{len(product_names)}），"
+        f"不确定则填 0。例如：[1, 2, 0, 1, 3]\n"
+        f"只输出 JSON，不要其他内容。"
+    )
+
+    try:
+        result = chat_with_images(
+            prompt,
+            image_data,
+            provider="deepseek",
+            model="deepseek-v4-pro",
+            max_tokens=200,
+            temperature=0.1,
+            timeout=60,
+        )
+        result = result.strip()
+        if result.startswith("```"):
+            result = re.sub(r"^```\w*\n?", "", result)
+            result = re.sub(r"\n?```$", "", result)
+        assignments = json.loads(result)
+
+        # 转换为 {产品名: [图片原始索引]}
+        mapping: dict[str, list[int]] = {name: [] for name in product_names}
+        for local_i, prod_num in enumerate(assignments):
+            if not isinstance(prod_num, int):
+                continue
+            orig_idx = valid_indices[local_i] if local_i < len(valid_indices) else -1
+            if orig_idx < 0:
+                continue
+            if 1 <= prod_num <= len(product_names):
+                mapping[product_names[prod_num - 1]].append(orig_idx)
+
+        return mapping
+    except Exception as e:
+        print(f"    ⚠️ Vision 图片分配失败: {e}")
+        return {}
+
+
+def fetch_article_content(url: str) -> tuple[str, list[str]]:
+    """读取文章全文 + 提取配图 URL。返回 (text, image_urls)。"""
+    raw_html = ""
+    text = ""
+
+    # 1. 先尝试 url-md（返回含 HTML 的混合格式）
     try:
         result = subprocess.run(
             ["url-md", "md", url, "--quiet", "--timeout", "20"],
             capture_output=True, text=True, timeout=30,
         )
         if result.returncode == 0:
-            # 去掉 frontmatter
-            text = result.stdout
-            if text.startswith("---\n"):
-                parts = text.split("---\n", 2)
+            raw_html = result.stdout
+            # 去掉 frontmatter 得到正文
+            content = result.stdout
+            if content.startswith("---\n"):
+                parts = content.split("---\n", 2)
                 if len(parts) >= 3:
-                    return parts[2].strip()
-            return text.strip()
+                    text = parts[2].strip()
+                else:
+                    text = content.strip()
+            else:
+                text = content.strip()
     except Exception:
         pass
 
-    # fallback: curl + UA 伪装
-    try:
-        result = subprocess.run(
-            ["curl", "-sL", "-H", f"User-Agent: {WX_UA}", url],
-            capture_output=True, text=True, timeout=20,
-        )
-        if result.returncode == 0:
-            # 粗提取：去 HTML 标签
-            text = re.sub(r"<script[^>]*>.*?</script>", "", result.stdout, flags=re.S)
-            text = re.sub(r"<style[^>]*>.*?</style>", "", text, flags=re.S)
-            text = re.sub(r"<[^>]+>", "\n", text)
-            text = re.sub(r"\n{3,}", "\n\n", text)
-            return text.strip()[:5000]
-    except Exception:
-        pass
+    # 2. fallback: curl 拿原始 HTML
+    if not text:
+        try:
+            result = subprocess.run(
+                ["curl", "-sL", "-H", f"User-Agent: {WX_UA}", url],
+                capture_output=True, text=True, timeout=20,
+            )
+            if result.returncode == 0:
+                raw_html = result.stdout
+                cleaned = re.sub(r"<script[^>]*>.*?</script>", "", result.stdout, flags=re.S)
+                cleaned = re.sub(r"<style[^>]*>.*?</style>", "", cleaned, flags=re.S)
+                cleaned = re.sub(r"<[^>]+>", "\n", cleaned)
+                text = re.sub(r"\n{3,}", "\n\n", cleaned).strip()[:5000]
+        except Exception:
+            pass
 
-    return ""
+    images = _extract_images_from_html(raw_html) if raw_html else []
+    return text, images
 
 
 # ── 分流与分析 ─────────────────────────────────────────
@@ -163,6 +297,32 @@ BLACKLISTED_COMPANIES = {
     "epic games", "valve",
 }
 
+# 大厂知名游戏名（当 DeepSeek 提取 developer="未知" 时用游戏名兜底）
+BLACKLISTED_GAME_NAMES = {
+    "pragmata", "识质存在", "原神", "王者荣耀", "和平精英",
+    "崩坏星穹铁道", "鸣潮", "明日方舟", "阴阳师", "少女前线",
+    "荒野乱斗", "部落冲突", "皇室战争", "绝区零",
+    "monster hunter", "怪物猎人", "street fighter", "街头霸王",
+    "resident evil", "生化危机", "devil may cry", "鬼泣",
+    "final fantasy", "最终幻想", "dragon quest", "勇者斗恶龙",
+    "elden ring", "艾尔登法环", "dark souls", "黑暗之魂",
+    "gta", "red dead", "荒野大镖客",
+}
+
+# 文章标题含这些信号词时，说明文章在讨论已有游戏，不是发布新游戏
+OLD_GAME_ARTICLE_SIGNALS = {
+    "经典", "盘点", "回顾", "复盘", "翻车", "暴死", "凉了",
+    "为什么没人买", "为啥没人买", "销量不佳", "销量惨淡",
+    "种草机", "种草", "安利",
+}
+
+# chart_info 中出现这些关键词说明游戏已有市场数据，不算新品
+ESTABLISHED_MARKET_SIGNALS = [
+    "评论超过", "评论数", "条评论", "好评率",
+    "销量", "万份", "万套", "万下载",
+    "同时在线", "在线人数", "DAU", "MAU",
+]
+
 BLACKLISTED_KEYWORDS_STRATEGY = {
     "任天堂", "nintendo", "switch", "ps5", "xbox", "掌机",
     "股价", "市值", "人事", "离职", "加入",
@@ -179,22 +339,46 @@ NON_GAME_KEYWORDS = {
 
 
 def _is_blacklisted_product(prod: dict) -> bool:
-    """硬过滤：大厂产品、3A、超休闲。"""
+    """硬过滤：大厂产品、3A、超休闲、知名大作。"""
     name = (prod.get("name", "") or "").lower()
     dev = (prod.get("developer", "") or "").lower()
     pub = (prod.get("publisher", "") or "").lower()
     cats = " ".join(prod.get("category_tags", [])).lower()
     combined = f"{name} {dev} {pub} {cats}"
 
-    # 大厂黑名单
+    # 大厂黑名单（检查 developer/publisher/tags）
     for company in BLACKLISTED_COMPANIES:
         if company.lower() in combined:
+            return True
+
+    # 游戏名黑名单（兜底：DeepSeek 把 developer 写成"未知"时仍能拦截）
+    for game_name in BLACKLISTED_GAME_NAMES:
+        if game_name.lower() in name:
             return True
 
     # 3A 关键词
     if any(kw in combined for kw in ("3a", "aaa", "主机大作")):
         return True
 
+    return False
+
+
+def _has_established_market_data(prod: dict) -> bool:
+    """检测产品是否已有成熟市场数据（有 → 不是新品）。"""
+    chart = (prod.get("chart_info", "") or "").strip()
+    if not chart:
+        return False
+    for signal in ESTABLISHED_MARKET_SIGNALS:
+        if signal in chart:
+            return True
+    return False
+
+
+def _is_old_game_article(title: str) -> bool:
+    """检测文章标题是否暗示在讨论已有游戏而非新品。"""
+    for signal in OLD_GAME_ARTICLE_SIGNALS:
+        if signal in title:
+            return True
     return False
 
 
@@ -283,6 +467,23 @@ value_score 评分标准（严格执行，宁可漏收不可滥收）：
 - X3: 过于轻度的超休闲（打螺丝、撕封条、解压、涂色、ASMR 等纯消磨时间无深度的游戏）
 - X4: PC/主机 3A 大作
 - X5: 已广为人知的手游（原神、王者荣耀、和平精英、崩坏星穹铁道、鸣潮、明日方舟、阴阳师、少女前线等）
+- X6: 已上线的产品。竞品库只收尚未上线的新品（已公布、预约中、测试中）。如果文章说"已上线"、"正式上线"、"正式推出"、"已发售"、游戏已有用户评论或销量数据，release_status 必须设为"已上线"
+
+⚠️ is_genuinely_new 判定规则（最关键字段，必须严格）：
+
+is_genuinely_new = true 仅当游戏是最近才公布或上线的新品。以下情况必须设为 false：
+- 文章是对已上线游戏的评测、种草、推荐、复盘、销量分析 → false
+- 游戏已有大量用户评论（如"Steam评论超过500条"）→ false
+- 游戏已有销量数据（如"销量11万份"、"月流水XXX"）→ false
+- 游戏已在榜单上有历史排名（如"最高排名第34名"）→ false
+- 文章讨论的是游戏的商业模式问题或失败原因 → false
+- 游戏标题出现在"经典推荐"、"盘点"、"回顾"、"种草机"类文章中 → false
+
+举例：
+- 文章标题"经典微信小游戏推荐《快点躲起来》" → is_genuinely_new: false（经典推荐 = 老游戏）
+- 文章标题"IGN满分，可为啥没人买？"讨论某游戏销量 → is_genuinely_new: false（有销量数据 = 已上线一段时间）
+- 文章标题"AI游戏仅剩54%好评"讨论某游戏 → is_genuinely_new: false（有大量评论 = 老游戏）
+- 文章"微信小游戏开发者大会上公布的新作" → is_genuinely_new: true（刚公布）
 
 收录时还需标注产品重度：
 - "轻度": 休闲、放置、超休闲（但有深度的）、益智
@@ -290,14 +491,16 @@ value_score 评分标准（严格执行，宁可漏收不可滥收）：
 - "重度": SLG、MMO、ARPG、开放世界、竞技
 
 举例：
-- 某海外独立工作室的 Roguelite → ✅ N1，中度
-- Steam 上新出的独立塔防 → ✅ N4，中度
-- 微信小游戏 IAA 放置塔防 → ✅ N5，中度
+- 某海外独立工作室的 Roguelite，刚公布还没上线 → ✅ N1，中度
+- 微信小游戏开发者大会上刚公布的新作 → ✅ N5，中度
 - 腾讯的造化工坊 → ❌ X1（腾讯）
 - 快手弹指宇宙的诡秘之主 → ❌ X1（快手）
 - 战神新作 → ❌ X4 + X1（索尼）
 - 打螺丝小游戏 → ❌ X3
 - 某三消装修游戏 → ❌ X2
+- Steam 已发售的独立游戏（有评论/有销量） → ❌ X6（已上线）
+- 微信小游戏已经上线运营中 → ❌ X6（已上线）
+- 文章说"近期正式上线"的产品 → ❌ X6（已上线）
 
 ⚠️ 产品命名规则（严格执行）：
 - name 必须是游戏的正式名称（中文名或英文名均可），如"沙画消消"、"Last Asylum"、"墨境"
@@ -317,6 +520,7 @@ value_score 评分标准（严格执行，宁可漏收不可滥收）：
     "name": "游戏正式名称（必填，不接受描述性名称）",
     "is_genuinely_new": true,
     "newness_reason": "为什么认为这是新品",
+    "image_index": -1,
     "weight": "轻度|中度|重度",
     "platform": ["iOS", "Android", "Steam", "微信小游戏", "抖音小游戏"],
     "category_primary": "主品类（如塔防/卡牌/Roguelite/放置/SLG/二合/消除等）",
@@ -336,15 +540,28 @@ value_score 评分标准（严格执行，宁可漏收不可滥收）：
 ]
 ```
 
+⚠️ image_index 字段说明：
+- 文章配图会以 [IMG0] [IMG1] ... 的编号标注在正文前
+- 对每个产品，选择最能代表该游戏画面的配图编号填入 image_index
+- 如果没有合适的配图，填 -1
+- 如果一篇文章介绍多个游戏，不同游戏应尽量分配不同的图片
+
 如果文章里没有符合条件的新产品，new_products 返回空数组 []。
 如果文章是纯 teardown 类型，info_types 只写 ["teardown"]，strategy 和 new_products 都为 null/[]。
 
 只输出 JSON，不要输出其他内容。"""
 
 
-def analyze_article(title: str, content: str, source_name: str) -> dict | None:
+def analyze_article(title: str, content: str, source_name: str,
+                     images: list[str] | None = None) -> dict | None:
     """用 DeepSeek 分析文章，返回结构化数据。最多重试 3 次。"""
-    prompt = f"来源：{source_name}\n标题：{title}\n\n正文（截取前 3000 字）：\n{content[:3000]}"
+    # 在正文前插入图片编号列表
+    img_section = ""
+    if images:
+        img_lines = [f"[IMG{i}] {url}" for i, url in enumerate(images)]
+        img_section = "文章配图列表：\n" + "\n".join(img_lines) + "\n\n"
+
+    prompt = f"来源：{source_name}\n标题：{title}\n\n{img_section}正文（截取前 3000 字）：\n{content[:3000]}"
 
     for attempt in range(3):
         if attempt > 0:
@@ -455,11 +672,50 @@ collected_date: "{today}"
     return filepath
 
 
+def _normalize_product_name(name: str) -> str:
+    """归一化产品名称：全角→半角、去多余空格、统一大小写。"""
+    # 全角冒号/括号 → 半角
+    name = name.replace("：", ":").replace("（", "(").replace("）", ")")
+    # 多个空格合并
+    name = re.sub(r"\s+", " ", name).strip().lower()
+    return name
+
+
+def _find_existing_product(name: str) -> Path | None:
+    """在竞品库所有分档目录中搜索同名/近似产品。"""
+    norm = _normalize_product_name(name)
+    for weight_sub in ("轻度", "中度", "重度"):
+        d = COMPETE_DIR / weight_sub
+        if not d.exists():
+            continue
+        for f in d.glob("*.md"):
+            try:
+                head = f.read_text(encoding="utf-8")[:500]
+                m = re.search(r'^title:\s*"(.+?)"', head, re.MULTILINE)
+                if not m:
+                    continue
+                existing_norm = _normalize_product_name(m.group(1))
+
+                # 精确匹配
+                if existing_norm == norm:
+                    return f
+                # 前缀匹配：一个是另一个的前缀（如 "Tiny War" vs "Tiny War: Survival Express"）
+                if len(norm) >= 5 and len(existing_norm) >= 5:
+                    if norm.startswith(existing_norm) or existing_norm.startswith(norm):
+                        return f
+            except Exception:
+                continue
+    return None
+
+
 def write_product_entry(product: dict, article: dict, source_name: str) -> Path | None:
     """写入竞品库条目。按轻中重度分档 + 日期命名。"""
     name = product.get("name", "").strip()
     if not name:
         return None
+
+    # 归一化名称（全角→半角）
+    name = name.replace("：", ":").replace("（", "(").replace("）", ")")
 
     # 拒绝描述性名称（非正式游戏名）
     reject_patterns = ["新品", "like新品", "未知", "未命名", "某款", "一款"]
@@ -487,6 +743,7 @@ def write_product_entry(product: dict, article: dict, source_name: str) -> Path 
     slug = re.sub(r'[/\\:*?"<>|]', '_', name)
     filepath = weight_dir / f"{today}_{slug}.md"
 
+    # 去重：精确文件名匹配
     if filepath.exists():
         # 追加到信息时间线（按 URL 去重，避免同文章多次追加）
         existing = filepath.read_text(encoding="utf-8")
@@ -501,6 +758,22 @@ def write_product_entry(product: dict, article: dict, source_name: str) -> Path 
             )
             filepath.write_text(existing, encoding="utf-8")
         return filepath
+
+    # 去重：跨分档 + 中英文别名匹配
+    existing_path = _find_existing_product(name)
+    if existing_path:
+        print(f"    ⏭️ 竞品库跳过: 已有同名条目 '{name}' → {existing_path.name}")
+        existing = existing_path.read_text(encoding="utf-8")
+        article_url = article.get("link", "")
+        if article_url and article_url not in existing:
+            timeline_entry = f"- [{today}] [{source_name}] {article['title']}: {product.get('summary', '')}"
+            if "## 信息时间线" in existing:
+                existing = existing.replace(
+                    "## 信息时间线\n",
+                    f"## 信息时间线\n{timeline_entry}\n",
+                )
+                existing_path.write_text(existing, encoding="utf-8")
+        return existing_path
 
     # 新建条目 —— 重要信息优先
     dev = product.get("developer", "")
@@ -525,6 +798,7 @@ release_status: "{product.get('release_status', '')}"
 release_date: "{product.get('release_date', '')}"
 region: {json.dumps(product.get('region', []), ensure_ascii=False)}
 chart_info: "{product.get('chart_info', '')}"
+cover_image: "{product.get('cover_image', '')}"
 entry_id: PROD-{today}-{int(time.time()) % 10000:04d}
 source_name: "{source_name}"
 url: "{article.get('link', '')}"
@@ -592,8 +866,8 @@ def process_source(source: dict, max_articles: int = 5) -> dict:
         if not title or not link:
             continue
 
-        # 2. 读全文
-        content = fetch_article_content(link)
+        # 2. 读全文 + 提取配图
+        content, article_images = fetch_article_content(link)
         if not content or len(content) < 100:
             print(f"  → ⚠️ {title[:30]}... 内容过短，跳过")
             stats["errors"] += 1
@@ -605,8 +879,8 @@ def process_source(source: dict, max_articles: int = 5) -> dict:
             stats["filtered"] += 1
             continue
 
-        # 3. DeepSeek 分析（分类 + 提取一步完成）
-        analysis = analyze_article(title, content, name)
+        # 3. DeepSeek 分析（分类 + 提取一步完成，含图片分配）
+        analysis = analyze_article(title, content, name, images=article_images)
         if not analysis:
             stats["errors"] += 1
             continue
@@ -635,15 +909,53 @@ def process_source(source: dict, max_articles: int = 5) -> dict:
                 stats["filtered"] += 1
                 print(f"    ⏭️ 战略库过滤（value_score ≤ 2）")
 
-        # 6. 竞品库写入（new 类型，只收新产品 + 硬过滤大厂）
+        # 6. 竞品库写入（new 类型，只收新产品 + 多层硬过滤）
         new_products = analysis.get("new_products", [])
+        is_old_article = _is_old_game_article(title)
+        # 同文章内去重：DeepSeek 可能对同一游戏提取多次
+        seen_names_in_article: set[str] = set()
+
+        # 6.1 先过滤，收集通过的产品名
+        passed_products: list[dict] = []
         for prod in new_products:
+            prod_name = prod.get("name", "")
             if not prod.get("is_genuinely_new", False):
                 continue
-            # 硬过滤：大厂黑名单（代码层强制，不依赖 DeepSeek）
-            if _is_blacklisted_product(prod):
-                print(f"    🚫 竞品库硬过滤: {prod.get('name','')} (大厂/3A/超休闲)")
+            norm_name = _normalize_product_name(prod_name)
+            if norm_name in seen_names_in_article:
+                print(f"    ⏭️ 同文章重复: {prod_name}")
                 continue
+            seen_names_in_article.add(norm_name)
+            release_status = (prod.get("release_status", "") or "").strip()
+            if release_status == "已上线":
+                print(f"    🚫 竞品库硬过滤: {prod_name} (已上线)")
+                continue
+            if _is_blacklisted_product(prod):
+                print(f"    🚫 竞品库硬过滤: {prod_name} (大厂/知名大作)")
+                continue
+            if _has_established_market_data(prod):
+                print(f"    🚫 竞品库硬过滤: {prod_name} (已有市场数据: {prod.get('chart_info', '')[:40]})")
+                continue
+            if is_old_article:
+                print(f"    🚫 竞品库硬过滤: {prod_name} (文章为回顾/推荐类: '{title[:30]}')")
+                continue
+            passed_products.append(prod)
+
+        # 6.2 用 DeepSeek Vision 精确分配图片
+        if passed_products and article_images:
+            product_names = [p.get("name", "") for p in passed_products]
+            img_mapping = assign_images_to_products(product_names, article_images)
+            for prod in passed_products:
+                indices = img_mapping.get(prod.get("name", ""), [])
+                if indices:
+                    prod["cover_image"] = article_images[indices[0]]
+                elif article_images:
+                    prod["cover_image"] = article_images[0]
+            if img_mapping:
+                print(f"    🖼️ Vision 分配: {sum(len(v) for v in img_mapping.values())} 张图 → {len(product_names)} 个产品")
+
+        # 6.3 写入
+        for prod in passed_products:
             path = write_product_entry(prod, art, name)
             if path:
                 stats["product"] += 1

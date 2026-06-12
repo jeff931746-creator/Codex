@@ -14,6 +14,7 @@ release_status: "测试中"
 release_date: "待确认"
 region: ["海外"]
 chart_info: ""
+cover_image: "https://mmbiz.qpic.cn/mmbiz_jpg/QzP1r7mkjksgODn10ibfvMib8DdljMVXKMTDpBfbGXjqaqfbXWia9051GqgKgDzKJoHdTJeD1xGKtdMODe5Otx8FA/640?wx_fmt=other&from=appmsg"
 entry_id: PROD-2026-06-04-6705
 source_name: "鹅说的游戏"
 url: "https://mp.weixin.qq.com/s/oZo_HAdw_4YbIDCIMc-pdA"

@@ -160,3 +160,9 @@ For each requested title:
 4. If the user wants an image, use the exact returned `cover` only when it is a trustworthy gameplay, battle, or real-material screenshot.
 5. Download with `curl -L -o <target-file>`.
 6. Confirm all files landed in the target folder.
+
+## 踩坑记录
+
+记录执行本 Skill 时的历史执行偏差，不引入新规则，只标注哪些步骤容易出错。
+
+格式：`[N次] §步骤 描述`。同一条记录累计 ≥3 次时，在 neat-freak Step 6 触发升格到 body 的判断。

@@ -136,6 +136,38 @@ def chat(
     )
 
 
+def chat_with_images(
+    prompt: str,
+    image_data: list[tuple[str, str]],
+    *,
+    provider: str | None = None,
+    system: str | None = None,
+    model: str | None = None,
+    max_tokens: int | None = None,
+    temperature: float | None = None,
+    timeout: int = 300,
+    retry_policy: "RetryPolicy | None" = None,
+    logger: "Callable[[str], None] | None" = None,
+    return_empty_on_error: bool = False,
+    extra: dict[str, Any] | None = None,
+) -> str:
+    """带图片的 LLM 调用。image_data: [(base64_str, media_type), ...]。"""
+    impl = _implementation(provider)
+    return impl.chat_with_images(
+        prompt,
+        image_data,
+        system=system,
+        model=model,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        timeout=timeout,
+        retry_policy=retry_policy,
+        logger=logger,
+        return_empty_on_error=return_empty_on_error,
+        extra=extra,
+    )
+
+
 def chat_text(
     prompt: str,
     *,

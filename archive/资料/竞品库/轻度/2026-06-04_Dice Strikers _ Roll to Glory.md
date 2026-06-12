@@ -14,6 +14,7 @@ release_status: "测试中"
 release_date: "待确认"
 region: ["加拿大", "西班牙"]
 chart_info: ""
+cover_image: "https://mmbiz.qpic.cn/mmbiz_jpg/oNVAAnQxuyeUQfahWILLe2UPnbqC9ibt6ZWqIPBKV3kDdacA8Y609xR9meg9mrYkdsOxcrmsNYJXzgqyWIichgbmZicLXV7Rj3gz46DVWOgJv4/0?wx_fmt=jpeg"
 entry_id: PROD-2026-06-04-6604
 source_name: "王董的新游戏"
 url: "https://mp.weixin.qq.com/s/HxI0Ip7Pccjfmpy-EvsUVg"

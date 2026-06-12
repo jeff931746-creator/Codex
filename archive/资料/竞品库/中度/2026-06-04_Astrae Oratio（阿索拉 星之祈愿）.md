@@ -14,6 +14,7 @@ release_status: "测试中"
 release_date: "待确认"
 region: ["日本", "全球"]
 chart_info: ""
+cover_image: "https://mmbiz.qpic.cn/sz_mmbiz_png/gsW8iazK5P4Q9glDyZwkeO0cNASCicY2RiaI3P6ZWfoL7dqXcGeZFqWQqgwu0xbZfsibePSGcwcEiahpicPZMicHbowW5mTcYnTZChicA9ic1AfZCuoE/640?wx_fmt=png&from=appmsg"
 entry_id: PROD-2026-06-04-9063
 source_name: "GameLook"
 url: "https://mp.weixin.qq.com/s/v6VZnGLqvijIH5AAFDUY2Q"

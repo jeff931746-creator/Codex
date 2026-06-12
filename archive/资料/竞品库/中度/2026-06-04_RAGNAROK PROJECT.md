@@ -14,6 +14,7 @@ release_status: "已公布"
 release_date: "2027年上半年"
 region: ["全球"]
 chart_info: ""
+cover_image: "https://mmbiz.qpic.cn/mmbiz_png/LnV8UVj5ORUPX234c2zON3A2LClUXWf9WnjDib7bAYMVM7v9MzVhR33Nq5fDZddKeiaO4ic4Ya9gQnCgoDcZml0VQ/640?wx_fmt=other&wxfrom=5&wx_lazy=1&wx_co=1&randomid=pmsbza71&tp=wxpic#imgIndex=9"
 entry_id: PROD-2026-06-04-9097
 source_name: "GameLook"
 url: "https://mp.weixin.qq.com/s/FwyOG8ujVl3EcDamoRAkIw"

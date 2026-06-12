@@ -1,0 +1,244 @@
+:root {
+  color-scheme: dark;
+  --bg: #172126;
+  --panel: #222a31;
+  --panel-2: #2d3942;
+  --text: #f6fbf5;
+  --muted: #9cb0aa;
+  --green: #81d95b;
+  --green-deep: #2f9c53;
+  --red: #e94e64;
+  --red-deep: #a92847;
+  --water: #43b7d7;
+  --gold: #ffd166;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(82, 122, 108, 0.26), transparent 36%),
+    linear-gradient(180deg, #10191d, var(--bg));
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button {
+  border: 0;
+  color: inherit;
+  font: inherit;
+}
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.phone {
+  position: relative;
+  width: min(100%, 430px);
+  height: min(900px, calc(100vh - 40px));
+  min-height: 680px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 28px;
+  background: #10171b;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+}
+
+.hud {
+  position: absolute;
+  z-index: 3;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  height: 58px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(24, 33, 38, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.hud > div:last-child {
+  text-align: right;
+}
+
+.hud strong {
+  display: block;
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.label {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.label.enemy {
+  color: #ff8ea2;
+}
+
+.label.player {
+  color: #9bf175;
+}
+
+.timer {
+  min-width: 78px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  text-align: center;
+  font-weight: 800;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: auto;
+}
+
+.controls {
+  position: absolute;
+  z-index: 3;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.unit {
+  min-height: 58px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 3px;
+  border-radius: 8px;
+  background: rgba(31, 40, 47, 0.92);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.unit.selected {
+  background: linear-gradient(180deg, #426b49, #283d31);
+  box-shadow: inset 0 0 0 2px rgba(129, 217, 91, 0.9);
+}
+
+.unit:disabled {
+  cursor: default;
+  opacity: 0.88;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  font-weight: 900;
+}
+
+.unit span:nth-child(2) {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+small {
+  color: var(--gold);
+  font-size: 11px;
+}
+
+.overlay {
+  position: absolute;
+  z-index: 6;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 26px;
+  background: rgba(11, 17, 20, 0.72);
+  backdrop-filter: blur(8px);
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+.result {
+  width: min(100%, 340px);
+  padding: 24px;
+  border-radius: 8px;
+  background: var(--panel);
+  text-align: center;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.result span {
+  color: var(--gold);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.result h1 {
+  margin: 8px 0;
+  font-size: 28px;
+}
+
+.result p {
+  margin: 0 0 18px;
+  color: var(--muted);
+}
+
+.result button {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 8px;
+  background: var(--green-deep);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+@media (max-width: 460px) {
+  .shell {
+    padding: 0;
+  }
+
+  .phone {
+    width: 100vw;
+    height: 100vh;
+    min-height: 620px;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .hud {
+    left: 8px;
+    right: 8px;
+    gap: 6px;
+    padding: 9px 10px;
+  }
+
+  .hud strong {
+    font-size: 13px;
+  }
+
+  .timer {
+    min-width: 66px;
+    padding: 7px 8px;
+  }
+}

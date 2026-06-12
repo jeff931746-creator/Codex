@@ -14,6 +14,7 @@ release_status: "测试中"
 release_date: "待确认"
 region: ["海外"]
 chart_info: ""
+cover_image: "https://mmbiz.qpic.cn/sz_mmbiz_jpg/4nD8RGbZQJrzzwzhR4dgLTuvZ8ADctNddAV6R7pTibe86dPJQfjKYtbql1WfyZR0tZric2wTUvJiabZ9ZlKE4ggVw/0?wx_fmt=jpeg"
 entry_id: PROD-2026-06-04-5291
 source_name: "游戏旅人"
 url: "https://mp.weixin.qq.com/s/58k_08-jZXISAoVTc4S4lA"

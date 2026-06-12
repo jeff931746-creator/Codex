@@ -1,0 +1,39 @@
+---
+title: "Mechanic War: Idle RPG"
+weight: "轻度"
+platform: ["iOS", "Android"]
+core_gameplay: "一款机甲题材的放置RPG，玩家可以自助构建机甲和武器，拥有纸娃娃系统。核心为放置挂机获取资源，提升战力。"
+category_primary: "放置RPG"
+category_tags: ["机甲", "纸娃娃系统", "放置"]
+art_style: "未知"
+similar_games: ""
+developer: "未知"
+publisher: "未知"
+monetization: "IAA"
+release_status: "测试中"
+release_date: "待确认"
+region: ["海外"]
+chart_info: ""
+cover_image: "https://mmbiz.qpic.cn/mmbiz_jpg/QzP1r7mkjkvylPgc80yF6jyLPuCASkxExb3kGA6VicxnWEJGAvYdjwIRd9EyACDhR53xIr9ibFlDosvFLCPVTv1Q/640?wx_fmt=other&from=appmsg"
+entry_id: PROD-2026-06-09-4122
+source_name: "鹅说的游戏"
+url: "https://mp.weixin.qq.com/s/DQIWl_xtG5-jrahugZq-Jw"
+collected_date: "2026-06-09"
+last_updated: "2026-06-09"
+user_rating: null
+user_note: ""
+---
+
+## Mechanic War: Idle RPG
+
+机甲题材的放置RPG，特色是机甲和武器的DIY纸娃娃系统。
+
+**开发商: 未知 | 发行商: 未知**
+**美术风格**: 未知
+
+
+## 信息时间线
+- [2026-06-09] [鹅说的游戏] 【新游记】第64回：腾讯海外新作\IGG永不缺席\二次元卡牌加速后还有得赚？: 机甲题材的放置RPG，特色是机甲和武器的DIY纸娃娃系统。
+
+## 市场表现
+（暂无数据）

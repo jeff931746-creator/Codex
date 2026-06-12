@@ -14,6 +14,7 @@ release_status: "测试中"
 release_date: "待确认"
 region: ["韩国", "海外"]
 chart_info: ""
+cover_image: "https://mmbiz.qpic.cn/mmbiz_jpg/8ZpzgkunWdegoKo38AiaQPUrTRr0ib4cHSfplQprlXWUkZFJBCejEHguicwGL4iaUxMOBHAMK3icEpDh75zmCcM6mwA/0?wx_fmt=jpeg"
 entry_id: PROD-2026-06-04-7153
 source_name: "Vergil的游戏杂谈"
 url: "https://mp.weixin.qq.com/s/QYsYEAr-yMW-LvwZpBsb5Q"

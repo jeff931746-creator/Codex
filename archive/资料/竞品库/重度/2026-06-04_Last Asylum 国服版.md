@@ -14,6 +14,7 @@ release_status: "已公布"
 release_date: "待确认"
 region: ["中国"]
 chart_info: ""
+cover_image: "https://mmbiz.qpic.cn/mmbiz_png/aFJVDt8EwHKMNfuALjorV6EWav3G1jRdOeU2tAvRqFqAibJA6W9LnnHKAysuQZCZewQYRwIVz4AE67MFbTDd2HA/640?wx_fmt=png&from=appmsg"
 entry_id: PROD-2026-06-04-6411
 source_name: "柠檬游戏说"
 url: "https://mp.weixin.qq.com/s/UhkgsWEt0_LRnyTLg9160g"

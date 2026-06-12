@@ -14,6 +14,7 @@ release_status: "测试中"
 release_date: "待确认"
 region: ["海外"]
 chart_info: ""
+cover_image: "https://mmbiz.qpic.cn/sz_mmbiz_jpg/E8v1w0RfAHD5wqNtVCq2LbjIVjxe1Wulo2Tw8Eajma2hekoeKgicLzc9M1ia98Mr1JVJTTubWHP0icV5qRt1q2O2pzomD3WPH2gLlhEpseWicd8/0?wx_fmt=jpeg"
 entry_id: PROD-2026-06-04-1169
 source_name: "游戏吗喽说"
 url: "https://mp.weixin.qq.com/s/5vOnfHrbwdfwcBSK0l0BoQ"

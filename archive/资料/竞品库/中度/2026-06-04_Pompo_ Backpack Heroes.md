@@ -14,6 +14,7 @@ release_status: "测试中"
 release_date: "待确认"
 region: ["亚洲"]
 chart_info: "首发于多地进入免费榜前10名"
+cover_image: "https://mmbiz.qpic.cn/mmbiz_jpg/8ZpzgkunWdeyaY7sWEX0icF7vtbDibHNU85cqehOxDjgicH4bu3HC0kKuDseIhBcY5bIaSjr3OySfZEOo1qWtGEyg/0?wx_fmt=jpeg"
 entry_id: PROD-2026-06-04-1442
 source_name: "Vergil的游戏杂谈"
 url: "https://mp.weixin.qq.com/s/khOhsCgetreIxXRQ4MeO9A"

@@ -129,6 +129,54 @@ def build_chat_payload(
     return payload
 
 
+def chat_with_images(
+    prompt: str,
+    image_data: list[tuple[str, str]],
+    *,
+    system: str | None = None,
+    model: str | None = None,
+    max_tokens: int | None = None,
+    temperature: float | None = None,
+    timeout: int = 300,
+    retry_policy: RetryPolicy | None = None,
+    logger: Callable[[str], None] | None = None,
+    return_empty_on_error: bool = False,
+    extra: dict[str, Any] | None = None,
+) -> str:
+    """发送带图片的 prompt 到 DeepSeek Vision。
+
+    Args:
+        prompt: 文本指令。
+        image_data: [(base64_str, media_type), ...] 列表。
+            media_type 如 "image/jpeg"、"image/png"。
+    """
+    messages: list[dict[str, Any]] = []
+    if system:
+        messages.append({"role": "system", "content": system})
+
+    content: list[dict[str, Any]] = []
+    for b64, mime in image_data:
+        content.append({
+            "type": "image_url",
+            "image_url": {"url": f"data:{mime};base64,{b64}"},
+        })
+    content.append({"type": "text", "text": prompt})
+    messages.append({"role": "user", "content": content})
+
+    return chat(
+        messages,
+        model=model,
+        max_tokens=max_tokens,
+        temperature=temperature,
+        thinking={"type": "disabled"},
+        timeout=timeout,
+        retry_policy=retry_policy,
+        logger=logger,
+        return_empty_on_error=return_empty_on_error,
+        extra=extra,
+    )
+
+
 def chat_text(
     prompt: str,
     *,

@@ -49,9 +49,9 @@ Gates：`intake` → `plan` → `evidence` → `synthesis` → `review` → `del
 
 Gates：`intake` → `plan` → `target-inspection` → `edit` → `self-review` → `validation` → `delivery`
 
-- `target-inspection`：受影响文件和当前内容已知；**需求 GDD 必须确认已读 `reference/部门标准/策划/gdd/GDD写作标准.md`**
+- `target-inspection`：受影响文件和当前内容已知；**有对应部门标准时须确认已读**
 - `edit`：文本变更已应用
-- `self-review`：措辞冲突、范围偏移、逻辑覆盖已检查；**需求 GDD 的 self-review 必须走 `gdd-review` Skill，不可内联**
+- `self-review`：措辞冲突、范围偏移、逻辑覆盖已检查；**主 agent 本轮写过的设计文档须交子 agent 审核**
 - `validation`：相关资产的本地检查已运行
 
 ### implementation
@@ -167,7 +167,7 @@ Gates：`intake` → `plan` → `governance-design` → `target-inspection` → 
 | 请求含触发词（标准/流程/体系/框架/方法论/沉淀/长期管理，知识资产类库） | `knowledge-asset` + `strict`，进入 governance-design |
 | knowledge-asset plan 缺 3 项扫描清单 | 拒绝 plan |
 | doc-change / implementation plan 缺 gate 序列 | 拒绝 plan |
-| doc-change 目标是设计文档，edit 前未读 GDD 标准 | 阻断 edit |
+| doc-change 目标有对应部门标准，edit 前未读标准 | 阻断 edit |
 | doc-change 产出设计文档但 self-review 未交子 agent | 阻断交付 |
 | 分类中途发现错误 | rewind 到 intake，已产出降 draft |
 | 当前 gate 未完成 | 停在当前 gate |

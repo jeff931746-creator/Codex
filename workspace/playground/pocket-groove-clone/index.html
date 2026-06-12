@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pocket Groove Clone Prototype</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="phone">
+        <header class="hud">
+          <div>
+            <span class="label enemy">Enemy</span>
+            <strong id="enemyHud">95 · HQ 100</strong>
+          </div>
+          <div class="timer" id="timer">00:00</div>
+          <div>
+            <span class="label player">Player</span>
+            <strong id="coins">95 · HQ 100</strong>
+          </div>
+        </header>
+
+        <canvas id="game" width="420" height="720" aria-label="hex territory battle game"></canvas>
+
+        <footer class="controls">
+          <button class="unit selected" id="incomeStat" disabled>
+            <span class="icon">C</span>
+            <span>Income</span>
+            <small>+0/s</small>
+          </button>
+          <button class="unit" id="mineStat" disabled>
+            <span class="icon">M</span>
+            <span>Mines</span>
+            <small>0</small>
+          </button>
+          <button class="unit" id="campStat" disabled>
+            <span class="icon">B</span>
+            <span>Barracks</span>
+            <small>0</small>
+          </button>
+        </footer>
+
+        <div id="overlay" class="overlay hidden">
+          <div class="result">
+            <span id="resultKicker">Victory</span>
+            <h1 id="resultTitle">Territory Secured</h1>
+            <p id="resultCopy">Your squad pushed through the center lane.</p>
+            <button id="restartButton">Next Match</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="game.js?v=connected-defense-20260604c"></script>
+  </body>
+</html>

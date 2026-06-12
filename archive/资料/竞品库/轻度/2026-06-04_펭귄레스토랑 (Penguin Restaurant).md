@@ -14,6 +14,7 @@ release_status: "待确认"
 release_date: "待确认"
 region: ["韩国"]
 chart_info: ""
+cover_image: "https://mmbiz.qpic.cn/sz_mmbiz_jpg/nwicv3MuFUvkjeuiaYSOiaibZfKaZus49DJAMmEINsRRem6XPk4wgfzaTknHuRMb0QCYO53vjtcxyYR2WgtWcfFS7A/0?wx_fmt=jpeg"
 entry_id: PROD-2026-06-04-7134
 source_name: "奎妮游戏推荐"
 url: "https://mp.weixin.qq.com/s/1j54b8fcabO_IWnGSUfZ4A"

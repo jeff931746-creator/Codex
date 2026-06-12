@@ -14,6 +14,7 @@ release_status: "测试中"
 release_date: "待确认"
 region: ["全球"]
 chart_info: ""
+cover_image: "https://mmbiz.qpic.cn/sz_mmbiz_jpg/jibUVkKNMfU0Ytqov5XBf3xWSShoybO4G1tBphiasFdF7AqHUHUaq8WqBWOHKMtTqr9GYSWhwLTcsV1VZI8QSsMGhtqq9MxJZ3JQkkSGkuNjs/0?wx_fmt=jpeg"
 entry_id: PROD-2026-06-04-7101
 source_name: "奎妮游戏推荐"
 url: "https://mp.weixin.qq.com/s/H4rSiOzlfl1GDzY2JDZC2g"
