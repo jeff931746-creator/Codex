@@ -38,6 +38,9 @@ FILTER_LOG = STRATEGY_DIR / "过滤日志.md"
 sys.path.insert(0, str(CODEX_ROOT))
 
 from archive.tools.lib.llm_client import chat_text, chat_with_images  # noqa: E402
+from archive.tools.scripts.controlled_vocab import (  # noqa: E402
+    PRIMARY_CATEGORIES, GAMEPLAY_TAGS, normalize_primary, normalize_tags,
+)
 
 import base64
 import urllib.request
@@ -514,6 +517,10 @@ is_genuinely_new = true 仅当游戏是最近才公布或上线的新品。以�
 - art_style：从文章描述或截图提取（像素、3D写实、二次元、卡通、水墨等）
 - similar_games：文章中提到的对标/类似产品
 
+⚠️ 受控词表约束（严格执行，下游入库依赖）：
+- category_primary 必须从以下封闭列表里选**唯一一个**最接近的，禁止自创新品类：__PRIMARY_CATEGORIES__
+- category_tags 优先从以下推荐标签里选（最多 5 个），同义概念一律用列表里的词，不要造近义词：__GAMEPLAY_TAGS__
+
 ```json
 [
   {
@@ -550,6 +557,13 @@ is_genuinely_new = true 仅当游戏是最近才公布或上线的新品。以�
 如果文章是纯 teardown 类型，info_types 只写 ["teardown"]，strategy 和 new_products 都为 null/[]。
 
 只输出 JSON，不要输出其他内容。"""
+
+# 注入受控词表（controlled_vocab 是唯一真相源，避免 prompt 里硬编码漂移）
+ANALYSIS_SYSTEM = ANALYSIS_SYSTEM.replace(
+    "__PRIMARY_CATEGORIES__", "、".join(PRIMARY_CATEGORIES)
+).replace(
+    "__GAMEPLAY_TAGS__", "、".join(GAMEPLAY_TAGS)
+)
 
 
 def analyze_article(title: str, content: str, source_name: str,
@@ -713,6 +727,10 @@ def write_product_entry(product: dict, article: dict, source_name: str) -> Path 
     name = product.get("name", "").strip()
     if not name:
         return None
+
+    # 受控词表归一化：主品类落封闭集，标签同义归并（非 strict，保留原始长尾信息）
+    product["category_primary"] = normalize_primary(product.get("category_primary", "")) or ""
+    product["category_tags"] = normalize_tags(product.get("category_tags", []))
 
     # 归一化名称（全角→半角）
     name = name.replace("：", ":").replace("（", "(").replace("）", ")")
