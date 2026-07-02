@@ -1,0 +1,309 @@
+<title>多 AI 工作区沉淀迭代流程 GDD</title>
+
+<h1>多 AI 工作区沉淀迭代流程 GDD</h1>
+
+<callout emoji="📌" background-color="light-blue" border-color="blue">
+  <p>本文说明 `/Users/mt/Documents/Codex-codex-work` 这套工作区如何被 Codex、Claude 或其他 AI 使用。重点不是“怎么启动 AI”，而是任务产物如何在 workspace、archive、reference、.agents 与 memory 之间沉淀、迭代、晋升和归档。</p>
+</callout>
+
+<h2>一、需求目的</h2>
+
+<ul>
+  <li>让不同 AI 使用同一个工程逻辑，手段：通过薄入口、AI-ONBOARDING、AI-ENTRYPOINTS 将接入规则集中到 agent-neutral 层。</li>
+  <li>让每次任务产物都有明确归属，手段：按执行层、沉淀层、标准层、运行规则层划分文件位置和生命周期。</li>
+  <li>让经验可以从一次性产物演进为可复用方法，手段：规定 workspace → archive/经验 → archive/方法论 → reference 的晋升条件。</li>
+  <li>让规则迭代可控而不漂移，手段：规则层只写原则，具体路径和入口清单由 AI-ENTRYPOINTS 管理，历史资料和公共记忆保真保存。</li>
+  <li>让跨 AI 接力不中断，手段：将项目状态写入公共位置，运行时私有目录只允许保存运行时内部状态。</li>
+</ul>
+
+<h2>二、需求概述</h2>
+
+<p>这套工作区是一个多 AI 协作的工作流环境。它既承载日常任务产物，也承载长期沉淀出来的方法、标准、工具、规则和公共记忆。任何 AI 进入工程后，都必须先确认入口规则，再根据任务类型决定产物落在哪一层，并在任务结束时判断是否需要晋升、归档、写入公共记忆或保持为临时产物。</p>
+
+<p>这套体系的核心不是“把所有东西都放进一个目录”，而是让每类内容有清楚的生命周期：临时执行产物先在 workspace 中完成；有复用价值的经验进入 archive/经验；经过多次验证的方法进入 archive/方法论；稳定标准进入 reference；AI 的操作规则、hook、adapter 和公共记忆归 .agents 管理。</p>
+
+<h2>三、功能概述</h2>
+
+<h3>3.1 总流程图</h3>
+
+<whiteboard type="mermaid">
+flowchart TD
+    A["用户提出任务"] --&gt; B["AI 读取薄入口&lt;br/&gt;AGENTS / CODEX / CLAUDE"]
+    B --&gt; C["读取 AI-ONBOARDING&lt;br/&gt;确认强制规则"]
+    C --&gt; D["读取 AI-ENTRYPOINTS&lt;br/&gt;确认路径、规则源、状态目录"]
+    D --&gt; E["读取 PROJECT / memory / rules"]
+    E --&gt; F{"任务分类与 gate"}
+    F --&gt; G["workspace 执行层&lt;br/&gt;产出、试验、项目工作"]
+    G --&gt; H{"是否有复用价值"}
+    H -- "否" --&gt; I["保留在项目目录或清理 tmp"]
+    H -- "是" --&gt; J["archive/经验&lt;br/&gt;记录案例、过程、复盘"]
+    J --&gt; K{"是否形成稳定方法"}
+    K -- "否" --&gt; J
+    K -- "是" --&gt; L["archive/方法论&lt;br/&gt;抽象为可复用方法"]
+    L --&gt; M{"是否成为组织标准"}
+    M -- "否" --&gt; L
+    M -- "是，经用户确认" --&gt; N["reference/部门标准 或 模板&lt;br/&gt;稳定真相源"]
+    E --&gt; O[".agents 运行层&lt;br/&gt;规则、hook、adapter、公共记忆"]
+    O --&gt; P{"是否修改规则或记忆"}
+    P -- "是" --&gt; Q["校验一致性&lt;br/&gt;必要时版本化/提交"]
+    P -- "否" --&gt; R["只按规则执行"]
+</whiteboard>
+
+<h3>3.2 AI 接入层</h3>
+
+<p>AI 接入层用于保证任何运行时进入工程后先读同一套规则，而不是沿用某个运行时自己的私有逻辑。</p>
+
+<p><b>操作流程</b></p>
+<ol>
+  <li seq="auto">用户在 `/Users/mt/Documents/Codex-codex-work` 发起任务。</li>
+  <li seq="auto">AI 读取薄入口文件：`AGENTS.md`、`CODEX.md`、`CLAUDE.md` 或其他运行时入口。</li>
+  <li seq="auto">AI 读取 `.agents/AI-ONBOARDING.md`，确认必须遵守的规则层约束。</li>
+  <li seq="auto">AI 读取 `.agents/AI-ENTRYPOINTS.md`，确认当前具体路径、规则源、公共状态目录、hook/adapters 与 guard 命令。</li>
+  <li seq="auto">AI 按任务需要读取 `PROJECT.md`、`.agents/memory/MEMORY.md` 和 `.agents/rules/*.md`。</li>
+</ol>
+
+<p><b>规则/边界</b></p>
+<ul>
+  <li>若 AI 不支持 hook，也必须遵守 AI-ONBOARDING 与 AI-ENTRYPOINTS。</li>
+  <li>若用户没有明确要求迁移、同步、比较或回写旧工程，则不得把 `/Users/mt/Documents/Codex` 当作隐式依赖。</li>
+  <li>若入口文件和 AI-ENTRYPOINTS 的具体路径冲突，以 AI-ENTRYPOINTS 为准。</li>
+</ul>
+
+<h3>3.3 workspace 执行层</h3>
+
+<p>workspace 是任务执行层，用于承载正在做的项目、试验、临时产物和用户当前要看的输出。它不是长期标准层，也不是方法论最终沉淀层。</p>
+
+<p><b>操作流程</b></p>
+<ol>
+  <li seq="auto">AI 根据任务类型选择 workspace 下的目标位置：项目工作放 `workspace/projects/`，试验或原型放 `workspace/playground/`，临时文件放 `workspace/tmp/`。</li>
+  <li seq="auto">AI 在执行前判断任务强度和 flow type，并按 `.agents/rules/task-flow.md` 推进 gate。</li>
+  <li seq="auto">若需要写文件，AI 先运行 workspace guard 检查目标路径。</li>
+  <li seq="auto">任务完成后，AI 判断产物是临时产物、项目产物，还是具备沉淀价值。</li>
+  <li seq="auto">若只是临时产物，任务结束后可清理；若是项目产物，保留在对应项目目录；若具备复用价值，进入 archive 沉淀判断。</li>
+</ol>
+
+<p><b>产物形态</b></p>
+<table>
+  <thead><tr><th background-color="light-gray">位置</th><th background-color="light-gray">用途</th><th background-color="light-gray">典型产物</th><th background-color="light-gray">退出条件</th></tr></thead>
+  <tbody>
+    <tr><td>workspace/projects/</td><td>正式或半正式项目工作</td><td>立项文档、GDD、评审材料、开发产物</td><td>项目进入开发、上线、中止或归档</td></tr>
+    <tr><td>workspace/playground/</td><td>试验、原型、探索</td><td>demo、样例、测试页面、玩法验证</td><td>转入项目、沉淀为经验、或清理</td></tr>
+    <tr><td>workspace/tmp/</td><td>短期临时文件</td><td>中间图、草稿、导入导出文件</td><td>交付后删除或明确保留</td></tr>
+  </tbody>
+</table>
+
+<p><b>规则/边界</b></p>
+<ul>
+  <li>若文件只是过程材料，不得直接晋升到 archive 或 reference。</li>
+  <li>若用户只要求一次性输出，不得擅自创建长期标准或方法论。</li>
+  <li>若 workspace/tmp 中的产物要长期保留，必须先判断它应进入项目目录、archive，还是 .agents/memory。</li>
+</ul>
+
+<h3>3.4 archive 经验沉淀层</h3>
+
+<p>archive/经验 用于保存已经完成或阶段性完成的真实案例、复盘和上下文。它回答“当时发生了什么、为什么这么做、结果如何”。</p>
+
+<p><b>操作流程</b></p>
+<ol>
+  <li seq="auto">AI 在任务结束或阶段完成时判断是否产生可复用经验。</li>
+  <li seq="auto">若经验只来自单个案例，优先沉淀到 `archive/经验/`，不要直接写成方法论或标准。</li>
+  <li seq="auto">经验文档需要保留任务背景、关键决策、失败路径、最终结论和可复用提醒。</li>
+  <li seq="auto">后续遇到类似任务时，AI 可以引用经验，但不得把单次经验当作通用规则。</li>
+</ol>
+
+<p><b>晋升条件</b></p>
+<ul>
+  <li>若同类经验反复出现，并且能抽象出稳定步骤或判据，则可提议晋升到 `archive/方法论/`。</li>
+  <li>若经验仍依赖具体项目上下文，则留在 `archive/经验/`，不要升级。</li>
+  <li>若经验已经失效，应归档或标注失效原因，而不是继续作为活动依据。</li>
+</ul>
+
+<p><b>规则/边界</b></p>
+<ul>
+  <li>经验层可以记录过程和背景，但不能替代当前规则源。</li>
+  <li>经验层内容可以有历史语言和当时判断，不应为了中立化而改写历史事实。</li>
+  <li>经验层被引用时，应说明它是案例经验还是当前生效规则。</li>
+</ul>
+
+<h3>3.5 archive 方法论沉淀层</h3>
+
+<p>archive/方法论 用于保存已经从多个案例中抽象出的可复用方法。它回答“以后遇到同类问题应该怎么推理、怎么拆解、怎么判断”。</p>
+
+<p><b>操作流程</b></p>
+<ol>
+  <li seq="auto">AI 发现多个经验共享同一结构、判据或推理路径时，先向用户说明可沉淀为方法论。</li>
+  <li seq="auto">用户确认后，AI 将经验中的共性抽象成方法步骤、适用边界、反例和验证方式。</li>
+  <li seq="auto">方法论文档需要引用来源经验，说明它从哪些案例中抽象而来。</li>
+  <li seq="auto">方法论在后续任务中被使用后，应根据真实反馈迭代，而不是一次写死。</li>
+</ol>
+
+<p><b>迭代方式</b></p>
+<ul>
+  <li>若方法在新案例中有效，补充适用样例。</li>
+  <li>若方法在新案例中失效，补充失效条件或修订步骤。</li>
+  <li>若方法开始影响多人协作或评审口径，提议是否升格为 reference 标准。</li>
+</ul>
+
+<p><b>规则/边界</b></p>
+<ul>
+  <li>方法论不是强制标准，除非被 reference 或项目规则显式引用。</li>
+  <li>方法论不得混入未经验证的个人猜测；待验证内容必须标注待定。</li>
+  <li>方法论应保持薄框架和可操作判据，避免膨胀成难以执行的大文档。</li>
+</ul>
+
+<h3>3.6 reference 标准层</h3>
+
+<p>reference 是稳定标准和模板层。它回答“当前组织正式认可的标准是什么”。AI 不得擅自修改 reference，除非用户明确要求建立、修订或迁移标准。</p>
+
+<p><b>操作流程</b></p>
+<ol>
+  <li seq="auto">AI 在执行专项工作前，先查 `reference/部门标准/{能力}/` 是否存在对应标准。</li>
+  <li seq="auto">若标准存在，AI 按标准执行，不自行发明替代口径。</li>
+  <li seq="auto">若标准不存在，AI 向用户报告缺口，并询问是否建立。</li>
+  <li seq="auto">若用户确认修订标准，AI 先说明修订目标、影响范围、来源依据和验证方式。</li>
+  <li seq="auto">标准修订完成后，AI 同步检查 README、索引、历史版本或相关引用是否需要更新。</li>
+</ol>
+
+<p><b>晋升条件</b></p>
+<ul>
+  <li>方法论已经在多个真实任务中验证有效。</li>
+  <li>它需要约束后续多人或多 AI 的工作行为。</li>
+  <li>它具备明确适用范围、通过标准、不通过标准和版本维护方式。</li>
+  <li>用户明确确认它应成为标准。</li>
+</ul>
+
+<p><b>规则/边界</b></p>
+<ul>
+  <li>reference 是稳定真相源，不是草稿区。</li>
+  <li>标准文档应版本化，历史版本只读保存。</li>
+  <li>标准层不记录大量过程细节；过程细节应留在 archive/经验 或相关项目目录。</li>
+</ul>
+
+<h3>3.7 .agents 运行规则层</h3>
+
+<p>.agents 是 agent-neutral 运行层，管理 AI 如何进入工程、如何执行任务、如何写公共记忆、如何挂 hook 和 adapter。它不保存业务项目正文，也不替代 archive/reference。</p>
+
+<p><b>操作流程</b></p>
+<ol>
+  <li seq="auto">AI 通过 `.agents/AI-ONBOARDING.md` 获取强制规则。</li>
+  <li seq="auto">AI 通过 `.agents/AI-ENTRYPOINTS.md` 获取具体路径、入口清单、hook、adapter 和公共状态位置。</li>
+  <li seq="auto">AI 通过 `.agents/rules/` 获取任务流、质量门禁和工作流链路规则。</li>
+  <li seq="auto">AI 通过 `.agents/memory/MEMORY.md` 获取公共项目记忆索引。</li>
+  <li seq="auto">当运行规则需要变化时，AI 先判断这是规则层变化、索引层变化、hook 变化还是记忆变化，再只改对应位置。</li>
+</ol>
+
+<p><b>迭代方式</b></p>
+<table>
+  <thead><tr><th background-color="light-gray">变化类型</th><th background-color="light-gray">修改位置</th><th background-color="light-gray">原则</th></tr></thead>
+  <tbody>
+    <tr><td>强制原则变化</td><td>.agents/AI-ONBOARDING.md</td><td>只改规则，不写具体路径清单。</td></tr>
+    <tr><td>路径、入口、hook、状态目录变化</td><td>.agents/AI-ENTRYPOINTS.md</td><td>只改具体索引，不重写规则原则。</td></tr>
+    <tr><td>任务流或 gate 变化</td><td>.agents/rules/task-flow.md</td><td>保持 gate、触发条件、回退逻辑一致。</td></tr>
+    <tr><td>质量、事实性、Git 纪律变化</td><td>.agents/rules/quality-gates.md</td><td>保证交付检查可执行。</td></tr>
+    <tr><td>公共记忆变化</td><td>.agents/memory/</td><td>保真记录，不把历史内容改成中立描述。</td></tr>
+  </tbody>
+</table>
+
+<p><b>规则/边界</b></p>
+<ul>
+  <li>若只是某个运行时自己的缓存、日志或 transcript，不进入 .agents。</li>
+  <li>若是项目规则、公共记忆、任务状态、checkpoint 或 handoff，不得写入 .claude、.codex 或其他 runtime 私有目录。</li>
+  <li>若修改 .agents 下规则或 hook，交付前必须做本地验证和 git diff/status 检查。</li>
+</ul>
+
+<h3>3.8 公共记忆与任务状态</h3>
+
+<p>公共记忆用于让跨会话、跨 AI 的重要信息可被找回。它不应成为过程垃圾桶，也不应替代 archive/reference。</p>
+
+<p><b>操作流程</b></p>
+<ol>
+  <li seq="auto">任务开始时，AI 先看当前任务是否需要读取公共记忆。</li>
+  <li seq="auto">若需要，AI 先读 `.agents/memory/MEMORY.md`，再打开相关链接文件。</li>
+  <li seq="auto">任务结束时，AI 判断是否产生长期约束、重要结论、跨 runtime handoff 或用户明确要求记忆。</li>
+  <li seq="auto">若只是当前任务中间状态，写入 `workspace/tmp/agent-checkpoints/&lt;runtime&gt;/`。</li>
+  <li seq="auto">若是长期公共记忆，写入 `.agents/memory/` 并更新索引。</li>
+  <li seq="auto">若内容已经沉淀为经验、方法或标准，转入 archive/reference，而不是无限膨胀 MEMORY.md。</li>
+</ol>
+
+<p><b>记忆分层口径</b></p>
+<table>
+  <thead><tr><th background-color="light-gray">层级</th><th background-color="light-gray">位置</th><th background-color="light-gray">保存内容</th><th background-color="light-gray">清理/晋升方式</th></tr></thead>
+  <tbody>
+    <tr><td>任务热状态</td><td>workspace/tmp/agent-checkpoints/&lt;runtime&gt;/</td><td>当前任务 gate、handoff、待办</td><td>任务完成后清理；重要内容晋升公共记忆</td></tr>
+    <tr><td>公共项目记忆</td><td>.agents/memory/</td><td>长期约束、重要任务状态、跨 AI 交接</td><td>过期后归档；方法性内容迁入 archive</td></tr>
+    <tr><td>经验/方法/标准</td><td>archive/经验、archive/方法论、reference</td><td>沉淀后的案例、方法和正式标准</td><td>按层级规则维护版本和索引</td></tr>
+  </tbody>
+</table>
+
+<p><b>规则/边界</b></p>
+<ul>
+  <li>若内容只是调试过程、失败尝试、中间输出或重复解释，则不得写入公共记忆。</li>
+  <li>若历史记忆来自迁移，应保留原始逻辑和 wording；只在索引层做必要适配。</li>
+  <li>若新 AI 接手任务，它应优先读取公共记忆和 checkpoint，而不是读取其他运行时私有 memory。</li>
+</ul>
+
+<h3>3.9 Hook、Adapter 与物理约束</h3>
+
+<p>Hook 和 Adapter 用于把规则转化为工具调用前后的实际约束。它们是执行保护层，不是规则真相源。</p>
+
+<p><b>操作流程</b></p>
+<ol>
+  <li seq="auto">支持 hook 的运行时接入 `.agents/hooks.json`。</li>
+  <li seq="auto">运行时需要示例配置时，参考 `.agents/adapters/`。</li>
+  <li seq="auto">当 AI 尝试写入 runtime 私有目录、执行危险命令或跳过检查时，hook 尽量阻断或提醒。</li>
+  <li seq="auto">不支持 hook 的运行时，仍按 onboarding 和 entrypoints 进行程序性约束。</li>
+</ol>
+
+<p><b>规则/边界</b></p>
+<ul>
+  <li>Hook 支持物理拦截，但不能替代 AI 对规则的理解。</li>
+  <li>Adapter 只是运行时接入示例，不定义项目规则。</li>
+  <li>若某个 AI 经常不读入口或乱写目录，再考虑增加轻量 preflight；当前不是必须条件。</li>
+</ul>
+
+<h3>3.10 交付与迭代闭环</h3>
+
+<p>交付不是流程终点，而是判断产物是否需要沉淀、晋升、归档或继续留在执行层的节点。</p>
+
+<p><b>操作流程</b></p>
+<ol>
+  <li seq="auto">AI 完成任务后，按 flow type 执行 validation 和 review。</li>
+  <li seq="auto">AI 在交付中说明产物位置、验证结果、未做检查和剩余风险。</li>
+  <li seq="auto">AI 判断本次产物是否只是本轮输出、项目产物、经验、方法、标准或运行规则变化。</li>
+  <li seq="auto">若需要沉淀，AI 先说明建议进入哪一层和理由，等待用户确认高风险或长期资产变更。</li>
+  <li seq="auto">若修改了规则、hook、标准或长期资产，AI 检查 git status/diff，并提醒 scoped commit。</li>
+</ol>
+
+<p><b>沉淀判断表</b></p>
+<table>
+  <thead><tr><th background-color="light-gray">问题</th><th background-color="light-gray">若答案为是</th><th background-color="light-gray">目标层级</th></tr></thead>
+  <tbody>
+    <tr><td>这是当前项目必须保留的业务产物吗？</td><td>留在对应项目目录</td><td>workspace/projects</td></tr>
+    <tr><td>这是一次任务的可复用经验吗？</td><td>写成案例或复盘</td><td>archive/经验</td></tr>
+    <tr><td>它已经从多个案例抽象出方法了吗？</td><td>写成步骤、判据、边界</td><td>archive/方法论</td></tr>
+    <tr><td>它需要成为正式约束吗？</td><td>用户确认后版本化</td><td>reference/部门标准 或 模板</td></tr>
+    <tr><td>它影响 AI 如何工作吗？</td><td>修改规则、入口、hook 或记忆索引</td><td>.agents</td></tr>
+    <tr><td>它只是当前接力状态吗？</td><td>写 checkpoint，任务完成后清理</td><td>workspace/tmp/agent-checkpoints</td></tr>
+  </tbody>
+</table>
+
+<h2>四、UE 交互</h2>
+
+<p>用户使用这套工作区时，只需要在任务开始时说明目标和约束。AI 应负责读取入口、确认规则、选择任务流、判断产物层级、执行验证并交付结果。</p>
+
+<p>当用户希望某个产物长期保留时，最好明确说明它是项目产物、经验、方法、标准还是 AI 运行规则。若用户没有说明，AI 应在交付时主动判断并提出建议，而不是默认写入长期层。</p>
+
+<p>当用户要求“迁移、清理、规则中立、状态隔离、接入其他 AI、沉淀方法论、建立标准”这类长期影响任务时，AI 应按 strict 或 knowledge-asset 流程处理，先说明影响范围和验证方式。</p>
+
+<h2>五、Self-Review</h2>
+
+<table>
+  <thead><tr><th background-color="light-gray">判据</th><th background-color="light-gray">检查结果</th></tr></thead>
+  <tbody>
+    <tr><td>需求目的存在且清晰</td><td>通过：目标覆盖多 AI 接入、层级归属、沉淀晋升、规则迭代和跨 AI 接力。</td></tr>
+    <tr><td>脑图/流程图存在且覆盖整体结构</td><td>通过：流程图覆盖接入、执行、经验沉淀、方法晋升、标准固化和 .agents 规则闭环。</td></tr>
+    <tr><td>功能模块完整</td><td>通过：各层级均包含功能说明、操作流程、晋升/迭代方式和规则边界。</td></tr>
+    <tr><td>配置项合规</td><td>通过：配置项出现在对应功能说明之后，且声明生效范围。</td></tr>
+    <tr><td>设计层 / 技术层边界</td><td>通过：文档描述工作区使用行为、层级规则和功能级约束，不展开底层实现细节。</td></tr>
+  </tbody>
+</table>

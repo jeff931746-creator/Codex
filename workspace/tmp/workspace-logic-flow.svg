@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1280" viewBox="0 0 1800 1280">
+  <defs>
+    <style>
+      .bg { fill: #f7f8fb; }
+      .title { font: 700 42px Arial, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #172033; }
+      .subtitle { font: 22px Arial, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #526071; }
+      .section { font: 700 24px Arial, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #243047; }
+      .text { font: 20px Arial, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #1f2937; }
+      .small { font: 17px Arial, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #405064; }
+      .tiny { font: 15px Arial, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #526071; }
+      .box { fill: #ffffff; stroke: #c9d3df; stroke-width: 2; rx: 10; }
+      .rule { fill: #fff5d8; stroke: #dfb84c; stroke-width: 2; rx: 10; }
+      .index { fill: #e9f7ef; stroke: #50a56a; stroke-width: 2; rx: 10; }
+      .gate { fill: #edf2ff; stroke: #6b82d6; stroke-width: 2; rx: 10; }
+      .guard { fill: #ffeceb; stroke: #d66a63; stroke-width: 2; rx: 10; }
+      .layer { fill: #eef8fb; stroke: #54a3b8; stroke-width: 2; rx: 10; }
+      .deliver { fill: #f0edff; stroke: #8067c8; stroke-width: 2; rx: 10; }
+      .arrow { stroke: #65758b; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #8b98a8; stroke-width: 2.5; fill: none; marker-end: url(#arrow); stroke-dasharray: 8 7; }
+      .lane { fill: #ffffff; stroke: #d8dee8; stroke-width: 2; rx: 18; opacity: 0.78; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#65758b"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1800" height="1280"/>
+
+  <text class="title" x="70" y="72">Codex-codex-work 工作区运行逻辑</text>
+  <text class="subtitle" x="70" y="108">规则中立、入口适配、状态隔离；规则层只定原则，具体路径和入口清单由 AI-ENTRYPOINTS 管理。</text>
+
+  <rect class="lane" x="50" y="145" width="520" height="1015"/>
+  <rect class="lane" x="640" y="145" width="520" height="1015"/>
+  <rect class="lane" x="1230" y="145" width="520" height="1015"/>
+
+  <text class="section" x="82" y="190">1. 接入与权威层</text>
+  <text class="section" x="672" y="190">2. 任务执行层</text>
+  <text class="section" x="1262" y="190">3. 安全、状态与交付层</text>
+
+  <rect class="box" x="105" y="230" width="410" height="86"/>
+  <text class="text" x="140" y="265">任意 AI 进入工程</text>
+  <text class="small" x="140" y="294">Codex / Claude / Cursor / Gemini / 其他</text>
+
+  <rect class="box" x="105" y="365" width="410" height="112"/>
+  <text class="text" x="140" y="399">薄入口文件</text>
+  <text class="small" x="140" y="428">AGENTS.md / CODEX.md / CLAUDE.md</text>
+  <text class="small" x="140" y="455">只指向规则与索引，不复制规则正文</text>
+
+  <rect class="rule" x="105" y="526" width="410" height="120"/>
+  <text class="text" x="140" y="561">.agents/AI-ONBOARDING.md</text>
+  <text class="small" x="140" y="591">规则层：必须读、必须隔离、必须检查</text>
+  <text class="small" x="140" y="620">不放具体路径清单，避免规则层漂移</text>
+
+  <rect class="index" x="105" y="695" width="410" height="150"/>
+  <text class="text" x="140" y="730">.agents/AI-ENTRYPOINTS.md</text>
+  <text class="small" x="140" y="760">索引层：工作区路径、必读文件</text>
+  <text class="small" x="140" y="789">hooks / adapters / guard / 公共状态目录</text>
+  <text class="small" x="140" y="818">以后改具体接入内容主要改这里</text>
+
+  <rect class="box" x="105" y="895" width="410" height="165"/>
+  <text class="text" x="140" y="930">主动规则源</text>
+  <text class="small" x="140" y="960">PROJECT.md：范围、会话、技能入口</text>
+  <text class="small" x="140" y="989">.agents/memory/MEMORY.md：公共记忆索引</text>
+  <text class="small" x="140" y="1018">.agents/rules/*.md：任务流、质量、链路</text>
+
+  <rect class="box" x="695" y="230" width="410" height="112"/>
+  <text class="text" x="730" y="265">会话启动</text>
+  <text class="small" x="730" y="294">确认 workspace = Codex-codex-work</text>
+  <text class="small" x="730" y="321">只按需打开相关 memory 链接</text>
+
+  <rect class="gate" x="695" y="390" width="410" height="128"/>
+  <text class="text" x="730" y="425">任务分类</text>
+  <text class="small" x="730" y="455">quick：直接结论</text>
+  <text class="small" x="730" y="484">standard / strict：先计划和 gate</text>
+
+  <rect class="gate" x="695" y="566" width="410" height="174"/>
+  <text class="text" x="730" y="601">选择 flow type</text>
+  <text class="small" x="730" y="631">analysis / doc-change / implementation</text>
+  <text class="small" x="730" y="660">review / collection / knowledge-asset</text>
+  <text class="small" x="730" y="689">strict 或长期资产：不得跳过计划</text>
+  <text class="small" x="730" y="718">方向变化：回到 intake 重新规划</text>
+
+  <rect class="gate" x="695" y="790" width="410" height="154"/>
+  <text class="text" x="730" y="825">按 gate 顺序推进</text>
+  <text class="small" x="730" y="855">intake → plan → inspection/evidence</text>
+  <text class="small" x="730" y="884">edit / implementation / synthesis</text>
+  <text class="small" x="730" y="913">validation → review → delivery</text>
+
+  <rect class="layer" x="695" y="992" width="410" height="120"/>
+  <text class="text" x="730" y="1027">工作层级</text>
+  <text class="small" x="730" y="1057">reference：稳定标准，不擅改</text>
+  <text class="small" x="730" y="1086">archive：沉淀层；workspace：执行层</text>
+
+  <rect class="guard" x="1285" y="230" width="410" height="138"/>
+  <text class="text" x="1320" y="265">文件安全</text>
+  <text class="small" x="1320" y="295">改文件前已知路径先跑 guard</text>
+  <text class="small" x="1320" y="324">patch 目标必须在当前工作区内</text>
+  <text class="tiny" x="1320" y="350">tools/workspace-guard/check-paths.sh</text>
+
+  <rect class="guard" x="1285" y="420" width="410" height="150"/>
+  <text class="text" x="1320" y="455">状态隔离</text>
+  <text class="small" x="1320" y="485">项目规则、记忆、checkpoint、handoff</text>
+  <text class="small" x="1320" y="514">写入 .agents/ 或 workspace/tmp/</text>
+  <text class="small" x="1320" y="543">agent-checkpoints；不写 runtime 私有目录</text>
+
+  <rect class="guard" x="1285" y="622" width="410" height="128"/>
+  <text class="text" x="1320" y="657">Hook / Adapter</text>
+  <text class="small" x="1320" y="687">支持 hook：.agents/hooks.json 物理拦截</text>
+  <text class="small" x="1320" y="716">不支持 hook：由入口规则和 preflight 约束</text>
+
+  <rect class="deliver" x="1285" y="800" width="410" height="144"/>
+  <text class="text" x="1320" y="835">验证与自检</text>
+  <text class="small" x="1320" y="865">质量门禁：事实性、评审纪律、Git 卫生</text>
+  <text class="small" x="1320" y="894">共享资产改动：本地验证 + diff/status</text>
+  <text class="small" x="1320" y="923">跳过检查必须说明原因</text>
+
+  <rect class="deliver" x="1285" y="992" width="410" height="120"/>
+  <text class="text" x="1320" y="1027">交付 / 记忆 / Git</text>
+  <text class="small" x="1320" y="1057">交付结论 + 文件路径 + 验证结果</text>
+  <text class="small" x="1320" y="1086">需要跨 runtime 保留时写公共记忆</text>
+
+  <path class="arrow" d="M310 316 L310 365"/>
+  <path class="arrow" d="M310 477 L310 526"/>
+  <path class="arrow" d="M310 646 L310 695"/>
+  <path class="arrow" d="M310 845 L310 895"/>
+
+  <path class="arrow" d="M515 980 C585 980 615 286 695 286"/>
+  <path class="arrow" d="M900 342 L900 390"/>
+  <path class="arrow" d="M900 518 L900 566"/>
+  <path class="arrow" d="M900 740 L900 790"/>
+  <path class="arrow" d="M900 944 L900 992"/>
+
+  <path class="arrow" d="M1105 286 L1285 286"/>
+  <path class="arrow" d="M1105 652 C1195 652 1195 495 1285 495"/>
+  <path class="arrow" d="M1105 868 C1195 868 1195 864 1285 864"/>
+  <path class="arrow" d="M1490 368 L1490 420"/>
+  <path class="arrow" d="M1490 570 L1490 622"/>
+  <path class="arrow" d="M1490 750 L1490 800"/>
+  <path class="arrow" d="M1490 944 L1490 992"/>
+
+  <path class="dash" d="M1285 686 C1175 686 1175 850 1105 850"/>
+  <text class="tiny" x="1160" y="760">hook/preflight 在工具调用前阻断风险</text>
+
+  <path class="dash" d="M900 790 C900 760 655 740 655 454 C655 385 695 385 740 390"/>
+  <text class="tiny" x="665" y="765">方向变化 / gate 未完成 / 连续失败：rewind 或 re-plan</text>
+
+  <rect class="box" x="110" y="1188" width="1580" height="52"/>
+  <text class="small" x="140" y="1222">核心约束：AI-ONBOARDING 只定义规则；AI-ENTRYPOINTS 管具体路径和清单；PROJECT / rules / memory 执行流程；runtime 私有目录只存运行时内部状态。</text>
+</svg>

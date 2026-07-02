@@ -2,7 +2,7 @@
 
 这里收纳立项阶段的流程材料。
 
-本目录及其子目录默认遵守根目录 [`CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md) 的 Session Management Protocol.
+本目录及其子目录默认遵守本工作区 `.agents/AI-ONBOARDING.md` 与 `.agents/AI-ENTRYPOINTS.md` 的入场与会话规则.
 
 ---
 

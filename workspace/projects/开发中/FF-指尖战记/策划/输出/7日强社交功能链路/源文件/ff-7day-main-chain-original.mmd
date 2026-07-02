@@ -1,0 +1,106 @@
+flowchart TB
+    %% 竖向阶段模块版：减少跨模块回流线，D4-D7 每段只保留一条内部小链路
+
+    START["7日主链路<br/>从单人成长到军团生态"]
+
+    D1["D1 单人变强<br/>冒险 / 装备 / 自动战斗<br/>玩家认知：我会玩，我能变强"]
+    D2["D2 成长目标<br/>技能 / 宠物 / 任务 / 七日活动<br/>玩家认知：我知道接下来养什么"]
+    D3["D3 多人感知<br/>同屏 / 排行 / 聊天 / 他人信息<br/>玩家认知：这不是单机"]
+
+    START --> D1 --> D2 --> D3
+
+    %% D1-D3 底层成长与基础商业化
+    subgraph EARLY["D1-D3 底层循环：先让玩家稳定成长，并看见别人"]
+        direction TB
+        E1["成长循环<br/>战斗 → 掉落 → 养成 → 战力提升"]
+        E2["基础付费权益<br/>首充 / 月卡 / 七日嘉年华"]
+        E3["开放条件<br/>战力提升后解锁多人感知与资源玩法"]
+
+        E2 --> E1 --> E3
+    end
+    D1 --> E1
+    D2 --> E2
+    E3 --> D3
+
+    %% D4 资源争夺阶段
+    subgraph D4M["D4 资源争夺：让玩家理解“好东西要抢”"]
+        direction TB
+        D4A["世界狩猎 / 公共Boss<br/>高价值资源出现"]
+        D4B["公共或半公共场景<br/>可能遇到其他玩家"]
+        D4C{"是否发生争夺"}
+        D4D["未争夺：正常收益<br/>装备 / 材料 / 货币"]
+        D4E["发生争夺：战斗 / 抢夺 / 复活"]
+        D4F["结果变化<br/>奖励权变化 / 临时收益归属变化"]
+        D4G["沉淀情绪<br/>战报 / 仇人 / 复仇入口"]
+        D4P["资源效率付费<br/>掉落加速 / 多倍点数消耗 / 复活"]
+
+        D4A --> D4B --> D4C
+        D4C --> D4D
+        D4C --> D4E --> D4F --> D4G
+        D4P --> D4A
+    end
+
+    D3 --> D4M
+
+    %% D5 寻血与玩法背包阶段
+    subgraph D5M["D5 轻PVP冲突：把资源争夺升级成入侵、防守和复仇"]
+        direction TB
+        D5A["寻血入口<br/>矿点 / 事件 / 入侵目标"]
+        D5B["入侵或防守<br/>玩家主动介入他人收益"]
+        D5C["玩法背包 / 临时收益<br/>未入账奖励进入临时包"]
+        D5D["风险控制<br/>核心资产不掉，玩法收益可抢"]
+        D5E["结算与延续<br/>抢夺比例 / 保护 / 追回 / 复仇记录"]
+        D5P["冲突场景付费<br/>复活 / 保护 / 追回 / 复仇加速"]
+
+        D5A --> D5B --> D5C --> D5D --> D5E
+        D5P --> D5C
+    end
+
+    D4G --> D5M
+
+    %% D6 军团承接阶段
+    subgraph D6M["D6 军团归属：把个人冲突转成组织需求"]
+        direction TB
+        D6A["个人冲突受挫<br/>被抢 / 被入侵 / 奖励丢失"]
+        D6B["查看对方信息<br/>战力 / 军团 / 战报"]
+        D6C["加入或创建军团<br/>找到组织和保护感"]
+        D6D["军团基础目标<br/>任务 / 捐献 / 贡献 / 军团币 / 商店"]
+        D6E["军团成长<br/>等级 / 活跃 / 商店解锁 / 成员凝聚"]
+
+        D6A --> D6B --> D6C --> D6D --> D6E
+    end
+
+    D5E --> D6M
+
+    %% D7 首周收束和长期预期
+    subgraph D7M["D7 首周收束：把军团基础目标升级为共同目标"]
+        direction TB
+        D7A["军团试炼<br/>军团Boss / DPS / 排名 / 奖励"]
+        D7B["军团榜与贡献<br/>成员贡献 / 军团币产出 / 活跃沉淀"]
+        D7C["沙盘预告<br/>军团沙盘 / 战役活动"]
+        D7D["长期目标<br/>帮战 / 国战 / 跨服对抗 / 区服整合"]
+        D7P["长期付费预期<br/>军团目标 / 后续沙盘 / 版本战令预告"]
+
+        D7A --> D7B --> D7C --> D7D
+        D7P --> D7C
+    end
+
+    D6E --> D7M
+
+    END["首周最终认知<br/>我变强不是只为刷单机，而是为了抢资源、报复、进军团、参与后续战役"]
+    D7D --> END
+
+    %% 样式
+    classDef main fill:#e8f2ff,stroke:#2f6fed,stroke-width:1px,color:#111;
+    classDef growth fill:#f5f7fa,stroke:#8a94a6,stroke-width:1px,color:#111;
+    classDef conflict fill:#fff1e6,stroke:#f08a24,stroke-width:1px,color:#111;
+    classDef guild fill:#eef8ee,stroke:#3b9b4f,stroke-width:1px,color:#111;
+    classDef longterm fill:#f4ecff,stroke:#8b5cf6,stroke-width:1px,color:#111;
+    classDef pay fill:#fff7cc,stroke:#c9a227,stroke-width:1px,color:#111;
+
+    class START,D1,D2,D3,END main;
+    class E1,E3 growth;
+    class D4A,D4B,D4C,D4D,D4E,D4F,D4G,D5A,D5B,D5C,D5D,D5E,D6A,D6B conflict;
+    class D6C,D6D,D6E,D7A,D7B guild;
+    class D7C,D7D longterm;
+    class E2,D4P,D5P,D7P pay;

@@ -47,6 +47,12 @@ const config = {
   feishuCrossChatConcurrency: Number(process.env.FEISHU_CROSS_CHAT_CONCURRENCY || 6),
   feishuRunIndicator: String(process.env.FEISHU_RUN_INDICATOR || "").toLowerCase() !== "0",
   feishuRunIndicatorEmojiType: process.env.FEISHU_RUN_INDICATOR_EMOJI_TYPE || "SMILE",
+  feishuProgressUpdates: String(process.env.FEISHU_PROGRESS_UPDATES || "").toLowerCase() !== "0",
+  feishuProgressIntervalMs: Number(process.env.FEISHU_PROGRESS_INTERVAL_MS || 30000),
+  feishuProgressMessages: String(
+    process.env.FEISHU_PROGRESS_MESSAGES ||
+      "收到，开始处理。|还在处理，稍等。|正在整理结果。"
+  ),
   feishuBotOpenId: process.env.FEISHU_BOT_OPEN_ID || "",
   feishuOwnerOpenId: process.env.FEISHU_OWNER_OPEN_ID || "",
   codexPython: process.env.CODEX_PYTHON_BIN || process.env.PYTHON_BIN || "python3",
@@ -2212,6 +2218,54 @@ async function sendFeishuMessage(chatId, content) {
   console.log("[feishu] reply sent");
 }
 
+function progressMessageList() {
+  return config.feishuProgressMessages
+    .split("|")
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+async function startFeishuProgressUpdates(chatId) {
+  if (!config.feishuProgressUpdates || !chatId) {
+    return () => {};
+  }
+
+  const messages = progressMessageList();
+  if (!messages.length) {
+    return () => {};
+  }
+
+  let stopped = false;
+  let index = 0;
+  const sendProgress = async () => {
+    if (stopped) {
+      return;
+    }
+    const message = messages[Math.min(index, messages.length - 1)];
+    index += 1;
+    try {
+      await sendFeishuMessage(chatId, message);
+    } catch (error) {
+      console.error("[feishu] progress update failed", error);
+    }
+  };
+
+  await sendProgress();
+  const intervalMs = Math.max(0, Number(config.feishuProgressIntervalMs || 0));
+  const timer = intervalMs > 0
+    ? setInterval(() => {
+        void sendProgress();
+      }, intervalMs)
+    : null;
+
+  return () => {
+    stopped = true;
+    if (timer) {
+      clearInterval(timer);
+    }
+  };
+}
+
 async function askOpenAI(userText) {
   const data = await apiJson("openai", "responses", {
     method: "POST",
@@ -2392,39 +2446,46 @@ function scheduleFeishuReply(payload) {
       const chatId = message?.chat_id;
       const userText = extractMessageText(message?.content);
       const sessionTarget = resolveFeishuSessionTarget(payload);
-      const replyInput = await buildReplyInputFromMessage(userText);
-      const intent = classifyReplyIntent(userText, replyInput);
-      const prompt = buildReplyPrompt({
-        intent,
-        originalText: userText,
-        replyInput
-      });
+      const stopProgressUpdates = await startFeishuProgressUpdates(chatId);
+      let replyInput = null;
+      let intent = "chat";
+      try {
+        replyInput = await buildReplyInputFromMessage(userText);
+        intent = classifyReplyIntent(userText, replyInput);
+        const prompt = buildReplyPrompt({
+          intent,
+          originalText: userText,
+          replyInput
+        });
 
-      console.log("[feishu] processing", {
-        chatId,
-        sender,
-        sessionTarget: sessionTarget || "(default)",
-        docLinks: replyInput.docLinks?.length || 0,
-        intent
-      });
-
-      if (replyInput.error && replyInput.docLinks?.length) {
-        await sendFeishuMessage(
+        console.log("[feishu] processing", {
           chatId,
-          "我看到了这个飞书文档链接，但现在还没读到正文。你可以把文档分享给我，或者直接把正文贴过来，我就能继续帮你审。"
-        );
-        return;
-      }
+          sender,
+          sessionTarget: sessionTarget || "(default)",
+          docLinks: replyInput.docLinks?.length || 0,
+          intent
+        });
 
-      const reply = intent === "summary"
-        ? await buildSummaryReply({
+        if (replyInput.error && replyInput.docLinks?.length) {
+          await sendFeishuMessage(
             chatId,
-            messageId: message?.message_id || "",
-            originalText: userText,
-            sessionTarget
-          })
-        : await askBackend(prompt, { sessionTarget });
-      await sendFeishuMessage(chatId, reply);
+            "我看到了这个飞书文档链接，但现在还没读到正文。你可以把文档分享给我，或者直接把正文贴过来，我就能继续帮你审。"
+          );
+          return;
+        }
+
+        const reply = intent === "summary"
+          ? await buildSummaryReply({
+              chatId,
+              messageId: message?.message_id || "",
+              originalText: userText,
+              sessionTarget
+            })
+          : await askBackend(prompt, { sessionTarget });
+        await sendFeishuMessage(chatId, reply);
+      } finally {
+        stopProgressUpdates();
+      }
     } catch (error) {
       console.error("[feishu] background reply failed", error);
     }

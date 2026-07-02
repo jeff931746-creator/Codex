@@ -2,7 +2,7 @@
 
 这里放开发阶段可复用的公共资产。
 
-本目录及其子目录默认遵守根目录 [`CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md) 的 Session Management Protocol。
+本目录及其子目录默认遵守本工作区 `.agents/AI-ONBOARDING.md` 与 `.agents/AI-ENTRYPOINTS.md` 的入场与会话规则。
 
 当前分类：
 
@@ -14,4 +14,4 @@
 
 - 只要是 `策划` 相关，统一归到 `开发/`
 - 只要是已经服务于制作、协作、执行、验证的内容，也归到 `开发/`
-- 需要长期沉淀、可复用、可检索的拆解结论，统一回流到 `research/资料/`
+- 需要长期沉淀、可复用、可检索的拆解结论，统一回流到 `archive/资料/`

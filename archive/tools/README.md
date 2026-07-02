@@ -31,6 +31,7 @@ tools/
 - `model-tools/gemma4/`: temporary Ollama and Gemma helper scripts.
 - `repos/codex-skills-repo/`: skill source repository and catalog.
 - `repos/breakdown-worker/`: breakdown worker and prompts.
+- `douyin-text-extractor/`: Douyin public visible-copy and metadata extraction helper.
 - `scripts/daily_ad_combo_collector.py`: daily ad-combo collection helper.
 - `scripts/daily_game_breakdown.py`: daily game breakdown helper.
 - `scripts/claude_api.py`: Claude API helper script.

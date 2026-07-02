@@ -49,6 +49,13 @@ sync_runtime() {
     ditto "$DIR/node_modules" "$RUNTIME_DIR/node_modules"
   fi
 
+  SOURCE_LIB_DIR="$DIR/../../lib"
+  TARGET_LIB_DIR="$RUNTIME_DIR/../../lib"
+  if [ -d "$SOURCE_LIB_DIR" ]; then
+    mkdir -p "$TARGET_LIB_DIR"
+    cp "$SOURCE_LIB_DIR"/*.mjs "$TARGET_LIB_DIR"/
+  fi
+
   chmod +x "$RUNTIME_DIR/run.sh" "$RUNTIME_DIR/run_named_tunnel.sh" "$RUNTIME_DIR/run_quick_tunnel.sh"
 }
 

@@ -2,9 +2,9 @@
 
 新建立项预演项目时，直接复制这套按流程归档的结构。适用于**立项评估阶段**（阶段制管理，00-05）。
 
-工作流全链路（包括立项通过后的正式项目结构）详见 [`.claude/rules/workflow-chain.md`](/Users/mt/Documents/Codex/.claude/rules/workflow-chain.md)。立项通过后请使用 [`reference/模板/正式项目/`](/Users/mt/Documents/Codex/reference/模板/正式项目/)。
+工作流全链路（包括立项通过后的正式项目结构）详见 `.agents/rules/workflow-chain.md`。立项通过后请使用 `reference/模板/正式项目/`。
 
-This template follows the root workspace session protocol in [`/Users/mt/Documents/Codex/CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md).
+This template follows the workspace admission and session rules in `.agents/AI-ONBOARDING.md` and `.agents/AI-ENTRYPOINTS.md`.
 
 这份模板的目标是让一个 demo 从立项到可试玩，始终保持同一套文件边界。
 

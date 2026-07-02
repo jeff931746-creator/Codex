@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>这只怪能养吗 - 可玩 Demo</title>
+    <link rel="stylesheet" href="./styles.css?v=4" />
+  </head>
+  <body>
+    <main class="app" id="app">
+
+      <!-- ============ 局外大厅 ============ -->
+      <section class="screen lobby" id="lobbyScreen">
+        <div class="lobby-bg"></div>
+        <div class="lobby-inner">
+          <header class="lobby-head">
+            <span class="lobby-mark">?</span>
+            <div>
+              <h1>这只怪能养吗</h1>
+              <p>即时地牢 · 肉鸽 Build · 抓宠</p>
+            </div>
+          </header>
+
+          <div class="lobby-cols">
+            <div class="lobby-card">
+              <h2>出战队伍</h2>
+              <div id="lobbyTeam" class="lobby-team"></div>
+              <p class="lobby-hint">开局只带 1 只，地牢里抓宠加入本局队伍——越打越多、越来越强。</p>
+            </div>
+
+            <div class="lobby-card">
+              <h2>主角技能（带 1 个进地牢）</h2>
+              <div id="lobbySkills" class="lobby-skills"></div>
+            </div>
+
+            <div class="lobby-card">
+              <h2>图鉴 / 养成</h2>
+              <div class="lobby-stats">
+                <div><span id="dexCaught">0</span><small>已捕捉</small></div>
+                <div><span id="dexSeen">0</span><small>已遇见</small></div>
+                <div><span id="matCount">0</span><small>养成材料</small></div>
+              </div>
+              <button id="trainBtn" class="ghost-action" type="button">用材料升级队伍（+放大器池）</button>
+              <div id="poolNote" class="lobby-hint">当前放大器池：基础</div>
+            </div>
+          </div>
+
+          <button id="enterDungeonBtn" class="primary-action big" type="button">进入地牢</button>
+        </div>
+      </section>
+
+      <!-- ============ 地牢地图 ============ -->
+      <section class="screen map hidden" id="mapScreen">
+        <div class="map-top">
+          <div class="map-title">
+            <strong id="floorLabel">第 1 层</strong>
+            <span id="recipeLabel">配方：战斗6 精英1 事件2 自选1 Boss1</span>
+          </div>
+          <div class="map-coins"><span id="mapCoins">金币 0</span><span id="mapHp">队伍 100%</span></div>
+          <button id="abandonBtn" class="icon-text-btn" type="button">放弃本局</button>
+        </div>
+
+        <div class="map-track-wrap">
+          <div id="mapTrack" class="map-track"></div>
+        </div>
+
+        <div id="forkPanel" class="fork-panel hidden">
+          <p class="fork-title">分叉点 · 选择一条路线（另一条永久关闭）</p>
+          <div id="forkChoices" class="fork-choices"></div>
+        </div>
+
+        <div class="map-bottom">
+          <div id="nextHint" class="next-hint">下一间：战斗房</div>
+          <button id="advanceBtn" class="primary-action" type="button">前进</button>
+        </div>
+      </section>
+
+      <!-- ============ 战斗房 ============ -->
+      <section class="screen room hidden" id="roomScreen">
+        <div class="game-frame">
+          <div class="top-hud">
+            <div class="brand">
+              <span class="mark">?</span>
+              <div>
+                <h1 id="roomTitle">战斗房</h1>
+                <p id="roomSub">清空所有波次</p>
+              </div>
+            </div>
+            <div class="run-stats">
+              <span id="waveLabel">波次 1</span>
+              <span id="coinLabel">金币 0</span>
+              <button id="autoToggle" class="pill-btn on" type="button">自动战斗：开</button>
+              <button id="roomAbandon" class="icon-text-btn" type="button">放弃</button>
+            </div>
+          </div>
+
+          <div class="arena-wrap">
+            <canvas id="gameCanvas" width="1280" height="720"></canvas>
+            <div id="floatLog" class="float-log">自动战斗中</div>
+
+            <aside class="pet-panel">
+              <div class="panel-title">出战宠物</div>
+              <div id="petList" class="pet-list"></div>
+              <div class="combo-meter">
+                <div class="combo-top"><span>合击蓄力</span><strong id="comboText">0%</strong></div>
+                <div class="meter"><i id="comboBar"></i></div>
+              </div>
+            </aside>
+
+            <div class="hero-hp">
+              <div class="hero-hp-top"><span>队伍生命</span><strong id="hpText">100/100</strong></div>
+              <div class="meter hp"><i id="hpBar"></i></div>
+            </div>
+
+            <div class="controls">
+              <div class="joystick" id="joystick" role="button" aria-label="移动摇杆"><i id="joystickKnob"></i></div>
+              <div class="skill-row" id="skillRow"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 捉宠场景 ============ -->
+      <section class="screen capture hidden" id="captureScreen">
+        <div class="capture-stage">
+          <div class="capture-head">
+            <p class="capture-tag">随机事件 · 遇宠</p>
+            <button id="captureBack" class="icon-text-btn hidden" type="button">返回地牢</button>
+          </div>
+          <div class="wild-zone">
+            <canvas id="captureCanvas" width="760" height="300"></canvas>
+            <div class="wild-info">
+              <div class="wild-name-row">
+                <h2 id="capName">幼焰狼</h2>
+                <span id="capRarity" class="rarity rare">稀有</span>
+                <span id="capState" class="state-chip hidden">麻痹</span>
+              </div>
+              <div class="wild-hp">
+                <div class="meter wild"><i id="capHpBar"></i></div>
+                <span id="capHpText">100/100</span>
+              </div>
+              <p id="capRateLine" class="cap-rate-line">投球成功率：32%　逃跑概率：高</p>
+            </div>
+          </div>
+          <div class="capture-log" id="capLog">削血后逃跑率下降、成功率上升。</div>
+          <div class="capture-actions" id="capActions">
+            <button data-act="attack" type="button">攻击削血</button>
+            <button data-act="ball" type="button">投球（<span id="ballCount">5</span>）</button>
+            <button data-act="item" type="button">道具</button>
+            <button data-act="flee" type="button">放走</button>
+          </div>
+          <div id="itemTray" class="item-tray hidden"></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ 通用弹窗 ============ -->
+    <div id="modalRoot"></div>
+
+    <script src="./app.js?v=8"></script>
+  </body>
+</html>
