@@ -1,0 +1,101 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-reference-permission.py",
+            "statusMessage": "Checking reference edit permission"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-workspace-write-targets.py",
+            "statusMessage": "Checking workspace write targets"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/block-private-memory-write.py",
+            "statusMessage": "Checking workspace private-state policy"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-context-pressure.py",
+            "statusMessage": "Checking context-pressure handoff policy"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py bash /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-commit-message.sh",
+            "statusMessage": "Checking commit message policy"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py bash /Users/mt/Documents/Codex-codex-work/.agents/hooks/warn-dangerous.sh",
+            "statusMessage": "Checking dangerous command policy"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-flow-gates.py",
+            "timeout": 10,
+            "statusMessage": "Checking strict knowledge-asset flow gate"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-thin-runtime-pointers.py",
+            "timeout": 5,
+            "statusMessage": "Checking thin runtime pointers"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-task-flow-state.py",
+            "timeout": 5,
+            "statusMessage": "Checking task flow checkpoint"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-content-governance-gates.py",
+            "timeout": 5,
+            "statusMessage": "Checking content governance checkpoints"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py bash /Users/mt/Documents/Codex-codex-work/.agents/hooks/stop-status.sh",
+            "statusMessage": "Checking workspace status"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-neat-freak.py",
+            "statusMessage": "Checking QA checkpoint"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-validation.py",
+            "statusMessage": "Checking validation signal"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-impl-checklist.py",
+            "statusMessage": "Checking implementation review checkpoint"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-context-pressure.py",
+            "statusMessage": "Checking context-pressure handoff policy"
+          }
+        ]
+      }
+    ]
+  }
+}

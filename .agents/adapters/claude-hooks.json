@@ -1,0 +1,9 @@
+{
+  "note": "Claude hook adapter example. Configure Claude to use .agents/hooks commands if runtime hook wiring is needed.",
+  "runtime": "claude",
+  "hooksFile": "../hooks.json",
+  "environment": {
+    "AGENT_RUNTIME": "claude",
+    "AGENT_WORKSPACE": "/Users/mt/Documents/Codex-codex-work"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-reference-permission.py'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-workspace-write-targets.py'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/block-private-memory-write.py'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-context-pressure.py'",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' bash '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-commit-message.sh'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' bash '/Users/mt/Documents/Codex-codex-work/.agents/hooks/warn-dangerous.sh'",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-flow-gates.py'",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-thin-runtime-pointers.py'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-task-flow-state.py'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-content-governance-gates.py'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' bash '/Users/mt/Documents/Codex-codex-work/.agents/hooks/stop-status.sh'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-neat-freak.py'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-validation.py'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-impl-checklist.py'",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-context-pressure.py'",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}

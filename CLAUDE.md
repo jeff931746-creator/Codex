@@ -1,75 +1,14 @@
-# Workspace Rules
+# CLAUDE.md - Claude entry pointer
 
-This workspace is for workflow-related assets only.
+This file is a Claude runtime entry pointer. It intentionally does not define project workflow rules.
 
-## Scope
+Claude must first read `.agents/AI-ONBOARDING.md`, then use the agent-neutral project rule sources:
 
-- Keep only files, scripts, notes, research, prompts, and tools that directly support the active workflow.
-- Prefer: `workspace/projects/`, `workspace/playground/`, `workspace/tmp/`. `tmp/` is scratch — remove artifacts after use. Reusable scripts live in `archive/tools/`.
-- `reference/` is the core knowledge base — AI must not modify files here without explicit user permission.
-- `archive/` holds accumulated methods and tools. `reference/` holds stable standards and research.
+1. `.agents/AI-ONBOARDING.md`
+2. `.agents/AI-ENTRYPOINTS.md`
 
-## Skills
+`.agents/AI-ENTRYPOINTS.md` lists the concrete active source files, hook sources, adapters, public state locations, and file safety guard.
 
-以 `archive/skills/skills/` 为准，读对应 `SKILL.md` 并按其工作流执行。
+Runtime-specific hook configuration, if needed, should point to the hook or adapter source listed there. It is not the source of truth for project rules.
 
-### 入口选择
-
-先查这张表再选 Skill。命中第一行即停，不要同时触发多个入口。
-
-| 场景 | 入口 | 不要做什么 |
-|---|---|---|
-| 对一款游戏做分析 / 机制拆解 / 竞品研究，或项目知识库内有游戏拆解需入库 | `游戏机制拆解` | 不要直接写分析绕过 Skill，机制库需要标准化结构 |
-| 跨平台收集竞品 / 产品信息 | `产品收集` | 不要自定义字段后录入，schema 必须先确认 |
-| 下载 Forevernine 指定来源素材 | `forevernine-material-downloader` | 不要手动逐个处理 |
-| 评估买量素材组合 | `买量组合评估` | 不要跳过证据链给主观评分 |
-| 写一份功能需求 GDD | `gdd-write` | 不要直接输出完整文档，应逐步确认每一步 |
-| 审核 / Self-Review 一份 GDD | `gdd-review` | 不要内联审核，设计文档审核必须走 Skill |
-| 判断当前任务流程强度 | `session-router` | 不要直接执行跳过路由判断 |
-| compact 或 clear 前 | `session-compact` | 不要先压缩再补写记忆，顺序不能反 |
-| 新会话续接已有任务 | `session-resume` | 不要从 MEMORY.md 手动推断状态 |
-| 任务交付前收尾检查 | `neat-freak` | 不要只写交付摘要，门禁需要逐项确认 |
-
-## Session Management Protocol
-
-### 会话开始
-
-每次会话开始时，读取 `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md`，加载与当前任务相关的记忆。如果是续接已有任务，读完 MEMORY.md 后立即运行 `session-resume {任务名}`。
-
-### 资料导航
-
-| 需要什么 | 去哪里找 |
-|---|---|
-| 任务当前状态 | `memory/task_{任务名}.md` → 运行 `session-resume` |
-| 活跃任务列表 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/MEMORY.md` |
-| 可用 Skills | `archive/skills/skills/` |
-| 自动 Hooks | `.claude/hooks/` |
-| 任务流程与委派规则 | `.claude/rules/task-flow.md` |
-| 质量门禁 | `.claude/rules/quality-gates.md` |
-| 工作流链路规则 | `.claude/rules/workflow-chain.md` |
-| 记忆文件 | `/Users/mt/.claude/projects/-Users-mt-Documents-Codex/memory/` |
-| 部门标准 | `reference/部门标准/` |
-| API 调用规则（按需） | `.claude/references/api-client-architecture.md` — 写 API 脚本/调用 llm_client 时读取 |
-| 工作流详细参考（按需） | `.claude/references/workflow-chain-reference.md` — 创建新项目/阶段流转时读取 |
-
-### 流程强度分级
-
-| 任务强度 | 适用场景 | 流程要求 |
-|---|---|---|
-| `quick` | 单步问答、查一个事实、无文件改动的小判断 | 直接给结论；必要时用 1 句说明假设 |
-| `standard` | 一般分析、局部文档修改、小范围代码或脚本调整 | 先给极简 `plan`，获批后执行 |
-| `strict` | 新项目、跨文件改动、部署、会影响长期工作流的规则或 Skill | 必须完整 `plan`，说明目标、范围、风险、验证方式，获批后执行 |
-
-硬规则：`strict` 任务不得跳过 `plan`。任务方向明显变化时重新 `plan`。调整规范时先改文档，再按新规范执行。详细阶段门禁、任务类型和委派规则见 `.claude/rules/task-flow.md`。
-
-### 决策路由器
-
-读密集 / 分析 / 验证类 → **subagent**；连续失败 / 方向偏移 → **rewind**；上下文 >60% → **clear**；>30% → **compact**；否则 **continue**。错误分级：逻辑层 → rewind；实现层 → 就地修复；理解层 → compact 后重新澄清。完整触发条件见 `.claude/rules/task-flow.md` Hook 触发表。
-
-### 记忆写入规则
-
-- **强制写入**：重要任务结束时、形成长期约束时、compact / clear 前
-- **即时写入**：发现已确认结论或关键约束时
-- **禁止写入**：调试过程、失败尝试、中间输出、重复解释
-
-
+Claude must not write project memory, rules, task state, checkpoints, or handoff notes to runtime-private state directories. Use the project-visible state locations listed in `.agents/AI-ENTRYPOINTS.md`.
