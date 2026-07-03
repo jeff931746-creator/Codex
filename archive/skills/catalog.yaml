@@ -48,6 +48,13 @@ skills:
     owner: "mt"
     runtime_target: "/Users/mt/.codex/skills/neat-freak"
     notes: "任务结束前的轻量收尾门禁，对齐改动、文档、规则、记忆和交付摘要。"
+  - name: "mmd-to-image"
+    path: "skills/mmd-to-image"
+    status: "active"
+    scope: "global"
+    owner: "mt"
+    runtime_target: "/Users/mt/.codex/skills/mmd-to-image"
+    notes: "将 Mermaid .mmd 或 fenced mermaid 代码块渲染为 PNG/SVG/PDF，封装 mmdc/npx 选择与输出检查。"
 repo:
   source_of_truth: "/Users/mt/Documents/Codex/tools/codex-skills-repo"
   runtime_skills_dir: "/Users/mt/.codex/skills"

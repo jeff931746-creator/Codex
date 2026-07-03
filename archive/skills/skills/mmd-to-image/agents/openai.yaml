@@ -1,0 +1,4 @@
+interface:
+  display_name: "MMD to Image"
+  short_description: "Render Mermaid .mmd diagrams to images"
+  default_prompt: "Use $mmd-to-image to render this Mermaid .mmd file to a PNG image."
