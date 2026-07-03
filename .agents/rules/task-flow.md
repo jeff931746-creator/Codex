@@ -50,6 +50,14 @@ Do not trigger this route for:
 - `标准库`
 - one-off collection where the user explicitly says it does not need long-term maintenance
 
+## GDD Writing Route
+
+When creating a new game design document, feature requirements document, system design, gameplay design, activity/economy/monetization design, or GDD, route through `archive/skills/skills/gdd-write/SKILL.md`.
+
+The GDD writing route must use `reference/部门标准/策划/gdd/多Agent设计文档工作流.md` as the workflow source, use `reference/部门标准/策划/gdd/多Agent设计文档调度规则.md` for state/rollback/checkpoint semantics, and load only the current-stage files under `reference/部门标准/策划/gdd/多Agent设计文档判断原则/`.
+
+Do not copy the workflow or judgment principles into `.agents/`; `.agents` only routes and gates this behavior.
+
 ## Flow Types
 
 ### analysis
@@ -244,3 +252,4 @@ Keep the main thread focused on task type, current/completed/next gates, approve
 | `knowledge-asset` + `strict` changes scoped long-term workflow assets without matching independent-review checkpoint | block delivery |
 | `analysis-scaffold`: deliverable text violates `reference/部门标准/策划/机制拆解/拆解质量标准.md` expression requirements | block delivery; return to the standard and rewrite as natural conclusion + logic paragraphs |
 | Game design document/case review starts without GDD standard in `standard-check` | rewind to `standard-check`; previous output is draft until checked against GDD |
+| New game design document/GDD writing starts without `gdd-write` and the multi-Agent workflow source | rewind to GDD writing route |
