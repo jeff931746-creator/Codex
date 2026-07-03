@@ -56,6 +56,8 @@ When creating a new game design document, feature requirements document, system 
 
 The GDD writing route must use `reference/部门标准/策划/gdd/多Agent设计文档工作流.md` as the workflow source, use `reference/部门标准/策划/gdd/多Agent设计文档调度规则.md` for state/rollback/checkpoint semantics, and load only the current-stage files under `reference/部门标准/策划/gdd/多Agent设计文档判断原则/`.
 
+The GDD writing route requires real sub-agent evidence. Main-thread simulation of G1/G2/G3/G4/G5/G6 is not valid. For any changed Markdown design document under `workspace/projects/`, except `README.md`, record `workspace/tmp/agent-checkpoints/gdd-write/<doc-id>/workflow-state.json` with `.agents/hooks/checkpoint-gdd-workflow.py`. The checkpoint must bind the target document, current document diff hash, main agent id, actual sub-agent ids and per-stage proof tokens for G1/G2/G3/G4/G5/G6, and main-planner pass decisions for M1/M2/M3/M4. The proof token for each stage must appear with that stage's sub-agent id in the current runtime transcript. The Stop hook `check-gdd-workflow.py` blocks delivery when this evidence is missing, incomplete, expired, stale, not observed in the current runtime transcript, or when the G6 evidence no longer matches the current document diff.
+
 Do not copy the workflow or judgment principles into `.agents/`; `.agents` only routes and gates this behavior.
 
 ## Flow Types
@@ -253,3 +255,4 @@ Keep the main thread focused on task type, current/completed/next gates, approve
 | `analysis-scaffold`: deliverable text violates `reference/部门标准/策划/机制拆解/拆解质量标准.md` expression requirements | block delivery; return to the standard and rewrite as natural conclusion + logic paragraphs |
 | Game design document/case review starts without GDD standard in `standard-check` | rewind to `standard-check`; previous output is draft until checked against GDD |
 | New game design document/GDD writing starts without `gdd-write` and the multi-Agent workflow source | rewind to GDD writing route |
+| Changed design document covered by the GDD writing route lacks `gdd-write` workflow evidence with actual sub-agent ids | block delivery; main-thread simulation is invalid |
