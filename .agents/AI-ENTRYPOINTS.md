@@ -42,6 +42,8 @@ Open only linked memory files needed for the current task.
 
 Runtime entry files such as `AGENTS.md`, `CODEX.md`, and `CLAUDE.md` are thin pointers. Do not treat them as rule sources.
 
+Required multi-agent authorization for project workflow gates is defined in `.agents/AI-ONBOARDING.md`.
+
 ## Runtime Entry Files
 
 Use one of these project entries when configuring an AI runtime:

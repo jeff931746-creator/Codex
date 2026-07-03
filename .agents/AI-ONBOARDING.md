@@ -38,6 +38,12 @@ When a runtime supports hooks, guards, policies, or tool interception, configure
 
 When a runtime does not support hooks, this onboarding contract and the active rule sources remain mandatory. In that case the runtime must enforce the same constraints through its prompt, session rules, or manual preflight checks.
 
+## Required Multi-Agent Authorization
+
+When a project workflow or gate requires multi-agent evidence, independent review, delegated stage proof, or other sub-agent participation, this workspace authorizes agents to use available sub-agent or delegation tools as needed to complete that required workflow.
+
+This authorization is limited to project-required workflow evidence and review. It does not authorize unrelated delegation, broad background research, or avoidable parallel work.
+
 ## State Isolation Requirement
 
 Runtime-private directories may contain only runtime internals such as logs, transcripts, caches, or local continuation data.
