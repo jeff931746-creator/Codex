@@ -10,6 +10,9 @@
 
 - `文档/FF-7日强社交功能链路梳理.md`
 - `文档/FF-7日强社交功能链路细化设计稿.md`
+- `文档/FF-首周军团积分排行设计拆解GDD.md`
+- `文档/FF-首周军团积分排行UE设计稿.md`
+- `文档/FF-首周军团积分与后续沙盘威望预留方案.md`
 - `图片/ff-7day-main-chain-original.jpg`
 - `图片/ff-7day-main-chain-original.png`
 - `源文件/ff-7day-main-chain-original.mmd`

@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1800" viewBox="0 0 1600 1800">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .node { fill: #ffffff; stroke: #334155; stroke-width: 2.4; }
+      .stage { fill: #eff6ff; stroke: #2563eb; stroke-width: 2.4; }
+      .decision { fill: #fff7ed; stroke: #b45309; stroke-width: 2.4; }
+      .warn { fill: #fff1f2; stroke: #be123c; stroke-width: 2.4; }
+      .end { fill: #f0fdf4; stroke: #15803d; stroke-width: 2.4; }
+      .title { font: 700 42px Arial, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #111827; }
+      .text { font: 600 27px Arial, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #111827; }
+      .small { font: 500 23px Arial, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #334155; }
+      .edge { stroke: #334155; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .label { font: 600 22px Arial, "PingFang SC", "Microsoft YaHei", sans-serif; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1600" height="1800"/>
+  <text x="800" y="70" text-anchor="middle" class="title">多 Agent GDD 调度简化原图</text>
+
+  <!-- source standards -->
+  <rect class="node" x="470" y="120" width="660" height="70" rx="14"/>
+  <text class="text" x="800" y="164" text-anchor="middle">用户提出设计文档任务</text>
+
+  <rect class="node" x="470" y="235" width="660" height="70" rx="14"/>
+  <text class="text" x="800" y="279" text-anchor="middle">gdd-write Skill 接管</text>
+
+  <rect class="node" x="120" y="360" width="560" height="76" rx="14"/>
+  <text class="text" x="400" y="407" text-anchor="middle">读取 GDD 写作标准</text>
+
+  <rect class="stage" x="900" y="360" width="580" height="76" rx="14"/>
+  <text class="text" x="1190" y="407" text-anchor="middle">读取 多Agent设计文档工作流.md</text>
+
+  <rect class="stage" x="470" y="500" width="660" height="82" rx="14"/>
+  <text class="text" x="800" y="534" text-anchor="middle">工作流判定当前阶段</text>
+  <text class="small" x="800" y="565" text-anchor="middle">阶段 / 权责 / 推进权 / 打回权 / 防死循环</text>
+
+  <rect class="stage" x="470" y="650" width="660" height="82" rx="14"/>
+  <text class="text" x="800" y="684" text-anchor="middle">按阶段读取对应判断原则</text>
+  <text class="small" x="800" y="715" text-anchor="middle">只读取当前阶段原则，不一次性加载全部</text>
+
+  <rect class="node" x="255" y="800" width="1090" height="92" rx="14"/>
+  <text class="small" x="800" y="835" text-anchor="middle">判断原则目录：目标拆解 / 质询 / 循环推演 / 落地细化 / 写作 / 验收</text>
+  <text class="small" x="800" y="867" text-anchor="middle">reference/部门标准/策划/gdd/多Agent设计文档判断原则/</text>
+
+  <rect class="node" x="470" y="960" width="660" height="70" rx="14"/>
+  <text class="text" x="800" y="1004" text-anchor="middle">加载对应 role-card</text>
+
+  <rect class="node" x="470" y="1080" width="660" height="70" rx="14"/>
+  <text class="text" x="800" y="1124" text-anchor="middle">调用对应 agent</text>
+
+  <rect class="node" x="470" y="1200" width="660" height="70" rx="14"/>
+  <text class="text" x="800" y="1244" text-anchor="middle">agent 输出材料</text>
+
+  <rect class="node" x="470" y="1320" width="660" height="70" rx="14"/>
+  <text class="text" x="800" y="1364" text-anchor="middle">主策 agent 决策</text>
+
+  <polygon class="decision" points="800,1435 1080,1505 800,1575 520,1505"/>
+  <text class="text" x="800" y="1500" text-anchor="middle">是否进入下一阶段？</text>
+  <text class="small" x="800" y="1532" text-anchor="middle">子 agent 不推进，主策推进</text>
+
+  <!-- yes loop -->
+  <path class="edge" d="M1080 1505 C1370 1505, 1370 520, 1130 520"/>
+  <text class="label" x="1295" y="1448">是：回到工作流判定下一阶段</text>
+
+  <!-- no branch -->
+  <rect class="warn" x="120" y="1455" width="310" height="100" rx="14"/>
+  <text class="text" x="275" y="1495" text-anchor="middle">防死循环检查</text>
+  <text class="small" x="275" y="1530" text-anchor="middle">补资料 / 打回 / 降级 / 停止</text>
+
+  <polygon class="decision" points="275,1605 500,1665 275,1725 50,1665"/>
+  <text class="small" x="275" y="1658" text-anchor="middle">有新输入且</text>
+  <text class="small" x="275" y="1688" text-anchor="middle">未超打回次数？</text>
+
+  <rect class="warn" x="590" y="1618" width="420" height="94" rx="14"/>
+  <text class="text" x="800" y="1654" text-anchor="middle">主策裁决</text>
+  <text class="small" x="800" y="1687" text-anchor="middle">补资料 / 降级低保真 / 停止方向</text>
+
+  <path class="edge" d="M520 1505 C475 1505, 435 1505, 430 1505"/>
+  <text class="label" x="455" y="1474">否</text>
+  <path class="edge" d="M275 1555 L275 1605"/>
+  <path class="edge" d="M500 1665 L590 1665"/>
+  <text class="label" x="530" y="1640">否</text>
+  <path class="edge" d="M275 1725 C275 1760, 1380 1760, 1380 690 C1380 660, 1170 660, 1130 680"/>
+  <text class="label" x="470" y="1748">是：带新输入重跑对应阶段</text>
+
+  <!-- delivery branch -->
+  <rect class="node" x="1075" y="1220" width="410" height="86" rx="14"/>
+  <text class="text" x="1280" y="1256" text-anchor="middle">写作完成后</text>
+  <text class="small" x="1280" y="1288" text-anchor="middle">进入交付验收 agent</text>
+
+  <polygon class="decision" points="1280,1348 1490,1408 1280,1468 1070,1408"/>
+  <text class="text" x="1280" y="1416" text-anchor="middle">验收结果</text>
+
+  <rect class="end" x="1035" y="1545" width="485" height="70" rx="14"/>
+  <text class="small" x="1278" y="1574" text-anchor="middle">低保真通过：交付草稿 + 正式化阻断项</text>
+  <text class="small" x="1278" y="1603" text-anchor="middle">正式通过：交付正式 GDD</text>
+
+  <path class="edge" d="M1130 1355 C1190 1355, 1220 1308, 1225 1306"/>
+  <text class="label" x="1190" y="1335">写作阶段后</text>
+  <path class="edge" d="M1280 1306 L1280 1348"/>
+  <path class="edge" d="M1280 1468 L1280 1545"/>
+  <path class="edge" d="M1070 1408 C930 1408, 915 1440, 930 1462"/>
+  <text class="label" x="990" y="1382">打回</text>
+
+  <!-- main edges -->
+  <path class="edge" d="M800 190 L800 235"/>
+  <path class="edge" d="M705 305 C600 335, 500 345, 400 360"/>
+  <path class="edge" d="M895 305 C1000 335, 1080 345, 1190 360"/>
+  <path class="edge" d="M1190 436 C1190 475, 1050 500, 800 500"/>
+  <path class="edge" d="M800 582 L800 650"/>
+  <path class="edge" d="M800 732 L800 800"/>
+  <path class="edge" d="M800 892 L800 960"/>
+  <path class="edge" d="M800 1030 L800 1080"/>
+  <path class="edge" d="M800 1150 L800 1200"/>
+  <path class="edge" d="M800 1270 L800 1320"/>
+  <path class="edge" d="M800 1390 L800 1435"/>
+</svg>
