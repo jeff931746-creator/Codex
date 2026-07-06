@@ -41,7 +41,14 @@ def is_allowed_state_update(payload: dict) -> bool:
 
 
 def is_context_checkpoint_command(command: str) -> bool:
-    return 'checkpoint-context-pressure.py' in command
+    return any(
+        marker in command
+        for marker in (
+            'checkpoint-context-pressure.py',
+            'context-pressure-on.py',
+            'context-pressure-off.py',
+        )
+    )
 
 
 def risky_tool(payload: dict) -> bool:

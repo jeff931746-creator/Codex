@@ -230,6 +230,7 @@ Keep the main thread focused on task type, current/completed/next gates, approve
 - If context pressure is noticeable, compact using the current runtime's memory protocol.
 - If context use exceeds roughly 30%, compact before continuing substantial work.
 - If context use exceeds roughly 60% during an already-running task, do not interrupt that task solely because of context usage. Finish the current task at the smallest safe scope, avoid optional exploration, and set `workspace/tmp/agent-checkpoints/<runtime>/context-pressure.json` to `status=pending-next-task`.
+- If the user explicitly reports that context use is at or above roughly 60%, or asks why the 60% context brake did not take effect, immediately record `workspace/tmp/agent-checkpoints/<runtime>/context-pressure.json` with `status=active` before starting any new analysis-heavy work, file edits, rule changes, long script runs, git operations, or non-handoff delivery. For Codex, use `python3 .agents/hooks/context-pressure-on.py --used-percent 60 --reason user-reported-context-pressure`.
 - If a new user task, material scope change, or substantial new execution would start while context use is still above roughly 60%, automatically perform a compact continuation handoff before any analysis-heavy work, file edits, rule changes, long script runs, git operations, or non-handoff delivery. Set the context-pressure checkpoint to `status=active` for that new-task gate until the handoff is complete.
 - The 60% threshold is a workflow handoff brake, not a promise that the desktop app or model runtime can auto-compact. If the runtime has no programmatic context meter, treat user reports, screenshots, or visible context pressure as the signal.
 - A context-pressure handoff must preserve: current user request, active workspace, governing rule sources, completed decisions, changed files or intended edits, unresolved risks, validation status, and exact next action.
@@ -251,6 +252,7 @@ Keep the main thread focused on task type, current/completed/next gates, approve
 | Current gate incomplete | stay at current gate |
 | Context exceeds roughly 30% | compact through current runtime protocol |
 | Context exceeds roughly 60% during current task | finish current task narrowly; set context-pressure checkpoint to pending-next-task |
+| User explicitly reports context is at/above roughly 60% | record context-pressure checkpoint as active before new risky work |
 | New task starts while context remains above roughly 60% | auto-create handoff first; set context-pressure checkpoint active until complete |
 | Same issue fails three times | rewind |
 | Repeated failure or direction drift | rewind |
