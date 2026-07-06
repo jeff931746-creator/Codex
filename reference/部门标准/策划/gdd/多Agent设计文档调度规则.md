@@ -2,7 +2,7 @@
 
 ## 定位
 
-本文件定义多 Agent GDD 写作的底层调度语义：上下文如何装配、阶段状态如何保存、打回如何回滚、循环如何熔断、checkpoint 如何恢复。
+本文件定义多 Agent GDD 写作的底层调度语义：上下文如何装配、阶段状态如何保存、打回如何回滚、打回循环如何熔断、checkpoint 如何恢复。
 
 本文件不定义阶段顺序。阶段顺序见 `多Agent设计文档工作流.md`。
 
@@ -22,13 +22,14 @@
 
 主 Agent 在 G1 之前不得：
 
+- 提炼玩法目的、交付对象或正文结构
 - 提炼设计目标、意图或边界
-- 判断核心循环或功能定位
+- 判断结构依据、交付结构或功能定位
 - 从历史记忆合成方案方向
 - 把参考资料中的机制关系改写成候选方案
 - 输出“我会把 X 设计成 Y”这类设计结论
 
-如果主 Agent 已经越界读取并解释了业务证据，该解释只能作为污染风险记录，不得作为 G1/M1 证据；必须重新启动 G1，让子 Agent 在不继承该业务结论的任务包中完成资料与目标拆解。
+如果主 Agent 已经越界读取并解释了业务证据，该解释只能作为污染风险记录，不得作为 G1/M1 证据；必须重新启动 G1，让子 Agent 在不继承该业务结论的任务包中完成资料与层级拆解。
 
 ## 状态字典
 
@@ -39,10 +40,13 @@
 - candidate_design_problems
 - candidate_design_goals
 - candidate_design_intents
+- confirmed_play_purpose
 - confirmed_goal
 - confirmed_intent
+- confirmed_design_object
+- confirmed_delivery_objects
 - confirmed_boundary
-- confirmed_loop
+- confirmed_structure_basis
 - confirmed_features
 - confirmed_ue
 - direction_validation_pending_items
@@ -123,8 +127,8 @@
 
 每个主策确认点都必须形成可恢复 checkpoint：
 
-- M1 通过后，落盘 G1/G2 产物、已确认目标、设计意图和边界。
-- M2 通过后，落盘已确认循环。
+- M1 通过后，落盘 G1/G2 产物、已确认玩法目的、设计对象、交付对象边界、设计意图和边界。
+- M2 通过后，落盘已确认结构依据。
 - M3 通过后，落盘已确认功能点、规则、状态和 UE 要求。
 - M4 通过后，落盘待验收文档草稿。
 - G6 通过后，落盘最终交付版本。
