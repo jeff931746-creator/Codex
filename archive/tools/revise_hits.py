@@ -12,7 +12,6 @@
     - 条目准确性：删除错误年份的游戏，保持 50-100 行
 """
 import argparse
-import os
 import re
 import sys
 import time
@@ -24,43 +23,33 @@ for _parent in _THIS_FILE.parents:
         sys.path.insert(0, str(_parent))
         break
 
-from archive.tools.lib.siliconflow_client import SiliconFlowError, chat_text
+from archive.tools.lib.llm_client import chat_text
 
 # ---------- 路径配置 ----------
 
-ENV_PATH      = Path(__file__).resolve().parent / "breakdown-worker" / ".env"
 OUTPUT_DIR    = Path(__file__).resolve().parent.parent / "research" / "资料" / "竞品库" / "爆款年度榜"
 FRAMEWORK_PATH = Path(__file__).resolve().parent / "repos" / "codex-skills-repo" / "references" / "game-analysis-framework.md"
 
 YEARS = list(range(2015, 2027))
 TIMEOUT = 300  # 秒
 
-# ---------- 环境变量 ----------
-
-def load_env():
-    if not ENV_PATH.exists():
-        return
-    for line in ENV_PATH.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        k, v = line.split("=", 1)
-        os.environ.setdefault(k.strip(), v.strip())
-
 # ---------- API 调用（流式）----------
 
-def call_glm(prompt: str, model: str) -> str:
+LLM_ROUTE = "glm.siliconflow.5.1"
+
+
+def call_glm(prompt: str) -> str:
     """流式调用 SiliconFlow Pro 模型，返回完整响应文本。"""
     try:
         return chat_text(
             prompt,
-            model=model,
+            route=LLM_ROUTE,
             max_tokens=8192,
             temperature=0.2,
             timeout=TIMEOUT,
             stream=True,
         )
-    except SiliconFlowError as e:
+    except Exception as e:
         print(f"    [错] {type(e).__name__}: {e}", flush=True)
         return ""
 
@@ -149,9 +138,6 @@ def clean_output(raw: str) -> str:
 # ---------- main ----------
 
 def main():
-    load_env()
-
-    model = os.environ.get("SILICONFLOW_MODEL", "Pro/zai-org/GLM-5.1")
     if not FRAMEWORK_PATH.exists():
         sys.exit(f"[错] 框架文件不存在: {FRAMEWORK_PATH}")
 
@@ -164,7 +150,7 @@ def main():
     args = ap.parse_args()
 
     years = [args.year] if args.year else YEARS
-    print(f"[i] 模型：{model}  待处理：{years}", flush=True)
+    print(f"[i] route：{LLM_ROUTE}  待处理：{years}", flush=True)
 
     for year in years:
         out_file = OUTPUT_DIR / f"{year}.md"
@@ -177,11 +163,11 @@ def main():
             print(f"[跳过] {year}.md 含占位符，先用 collect_hits.py 补数据", flush=True)
             continue
 
-        print(f"\n[{year}] 开始修正（{model}）…", flush=True)
+        print(f"\n[{year}] 开始修正（{LLM_ROUTE}）…", flush=True)
         prompt = make_prompt(framework_core, content, year)
         print(f"  [prompt] {len(prompt):,} chars", flush=True)
 
-        revised = call_glm(prompt, model)
+        revised = call_glm(prompt)
         if not revised:
             print(f"  [失败] 跳过 {year}", flush=True)
             time.sleep(2)

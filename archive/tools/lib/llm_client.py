@@ -3,13 +3,19 @@
 
 from __future__ import annotations
 
-import os
 from typing import Any, Callable, Iterable  # noqa: F401 – Callable used in type comments
 
 from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.model_registry import (
+    MODEL_ROUTE_ALIASES,
+    MODEL_ROUTES,
+    env_route,
+    get_model_route,
+)
 
 
-SUPPORTED_PROVIDERS = {"siliconflow", "deepseek"}
+SUPPORTED_PROVIDERS = {"anthropic", "deepseek", "gemini", "openai", "siliconflow"}
+SUPPORTED_ROUTES = set(MODEL_ROUTES) | set(MODEL_ROUTE_ALIASES)
 
 # ---------------------------------------------------------------------------
 # 先搜后整：搜索增强分析入口
@@ -31,6 +37,8 @@ def search_and_analyze(
     analysis_prompt: str,
     *,
     system: str | None = None,
+    route: str | None = None,
+    model_route: str | None = None,
     provider: str | None = None,
     model: str | None = None,
     max_tokens: int | None = None,
@@ -75,6 +83,8 @@ def search_and_analyze(
     return chat_text(
         combined_prompt,
         system=system or _SEARCH_ANALYSIS_SYSTEM,
+        route=route,
+        model_route=model_route,
         provider=provider,
         model=model,
         max_tokens=max_tokens,
@@ -88,11 +98,38 @@ def search_and_analyze(
 
 
 def get_provider() -> str:
-    return os.environ.get("LLM_PROVIDER", "siliconflow").strip().lower() or "siliconflow"
+    raise RuntimeError("LLM_PROVIDER 旧入口已移除，请改用 LLM_ROUTE 或 route=")
+
+
+def get_route() -> str:
+    return env_route()
+
+
+def _resolve_route(
+    *,
+    route: str | None = None,
+    model_route: str | None = None,
+    provider: str | None = None,
+    model: str | None = None,
+) -> tuple[str | None, str | None]:
+    """Resolve route-first config."""
+    if provider is not None:
+        raise ValueError("provider= 旧入口已移除，请改用 route=")
+    requested_route = route or model_route
+    if requested_route is None:
+        requested_route = get_route() or None
+
+    if requested_route is None:
+        raise ValueError("LLM_ROUTE 未设置，请在调用处传 route= 或设置 LLM_ROUTE")
+
+    resolved = get_model_route(requested_route)
+    return resolved.provider, model or resolved.model
 
 
 def _implementation(provider: str | None = None):
-    resolved = (provider or get_provider()).strip().lower()
+    if provider is None:
+        raise ValueError("provider 只能由 route/model_registry 解析得到")
+    resolved = provider.strip().lower()
     if resolved == "siliconflow":
         from archive.tools.lib import siliconflow_client as impl
 
@@ -101,8 +138,20 @@ def _implementation(provider: str | None = None):
         from archive.tools.lib import deepseek_client as impl
 
         return impl
+    if resolved == "openai":
+        from archive.tools.lib import openai_client as impl
+
+        return impl
+    if resolved == "anthropic":
+        from archive.tools.lib import anthropic_client as impl
+
+        return impl
+    if resolved == "gemini":
+        from archive.tools.lib import gemini_client as impl
+
+        return impl
     raise ValueError(
-        f"Unsupported LLM_PROVIDER={resolved!r}. "
+        f"Unsupported LLM provider={resolved!r}. "
         f"Supported providers: {', '.join(sorted(SUPPORTED_PROVIDERS))}"
     )
 
@@ -110,6 +159,8 @@ def _implementation(provider: str | None = None):
 def chat(
     messages: Iterable[dict[str, Any]],
     *,
+    route: str | None = None,
+    model_route: str | None = None,
     provider: str | None = None,
     model: str | None = None,
     max_tokens: int | None = None,
@@ -121,10 +172,16 @@ def chat(
     return_empty_on_error: bool = False,
     extra: dict[str, Any] | None = None,
 ) -> str:
-    impl = _implementation(provider)
+    resolved_provider, resolved_model = _resolve_route(
+        route=route,
+        model_route=model_route,
+        provider=provider,
+        model=model,
+    )
+    impl = _implementation(resolved_provider)
     return impl.chat(
         messages,
-        model=model,
+        model=resolved_model,
         max_tokens=max_tokens,
         temperature=temperature,
         stream=stream,
@@ -140,6 +197,8 @@ def chat_with_images(
     prompt: str,
     image_data: list[tuple[str, str]],
     *,
+    route: str | None = None,
+    model_route: str | None = None,
     provider: str | None = None,
     system: str | None = None,
     model: str | None = None,
@@ -152,12 +211,18 @@ def chat_with_images(
     extra: dict[str, Any] | None = None,
 ) -> str:
     """带图片的 LLM 调用。image_data: [(base64_str, media_type), ...]。"""
-    impl = _implementation(provider)
+    resolved_provider, resolved_model = _resolve_route(
+        route=route,
+        model_route=model_route,
+        provider=provider,
+        model=model,
+    )
+    impl = _implementation(resolved_provider)
     return impl.chat_with_images(
         prompt,
         image_data,
         system=system,
-        model=model,
+        model=resolved_model,
         max_tokens=max_tokens,
         temperature=temperature,
         timeout=timeout,
@@ -171,6 +236,8 @@ def chat_with_images(
 def chat_text(
     prompt: str,
     *,
+    route: str | None = None,
+    model_route: str | None = None,
     provider: str | None = None,
     system: str | None = None,
     model: str | None = None,
@@ -183,11 +250,17 @@ def chat_text(
     return_empty_on_error: bool = False,
     extra: dict[str, Any] | None = None,
 ) -> str:
-    impl = _implementation(provider)
+    resolved_provider, resolved_model = _resolve_route(
+        route=route,
+        model_route=model_route,
+        provider=provider,
+        model=model,
+    )
+    impl = _implementation(resolved_provider)
     return impl.chat_text(
         prompt,
         system=system,
-        model=model,
+        model=resolved_model,
         max_tokens=max_tokens,
         temperature=temperature,
         stream=stream,

@@ -21,13 +21,14 @@ for _parent in _THIS_FILE.parents:
         sys.path.insert(0, str(_parent))
         break
 
-from archive.tools.lib.siliconflow_client import RetryPolicy, chat_text
+from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.llm_client import chat_text
 
 OUTPUT_DIR = Path("/Users/mt/Documents/Codex/archive/资料/人群簇库/_draft")
 RAW_DIR = OUTPUT_DIR / "_raw"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
-MODEL = os.environ.get("SILICONFLOW_MODEL", "Pro/zai-org/GLM-5.1")
+LLM_ROUTE = "SiliconFlow_GLM"
 
 def log(msg: str):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
@@ -35,7 +36,7 @@ def log(msg: str):
 def call_llm(prompt: str, max_tokens: int = 12000, retries: int = 3) -> str:
     return chat_text(
         prompt,
-        model=MODEL,
+        route=LLM_ROUTE,
         max_tokens=max_tokens,
         temperature=0.2,
         timeout=300,
@@ -259,7 +260,7 @@ def write_report(results: list):
         f"",
         f"**验证日期**：{TODAY}",
         f"**样本数**：{total}",
-        f"**模型**：{MODEL}",
+        f"**模型**：{LLM_ROUTE}",
         f"",
         f"## 一、关键指标",
         f"",
@@ -382,7 +383,7 @@ def main():
     log("=" * 60)
     log("人群簇 v0.2 矩阵反向验证")
     log("=" * 60)
-    log(f"模型：{MODEL}")
+    log(f"模型：{LLM_ROUTE}")
     log(f"样本数：{len(SAMPLES)}")
     log(f"输出：{OUTPUT_DIR}")
 

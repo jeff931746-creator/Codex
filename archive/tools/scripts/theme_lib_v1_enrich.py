@@ -16,7 +16,7 @@
 
 用法:
     cd /Users/mt/Documents/Codex
-    source "$HOME/Library/Application Support/FeishuCodexBridge/bridge/.env" && export LLM_PROVIDER=siliconflow
+    source "$HOME/Library/Application Support/FeishuCodexBridge/bridge/.env" && export LLM_ROUTE=SiliconFlow_DeepSeek_Flash
 
     # 试跑 5 部
     python3 archive/tools/scripts/theme_lib_v1_enrich.py --limit 5
@@ -318,6 +318,7 @@ material_hooks_v0_seed: {hooks}  (情绪形容词种子,请重判为视觉钩子
         raw = chat_text(
             user_prompt,
             system=SYSTEM_PROMPT,
+            route="SiliconFlow_DeepSeek_Flash",
             max_tokens=600,
             temperature=0.2,
             timeout=60,
@@ -377,7 +378,7 @@ material_hooks_v0_seed: {hooks}  (情绪形容词种子,请重判为视觉钩子
     new_fm = update_field(new_fm, "roi_score", str(new_roi))
     new_fm = update_field(new_fm, "quadrant", quadrant)
     new_fm = update_field(new_fm, "evidence_level", "B")
-    new_fm = update_field(new_fm, "source", "deepseek-v4-flash + v0-migrate")
+    new_fm = update_field(new_fm, "source", "SiliconFlow_DeepSeek_Flash + v0-migrate")
     new_fm = update_field(new_fm, "source_run_id", f"{TODAY}-llm-enrich")
     new_fm = update_field(new_fm, "last_updated", TODAY)
 

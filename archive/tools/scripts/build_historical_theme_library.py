@@ -3,7 +3,7 @@
 近25年题材库构建脚本（2000-2026）
 逐年收集日本动漫、欧美影视、韩国电影、海外文学，提取题材三要素+四象限评分。
 用途：游戏立项题材参考库。
-运行：SILICONFLOW_API_KEY=xxx python3 build_historical_theme_library.py
+运行：设置 `LLM_ROUTE=SiliconFlow_DeepSeek_Flash` 后执行本脚本
 """
 import concurrent.futures
 import json
@@ -19,7 +19,8 @@ for _parent in _THIS_FILE.parents:
         sys.path.insert(0, str(_parent))
         break
 
-from archive.tools.lib.llm_client import RetryPolicy, chat_text
+from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.llm_client import chat_text
 
 # ========== 配置 ==========
 OUTPUT_ROOT = Path(os.environ.get(
@@ -30,7 +31,7 @@ RAW_DIR = OUTPUT_ROOT / "_raw"
 CLUSTER_DIR = OUTPUT_ROOT / "题材聚类"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
-MODEL = os.environ.get("DEEPSEEK_FLASH_MODEL", "deepseek-ai/DeepSeek-V4-Flash")
+LLM_ROUTE = "SiliconFlow_DeepSeek_Flash"
 
 # ========== 日志 ==========
 def log(msg: str):
@@ -41,7 +42,7 @@ def log(msg: str):
 def call_llm(prompt: str, max_tokens: int = 8000, retries: int = 3) -> str:
     return chat_text(
         prompt,
-        model=MODEL,
+        route=LLM_ROUTE,
         max_tokens=max_tokens,
         temperature=0.3,
         timeout=180,
@@ -448,7 +449,7 @@ def write_overview(categorized: dict, clusters: list) -> str:
         "# 近25年题材库 总览",
         "",
         f"构建时间：{TODAY}  ",
-        f"数据来源：DeepSeek-V4-Flash（SiliconFlow）  ",
+        f"数据来源：SiliconFlow_DeepSeek_Flash route  ",
         f"覆盖范围：2000-2026年，2024年后作品覆盖可能不完整",
         "",
         "## 收录统计",
@@ -537,7 +538,7 @@ def write_readme() -> str:
 
 ## 数据说明
 
-- 数据来源：DeepSeek-V4-Flash（SiliconFlow），基于训练知识综合判断
+- 数据来源：SiliconFlow_DeepSeek_Flash route，基于训练知识综合判断
 - 知识截止约2024年，2024-2026年新作覆盖可能不完整
 - 排名为影响力综合判断，非严格官方榜单
 """

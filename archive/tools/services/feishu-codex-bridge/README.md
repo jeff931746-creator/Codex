@@ -91,11 +91,9 @@ cp .env.example .env
 - `CODEX_DESKTOP_BRIDGE_SCRIPT`
 - `CODEX_BRIDGE_WORKDIR`
 - `FEISHU_STATE_FILE`
-- `OPENAI_MODEL`
 - `SILICONFLOW_API_KEY`
-- `SILICONFLOW_MODEL`
+- `LLM_ROUTE`
 - `SILICONFLOW_BASE_URL`
-- `ANTHROPIC_MODEL`
 - `SYSTEM_PROMPT`
 
 后端说明：
@@ -555,14 +553,14 @@ curl http://127.0.0.1:3000/health
 ```bash
 FEISHU_BACKEND=siliconflow
 SILICONFLOW_API_KEY=sk-...
-SILICONFLOW_MODEL=deepseek-ai/DeepSeek-V3
+LLM_ROUTE=SiliconFlow_GLM
 SILICONFLOW_BASE_URL=https://api.siliconflow.cn/v1
 ```
 
 注意：
 
 - `SILICONFLOW_BASE_URL` 要保留末尾的 `/v1`
-- `SILICONFLOW_MODEL` 需要填硅基流动模型广场里的完整模型名
+- `LLM_ROUTE` 必须是 `model_registry` 中登记的 SiliconFlow route
 - 这条路径会走 OpenAI 兼容的 `chat/completions`
 
 ## 10. 重要说明

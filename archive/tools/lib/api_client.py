@@ -23,6 +23,8 @@ except ImportError:  # pragma: no cover - system Python fallback
 API_BASE_URLS = {
     "siliconflow": "https://api.siliconflow.cn/v1",
     "deepseek": "https://api.deepseek.com",
+    "openai": "https://api.openai.com/v1",
+    "anthropic": "https://api.anthropic.com/v1",
     "gemini": "https://generativelanguage.googleapis.com/v1beta/models",
     "tavily": "https://api.tavily.com",
     "itunes": "https://itunes.apple.com",

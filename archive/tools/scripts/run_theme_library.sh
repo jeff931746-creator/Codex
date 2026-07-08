@@ -12,13 +12,12 @@ if [ -z "$SILICONFLOW_API_KEY" ]; then
     exit 1
 fi
 
-# 设置默认模型
-export DEEPSEEK_FLASH_MODEL="${DEEPSEEK_FLASH_MODEL:-deepseek-ai/DeepSeek-V4-Flash}"
+export LLM_ROUTE="SiliconFlow_DeepSeek_Flash"
 
 echo "=========================================="
 echo "题材库构建工具"
 echo "=========================================="
-echo "模型：$DEEPSEEK_FLASH_MODEL"
+echo "route：$LLM_ROUTE"
 echo "输出：/Users/mt/Documents/Codex/archive/资料/历史题材库"
 echo "预计时间：13-15小时"
 echo "预计成本：¥1.0"

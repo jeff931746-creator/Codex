@@ -3,15 +3,14 @@
 为 10 个种子题材族生成总档。
 
 调用约定:
-  - 通过 archive.tools.lib.llm_client 调用 deepseek-v4-pro
+  - 通过 archive.tools.lib.llm_client 调用 DeepSeek_Official_Pro route
   - 严格 zero-shot,只给方法论标准和模板
 
 启动:
   set -a
   source "$HOME/Library/Application Support/FeishuCodexBridge/bridge/.env"
   set +a
-  export LLM_PROVIDER=deepseek
-  export DEEPSEEK_MODEL=deepseek-v4-pro
+  export LLM_ROUTE=DeepSeek_Official_Pro
   python3 archive/tools/scripts/run_theme_family_seeds.py
 
 产物:
@@ -68,11 +67,8 @@ def safe_name(name: str) -> str:
 
 
 def main():
-    provider = os.environ.get("LLM_PROVIDER", "").strip().lower()
-    if provider != "deepseek":
-        print(f"[FATAL] LLM_PROVIDER 必须为 deepseek,当前 {provider!r}")
-        sys.exit(2)
-    print(f"[info] LLM_PROVIDER={provider}, MODEL={os.environ.get('DEEPSEEK_MODEL', '(default)')}")
+    llm_route = "DeepSeek_Official_Pro"
+    print(f"[info] LLM_ROUTE={llm_route}")
 
     seeds = json.loads(SEEDS_PATH.read_text(encoding="utf-8"))
     print(f"[info] 加载 {len(seeds)} 个种子题材族")
@@ -96,6 +92,7 @@ def main():
             text = chat_text(
                 user,
                 system=system,
+                route=llm_route,
                 max_tokens=6000,
                 temperature=0.2,
                 timeout=300,

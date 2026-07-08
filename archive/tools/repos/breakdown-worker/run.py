@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
 """
-批量拆解 worker（支持统一 LLM provider 和 Gemini）
+批量拆解 worker（统一使用 LLM route）
 
 用法:
     python3 run.py --game "游戏名"
-    python3 run.py --game "游戏名" --provider deepseek
-    python3 run.py --game "游戏名" --provider gemini
-    python3 run.py --game "游戏名" --model Pro/zai-org/GLM-5.1
+    python3 run.py --game "游戏名" --route DeepSeek_Official_Pro
+    python3 run.py --game "游戏名" --route Google_Gemini_Pro
     python3 run.py --game "游戏名" --dry-run   # 只导出 prompt 不调 API
 
 流程:
     1. 读 inputs/<游戏名>/ 下所有 .md/.txt 作为资料
     2. 读机制库《拆解质量标准》+ 一份参考拆解（保卫向日葵）
-    3. 按 provider 调对应 API
+    3. 按 route 调对应 API
     4. 按 ===FILE: xxx=== 分隔符拆分响应
     5. 写到 outputs/<游戏名>/
 """
@@ -30,8 +29,8 @@ for _parent in _THIS_FILE.parents:
         break
 
 from archive.tools.lib.gemini_client import GeminiError, generate_content
-from archive.tools.lib.llm_client import SUPPORTED_PROVIDERS as LLM_PROVIDERS
 from archive.tools.lib.llm_client import chat as llm_chat
+from archive.tools.lib.model_registry import get_model_route
 
 ROOT = Path(__file__).resolve().parent
 REPO_ROOT = ROOT.parent.parent.parent.parent  # /Users/mt/Documents/Codex
@@ -86,7 +85,7 @@ def estimate_tokens(text: str) -> int:
 TOKEN_WARN = 40_000   # 超过此值打警告
 TOKEN_ABORT = 80_000  # 超过此值直接退出，防止意外巨额消耗
 
-def call_llm(provider: str, model: str | None, system_prompt: str, user_prompt: str) -> str:
+def call_llm(route: str, system_prompt: str, user_prompt: str) -> str:
     input_tokens = estimate_tokens(system_prompt + user_prompt)
     print(f"[tokens] 预估输入 ~{input_tokens:,} tokens（system {len(system_prompt):,} + user {len(user_prompt):,} chars）")
     if input_tokens > TOKEN_ABORT:
@@ -100,8 +99,7 @@ def call_llm(provider: str, model: str | None, system_prompt: str, user_prompt: 
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt},
             ],
-            provider=provider,
-            model=model,
+            route=route,
             temperature=0.7,
             max_tokens=16384,
             timeout=1200,
@@ -128,23 +126,13 @@ def call_gemini(model: str, system_prompt: str, user_prompt: str) -> str:
     except (KeyError, IndexError):
         sys.exit(f"[错] Gemini 响应结构异常: {json.dumps(body, ensure_ascii=False)[:500]}")
 
-PROVIDERS = {
-    "siliconflow": {
-        "call": call_llm,
-        "default_model_env": "SILICONFLOW_MODEL",
-        "default_model": None,
-    },
-    "deepseek": {
-        "call": call_llm,
-        "default_model_env": "DEEPSEEK_MODEL",
-        "default_model": None,
-    },
-    "gemini": {
-        "call": call_gemini,
-        "default_model_env": "GEMINI_MODEL",
-        "default_model": "gemini-2.5-pro",
-    },
-}
+def call_route(route_name: str, system_prompt: str, user_prompt: str) -> str:
+    route = get_model_route(route_name)
+    if route.provider == "gemini":
+        return call_gemini(route.model, system_prompt, user_prompt)
+    if route.provider in {"siliconflow", "deepseek"}:
+        return call_llm(route.route, system_prompt, user_prompt)
+    sys.exit(f"[错] breakdown-worker 不支持 route provider: {route.provider}")
 
 # ---------- parse & write ----------
 
@@ -177,18 +165,15 @@ def write_outputs(game: str, files: list[tuple[str, str]]) -> Path:
 
 def main():
     load_env()
-    default_provider = os.environ.get("LLM_PROVIDER") or os.environ.get("PROVIDER", "siliconflow")
-    default_provider = default_provider.lower()
+    default_route = os.environ.get("LLM_ROUTE", "SiliconFlow_GLM")
     ap = argparse.ArgumentParser()
     ap.add_argument("--game", required=True, help="游戏名（对应 inputs/<game>/ 目录）")
-    ap.add_argument("--provider", default=default_provider, choices=list(PROVIDERS.keys()))
-    ap.add_argument("--model", default=None, help="覆盖默认模型")
+    ap.add_argument("--route", default=default_route, help="LLM route,如 DeepSeek_Official_Pro")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--no-critique", action="store_true", help="跳过第二轮自审（默认会跑）")
     args = ap.parse_args()
 
-    prov = PROVIDERS[args.provider]
-    model = args.model or os.environ.get(prov["default_model_env"]) or prov["default_model"]
+    route = get_model_route(args.route)
 
     game_inputs = ROOT / "inputs" / args.game
     system_prompt = read_text(ROOT / "prompts" / "system.md")
@@ -212,7 +197,7 @@ def main():
 按 system prompt 指定的 ===FILE: xxx=== 分隔符，输出 00_总档.md 和所有模块拆解文件。现在开始。
 """
 
-    print(f"[i] provider={args.provider} model={model} game={args.game}")
+    print(f"[i] route={route.route} provider={route.provider} model={route.model} game={args.game}")
     print(f"[i] system prompt: {len(system_prompt)} chars")
     print(f"[i] user prompt: {len(user_prompt)} chars (standards {len(standards)} + ref {len(reference)} + materials {len(materials)})")
 
@@ -223,7 +208,7 @@ def main():
         return
 
     print(f"[i] 第 1 轮：出初稿…")
-    draft = prov["call"](args.provider, model, system_prompt, user_prompt) if args.provider in LLM_PROVIDERS else prov["call"](model, system_prompt, user_prompt)
+    draft = call_route(route.route, system_prompt, user_prompt)
     raw_dir = ROOT / "outputs" / args.game
     raw_dir.mkdir(parents=True, exist_ok=True)
     (raw_dir / "_draft_raw.md").write_text(draft, encoding="utf-8")
@@ -242,7 +227,7 @@ def main():
 # 产出
 按 system prompt 要求，输出重写后的完整拆解（用 ===FILE: xxx=== 分隔）。不要评论、不要 diff，直接给最终成品。"""
         print(f"[i] 第 2 轮：自审 + 重写…")
-        final = prov["call"](args.provider, model, critique_prompt, critique_user) if args.provider in LLM_PROVIDERS else prov["call"](model, critique_prompt, critique_user)
+        final = call_route(route.route, critique_prompt, critique_user)
         (raw_dir / "_final_raw.md").write_text(final, encoding="utf-8")
         print(f"[i] 终稿长度: {len(final)} chars，存到 _final_raw.md")
 

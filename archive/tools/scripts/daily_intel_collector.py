@@ -6,7 +6,7 @@
 用法：
     # 加载 API keys
     set -a && source "$HOME/Library/Application Support/FeishuCodexBridge/bridge/.env" && set +a
-    export LLM_PROVIDER=deepseek
+    export LLM_ROUTE=DeepSeek_Official_Pro
     export WX_API_KEY="你的 wechat-article-exporter API key"
 
     # 测试：只跑 GameLook 一个来源，最多 3 篇
@@ -199,8 +199,7 @@ def assign_images_to_products(
         result = chat_with_images(
             prompt,
             image_data,
-            provider="deepseek",
-            model="deepseek-v4-pro",
+            route="DeepSeek_Official_Pro",
             max_tokens=200,
             temperature=0.1,
             timeout=60,
@@ -584,7 +583,7 @@ def analyze_article(title: str, content: str, source_name: str,
             result = chat_text(
                 prompt,
                 system=ANALYSIS_SYSTEM,
-                provider="deepseek",
+                route="DeepSeek_Official_Pro",
                 max_tokens=2000,
                 temperature=0.1,
             )

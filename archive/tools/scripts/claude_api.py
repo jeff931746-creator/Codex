@@ -9,7 +9,9 @@ import os
 import sys
 import anthropic
 
-MODEL = "claude-opus-4-7"
+from archive.tools.lib.model_registry import get_model_route
+
+MODEL_ROUTE = get_model_route("Anthropic_Claude_Opus")
 client = anthropic.Anthropic(
     api_key=os.getenv("ANTHROPIC_AUTH_TOKEN") or os.getenv("ANTHROPIC_API_KEY"),
     base_url=os.getenv("ANTHROPIC_BASE_URL") or None,
@@ -42,7 +44,8 @@ def log_usage(usage, label: str) -> None:
     print(
         "[usage] anthropic "
         f"label={label} "
-        f"model={MODEL} "
+        f"route={MODEL_ROUTE.route} "
+        f"model={MODEL_ROUTE.model} "
         f"input_tokens={input_tokens} "
         f"output_tokens={output_tokens} "
         f"total_tokens={input_tokens + output_tokens} "
@@ -56,7 +59,7 @@ def ask(prompt: str, system: str = "", max_tokens: int = 4096) -> str:
     """单次调用，返回完整文本。"""
     messages = [{"role": "user", "content": prompt}]
     params = {
-        "model": MODEL,
+        "model": MODEL_ROUTE.model,
         "max_tokens": max_tokens,
         "messages": messages,
     }
@@ -81,7 +84,7 @@ def stream(prompt: str, system: str = "", max_tokens: int = 16000) -> str:
     """流式调用，实时打印输出，返回完整文本。"""
     messages = [{"role": "user", "content": prompt}]
     params = {
-        "model": MODEL,
+        "model": MODEL_ROUTE.model,
         "max_tokens": max_tokens,
         "messages": messages,
     }

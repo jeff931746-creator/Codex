@@ -8,7 +8,7 @@
   F (Feedback):  成功反馈
   N (Need):      基本心理需求(Self-Determination Theory,3 个)
 
-模型:DeepSeek V4 Pro(LLM_PROVIDER=deepseek)
+模型 route: DeepSeek_Official_Pro
 输出:archive/资料/玩法承接库/_draft/validation_report_v1.1_sdt_{date}.md
 """
 
@@ -33,6 +33,7 @@ OUTPUT_DIR = Path("/Users/mt/Documents/Codex/archive/资料/玩法承接库/_dra
 RAW_DIR = OUTPUT_DIR / "_raw" / "v1.1_sdt"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 RANKING_DIR = Path("/Users/mt/Documents/Codex/archive/资料/竞品库/爆款年度榜")
+LLM_ROUTE = "DeepSeek_Official_Pro"
 
 
 def log(msg):
@@ -42,6 +43,7 @@ def log(msg):
 def call_llm(prompt, max_tokens=18000, retries=4):
     return chat_text(
         prompt,
+        route=LLM_ROUTE,
         max_tokens=max_tokens,
         temperature=0.2,
         timeout=360,
@@ -716,9 +718,7 @@ def main():
     log("=" * 60)
     log("玩法承接 v1.1 行为契约验证(SDT 三需求版 A/P/F/N)")
     log("=" * 60)
-    provider = os.environ.get("LLM_PROVIDER", "未设置")
-    log(f"LLM_PROVIDER:{provider}")
-    log(f"DEEPSEEK_MODEL:{os.environ.get('DEEPSEEK_MODEL', '默认')}")
+    log(f"LLM_ROUTE:{LLM_ROUTE}")
 
     log("\n[1/3] 加载样本...")
     samples = load_all_samples()

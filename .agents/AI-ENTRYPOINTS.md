@@ -38,6 +38,7 @@ Open only linked memory files needed for the current task.
 | Factuality, review discipline, Git hygiene | `.agents/rules/quality-gates.md` |
 | Workflow layers and capability lookup | `.agents/rules/workflow-chain.md` |
 | Department standards | `reference/部门标准/` |
+| Delivery writing standard | `reference/部门标准/通用/交付型文档写作标准.md` |
 | Runtime hook logic and adapter examples | `.agents/hooks/`, `.agents/adapters/` |
 
 Runtime entry files such as `AGENTS.md`, `CODEX.md`, and `CLAUDE.md` are thin pointers. Do not treat them as rule sources.

@@ -1,12 +1,16 @@
 import { API_BASE_URLS, apiJson, envValue, jsonHeaders } from "./api-client.mjs";
+import { envRoute, getModelRoute } from "./model-registry.mjs";
 
 export const DEFAULT_SILICONFLOW_BASE_URL = API_BASE_URLS.siliconflow;
-export const DEFAULT_SILICONFLOW_MODEL = "deepseek-ai/DeepSeek-V3";
 
 export function resolveSiliconFlowConfig(env = process.env) {
+  const routeName = envRoute(env);
+  const route = routeName ? getModelRoute(routeName) : null;
+  const siliconflowRoute = route?.provider === "siliconflow" ? route : null;
   return {
     apiKey: envValue("SILICONFLOW_API_KEY", "", env),
-    model: envValue("SILICONFLOW_MODEL", DEFAULT_SILICONFLOW_MODEL, env),
+    route: siliconflowRoute?.route || "",
+    model: siliconflowRoute?.model || "",
     baseUrl: envValue("SILICONFLOW_BASE_URL", DEFAULT_SILICONFLOW_BASE_URL, env).replace(/\/$/, "")
   };
 }
@@ -22,6 +26,9 @@ export async function askSiliconFlowChat({
 }) {
   if (!apiKey) {
     throw new Error("SILICONFLOW_API_KEY is not set.");
+  }
+  if (!model) {
+    throw new Error("SiliconFlow model 必须由 LLM_ROUTE/model-registry 解析后显式传入。");
   }
 
   const data = await apiJson("siliconflow", "chat/completions", {

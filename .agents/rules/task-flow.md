@@ -50,6 +50,14 @@ Do not trigger this route for:
 - `标准库`
 - one-off collection where the user explicitly says it does not need long-term maintenance
 
+## Delivery Markdown Writing Standard
+
+When `analysis`, `doc-change`, or `knowledge-asset` work produces a Markdown or text deliverable, apply `reference/部门标准/通用/交付型文档写作标准.md` before `review`, `self-review`, or `validation`.
+
+The standard is a content standard. It defines the first-principles priority for deliverables: decision value first, then conclusion, mechanism, boundary, flow, and necessary evidence.
+
+Do not turn this standard into a copied template. `.agents/hooks/check-content-governance-gates.py` enforces the detectable violations; the source of truth remains under `reference/部门标准/`.
+
 ## GDD Writing Route
 
 When creating a new game design document, feature requirements document, system design, gameplay design, activity/economy/monetization design, or GDD, route through `archive/skills/skills/gdd-write/SKILL.md`.
@@ -260,6 +268,7 @@ Keep the main thread focused on task type, current/completed/next gates, approve
 | Read-heavy/noisy/verification-only work | delegate or parallelize |
 | Shared assets edited | local validation + Git review + independent-review checkpoint |
 | `knowledge-asset` + `strict` changes scoped long-term workflow assets without matching independent-review checkpoint | block delivery |
+| `delivery-writing`: deliverable text violates `reference/部门标准/通用/交付型文档写作标准.md` expression requirements | block delivery; rewrite as conclusion, mechanism, boundary, or flow, or add a valid hidden allow marker when the example is required for execution disambiguation |
 | `analysis-scaffold`: deliverable text violates `reference/部门标准/策划/机制拆解/拆解质量标准.md` expression requirements | block delivery; return to the standard and rewrite as natural conclusion + logic paragraphs |
 | Game design document/case review starts without GDD standard in `standard-check` | rewind to `standard-check`; previous output is draft until checked against GDD |
 | New game design document/GDD writing starts without `gdd-write` and the multi-Agent workflow source | rewind to GDD writing route |

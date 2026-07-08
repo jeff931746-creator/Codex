@@ -20,8 +20,8 @@ for _parent in _THIS_FILE.parents:
         sys.path.insert(0, str(_parent))
         break
 
-from archive.tools.lib.siliconflow_client import chat_text
 from archive.tools.lib.api_client import ApiError, request_json
+from archive.tools.lib.llm_client import chat_text
 
 # ========== 配置 ==========
 LIBRARY_ROOT = Path(os.environ.get(
@@ -57,10 +57,10 @@ def log(msg: str):
 
 # ========== LLM 调用 ==========
 def _call_glm(prompt: str, max_tokens: int) -> str:
-    """GLM-5.1 via SiliconFlow（分析阶段用）"""
+    """SiliconFlow_GLM route（分析阶段用）"""
     return chat_text(
         prompt,
-        model="Pro/zai-org/GLM-5.1",
+        route="SiliconFlow_GLM",
         max_tokens=max_tokens,
         temperature=0.3,
         timeout=120,
@@ -68,10 +68,10 @@ def _call_glm(prompt: str, max_tokens: int) -> str:
 
 
 def _call_deepseek(prompt: str, max_tokens: int) -> str:
-    """DeepSeek-V4-Flash via SiliconFlow（收集阶段用，与 GLM 共用 key）"""
+    """SiliconFlow_DeepSeek_Flash route（收集阶段用，与 GLM 共用 key）"""
     return chat_text(
         prompt,
-        model="deepseek-ai/DeepSeek-V4-Flash",
+        route="SiliconFlow_DeepSeek_Flash",
         max_tokens=max_tokens,
         temperature=0.3,
         timeout=120,

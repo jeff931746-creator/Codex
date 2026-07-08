@@ -1,11 +1,8 @@
 import { apiJson, apiFetch, envValue, jsonHeaders } from "./api-client.mjs";
 
-export const DEFAULT_DEEPSEEK_MODEL = "deepseek-v4-flash";
-
 export function resolveDeepSeekConfig(env = process.env) {
   return {
-    apiKey: envValue("DEEPSEEK_API_KEY", "", env),
-    model: envValue("DEEPSEEK_MODEL", DEFAULT_DEEPSEEK_MODEL, env)
+    apiKey: envValue("DEEPSEEK_API_KEY", "", env)
   };
 }
 
@@ -14,7 +11,7 @@ export async function askDeepSeekChat({
   userText,
   systemPrompt = "",
   apiKey,
-  model = DEFAULT_DEEPSEEK_MODEL,
+  model,
   maxTokens,
   temperature,
   thinking,
@@ -23,6 +20,9 @@ export async function askDeepSeekChat({
 }) {
   if (!apiKey) {
     throw new Error("DEEPSEEK_API_KEY is not set.");
+  }
+  if (!model) {
+    throw new Error("DeepSeek model 必须由 LLM_ROUTE/model-registry 解析后显式传入。");
   }
 
   const resolvedMessages = messages || [

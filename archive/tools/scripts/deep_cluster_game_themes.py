@@ -12,7 +12,7 @@
 
 启动:
   set -a; source "$HOME/Library/Application Support/FeishuCodexBridge/bridge/.env"; set +a
-  export LLM_PROVIDER=deepseek; export DEEPSEEK_MODEL=deepseek-v4-pro
+  export LLM_ROUTE=DeepSeek_Official_Pro
   python3 archive/tools/scripts/deep_cluster_game_themes.py
 """
 import concurrent.futures
@@ -33,8 +33,7 @@ RAW_DIR = LIB_ROOT / "_raw"
 CLUSTER_DIR = LIB_ROOT / "题材聚类_深度"
 CLUSTER_DIR.mkdir(parents=True, exist_ok=True)
 
-import os
-MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-v4-pro")
+LLM_ROUTE = "DeepSeek_Official_Pro"
 
 def log(msg):
     from datetime import datetime
@@ -47,7 +46,7 @@ def call_llm_json(prompt: str, label: str, max_tokens: int = 8000) -> list:
         text = cache.read_text(encoding="utf-8")
     else:
         text = chat_text(
-            prompt, model=MODEL, max_tokens=max_tokens, temperature=0.2,
+            prompt, route=LLM_ROUTE, max_tokens=max_tokens, temperature=0.2,
             timeout=240, retry_policy=RetryPolicy(retries=3, base_delay=3.0),
             return_empty_on_error=True
         )

@@ -4,7 +4,7 @@
 
 流程:
   1. 加载黄金标准 JSON
-  2. 用当前 prompt(改进版,加 IP 识别+游戏本体硬约束) 让 deepseek-v4-pro 打 30 款
+  2. 用当前 prompt(改进版,加 IP 识别+游戏本体硬约束) 让 DeepSeek_Official_Pro route 打 30 款
   3. 逐项对比:world_setting / ip_skin / core_verb / core_object / narrative_core / art_style
   4. 输出命中率报告 + 错例详情
 
@@ -26,7 +26,7 @@ from archive.tools.lib.llm_common import RetryPolicy
 WORK_DIR = ROOT / "archive/资料/游戏题材库/验证/v3_标杆"
 WORK_DIR.mkdir(parents=True, exist_ok=True)
 
-MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-v4-pro")
+LLM_ROUTE = "DeepSeek_Official_Pro"
 
 
 def log(msg):
@@ -40,7 +40,7 @@ def call_llm_json(prompt: str, label: str, max_tokens: int = 6000) -> list:
         text = cache.read_text(encoding="utf-8")
     else:
         text = chat_text(
-            prompt, model=MODEL, max_tokens=max_tokens, temperature=0.1,
+            prompt, route=LLM_ROUTE, max_tokens=max_tokens, temperature=0.1,
             timeout=240, retry_policy=RetryPolicy(retries=3, base_delay=3.0),
             return_empty_on_error=True,
         )
@@ -309,7 +309,7 @@ def main():
     # 写报告
     total = len(golden)
     lines = [f"# 30 款标杆 prompt v3 验证报告", "",
-             f"模型: {MODEL}",
+             f"模型: {LLM_ROUTE}",
              f"总样本: {total}", "",
              "## 字段命中率", "",
              "| 字段 | 命中 | 命中率 |",

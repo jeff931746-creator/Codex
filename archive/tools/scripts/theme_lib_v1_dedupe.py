@@ -349,7 +349,7 @@ recommended_playstyles: []
 risk_notes: {yaml_list(merged['risk_notes'])}
 
 # === 元数据 ===
-source: deepseek-v4-flash + v0-migrate + tags + dedupe
+source: SiliconFlow_DeepSeek_Flash + v0-migrate + tags + dedupe
 source_run_id: {TODAY}-dedupe
 evidence_level: B
 review_status: auto

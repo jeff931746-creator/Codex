@@ -46,7 +46,6 @@ ROOT = Path(__file__).resolve().parent
 
 # ---------- 配置 ----------
 
-SUMMARY_MODEL = None  # 在 main() 里从环境变量读取
 MAX_RAW_CHARS = 15_000             # 送给摘要模型的原始文本上限
 MAX_PER_PAGE = 6_000               # 每页抓取字符上限
 MAX_FALLBACK_CHARS = 3_000         # 摘要失败时直接写入的原始文本上限
@@ -157,26 +156,26 @@ def search_duckduckgo(query: str, max_results: int = 3) -> list[str]:
     return clean
 
 
-def call_llm_summary(raw_text: str, model: str | None) -> str:
+SUMMARY_ROUTE = "SiliconFlow_Qwen"
+
+
+def call_llm_summary(raw_text: str) -> str:
     """
-    调统一 LLM provider 做摘要。
+    调统一 LLM route 做摘要。
     失败时返回空字符串（调用方决定降级策略）。
     """
     # 截断原始文本
     truncated = raw_text[:MAX_RAW_CHARS]
     user_msg = SUMMARY_PROMPT.format(raw=truncated)
 
-    provider = os.environ.get("LLM_PROVIDER") or os.environ.get("PROVIDER", "siliconflow")
-    model_label = model or "(provider default)"
-    print(f"[summary] provider={provider} model={model_label}，发送 ~{len(truncated):,} chars…", flush=True)
+    print(f"[summary] route={SUMMARY_ROUTE}，发送 ~{len(truncated):,} chars…", flush=True)
     try:
         content = chat(
             [
                 {"role": "system", "content": SUMMARY_SYSTEM},
                 {"role": "user", "content": user_msg},
             ],
-            provider=provider,
-            model=model,
+            route=SUMMARY_ROUTE,
             temperature=0.3,
             max_tokens=1024,
             timeout=SUMMARY_TIMEOUT,
@@ -193,9 +192,6 @@ def call_llm_summary(raw_text: str, model: str | None) -> str:
 
 def main():
     load_env()
-    # 收集任务可用独立小模型；未配置时交给当前 provider client 使用自己的默认模型。
-    summary_model = os.environ.get("COLLECT_MODEL")
-
     ap = argparse.ArgumentParser()
     ap.add_argument("--game", required=True, help="游戏名（对应 inputs/<game>/ 目录）")
     args = ap.parse_args()
@@ -247,7 +243,7 @@ def main():
     print(f"[i] 原始文本总计 {len(raw_text):,} chars", flush=True)
 
     # --- Step 3: 摘要 ---
-    summary = call_llm_summary(raw_text, summary_model)
+    summary = call_llm_summary(raw_text)
 
     if summary:
         final_content = f"# {game} — 网络资料（自动搜集）\n\n{summary}\n"

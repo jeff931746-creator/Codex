@@ -4,7 +4,7 @@
 基于市面上代表性游戏全景反推人群簇，不依赖机制库。
 
 数据源：LLM 训练知识中的市面买量游戏全景
-模型：GLM-5.1
+route：SiliconFlow_GLM
 输出：5-7 个 AUD 草稿到 archive/资料/人群簇库/_draft/sample-v2-*.md
 """
 
@@ -21,13 +21,14 @@ for _parent in _THIS_FILE.parents:
         sys.path.insert(0, str(_parent))
         break
 
-from archive.tools.lib.siliconflow_client import RetryPolicy, chat_text
+from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.llm_client import chat_text
 
 OUTPUT_DIR = Path("/Users/mt/Documents/Codex/archive/资料/人群簇库/_draft")
 RAW_DIR = OUTPUT_DIR / "_raw"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
-MODEL = os.environ.get("SILICONFLOW_MODEL", "Pro/zai-org/GLM-5.1")
+LLM_ROUTE = "SiliconFlow_GLM"
 
 def log(msg: str):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
@@ -35,7 +36,7 @@ def log(msg: str):
 def call_llm(prompt: str, max_tokens: int = 6000, retries: int = 3) -> str:
     return chat_text(
         prompt,
-        model=MODEL,
+        route=LLM_ROUTE,
         max_tokens=max_tokens,
         temperature=0.3,
         timeout=240,
@@ -259,7 +260,7 @@ def main():
     log("=" * 50)
     log("Sprint 0.2 v2: 人群簇小样生成（市场全景反推）")
     log("=" * 50)
-    log(f"模型：{MODEL}")
+    log(f"模型：{LLM_ROUTE}")
     log(f"数据源：LLM 训练知识中的市面买量游戏全景")
     log(f"输出：{OUTPUT_DIR}")
 

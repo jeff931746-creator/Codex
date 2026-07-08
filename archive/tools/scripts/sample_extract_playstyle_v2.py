@@ -3,7 +3,7 @@
 玩法承接库 - 小样脚本 v2（Sprint 0.1 重跑）
 加入硬约束 + 嵌入标准映射对照 + 五问诊断深度要求
 
-模型：GLM-5.1
+route：SiliconFlow_GLM
 输出：3-5 个 PLY 草稿到 archive/资料/玩法承接库/_draft/sample-v2-*.md
 """
 
@@ -20,7 +20,8 @@ for _parent in _THIS_FILE.parents:
         sys.path.insert(0, str(_parent))
         break
 
-from archive.tools.lib.siliconflow_client import RetryPolicy, chat_text
+from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.llm_client import chat_text
 
 OUTPUT_DIR = Path("/Users/mt/Documents/Codex/archive/资料/玩法承接库/_draft")
 RAW_DIR = OUTPUT_DIR / "_raw"
@@ -33,7 +34,7 @@ SAMPLE_GAMES = [
     "/Users/mt/Documents/Codex/archive/资料/机制库/口袋奇兵",
 ]
 
-MODEL = os.environ.get("SILICONFLOW_MODEL", "Pro/zai-org/GLM-5.1")
+LLM_ROUTE = "SiliconFlow_GLM"
 
 def log(msg: str):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
@@ -41,7 +42,7 @@ def log(msg: str):
 def call_llm(prompt: str, max_tokens: int = 6000, retries: int = 3) -> str:
     return chat_text(
         prompt,
-        model=MODEL,
+        route=LLM_ROUTE,
         max_tokens=max_tokens,
         temperature=0.3,
         timeout=240,
@@ -305,7 +306,7 @@ def main():
     log("=" * 50)
     log("Sprint 0.1 v2: 玩法承接小样生成（加硬约束）")
     log("=" * 50)
-    log(f"模型：{MODEL}")
+    log(f"模型：{LLM_ROUTE}")
     log(f"输出：{OUTPUT_DIR}")
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

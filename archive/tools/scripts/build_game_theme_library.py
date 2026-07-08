@@ -6,7 +6,7 @@
   - 2000-2014: 任天堂掌机/主机重要平台(NDS / GBA / GBC / N64 / GameCube / Wii / 3DS 早期)
   - 2017-2026: Switch 完整生命周期
 
-模型: deepseek-v4-pro 官方 API
+route: DeepSeek_Official_Pro
 并发: 5 workers
 预计产出: ~2400 款游戏
 
@@ -16,8 +16,7 @@
   set -a
   source "$HOME/Library/Application Support/FeishuCodexBridge/bridge/.env"
   set +a
-  export LLM_PROVIDER=deepseek
-  export DEEPSEEK_MODEL=deepseek-v4-pro
+  export LLM_ROUTE=DeepSeek_Official_Pro
   python3 archive/tools/scripts/build_game_theme_library.py
 """
 import concurrent.futures
@@ -46,8 +45,7 @@ RAW_DIR = OUTPUT_ROOT / "_raw"
 CLUSTER_DIR = OUTPUT_ROOT / "题材聚类"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
-MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-v4-pro")
-PROVIDER = os.environ.get("LLM_PROVIDER", "deepseek")
+LLM_ROUTE = "DeepSeek_Official_Pro"
 
 # 并发配置
 DISCOVERY_WORKERS = 5
@@ -75,7 +73,7 @@ def log(msg: str):
 def call_llm(prompt: str, max_tokens: int = 8000, retries: int = 3) -> str:
     return chat_text(
         prompt,
-        model=MODEL,
+        route=LLM_ROUTE,
         max_tokens=max_tokens,
         temperature=0.3,
         timeout=240,
@@ -455,7 +453,7 @@ def write_overview(categorized: dict, clusters: list) -> str:
         "# 任天堂平台游戏题材库 总览",
         "",
         f"构建时间: {TODAY}  ",
-        f"数据来源: deepseek-v4-pro(官方API)  ",
+        f"数据来源: DeepSeek_Official_Pro route  ",
         f"覆盖范围: 2000-2014(任天堂掌机/主机) + 2017-2026(Switch)",
         "",
         "## 收录统计",
@@ -559,7 +557,7 @@ def write_readme() -> str:
 
 ## 数据说明
 
-- 数据来源: deepseek-v4-pro(官方 API),基于训练知识综合判断
+- 数据来源: DeepSeek_Official_Pro route,基于训练知识综合判断
 - 2025-2026 年作品覆盖可能不完整
 - 销量量级为综合估算,非严格官方数据
 """
@@ -568,8 +566,7 @@ def write_readme() -> str:
 def main():
     log("构建任天堂平台游戏题材库")
     log(f"  目标: 2000-2014(任天堂掌机/主机) + 2017-2026(Switch)")
-    log(f"  Provider: {PROVIDER}")
-    log(f"  Model: {MODEL}")
+    log(f"  Route: {LLM_ROUTE}")
     log(f"  Discovery 查询数: {len(DISCOVERY_QUERIES)}")
     log(f"  并发: discovery={DISCOVERY_WORKERS}, analysis={ANALYSIS_WORKERS}")
     OUTPUT_ROOT.mkdir(parents=True, exist_ok=True)

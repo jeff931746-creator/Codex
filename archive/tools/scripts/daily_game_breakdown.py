@@ -19,12 +19,13 @@ for _parent in _THIS_FILE.parents:
         sys.path.insert(0, str(_parent))
         break
 
-from archive.tools.lib.siliconflow_client import chat
+from archive.tools.lib.llm_client import chat
 
 LIBRARY_ROOT = Path("/Users/mt/Documents/Codex/archive/资料/机制库")
 INDEX_FILE = LIBRARY_ROOT / "00_总索引.md"
 STATE_FILE = Path("/tmp/daily_game_breakdown_state.json")
 STATE_TTL_HOURS = 24
+LLM_ROUTE = "SiliconFlow_GLM"
 
 # ========== 候选池（Python 决定选题，不交给 GLM）==========
 CANDIDATE_POOL = [
@@ -395,7 +396,7 @@ def call_api(messages, max_tokens=16384):
     t0 = time.time()
     content = chat(
         messages,
-        model="Pro/zai-org/GLM-5.1",
+        route=LLM_ROUTE,
         max_tokens=max_tokens,
         temperature=0.5,
         timeout=420,

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-用 GLM API 收集 2015-2026 年 Steam 和微信小游戏平台爆款游戏年度榜。
+用统一 LLM route 收集 2015-2026 年 Steam 和微信小游戏平台爆款游戏年度榜。
 
 用法:
     python3 collect_hits.py              # 生成 2015-2026 全部年份
@@ -11,7 +11,6 @@
     /Users/mt/Documents/Codex/reference/资料/竞品库/爆款年度榜/{year}.md
 """
 import argparse
-import os
 import re
 import sys
 import time
@@ -23,11 +22,10 @@ for _parent in _THIS_FILE.parents:
         sys.path.insert(0, str(_parent))
         break
 
-from archive.tools.lib.siliconflow_client import SiliconFlowError, chat_text
+from archive.tools.lib.llm_client import chat_text
 
 # ---------- 路径配置 ----------
 
-ENV_PATH = Path(__file__).resolve().parent / "breakdown-worker" / ".env"
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "research" / "资料" / "竞品库" / "爆款年度榜"
 
 YEARS = list(range(2015, 2027))
@@ -36,34 +34,25 @@ PLATFORMS = {
     "微信小游戏": "微信小游戏平台（微信内嵌小程序游戏）",
 }
 
-# ---------- 环境变量 ----------
-
-def load_env():
-    if not ENV_PATH.exists():
-        return
-    for line in ENV_PATH.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        k, v = line.split("=", 1)
-        os.environ.setdefault(k.strip(), v.strip())
-
 # ---------- API 调用（流式）----------
 
 TIMEOUT = 300  # 秒
 
-def call_glm(prompt: str, model: str) -> str:
+LLM_ROUTE = "qwen.siliconflow.qwen2.5-72b"
+
+
+def call_glm(prompt: str) -> str:
     """流式调用 SiliconFlow API，返回完整响应文本。"""
     try:
         return chat_text(
             prompt,
-            model=model,
+            route=LLM_ROUTE,
             max_tokens=8192,
             temperature=0.3,
             timeout=TIMEOUT,
             stream=True,
         )
-    except SiliconFlowError as e:
+    except Exception as e:
         print(f"    [错] {type(e).__name__}: {e}", flush=True)
         return ""
 
@@ -95,14 +84,14 @@ def clean_table(raw: str) -> str:
 
 # ---------- 生成单年文件 ----------
 
-def generate_year(year: int, model: str, api_key: str, base_url: str) -> str:
+def generate_year(year: int) -> str:
     """生成单年榜单，返回完整 Markdown 内容。"""
     sections = [f"# {year} 爆款游戏年度榜\n"]
 
     for platform, platform_desc in PLATFORMS.items():
         print(f"  [{platform}] 请求中…", flush=True)
         prompt = make_prompt(year, platform, platform_desc)
-        raw = call_glm(prompt, model)
+        raw = call_glm(prompt)
 
         if raw:
             table = clean_table(raw)
@@ -131,11 +120,6 @@ def generate_year(year: int, model: str, api_key: str, base_url: str) -> str:
 # ---------- main ----------
 
 def main():
-    load_env()
-
-    # 收集任务用非推理模型，避免浪费推理 tokens
-    model = os.environ.get("COLLECT_MODEL", "Qwen/Qwen2.5-72B-Instruct")
-
     ap = argparse.ArgumentParser()
     ap.add_argument("--year", type=int, default=None, help="只生成指定年份（默认全部 2015-2026）")
     ap.add_argument("--overwrite", action="store_true", help="覆盖已存在的文件")
@@ -144,7 +128,7 @@ def main():
     years = [args.year] if args.year else YEARS
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    print(f"[i] 模型：{model}  输出目录：{OUTPUT_DIR}", flush=True)
+    print(f"[i] route：{LLM_ROUTE}  输出目录：{OUTPUT_DIR}", flush=True)
     print(f"[i] 待处理年份：{years}", flush=True)
 
     for year in years:
@@ -154,7 +138,7 @@ def main():
             continue
 
         print(f"\n[{year}] 开始生成…", flush=True)
-        content = generate_year(year, model, api_key, base_url)
+        content = generate_year(year)
         out_file.write_text(content, encoding="utf-8")
         print(f"[{year}] ✓ 写入 {out_file}", flush=True)
 

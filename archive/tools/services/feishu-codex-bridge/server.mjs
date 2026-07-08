@@ -10,11 +10,16 @@ import {
   resolveSiliconFlowConfig
 } from "../../lib/siliconflow-client.mjs";
 import { apiJson, apiUrl, jsonHeaders } from "../../lib/api-client.mjs";
+import { envRoute, getModelRoute } from "../../lib/model-registry.mjs";
 
 const scriptFile = fileURLToPath(import.meta.url);
 const scriptDir = dirname(scriptFile);
 const defaultPort = Number(process.env.PORT || 3000);
+const configuredRouteName = envRoute();
+const configuredRoute = configuredRouteName ? getModelRoute(configuredRouteName) : null;
 const siliconFlowConfig = resolveSiliconFlowConfig();
+const openaiRoute = configuredRoute?.provider === "openai" ? configuredRoute : null;
+const anthropicRoute = configuredRoute?.provider === "anthropic" ? configuredRoute : null;
 
 const config = {
   port: defaultPort,
@@ -62,14 +67,16 @@ const config = {
   codexSessionTarget: process.env.CODEX_SESSION_TARGET || "",
   codexWorkdir:
     process.env.CODEX_BRIDGE_WORKDIR || "/Users/mt/Documents/Codex",
+  llmRoute: configuredRoute?.route || "",
+  llmRouteProvider: configuredRoute?.provider || "",
   openaiApiKey: process.env.OPENAI_API_KEY || "",
-  openaiModel: process.env.OPENAI_MODEL || "gpt-5-mini",
+  openaiModel: openaiRoute?.model || "",
   siliconflowApiKey: siliconFlowConfig.apiKey,
+  siliconflowRoute: siliconFlowConfig.route,
   siliconflowModel: siliconFlowConfig.model,
   siliconflowBaseUrl: siliconFlowConfig.baseUrl,
   anthropicApiKey: process.env.ANTHROPIC_API_KEY || "",
-  anthropicModel:
-    process.env.ANTHROPIC_MODEL || "claude-3-5-haiku-latest",
+  anthropicModel: anthropicRoute?.model || "",
   botName: process.env.BOT_NAME || "助手",
   feishuStateFile:
     process.env.FEISHU_STATE_FILE || join(scriptDir, ".state", "chat-state.json"),
@@ -93,7 +100,10 @@ function resolveBackend() {
     if (config.codexSessionTarget) {
       return "codex";
     }
-    if (config.siliconflowApiKey) {
+    if (config.llmRouteProvider) {
+      return config.llmRouteProvider;
+    }
+    if (config.siliconflowApiKey && config.siliconflowModel) {
       return "siliconflow";
     }
     if (config.anthropicApiKey) {
@@ -113,6 +123,11 @@ const activeModel =
       : activeBackend === "codex"
         ? config.codexSessionTarget || "(selected Codex session)"
         : config.openaiModel;
+
+if (!["codex", "openai", "anthropic", "siliconflow"].includes(activeBackend)) {
+  console.error(`Unsupported active backend ${activeBackend}. LLM_ROUTE must match a Feishu-supported provider.`);
+  process.exit(1);
+}
 
 function logAnthropicUsage(usage, context = {}) {
   if (!usage || typeof usage !== "object") {
@@ -174,8 +189,10 @@ if (
   !config.feishuAppId ||
   !config.feishuAppSecret ||
   (activeBackend === "openai" && !config.openaiApiKey) ||
-  (activeBackend === "siliconflow" && !config.siliconflowApiKey) ||
+  (activeBackend === "openai" && !config.openaiModel) ||
+  (activeBackend === "siliconflow" && (!config.siliconflowApiKey || !config.siliconflowModel)) ||
   (activeBackend === "anthropic" && !config.anthropicApiKey) ||
+  (activeBackend === "anthropic" && !config.anthropicModel) ||
   (activeBackend === "codex" && !existsSync(config.codexBridgeScript))
 ) {
   console.error(
@@ -2267,6 +2284,9 @@ async function startFeishuProgressUpdates(chatId) {
 }
 
 async function askOpenAI(userText) {
+  if (!config.openaiModel) {
+    throw new Error("FEISHU_BACKEND=openai 需要设置 LLM_ROUTE 为 OpenAI route。");
+  }
   const data = await apiJson("openai", "responses", {
     method: "POST",
     headers: {
@@ -2304,6 +2324,9 @@ async function askOpenAI(userText) {
 }
 
 async function askSiliconFlow(userText) {
+  if (!config.siliconflowModel) {
+    throw new Error("FEISHU_BACKEND=siliconflow 需要设置 LLM_ROUTE 为 SiliconFlow route。");
+  }
   return askSiliconFlowChat({
     userText,
     systemPrompt: config.systemPrompt,
@@ -2314,6 +2337,9 @@ async function askSiliconFlow(userText) {
 }
 
 async function askAnthropic(userText) {
+  if (!config.anthropicModel) {
+    throw new Error("FEISHU_BACKEND=anthropic 需要设置 LLM_ROUTE 为 Anthropic route。");
+  }
   const data = await apiJson("anthropic", "messages", {
     method: "POST",
     headers: {

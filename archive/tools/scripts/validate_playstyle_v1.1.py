@@ -4,7 +4,7 @@
 应用 9 个 CC 主簇 + R/G/LT 承接结构,用 DeepSeek V4 Pro 跑 1700+ 爆款样本。
 
 数据源:archive/资料/竞品库/爆款年度榜/{平台}/{年份}.md
-模型:DeepSeek V4 Pro(通过统一 llm_client,LLM_PROVIDER=deepseek)
+模型 route: DeepSeek_Official_Pro
 输出:archive/资料/玩法承接库/_draft/validation_report_v1.1_{date}.md
 """
 
@@ -29,6 +29,7 @@ OUTPUT_DIR = Path("/Users/mt/Documents/Codex/archive/资料/玩法承接库/_dra
 RAW_DIR = OUTPUT_DIR / "_raw" / "v1.1"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 RANKING_DIR = Path("/Users/mt/Documents/Codex/archive/资料/竞品库/爆款年度榜")
+LLM_ROUTE = "DeepSeek_Official_Pro"
 
 
 def log(msg):
@@ -38,6 +39,7 @@ def log(msg):
 def call_llm(prompt, max_tokens=18000, retries=4):
     return chat_text(
         prompt,
+        route=LLM_ROUTE,
         max_tokens=max_tokens,
         temperature=0.2,
         timeout=360,
@@ -309,7 +311,7 @@ def write_report(all_results, all_samples):
         f"",
         f"**日期**:{TODAY}",
         f"**样本数**:{total}",
-        f"**模型**:DeepSeek V4 Pro(`LLM_PROVIDER=deepseek`)",
+        f"**模型 route**:`DeepSeek_Official_Pro`",
         f"",
         f"## 一、v1.1 验证指标",
         f"",
@@ -424,9 +426,7 @@ def main():
     log("=" * 60)
     log("玩法承接 v1.1 矩阵验证(1700+ 真实样本 + 9 CC 主簇)")
     log("=" * 60)
-    provider = os.environ.get("LLM_PROVIDER", "未设置")
-    log(f"LLM_PROVIDER:{provider}")
-    log(f"DEEPSEEK_MODEL:{os.environ.get('DEEPSEEK_MODEL', '默认')}")
+    log(f"LLM_ROUTE:{LLM_ROUTE}")
 
     log("\n[1/3] 加载样本...")
     samples = load_all_samples()

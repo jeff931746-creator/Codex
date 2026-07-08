@@ -5,14 +5,13 @@
 调用约定:
   - 严格遵守 .claude/rules/api-client-architecture.md
   - 通过 archive.tools.lib.llm_client 调用,不直接 import deepseek_client
-  - LLM_PROVIDER 由调用方环境提供,默认期望 deepseek + deepseek-v4-pro
+  - 固定使用 route: DeepSeek_Official_Pro
 
 启动示例:
   set -a
   source "$HOME/Library/Application Support/FeishuCodexBridge/bridge/.env"
   set +a
-  export LLM_PROVIDER=deepseek
-  export DEEPSEEK_MODEL=deepseek-v4-pro
+  export LLM_ROUTE=DeepSeek_Official_Pro
   python3 archive/tools/scripts/run_theme_motif_classification.py
 
 产物:
@@ -122,6 +121,7 @@ def classify_one(sample: dict, system_prompt: str, user_template: str) -> tuple[
     raw = chat_text(
         user,
         system=system_prompt,
+        route="DeepSeek_Official_Pro",
         max_tokens=2500,
         temperature=0.1,
         timeout=180,
@@ -141,12 +141,7 @@ def file_safe(name: str) -> str:
 
 
 def main():
-    provider = os.environ.get("LLM_PROVIDER", "").strip().lower()
-    if provider not in {"deepseek", "siliconflow"}:
-        print(f"[FATAL] LLM_PROVIDER 必须是 deepseek 或 siliconflow,当前 {provider!r}")
-        sys.exit(2)
-    print(f"[info] LLM_PROVIDER={provider}")
-    print(f"[info] DEEPSEEK_MODEL={os.environ.get('DEEPSEEK_MODEL', '(default)')}")
+    print("[info] LLM_ROUTE=DeepSeek_Official_Pro")
 
     system_prompt = load_system_prompt()
     user_template = load_user_template()

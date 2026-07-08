@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 人群簇 v1.0 矩阵扩大验证脚本 - 230 样本版
-用 GLM-5.1 对 230 个跨媒介样本做归类验证，重点验证微信小游戏人群分布。
+用 SiliconFlow_GLM route 对 230 个跨媒介样本做归类验证，重点验证微信小游戏人群分布。
 
 样本分布：
 - 国内重度手游 25
@@ -34,13 +34,14 @@ for _parent in _THIS_FILE.parents:
         sys.path.insert(0, str(_parent))
         break
 
-from archive.tools.lib.siliconflow_client import RetryPolicy, chat_text
+from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.llm_client import chat_text
 
 OUTPUT_DIR = Path("/Users/mt/Documents/Codex/archive/资料/人群簇库/_draft")
 RAW_DIR = OUTPUT_DIR / "_raw"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
-MODEL = os.environ.get("SILICONFLOW_MODEL", "Pro/zai-org/GLM-5.1")
+LLM_ROUTE = "SiliconFlow_GLM"
 
 def log(msg: str):
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}", flush=True)
@@ -48,7 +49,7 @@ def log(msg: str):
 def call_llm(prompt: str, max_tokens: int = 16000, retries: int = 3) -> str:
     return chat_text(
         prompt,
-        model=MODEL,
+        route=LLM_ROUTE,
         max_tokens=max_tokens,
         temperature=0.2,
         timeout=360,
@@ -480,7 +481,7 @@ def write_report(all_results):
         f"",
         f"**验证日期**：{TODAY}",
         f"**样本数**：{total}",
-        f"**模型**：{MODEL}",
+        f"**模型**：{LLM_ROUTE}",
         f"",
         f"## 一、关键指标",
         f"",
@@ -610,7 +611,7 @@ def main():
     log("=" * 60)
     log("人群簇 v1.0 矩阵扩大验证（230 样本）")
     log("=" * 60)
-    log(f"模型：{MODEL}")
+    log(f"模型：{LLM_ROUTE}")
     log(f"总样本：{len(SAMPLES)}")
     log(f"输出：{OUTPUT_DIR}")
 

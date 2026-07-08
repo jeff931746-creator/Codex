@@ -28,7 +28,7 @@ RAW_DIR = LIB_ROOT / "_raw"
 OUT_DIR = LIB_ROOT / "整理"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-MODEL = os.environ.get("DEEPSEEK_MODEL", "deepseek-v4-pro")
+LLM_ROUTE = "DeepSeek_Official_Pro"
 
 # 沿用旧脚本的玩法归类规则
 from organize_game_themes import PLAY_BUCKETS, categorize_play, load_all_analyzed
@@ -45,7 +45,7 @@ def call_llm_json(prompt: str, label: str, max_tokens: int = 6000) -> list:
         text = cache.read_text(encoding="utf-8")
     else:
         text = chat_text(
-            prompt, model=MODEL, max_tokens=max_tokens, temperature=0.1,
+            prompt, route=LLM_ROUTE, max_tokens=max_tokens, temperature=0.1,
             timeout=240, retry_policy=RetryPolicy(retries=3, base_delay=3.0),
             return_empty_on_error=True,
         )

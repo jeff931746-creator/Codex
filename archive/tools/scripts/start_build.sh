@@ -1,7 +1,7 @@
 #!/bin/bash
 # 确保环境变量
 export SILICONFLOW_API_KEY="${SILICONFLOW_API_KEY}"
-export DEEPSEEK_FLASH_MODEL="${DEEPSEEK_FLASH_MODEL:-deepseek-ai/DeepSeek-V4-Flash}"
+export LLM_ROUTE="SiliconFlow_DeepSeek_Flash"
 
 # 生成日志文件名
 LOG_FILE="theme_library_$(date +%Y%m%d_%H%M%S).log"

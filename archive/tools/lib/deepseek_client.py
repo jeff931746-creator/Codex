@@ -15,9 +15,6 @@ from archive.tools.lib.llm_common import (
 )
 
 
-DEFAULT_DEEPSEEK_MODEL = "deepseek-v4-pro"
-
-
 class DeepSeekError(RuntimeError):
     """Raised when the DeepSeek official API request fails."""
 
@@ -29,8 +26,8 @@ def get_deepseek_api_key(required: bool = True) -> str:
     return api_key
 
 
-def get_deepseek_model(default: str = DEFAULT_DEEPSEEK_MODEL) -> str:
-    return env_value("DEEPSEEK_MODEL", default)
+def get_deepseek_model() -> str:
+    raise RuntimeError("DeepSeek model 必须由 route/model_registry 解析后显式传入")
 
 
 def chat(

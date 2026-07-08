@@ -21,13 +21,14 @@ for _parent in _THIS_FILE.parents:
         sys.path.insert(0, str(_parent))
         break
 
-from archive.tools.lib.siliconflow_client import RetryPolicy, chat_text
+from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.llm_client import chat_text
 
 OUTPUT_DIR = Path("/Users/mt/Documents/Codex/archive/资料/人群簇库/_draft")
 RAW_DIR = OUTPUT_DIR / "_raw"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
-MODEL = os.environ.get("DEEPSEEK_FLASH_MODEL", "deepseek-ai/DeepSeek-V4-Flash")
+LLM_ROUTE = "SiliconFlow_DeepSeek_Flash"
 
 RANKING_DIR = Path("/Users/mt/Documents/Codex/archive/资料/竞品库/爆款年度榜")
 
@@ -43,7 +44,7 @@ def call_llm(prompt, max_tokens=16000, retries=4):
     """
     return chat_text(
         prompt,
-        model=MODEL,
+        route=LLM_ROUTE,
         max_tokens=max_tokens,
         temperature=0.2,
         timeout=360,
@@ -316,7 +317,7 @@ def write_report(all_results, all_samples):
         f"**日期**：{TODAY}",
         f"**样本来源**：archive/资料/竞品库/爆款年度榜/2024-2026.md（已去重）",
         f"**样本数**：{total}",
-        f"**模型**：{MODEL}",
+        f"**模型**：{LLM_ROUTE}",
         f"",
         f"## 一、关键指标",
         f"",
@@ -431,7 +432,7 @@ def main():
     log("=" * 60)
     log("人群簇 v1.0 矩阵扩大验证（真实爆款样本）")
     log("=" * 60)
-    log(f"模型：{MODEL}")
+    log(f"模型：{LLM_ROUTE}")
 
     # 加载真实样本
     log("\n[1/3] 加载本地榜单样本...")

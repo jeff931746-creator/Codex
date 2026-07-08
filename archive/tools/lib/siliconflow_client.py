@@ -18,9 +18,6 @@ from archive.tools.lib.llm_common import (
 
 
 DEFAULT_BASE_URL = API_BASE_URLS["siliconflow"]
-DEFAULT_MODEL = "Pro/zai-org/GLM-5.1"
-
-
 class SiliconFlowError(RuntimeError):
     """Raised when the SiliconFlow request fails or returns invalid data."""
 
@@ -47,8 +44,8 @@ def get_base_url() -> str:
     return env_value("SILICONFLOW_BASE_URL", DEFAULT_BASE_URL).rstrip("/")
 
 
-def get_model(env_name: str = "SILICONFLOW_MODEL", default: str = DEFAULT_MODEL) -> str:
-    return env_value(env_name, default)
+def get_model() -> str:
+    raise RuntimeError("SiliconFlow model 必须由 route/model_registry 解析后显式传入")
 
 
 def _request_json(

@@ -6,7 +6,7 @@
 输入：5 个游戏的 00_总档.md
 输出：3-5 个 AUD 草稿到 archive/资料/人群簇库/_draft/sample-*.md
 
-模型：GLM-5.1（深度推理，需要按情绪×玩法×付费三维聚类）
+route：SiliconFlow_GLM（深度推理，需要按情绪×玩法×付费三维聚类）
 """
 
 import json
@@ -22,7 +22,8 @@ for _parent in _THIS_FILE.parents:
         sys.path.insert(0, str(_parent))
         break
 
-from archive.tools.lib.siliconflow_client import RetryPolicy, chat_text
+from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.llm_client import chat_text
 
 # ========== 配置 ==========
 OUTPUT_DIR = Path("/Users/mt/Documents/Codex/archive/资料/人群簇库/_draft")
@@ -38,7 +39,7 @@ SAMPLE_GAMES = [
     "/Users/mt/Documents/Codex/archive/资料/机制库/保卫向日葵",     # 经典塔防
 ]
 
-MODEL = os.environ.get("SILICONFLOW_MODEL", "Pro/zai-org/GLM-5.1")
+LLM_ROUTE = "SiliconFlow_GLM"
 
 # ========== 日志 ==========
 def log(msg: str):
@@ -48,7 +49,7 @@ def log(msg: str):
 def call_llm(prompt: str, max_tokens: int = 4000, retries: int = 3) -> str:
     return chat_text(
         prompt,
-        model=MODEL,
+        route=LLM_ROUTE,
         max_tokens=max_tokens,
         temperature=0.3,
         timeout=180,
@@ -239,7 +240,7 @@ def main():
     log("=" * 50)
     log("Sprint 0.2: 人群簇小样生成")
     log("=" * 50)
-    log(f"模型：{MODEL}")
+    log(f"模型：{LLM_ROUTE}")
     log(f"输入：{len(SAMPLE_GAMES)} 个游戏")
     log(f"输出：{OUTPUT_DIR}")
 

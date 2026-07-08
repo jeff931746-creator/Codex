@@ -12,13 +12,13 @@ v1.1 三层标签增量打标脚本(Step 4)
 不动 — 沿用上一轮 LLM 输出。
 
 特性:
-- DeepSeek-V4-Flash + 16 线程并发
+- SiliconFlow_DeepSeek_Flash route + 16 线程并发
 - 已经补好(theme_primary != TBD)的样本自动跳过 — 断点续传
 - 失败写 _logs/enrich_tags_*.log
 
 用法:
     cd /Users/mt/Documents/Codex
-    python3 archive/tools/scripts/theme_lib_v1_enrich_tags.py --limit 5
+    LLM_ROUTE=SiliconFlow_DeepSeek_Flash python3 archive/tools/scripts/theme_lib_v1_enrich_tags.py --limit 5
     python3 archive/tools/scripts/theme_lib_v1_enrich_tags.py --workers 16
 """
 from __future__ import annotations
@@ -357,6 +357,7 @@ def enrich_sample(sample_path: Path, log_file, force: bool = False) -> str:
         raw = chat_text(
             user_prompt,
             system=SYSTEM_PROMPT,
+            route="SiliconFlow_DeepSeek_Flash",
             max_tokens=400,
             temperature=0.2,
             timeout=60,
@@ -427,7 +428,7 @@ def enrich_sample(sample_path: Path, log_file, force: bool = False) -> str:
     new_fm = update_field(new_fm, "visual_tags", yaml_list(visual_tags))
     new_fm = update_field(new_fm, "acquisition_score", str(new_acq))
     new_fm = update_field(new_fm, "evidence_level", "B")
-    new_fm = update_field(new_fm, "source", "deepseek-v4-flash + v0-migrate + tags")
+    new_fm = update_field(new_fm, "source", "SiliconFlow_DeepSeek_Flash + v0-migrate + tags")
     new_fm = update_field(new_fm, "source_run_id", f"{TODAY}-tags-enrich")
     new_fm = update_field(new_fm, "last_updated", TODAY)
 
