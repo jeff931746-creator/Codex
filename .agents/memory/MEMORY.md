@@ -17,6 +17,7 @@ Memory explains history, preferences, and task state; it does not override activ
 ## Current Task State
 
 - [FF 当前工作交接](FF-当前工作交接.md) - 继续 FF/指尖战记/7日强社交功能链路时先读。
+- [FF 军团优化1.0模块拆分交接](FF-军团优化1.0-模块拆分交接.md) - 继续军团优化 1.0、模块拆分、UE 界面线稿时先读；后续按一个界面一个界面给用户审核，不直接写入飞书文档。
 - [战略库与信息收集体系](task_战略库与信息收集体系.md) - 信息收集体系、战略库、竞品库、来源、同步脚本相关任务。
 - [梦幻西游战斗数据库](task_梦幻西游战斗数据库.md) - 行动权差兑换率、梦幻西游手游战斗数据、飞书 Base 相关任务。
 

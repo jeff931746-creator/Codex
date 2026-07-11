@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="5200" height="3520" viewBox="0 0 5200 3520">
+  <defs>
+    <marker id="arrowBrown" markerWidth="20" markerHeight="20" refX="17" refY="10" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L18,10 L2,18 Z" fill="#765020"/>
+    </marker>
+    <marker id="arrowGray" markerWidth="18" markerHeight="18" refX="15" refY="9" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L16,9 L2,16 Z" fill="#8a8580"/>
+    </marker>
+    <linearGradient id="topLane" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff9ec"/>
+      <stop offset="1" stop-color="#fff1ca"/>
+    </linearGradient>
+    <linearGradient id="memberLane" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#eefaff"/>
+      <stop offset="1" stop-color="#eef8e6"/>
+    </linearGradient>
+    <filter id="phoneShadow" x="-18%" y="-16%" width="136%" height="138%">
+      <feDropShadow dx="0" dy="14" stdDeviation="11" flood-color="#2c2017" flood-opacity="0.24"/>
+    </filter>
+    <filter id="nodeShadow" x="-12%" y="-14%" width="124%" height="132%">
+      <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#4b3726" flood-opacity="0.18"/>
+    </filter>
+    <style>
+      .cn { font-family: "PingFang SC", "STHeiti", "Microsoft YaHei", sans-serif; letter-spacing: 0; }
+      .title { fill: #2e2118; font-size: 62px; font-weight: 900; }
+      .sub { fill: #67513c; font-size: 28px; font-weight: 700; }
+      .laneTitle { fill: #4a2f1d; font-size: 40px; font-weight: 900; }
+      .laneSub { fill: #735842; font-size: 24px; font-weight: 700; }
+      .nodeText { fill: #44301f; font-size: 28px; font-weight: 900; }
+      .nodeDesc { fill: #71553c; font-size: 21px; font-weight: 700; }
+      .lineText { fill: #6a4a2c; font-size: 24px; font-weight: 900; }
+      .ruleText { fill: #5a3c24; font-size: 26px; font-weight: 800; }
+      .phoneLabel { fill: #fff0c6; font-size: 28px; font-weight: 900; }
+      .phoneNote { fill: #dcc6a3; font-size: 21px; font-weight: 700; }
+      .smallLabel { fill: #fff0c6; font-size: 24px; font-weight: 900; }
+      .smallNote { fill: #dcc6a3; font-size: 18px; font-weight: 700; }
+      .nodeBox { fill: #fffdf8; stroke: #d69235; stroke-width: 4; rx: 26; ry: 26; }
+      .terminal { fill: #f0f9e8; stroke: #6e9a48; stroke-width: 5; rx: 28; ry: 28; }
+      .arrow { stroke: #765020; stroke-width: 9; fill: none; marker-end: url(#arrowBrown); stroke-linecap: round; stroke-linejoin: round; }
+      .arrowThin { stroke: #8a8580; stroke-width: 6; fill: none; marker-end: url(#arrowGray); stroke-linecap: round; stroke-linejoin: round; }
+      .dash { stroke-dasharray: 16 14; }
+    </style>
+  </defs>
+
+  <rect width="5200" height="3520" fill="#fbfaf7"/>
+  <path d="M0 0 H5200 V145 H0 Z" fill="#eee7dc"/>
+  <text x="90" y="82" class="cn title">战斗集结入口正式 UE 状态流</text>
+  <text x="90" y="125" class="cn sub">按权限显示、按钮状态、发起校验、成员确认与传送校验组织页面流；状态图已放大，连线只走节点外侧留白。</text>
+
+  <rect x="70" y="180" width="5060" height="1430" rx="42" fill="url(#topLane)" stroke="#ead2a5" stroke-width="3"/>
+  <rect x="70" y="1660" width="5060" height="1600" rx="42" fill="url(#memberLane)" stroke="#c9ded5" stroke-width="3"/>
+  <rect x="70" y="3320" width="5060" height="130" rx="30" fill="#fff7e5" stroke="#d9a65a" stroke-width="4"/>
+
+  <text x="120" y="250" class="cn laneTitle">发起者视角</text>
+  <text x="120" y="288" class="cn laneSub">进入玩法房间后先判断职位权限；有权限才显示召集入口，点击后先校验当前房间人数。</text>
+  <text x="120" y="1730" class="cn laneTitle">成员响应视角</text>
+  <text x="120" y="1768" class="cn laneSub">发起成功后成员收到确认弹窗；成员确认时再次校验房间人数与进入条件。</text>
+
+  <g id="entry-node" filter="url(#nodeShadow)">
+    <rect x="110" y="575" width="360" height="160" class="nodeBox"/>
+    <text x="290" y="635" text-anchor="middle" class="cn nodeText">玩家进入玩法房间</text>
+    <text x="290" y="680" text-anchor="middle" class="cn nodeDesc">先判断是否拥有集结权限</text>
+  </g>
+
+  <g id="permission-node" filter="url(#nodeShadow)" transform="translate(570 560)">
+    <path d="M150 0 L300 95 L150 190 L0 95 Z" fill="#fff4d4" stroke="#d69235" stroke-width="5"/>
+    <text x="150" y="82" text-anchor="middle" class="cn nodeText">是否拥有</text>
+    <text x="150" y="122" text-anchor="middle" class="cn nodeText">集结权限</text>
+  </g>
+
+  <path d="M470 655 H570" class="arrow"/>
+
+  <g id="phone-00" transform="translate(560 820)" filter="url(#phoneShadow)">
+    <rect x="-18" y="-18" width="336" height="756" rx="22" fill="#14110f" stroke="#2c2723" stroke-width="6"/>
+    <image href="ff-battle-rally-00-no-permission.full.png" x="0" y="0" width="300" height="654" preserveAspectRatio="xMidYMid meet"/>
+    <text x="150" y="692" text-anchor="middle" class="cn phoneLabel">00 普通成员</text>
+    <text x="150" y="728" text-anchor="middle" class="cn phoneNote">不显示召集按钮</text>
+  </g>
+
+  <path d="M720 750 V802" class="arrowThin"/>
+  <text x="755" y="790" class="cn lineText">否</text>
+
+  <g id="phone-01" transform="translate(1010 320)" filter="url(#phoneShadow)">
+    <rect x="-18" y="-18" width="336" height="756" rx="22" fill="#14110f" stroke="#2c2723" stroke-width="6"/>
+    <image href="ff-battle-rally-01-available.full.png" x="0" y="0" width="300" height="654" preserveAspectRatio="xMidYMid meet"/>
+    <text x="150" y="692" text-anchor="middle" class="cn phoneLabel">01 有权限可点击</text>
+    <text x="150" y="728" text-anchor="middle" class="cn phoneNote">盟主 / 副盟主 / 配置职位</text>
+  </g>
+
+  <path d="M870 655 H992" class="arrow"/>
+  <text x="900" y="625" class="cn lineText">是</text>
+
+  <g id="room-node" filter="url(#nodeShadow)" transform="translate(1420 560)">
+    <path d="M160 0 L320 95 L160 190 L0 95 Z" fill="#fff4d4" stroke="#d69235" stroke-width="5"/>
+    <text x="160" y="82" text-anchor="middle" class="cn nodeText">点击召集</text>
+    <text x="160" y="122" text-anchor="middle" class="cn nodeText">房间是否已满</text>
+  </g>
+
+  <path d="M1328 655 H1420" class="arrow"/>
+
+  <g id="phone-06" transform="translate(1850 320)" filter="url(#phoneShadow)">
+    <rect x="-18" y="-18" width="336" height="756" rx="22" fill="#14110f" stroke="#2c2723" stroke-width="6"/>
+    <image href="ff-battle-rally-06-room-full-click-tip.full.png" x="0" y="0" width="300" height="654" preserveAspectRatio="xMidYMid meet"/>
+    <text x="150" y="692" text-anchor="middle" class="cn phoneLabel">06 房间已满提示</text>
+    <text x="150" y="728" text-anchor="middle" class="cn phoneNote">不发起，不扣次数</text>
+  </g>
+
+  <path d="M1580 560 V455 H1832" class="arrow"/>
+  <text x="1652" y="430" class="cn lineText">已满</text>
+
+  <g id="phone-07" transform="translate(2310 320)" filter="url(#phoneShadow)">
+    <rect x="-18" y="-18" width="336" height="756" rx="22" fill="#14110f" stroke="#2c2723" stroke-width="6"/>
+    <image href="ff-battle-rally-07-launch-success.full.png" x="0" y="0" width="300" height="654" preserveAspectRatio="xMidYMid meet"/>
+    <text x="150" y="692" text-anchor="middle" class="cn phoneLabel">07 发起成功</text>
+    <text x="150" y="728" text-anchor="middle" class="cn phoneNote">扣次数，通知成员</text>
+  </g>
+
+  <path d="M1580 750 V1120 H2460 V1058" class="arrow"/>
+  <text x="1876" y="1092" class="cn lineText">未满，可发起</text>
+
+  <g id="button-states">
+    <text x="2810" y="318" class="cn laneTitle">按钮状态与点击反馈</text>
+    <text x="2810" y="356" class="cn laneSub">冷却时间与次数状态显示在召集按钮上；点击禁用态只给短提示。</text>
+    <g transform="translate(2810 410)" filter="url(#phoneShadow)">
+      <rect x="-16" y="-16" width="272" height="620" rx="20" fill="#14110f" stroke="#2c2723" stroke-width="6"/>
+      <image href="ff-battle-rally-02-cooldown.full.png" x="0" y="0" width="240" height="523" preserveAspectRatio="xMidYMid meet"/>
+      <text x="120" y="558" text-anchor="middle" class="cn smallLabel">02 冷却</text>
+      <text x="120" y="588" text-anchor="middle" class="cn smallNote">按钮显示时间</text>
+    </g>
+    <g transform="translate(3150 410)" filter="url(#phoneShadow)">
+      <rect x="-16" y="-16" width="272" height="620" rx="20" fill="#14110f" stroke="#2c2723" stroke-width="6"/>
+      <image href="ff-battle-rally-04-cooldown-click-tip.full.png" x="0" y="0" width="240" height="523" preserveAspectRatio="xMidYMid meet"/>
+      <text x="120" y="558" text-anchor="middle" class="cn smallLabel">04 点击冷却</text>
+      <text x="120" y="588" text-anchor="middle" class="cn smallNote">提示剩余时间</text>
+    </g>
+    <g transform="translate(3490 410)" filter="url(#phoneShadow)">
+      <rect x="-16" y="-16" width="272" height="620" rx="20" fill="#14110f" stroke="#2c2723" stroke-width="6"/>
+      <image href="ff-battle-rally-03-used-up.full.png" x="0" y="0" width="240" height="523" preserveAspectRatio="xMidYMid meet"/>
+      <text x="120" y="558" text-anchor="middle" class="cn smallLabel">03 次数用完</text>
+      <text x="120" y="588" text-anchor="middle" class="cn smallNote">0/3 用完</text>
+    </g>
+    <g transform="translate(3830 410)" filter="url(#phoneShadow)">
+      <rect x="-16" y="-16" width="272" height="620" rx="20" fill="#14110f" stroke="#2c2723" stroke-width="6"/>
+      <image href="ff-battle-rally-05-used-up-click-tip.full.png" x="0" y="0" width="240" height="523" preserveAspectRatio="xMidYMid meet"/>
+      <text x="120" y="558" text-anchor="middle" class="cn smallLabel">05 点击用完</text>
+      <text x="120" y="588" text-anchor="middle" class="cn smallNote">提示次数已用完</text>
+    </g>
+  </g>
+
+  <path d="M2628 655 H2794" class="arrowThin dash"/>
+  <text x="2638" y="622" class="cn lineText">成功后进入冷却</text>
+  <path d="M3066 672 H3134" class="arrowThin"/>
+  <path d="M3406 672 H3474" class="arrowThin dash"/>
+  <path d="M3746 672 H3814" class="arrowThin"/>
+
+  <g id="legend" transform="translate(4240 345)" filter="url(#nodeShadow)">
+    <rect x="0" y="0" width="780" height="335" rx="30" fill="#fffdf8" stroke="#e0c79f" stroke-width="4"/>
+    <text x="44" y="62" class="cn nodeText">图例</text>
+    <rect x="46" y="105" width="54" height="36" rx="9" fill="#fff4d4" stroke="#d69235" stroke-width="4"/>
+    <text x="122" y="132" class="cn nodeDesc">判断节点：权限、房间人数、进入条件</text>
+    <rect x="46" y="164" width="54" height="36" rx="9" fill="#14110f"/>
+    <text x="122" y="191" class="cn nodeDesc">竖屏 UE 节点：玩家实际看到的状态图</text>
+    <rect x="46" y="223" width="54" height="36" rx="9" fill="#f0f9e8" stroke="#6e9a48" stroke-width="4"/>
+    <text x="122" y="250" class="cn nodeDesc">终态节点：无额外弹窗，进入下一场景 / 保持状态</text>
+  </g>
+
+  <path d="M2460 1058 V1395 H2220 V1762" class="arrow"/>
+  <text x="2480" y="1355" class="cn lineText">发起成功后通知成员确认</text>
+
+  <g id="reject-node" transform="translate(1550 2075)" filter="url(#nodeShadow)">
+    <rect x="0" y="0" width="330" height="150" class="nodeBox"/>
+    <text x="165" y="62" text-anchor="middle" class="cn nodeText">拒绝 / 超时</text>
+    <text x="165" y="106" text-anchor="middle" class="cn nodeDesc">不传送，保持原状态</text>
+  </g>
+
+  <g id="phone-08" transform="translate(2050 1780)" filter="url(#phoneShadow)">
+    <rect x="-20" y="-20" width="380" height="855" rx="24" fill="#14110f" stroke="#2c2723" stroke-width="6"/>
+    <image href="ff-battle-rally-08-member-confirm-popup.full.png" x="0" y="0" width="340" height="741" preserveAspectRatio="xMidYMid meet"/>
+    <text x="170" y="785" text-anchor="middle" class="cn phoneLabel">08 成员确认弹窗</text>
+    <text x="170" y="822" text-anchor="middle" class="cn phoneNote">前往 / 拒绝 / 超时</text>
+  </g>
+
+  <path d="M2030 2150 H1880" class="arrowThin"/>
+
+  <g id="confirm-node" filter="url(#nodeShadow)" transform="translate(2550 2050)">
+    <path d="M165 0 L330 100 L165 200 L0 100 Z" fill="#edf8ff" stroke="#5d95b5" stroke-width="5"/>
+    <text x="165" y="87" text-anchor="middle" class="cn nodeText">确认前往</text>
+    <text x="165" y="128" text-anchor="middle" class="cn nodeText">再次校验</text>
+  </g>
+
+  <path d="M2408 2150 H2550" class="arrow"/>
+
+  <g id="phone-09" transform="translate(3150 1660)" filter="url(#phoneShadow)">
+    <rect x="-18" y="-18" width="336" height="756" rx="22" fill="#14110f" stroke="#2c2723" stroke-width="6"/>
+    <image href="ff-battle-rally-09-member-room-full-tip.full.png" x="0" y="0" width="300" height="654" preserveAspectRatio="xMidYMid meet"/>
+    <text x="150" y="692" text-anchor="middle" class="cn phoneLabel">09 确认时房间满</text>
+    <text x="150" y="728" text-anchor="middle" class="cn phoneNote">不传送，提示失败</text>
+  </g>
+
+  <path d="M2715 2050 V1900 H3132" class="arrow"/>
+  <text x="2878" y="1868" class="cn lineText">房间已满</text>
+
+  <g id="phone-10" transform="translate(3150 2460)" filter="url(#phoneShadow)">
+    <rect x="-18" y="-18" width="336" height="756" rx="22" fill="#14110f" stroke="#2c2723" stroke-width="6"/>
+    <image href="ff-battle-rally-10-member-condition-fail-tip.full.png" x="0" y="0" width="300" height="654" preserveAspectRatio="xMidYMid meet"/>
+    <text x="150" y="692" text-anchor="middle" class="cn phoneLabel">10 条件不足</text>
+    <text x="150" y="728" text-anchor="middle" class="cn phoneNote">等级不足 / 其他限制</text>
+  </g>
+
+  <path d="M2880 2150 H3000 V2790 H3132" class="arrow"/>
+  <text x="2878" y="2770" text-anchor="end" class="cn lineText">房间未满，但条件不足</text>
+
+  <g id="enter-node" transform="translate(2550 3020)" filter="url(#nodeShadow)">
+    <rect x="0" y="0" width="330" height="150" class="terminal"/>
+    <text x="165" y="62" text-anchor="middle" class="cn nodeText">满足条件</text>
+    <text x="165" y="106" text-anchor="middle" class="cn nodeDesc">传送进入场景</text>
+  </g>
+
+  <path d="M2715 2250 V3020" class="arrow"/>
+  <text x="2748" y="2668" class="cn lineText">房间未满，且满足进入条件</text>
+
+  <text x="120" y="3378" class="cn ruleText">规则注记：发起校验失败时不发起集结、不扣除集结次数、不进入冷却；发起成功后扣除集结次数并通知成员确认。</text>
+  <text x="120" y="3424" class="cn ruleText">成员拒绝 / 超时 / 不可传送 / 确认时房间满，只影响该成员，不影响其他成员响应。</text>
+</svg>

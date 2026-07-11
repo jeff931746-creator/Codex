@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="887" height="1774" viewBox="0 0 887 1774">
+  <defs>
+    <linearGradient id="topCard" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c1b12" stop-opacity="0.86"/>
+      <stop offset="1" stop-color="#140b08" stop-opacity="0.86"/>
+    </linearGradient>
+    <linearGradient id="topLooseArea" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#392314" stop-opacity="0.58"/>
+      <stop offset="0.55" stop-color="#21130d" stop-opacity="0.66"/>
+      <stop offset="1" stop-color="#150b08" stop-opacity="0.54"/>
+    </linearGradient>
+    <linearGradient id="paperBand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d7c098" stop-opacity="0.98"/>
+      <stop offset="0.55" stop-color="#c8aa79" stop-opacity="0.98"/>
+      <stop offset="1" stop-color="#b89561" stop-opacity="0.98"/>
+    </linearGradient>
+    <linearGradient id="redButton" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#cf623b"/>
+      <stop offset="0.45" stop-color="#9f3828"/>
+      <stop offset="1" stop-color="#631f15"/>
+    </linearGradient>
+    <linearGradient id="redButtonEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0aa55"/>
+      <stop offset="0.5" stop-color="#6b2518"/>
+      <stop offset="1" stop-color="#2b0c07"/>
+    </linearGradient>
+    <filter id="softShadow" x="-18%" y="-30%" width="136%" height="170%">
+      <feDropShadow dx="0" dy="6" stdDeviation="5" flood-color="#150806" flood-opacity="0.58"/>
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#ffe0a0" flood-opacity="0.25"/>
+    </filter>
+    <filter id="textLift" x="-15%" y="-28%" width="130%" height="160%">
+      <feDropShadow dx="0" dy="2" stdDeviation="1.2" flood-color="#160806" flood-opacity="0.88"/>
+    </filter>
+    <filter id="roughen" x="-4%" y="-4%" width="108%" height="108%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.012" numOctaves="2" seed="7" result="noise"/>
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0.52 0 0 0 0 0.35 0 0 0 0 0.18 0 0 0 0.18 0" result="grain"/>
+      <feBlend in="SourceGraphic" in2="grain" mode="multiply"/>
+    </filter>
+    <style>
+      .cn-heavy {
+        font-family: "PingFang SC", "STHeiti", "Microsoft YaHei", sans-serif;
+        font-weight: 900;
+        letter-spacing: 0;
+        paint-order: stroke;
+        stroke-linejoin: round;
+      }
+      .title-text {
+        font-size: 38px;
+        fill: #4c2b18;
+        stroke: #d8c5a3;
+        stroke-width: 1.5px;
+      }
+      .white-text {
+        font-size: 34px;
+        fill: #fff3cf;
+        stroke: #170a06;
+        stroke-width: 5px;
+      }
+      .number-text {
+        font-size: 32px;
+        fill: #fff3cf;
+        stroke: #170a06;
+        stroke-width: 5px;
+      }
+      .button-text {
+        font-size: 34px;
+        fill: #fff1bf;
+        stroke: #32100a;
+        stroke-width: 5px;
+      }
+    </style>
+  </defs>
+
+  <image href="ff-legion-member-screen-v4-base.png" x="0" y="0" width="887" height="1774" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- Shorten the right information frame and remove the original in-frame number + management button. -->
+  <g filter="url(#roughen)">
+    <rect x="374" y="65" width="492" height="278" rx="12" fill="url(#topCard)" stroke="#7b4d1f" stroke-width="3" opacity="0.98"/>
+    <rect x="382" y="74" width="476" height="258" rx="8" fill="#1d120c" opacity="0.18"/>
+    <path d="M397 87 H484 L499 118 H412 Z" fill="#c67634" opacity="0.92"/>
+    <path d="M392 87 H487 L505 104 L486 126 H392 L374 106 Z" fill="#c57936" stroke="#5b2411" stroke-width="3" opacity="0.95"/>
+    <text x="443" y="116" text-anchor="middle" class="cn-heavy white-text" font-size="29">等级 2</text>
+    <text x="510" y="117" class="cn-heavy white-text">高人养老院</text>
+    <rect x="395" y="142" width="444" height="28" rx="7" fill="#160a06" stroke="#0d0503" stroke-width="3"/>
+    <rect x="395" y="142" width="0" height="28" rx="7" fill="#f5a323"/>
+    <text x="617" y="168" text-anchor="middle" class="cn-heavy white-text" font-size="29">0/100</text>
+    <text x="398" y="220" class="cn-heavy white-text" font-size="31">兄弟齐心，其利断金</text>
+    <line x1="394" y1="248" x2="844" y2="248" stroke="#d3b06e" stroke-width="4" opacity="0.55"/>
+    <text x="398" y="294" class="cn-heavy white-text" font-size="31">建设每天3次，欢迎活跃人士一同加油！</text>
+  </g>
+
+  <!-- Clean loose area below the shortened info frame. Number is now outside the frame, matching the reference structure. -->
+  <g filter="url(#textLift)">
+    <rect x="374" y="342" width="492" height="94" rx="8" fill="url(#topLooseArea)"/>
+    <text x="395" y="409" class="cn-heavy number-text">编号：126755445666548893</text>
+    <g transform="translate(830 374)" opacity="0.92">
+      <rect x="0" y="0" width="35" height="42" rx="4" fill="#f4ead2" stroke="#5e4028" stroke-width="4"/>
+      <line x1="9" y1="13" x2="26" y2="13" stroke="#7b6041" stroke-width="4" stroke-linecap="round"/>
+      <line x1="9" y1="23" x2="26" y2="23" stroke="#7b6041" stroke-width="4" stroke-linecap="round"/>
+      <line x1="9" y1="33" x2="21" y2="33" stroke="#7b6041" stroke-width="4" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <!-- Manager-only entrance moved out of the info frame and centered under the banner. -->
+  <g transform="translate(105 376)" filter="url(#softShadow)">
+    <path d="M10 2 H152 L167 17 V52 L153 68 H10 L0 57 V14 Z" fill="url(#redButtonEdge)" opacity="0.96"/>
+    <path d="M17 8 H145 L157 20 V49 L145 61 H17 L8 52 V18 Z" fill="url(#redButton)" stroke="#3b1009" stroke-width="4"/>
+    <path d="M27 15 H133" stroke="#f7b45b" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+    <path d="M24 53 H132" stroke="#361007" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+    <circle cx="24" cy="22" r="4" fill="#f3c469" opacity="0.8"/>
+    <circle cx="140" cy="22" r="4" fill="#f3c469" opacity="0.8"/>
+    <circle cx="24" cy="48" r="4" fill="#4a150e" opacity="0.7"/>
+    <circle cx="140" cy="48" r="4" fill="#4a150e" opacity="0.7"/>
+    <text x="83" y="47" text-anchor="middle" class="cn-heavy button-text">管理</text>
+  </g>
+
+  <!-- Member list title: show legion population after the label. -->
+  <g filter="url(#roughen)">
+    <rect x="45" y="688" width="797" height="73" rx="7" fill="url(#paperBand)" stroke="#806141" stroke-width="3"/>
+    <path d="M52 696 H835" stroke="#efe0bd" stroke-width="3" opacity="0.45"/>
+    <path d="M52 753 H835" stroke="#7b5b38" stroke-width="3" opacity="0.55"/>
+    <text x="84" y="737" class="cn-heavy title-text">军团成员（37/56）</text>
+    <text x="613" y="737" class="cn-heavy title-text">活跃度</text>
+  </g>
+</svg>

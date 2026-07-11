@@ -1,0 +1,175 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="430" height="820" viewBox="0 0 430 820">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7c4b2b"/>
+      <stop offset="0.42" stop-color="#b68855"/>
+      <stop offset="1" stop-color="#4b2d24"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#d8c39a"/>
+      <stop offset="1" stop-color="#b89a6e"/>
+    </linearGradient>
+    <linearGradient id="darkPanel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f261d" stop-opacity="0.88"/>
+      <stop offset="1" stop-color="#24140f" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="redBtn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9f4232"/>
+      <stop offset="1" stop-color="#6f241d"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#2b160d" flood-opacity="0.45"/>
+    </filter>
+    <style>
+      .title { font: 700 18px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #ffe6a8; }
+      .text { font: 500 13px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #4b2c1a; }
+      .light { font: 600 13px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #fff1bd; }
+      .muted { font: 500 12px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #8a6d4a; }
+      .small { font: 500 11px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #6f5638; }
+      .btn { font: 700 14px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #fff1bd; }
+      .tag { font: 700 10px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #fff0bb; }
+      .num { font: 700 13px "PingFang SC", "Microsoft YaHei", sans-serif; fill: #8b331d; }
+    </style>
+  </defs>
+
+  <rect width="430" height="820" rx="0" fill="#281a15"/>
+  <rect x="18" y="16" width="394" height="788" rx="20" fill="url(#bg)" filter="url(#shadow)"/>
+  <rect x="30" y="32" width="370" height="728" rx="10" fill="#c8ad82" opacity="0.94"/>
+
+  <!-- top guild information -->
+  <rect x="42" y="50" width="346" height="164" rx="8" fill="#9a704e" opacity="0.42"/>
+  <path d="M55 62 C96 42 145 50 182 64 C231 42 324 40 377 63 L377 199 C321 184 244 189 194 204 C140 188 96 187 55 202 Z" fill="#d6bd91" opacity="0.55"/>
+
+  <!-- banner -->
+  <g transform="translate(50 66)" filter="url(#shadow)">
+    <path d="M12 0 H112 L121 16 V105 L62 132 L3 105 V16 Z" fill="#a84432" stroke="#5c251a" stroke-width="3"/>
+    <path d="M26 16 H98 V92 L62 111 L26 92 Z" fill="#b9513c" stroke="#d79d58" stroke-width="2"/>
+    <path d="M62 38 L71 58 L93 60 L76 73 L81 95 L62 83 L43 95 L48 73 L31 60 L53 58 Z" fill="#f0c66a"/>
+    <circle cx="62" cy="69" r="17" fill="none" stroke="#7a2c20" stroke-width="4"/>
+  </g>
+
+  <!-- management button under banner -->
+  <g filter="url(#shadow)">
+    <rect x="73" y="203" width="76" height="34" rx="4" fill="url(#redBtn)" stroke="#4d1b15" stroke-width="2"/>
+    <text x="111" y="225" class="btn" text-anchor="middle">管理</text>
+  </g>
+
+  <!-- info card -->
+  <rect x="178" y="70" width="198" height="122" rx="6" fill="url(#darkPanel)"/>
+  <text x="191" y="94" class="title">等级 2  高人养老院</text>
+  <rect x="191" y="104" width="142" height="13" rx="3" fill="#412218"/>
+  <rect x="191" y="104" width="38" height="13" rx="3" fill="#f0b644"/>
+  <text x="340" y="116" class="light" text-anchor="end">0/100</text>
+  <text x="191" y="140" class="light">兄弟齐心，其利断金</text>
+  <text x="191" y="168" class="light">建设每天3次，欢迎活跃人士一同加油！</text>
+
+  <!-- officer strip -->
+  <rect x="42" y="246" width="346" height="96" rx="7" fill="#b49467" opacity="0.95" stroke="#6b4a2e" stroke-width="2"/>
+  <g transform="translate(58 258)">
+    <g>
+      <circle cx="28" cy="34" r="24" fill="#4b2c25" stroke="#2c1712" stroke-width="2"/>
+      <circle cx="28" cy="31" r="17" fill="#f1c083"/>
+      <path d="M13 12 H43 L37 1 L28 11 L19 1 Z" fill="#d7a23f"/>
+      <rect x="8" y="58" width="40" height="16" rx="5" fill="#b65b32"/>
+      <text x="28" y="70" class="tag" text-anchor="middle">盟主</text>
+      <text x="28" y="87" class="small" text-anchor="middle">名字名字</text>
+    </g>
+    <g transform="translate(82 0)">
+      <circle cx="28" cy="34" r="24" fill="#4b2c25" stroke="#2c1712" stroke-width="2"/>
+      <circle cx="28" cy="31" r="17" fill="#f1c083"/>
+      <rect x="8" y="58" width="40" height="16" rx="5" fill="#b65b32"/>
+      <text x="28" y="70" class="tag" text-anchor="middle">大将军</text>
+      <text x="28" y="87" class="small" text-anchor="middle">名字名字</text>
+    </g>
+    <g transform="translate(164 0)">
+      <circle cx="28" cy="34" r="24" fill="#4b2c25" stroke="#2c1712" stroke-width="2"/>
+      <circle cx="28" cy="31" r="17" fill="#f1c083"/>
+      <rect x="8" y="58" width="40" height="16" rx="5" fill="#b65b32"/>
+      <text x="28" y="70" class="tag" text-anchor="middle">外交官</text>
+      <text x="28" y="87" class="small" text-anchor="middle">名字名字</text>
+    </g>
+    <g transform="translate(246 0)">
+      <circle cx="28" cy="34" r="24" fill="#4b2c25" stroke="#2c1712" stroke-width="2"/>
+      <circle cx="28" cy="31" r="17" fill="#f1c083"/>
+      <rect x="8" y="58" width="40" height="16" rx="5" fill="#b65b32"/>
+      <text x="28" y="70" class="tag" text-anchor="middle">军师</text>
+      <text x="28" y="87" class="small" text-anchor="middle">名字名字</text>
+    </g>
+  </g>
+
+  <!-- list header -->
+  <rect x="42" y="356" width="346" height="28" rx="3" fill="#d6bd91" stroke="#876342" stroke-width="1.5"/>
+  <text x="61" y="375" class="text">军团成员（最高战力）</text>
+  <text x="336" y="375" class="text" text-anchor="middle">活跃度</text>
+
+  <!-- member rows -->
+  <g>
+    <rect x="42" y="390" width="346" height="68" rx="5" fill="url(#panel)" stroke="#755332" stroke-width="2"/>
+    <circle cx="76" cy="424" r="23" fill="#3c2720" stroke="#2a1711" stroke-width="2"/>
+    <circle cx="76" cy="421" r="15" fill="#f3c08a"/>
+    <rect x="102" y="402" width="36" height="18" rx="5" fill="#b65b32"/>
+    <text x="120" y="416" class="tag" text-anchor="middle">盟主</text>
+    <text x="143" y="416" class="text">最帅之王</text>
+    <text x="214" y="416" font-family="PingFang SC, Microsoft YaHei, sans-serif" font-size="12" font-weight="700" fill="#2fa64a">在线</text>
+    <path d="M106 430 H178 L170 450 H98 Z" fill="#a93625" stroke="#5b1b13" stroke-width="1.5"/>
+    <text x="139" y="445" class="light" text-anchor="middle">778K</text>
+    <path d="M303 407 L321 414 V432 C321 444 312 450 303 454 C294 450 285 444 285 432 V414 Z" fill="#c89032" stroke="#80521c" stroke-width="2"/>
+    <text x="336" y="430" class="num" text-anchor="middle">266/520</text>
+    <text x="336" y="448" class="muted" text-anchor="middle">今日</text>
+  </g>
+
+  <g transform="translate(0 76)">
+    <rect x="42" y="390" width="346" height="68" rx="5" fill="url(#panel)" stroke="#755332" stroke-width="2"/>
+    <circle cx="76" cy="424" r="23" fill="#3c2720" stroke="#2a1711" stroke-width="2"/>
+    <circle cx="76" cy="421" r="15" fill="#f3c08a"/>
+    <text x="102" y="416" class="text">最帅之王</text>
+    <text x="168" y="416" class="muted">18天前</text>
+    <path d="M106 430 H178 L170 450 H98 Z" fill="#a93625" stroke="#5b1b13" stroke-width="1.5"/>
+    <text x="139" y="445" class="light" text-anchor="middle">778K</text>
+    <path d="M303 407 L321 414 V432 C321 444 312 450 303 454 C294 450 285 444 285 432 V414 Z" fill="#c89032" stroke="#80521c" stroke-width="2"/>
+    <text x="336" y="430" class="num" text-anchor="middle">266/520</text>
+    <text x="336" y="448" class="muted" text-anchor="middle">本周</text>
+  </g>
+
+  <g transform="translate(0 152)">
+    <rect x="42" y="390" width="346" height="68" rx="5" fill="url(#panel)" stroke="#755332" stroke-width="2"/>
+    <circle cx="76" cy="424" r="23" fill="#3c2720" stroke="#2a1711" stroke-width="2"/>
+    <circle cx="76" cy="421" r="15" fill="#f3c08a"/>
+    <text x="102" y="416" class="text">最帅之王</text>
+    <text x="168" y="416" class="muted">18天前</text>
+    <path d="M106 430 H178 L170 450 H98 Z" fill="#a93625" stroke="#5b1b13" stroke-width="1.5"/>
+    <text x="139" y="445" class="light" text-anchor="middle">778K</text>
+    <path d="M303 407 L321 414 V432 C321 444 312 450 303 454 C294 450 285 444 285 432 V414 Z" fill="#c89032" stroke="#80521c" stroke-width="2"/>
+    <text x="336" y="430" class="num" text-anchor="middle">266/520</text>
+    <text x="336" y="448" class="muted" text-anchor="middle">本周</text>
+  </g>
+
+  <g transform="translate(0 228)">
+    <rect x="42" y="390" width="346" height="68" rx="5" fill="url(#panel)" stroke="#755332" stroke-width="2"/>
+    <circle cx="76" cy="424" r="23" fill="#3c2720" stroke="#2a1711" stroke-width="2"/>
+    <circle cx="76" cy="421" r="15" fill="#f3c08a"/>
+    <text x="102" y="416" class="text">最帅之王</text>
+    <text x="168" y="416" class="muted">18天前</text>
+    <path d="M106 430 H178 L170 450 H98 Z" fill="#a93625" stroke="#5b1b13" stroke-width="1.5"/>
+    <text x="139" y="445" class="light" text-anchor="middle">778K</text>
+    <path d="M303 407 L321 414 V432 C321 444 312 450 303 454 C294 450 285 444 285 432 V414 Z" fill="#c89032" stroke="#80521c" stroke-width="2"/>
+    <text x="336" y="430" class="num" text-anchor="middle">266/520</text>
+    <text x="336" y="448" class="muted" text-anchor="middle">本周</text>
+  </g>
+
+  <!-- bottom navigation -->
+  <rect x="18" y="760" width="394" height="44" rx="0" fill="#3a2119"/>
+  <path d="M52 782 L78 766 L78 776 H111 V790 H78 V800 Z" fill="#c3523c" stroke="#29110d" stroke-width="2"/>
+  <g>
+    <rect x="165" y="765" width="56" height="48" rx="5" fill="#d5c2a3" stroke="#3d251b" stroke-width="2"/>
+    <text x="193" y="795" class="text" text-anchor="middle">成员</text>
+  </g>
+  <g>
+    <rect x="240" y="765" width="56" height="48" rx="5" fill="#8f6c4a" stroke="#3d251b" stroke-width="2"/>
+    <text x="268" y="795" class="light" text-anchor="middle">日志</text>
+  </g>
+  <g>
+    <rect x="315" y="765" width="56" height="48" rx="5" fill="#8f6c4a" stroke="#3d251b" stroke-width="2"/>
+    <text x="343" y="795" class="light" text-anchor="middle">申请</text>
+  </g>
+</svg>

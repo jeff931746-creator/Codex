@@ -54,6 +54,8 @@ Do not trigger this route for:
 
 When `analysis`, `doc-change`, or `knowledge-asset` work produces a Markdown or text deliverable, apply `reference/部门标准/通用/交付型文档写作标准.md` before `review`, `self-review`, or `validation`.
 
+Exception: documents covered by the GDD writing or review route do not use the general delivery-writing standard as a content or structure judge. Their正文 quality is judged only by the current G4/M3/G5/M4/G6 and independent-review principles; the output template remains non-normative.
+
 The standard is a content standard. It defines the first-principles priority for deliverables: decision value first, then conclusion, mechanism, boundary, flow, and necessary evidence.
 
 Do not turn this standard into a copied template. `.agents/hooks/check-content-governance-gates.py` enforces the detectable violations; the source of truth remains under `reference/部门标准/`.
@@ -115,7 +117,7 @@ Use for code review, document review, QA, scoring, and verification.
 Gates: `intake` -> `plan` -> `standard-check` -> `target-inspection` -> `findings` -> `cross-check` -> `delivery`
 
 - `standard-check`: locate applicable standards in `reference/部门标准/` or user-provided standards. If none exist, report the gap and wait for direction.
-- `standard-check` for game design documents: when the reviewed object is a game feature proposal, feature requirements document, system design, gameplay design, activity/economy/monetization design, GDD, or a user says `审核这个案子` / `review 这个设计文档`, first read `reference/部门标准/策划/gdd/GDD写作标准.md` and, when useful, `reference/部门标准/策划/gdd/GDD输出模板.md`. Then add narrower standards such as system-planning, numeric review, project-initiation, art, or development standards. Narrower standards may only supplement the GDD review; they must not replace it.
+- `standard-check` for game design documents: when the reviewed object is a game feature proposal, feature requirements document, system design, gameplay design, activity/economy/monetization design, GDD, or a user says `审核这个案子` / `review 这个设计文档`, first read `reference/部门标准/策划/gdd/多Agent设计文档工作流.md`、`多Agent设计文档判断原则/子Agent/独立审核原则.md` and `archive/skills/skills/gdd-review/SKILL.md`; read `GDD输出模板.md` only to confirm delivery structure. Then add narrower standards such as system-planning, numeric review, project-initiation, art, or development standards. Narrower standards may only supplement the node principles; they must not replace them.
 - `target-inspection`: the reviewed object is fully identified.
 - `findings`: findings are based on confirmed standards, not ad hoc criteria.
 - `cross-check`: findings are tied to evidence.
@@ -268,9 +270,9 @@ Keep the main thread focused on task type, current/completed/next gates, approve
 | Read-heavy/noisy/verification-only work | delegate or parallelize |
 | Shared assets edited | local validation + Git review + independent-review checkpoint |
 | `knowledge-asset` + `strict` changes scoped long-term workflow assets without matching independent-review checkpoint | block delivery |
-| `delivery-writing`: deliverable text violates `reference/部门标准/通用/交付型文档写作标准.md` expression requirements | block delivery; rewrite as conclusion, mechanism, boundary, or flow, or add a valid hidden allow marker when the example is required for execution disambiguation |
+| `delivery-writing`: a non-GDD deliverable violates `reference/部门标准/通用/交付型文档写作标准.md` expression requirements | block delivery; rewrite as conclusion, mechanism, boundary, or flow, or add a valid hidden allow marker when the example is required for execution disambiguation |
 | `analysis-scaffold`: deliverable text violates `reference/部门标准/策划/机制拆解/拆解质量标准.md` expression requirements | block delivery; return to the standard and rewrite as natural conclusion + logic paragraphs |
-| Game design document/case review starts without GDD standard in `standard-check` | rewind to `standard-check`; previous output is draft until checked against GDD |
+| Game design document/case review starts without the GDD workflow and independent-review principle in `standard-check` | rewind to `standard-check`; previous output is draft until checked against the collaboration-stage principles |
 | New game design document/GDD writing starts without `gdd-write` and the multi-Agent workflow source | rewind to GDD writing route |
 | GDD writing main agent interprets business evidence before G1 | discard that interpretation as workflow evidence; restart G1 with an unpolluted task package |
 | Game feature/system/activity/economy/monetization design answer is being formed in chat without `gdd-write`, even if described as draft, direction, discussion, partial feature scheme, section draft, or no-file output | block delivery; rewind to GDD writing route; do not deliver the feature scheme from the main thread |

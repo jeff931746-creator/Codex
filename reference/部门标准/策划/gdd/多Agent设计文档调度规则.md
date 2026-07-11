@@ -18,19 +18,19 @@
 - 本工作流和本调度规则
 - 当前运行时可用的子 Agent / delegation 能力
 
-命中 GDD 写作流程后，参考 GDD、历史记忆、机制资料、竞品资料、业务正文、已有设计文档正文等业务证据，必须作为 G1 输入交给子 Agent 首次读取和拆解。
+命中 GDD 写作流程后，参考 GDD、历史记忆、机制资料、竞品资料、业务正文、已有设计文档正文等业务证据，必须作为 G1 输入交给子 Agent 首次读取并还原设计目的。
 
 主 Agent 在 G1 之前不得：
 
-- 提炼玩法目的、交付对象或正文结构
+- 提炼设计目的、交付对象或正文结构
 - 提炼手段框架
-- 提炼设计目标、意图或边界
-- 判断结构依据、交付结构或功能定位
+- 提炼设计边界
+- 判断结构依据、独立功能结构或功能定位
 - 从历史记忆合成方案方向
 - 把参考资料中的机制关系改写成候选方案
 - 输出“我会把 X 设计成 Y”这类设计结论
 
-如果主 Agent 已经越界读取并解释了业务证据，该解释只能作为污染风险记录，不得作为 G1/M1 证据；必须重新启动 G1，让子 Agent 在不继承该业务结论的任务包中完成资料与层级拆解。
+如果主 Agent 已经越界读取并解释了业务证据，该解释只能作为污染风险记录，不得作为 G1/M1 证据；必须重新启动 G1，让子 Agent 在不继承该业务结论的任务包中完成设计目的还原。
 
 ## 状态字典
 
@@ -38,16 +38,23 @@
 
 - confirmed_facts
 - unknown_facts
-- candidate_design_problems
-- candidate_design_goals
-- candidate_design_intents
-- confirmed_play_purpose
+- candidate_design_purposes
+- candidate_upper_game_framework
+- candidate_core_or_system_loop
+- candidate_loop_gap
+- non_purpose_materials
+- confirmed_design_purpose
+- confirmed_loop_basis
+- confirmed_loop_gap
+- confirmed_exploration_boundary
+- candidate_means_frameworks
+- candidate_design_objects
+- candidate_delivery_objects
+- candidate_structure_bases
 - confirmed_means_framework
-- confirmed_goal
-- confirmed_intent
 - confirmed_design_object
 - confirmed_delivery_objects
-- confirmed_boundary
+- confirmed_delivery_boundary
 - confirmed_structure_basis
 - confirmed_features
 - confirmed_ue
@@ -104,7 +111,7 @@ DeepSeek 等 LLM 可以作为 G5 后的文本优化工具，但只能产出候�
 启用模型文本优化时，必须满足：
 
 1. 只通过统一 LLM 入口调用，例如 `archive/tools/lib/llm_client.py`；不得恢复 runtime 专属 wrapper，也不得在业务脚本中散落 key、endpoint 或鉴权逻辑。
-2. 输入上下文只包含 G5 草稿、M1-M3 已确认结论、当前资料覆盖范围、待确认项、写作标准和明确优化提示词。M4 在 G5-D 之后执行，不得作为模型优化输入前置条件。
+2. 输入上下文只包含 G5 草稿、M1-M3 已确认结论、当前资料覆盖范围、待确认项、G5 写作原则和明确优化提示词。M4 在 G5-D 之后执行，不得作为模型优化输入前置条件。
 3. 提示词必须要求模型只使用输入资料；资料未覆盖的内容标注“资料未覆盖”，不得补玩法、奖励、数值、系统能力或项目事实。
 4. 输出必须写入新文件或候选稿槽位，不得覆盖 G5 原稿或用户指定的正式文档。
 5. 输出状态必须标记为候选稿、待验收稿或 DeepSeek 优化稿；在 M4、G6 和 `gdd-review` 通过前，不得命名或汇报为正式可交付版。
@@ -154,16 +161,18 @@ DeepSeek 等 LLM 可以作为 G5 后的文本优化工具，但只能产出候�
 
 每个主策确认点都必须形成可恢复 checkpoint：
 
-- M1 通过后，落盘 G1/G2 产物、已确认玩法目的、手段框架、设计对象、交付对象边界、设计意图和边界。
-- M2 通过后，落盘已复核的手段框架和已确认结构依据。
+- M1 通过后，落盘 G1/G2 产物、已锁定设计目的、循环依据、当前缺口、非目的内容和探索边界。
+- M2 通过后，落盘已确认的手段框架、设计对象、交付对象边界和结构依据。
 - M3 通过后，落盘已确认功能点、规则、状态和 UE 要求。
 - G5-D 模型优化后，落盘候选稿、模型输入摘要、提示词版本和差异守门报告。
 - M4 通过后，落盘待验收文档草稿。
-- G6 通过后，落盘最终交付版本。
+- G6 通过后，保留 M4 已确认正文作为交付版本，并单独落盘 G6 交付验收记录；不得把验收记录追加到交付正文。
 
 推荐落盘位置：
 
 `workspace/tmp/agent-checkpoints/gdd-write/<doc-id>/`
+
+G6 交付验收记录也保存在该 checkpoint 目录。用户指定的正式 GDD 路径只保存设计正文，不保存阶段裁决、验收依据或审核结论。
 
 如果运行中断，应优先从最近一个已确认 checkpoint 恢复，而不是从头重跑。
 
@@ -175,6 +184,7 @@ DeepSeek 等 LLM 可以作为 G5 后的文本优化工具，但只能产出候�
 
 - 方向验证稿在 G6 通过后可交付。
 - 正式 GDD 在 G6 通过后，必须继续调用 `gdd-review`。
+- G6 和 `gdd-review` 的结论均为独立流程记录，不得回写为 GDD 章节或附录。
 - 正式 `gdd-review` 必须由非生产者执行。参与 G5 写作、DeepSeek 上下文装配、提示词编写、候选稿修改、blocking issue 修复的主 Agent 或写作 Agent，都不能作为该稿件的唯一正式通过验收者。
 - DeepSeek 自检、主 Agent 自检、差异守门报告都只能作为验收材料，不能作为正式通过结论。
 - `gdd-review` 通过前，正式 GDD 不得视为正式交付完成；若当前运行环境没有可用的非生产者 reviewer，只能交付“已完成自检，未完成正式独立验收”的状态说明。
@@ -188,9 +198,9 @@ DeepSeek 等 LLM 可以作为 G5 后的文本优化工具，但只能产出候�
 - 调度规则已读。
 - 当前阶段对应判断原则已读。
 - 主策确认点均有明确结论。
-- 手段框架裁决已完成，并被后续结构依据和交付结构承接。
+- 手段框架裁决已完成，并被后续结构依据和独立功能承接。
 - 打回计数未超限，或已完成主策裁决。
-- 写作标准和输出模板已应用。
+- 当前节点判断原则和输出模板已应用。
 - 若启用 DeepSeek 等 LLM 文本优化，候选稿、提示词版本和差异守门报告已落盘。
 - 交付验收已通过。
 - 正式 GDD 已通过非生产者 `gdd-review`。

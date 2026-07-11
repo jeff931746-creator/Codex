@@ -37,7 +37,7 @@ Check this table before selecting a project-local skill. Stop at the first match
 | Download Forevernine source materials | `forevernine-material-downloader` | Do not process items manually one by one |
 | Evaluate ad-buying material combinations | `买量组合评估` | Do not skip evidence chains and give subjective scores |
 | Write a feature GDD | `gdd-write` | Do not output the full document directly; confirm step by step |
-| Review or self-review a GDD, feature design document, system design, gameplay/design proposal, or "case/案子" for a game feature | `gdd-review` | Do not perform informal inline review; do not let system-planning, numeric, or project-initiation standards replace the GDD standard |
+| Review or self-review a GDD, feature design document, system design, gameplay/design proposal, or "case/案子" for a game feature | `gdd-review` | Do not perform informal inline review; do not let system-planning, numeric, or project-initiation standards replace the GDD collaboration-stage principles |
 | Determine task flow intensity | `.agents/rules/task-flow.md` | Do not execute complex tasks without routing |
 | Before compact or clear | `.agents/memory/` plus current runtime memory protocol | Do not compress before preserving important constraints |
 | Resume an existing task | `.agents/memory/` plus current runtime memory protocol | Do not infer state only from another runtime's private memory |

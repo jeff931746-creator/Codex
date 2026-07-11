@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#6b4725"/>
+    </marker>
+    <linearGradient id="box" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff4d4"/>
+      <stop offset="1" stop-color="#ead0a4"/>
+    </linearGradient>
+    <linearGradient id="tip" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a2b18"/>
+      <stop offset="1" stop-color="#1d1009"/>
+    </linearGradient>
+    <style>
+      .cn { font-family: "PingFang SC", "STHeiti", "Microsoft YaHei", sans-serif; font-weight: 800; letter-spacing: 0; }
+      .title { font-size: 34px; fill: #3c2818; font-weight: 900; }
+      .h { font-size: 23px; fill: #3c2818; font-weight: 900; }
+      .body { font-size: 18px; fill: #5f452e; }
+      .small { font-size: 16px; fill: #6e543b; }
+      .tipText { font-size: 18px; fill: #fff2c1; font-weight: 900; }
+      .link { stroke: #6b4725; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+      .thin { stroke: #9c7548; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1600" height="980" fill="#f4ead7"/>
+  <text x="48" y="58" class="cn title">战斗集结入口状态图</text>
+  <text x="48" y="94" class="cn body">按“权限 -> 发起校验 -> 扣次数并通知 -> 成员确认 -> 传送校验”组织界面状态；提示状态必须包含提示文案。</text>
+
+  <g transform="translate(52 142)">
+    <rect x="0" y="0" width="250" height="128" rx="14" fill="url(#box)" stroke="#7c5634" stroke-width="3"/>
+    <text x="22" y="38" class="cn h">0. 无权限</text>
+    <text x="22" y="72" class="cn body">普通成员</text>
+    <text x="22" y="102" class="cn small">不显示召集按钮</text>
+  </g>
+
+  <g transform="translate(372 142)">
+    <rect x="0" y="0" width="250" height="128" rx="14" fill="url(#box)" stroke="#7c5634" stroke-width="3"/>
+    <text x="22" y="38" class="cn h">1. 有权限可点击</text>
+    <text x="22" y="72" class="cn body">盟主/副盟主/配置职位</text>
+    <text x="22" y="102" class="cn small">显示右侧召集按钮</text>
+  </g>
+
+  <g transform="translate(692 142)">
+    <rect x="0" y="0" width="250" height="128" rx="14" fill="url(#box)" stroke="#7c5634" stroke-width="3"/>
+    <text x="22" y="38" class="cn h">2. 冷却</text>
+    <text x="22" y="72" class="cn body">按钮显示冷却时间</text>
+    <text x="22" y="102" class="cn small">点击出冷却提示</text>
+  </g>
+
+  <g transform="translate(1012 142)">
+    <rect x="0" y="0" width="250" height="128" rx="14" fill="url(#box)" stroke="#7c5634" stroke-width="3"/>
+    <text x="22" y="38" class="cn h">3. 次数用完</text>
+    <text x="22" y="72" class="cn body">按钮显示 0/3 用完</text>
+    <text x="22" y="102" class="cn small">点击出次数用完提示</text>
+  </g>
+
+  <path d="M302 206 H360" class="link"/>
+  <path d="M622 206 H680" class="thin"/>
+  <path d="M942 206 H1000" class="thin"/>
+
+  <g transform="translate(372 350)">
+    <rect x="0" y="0" width="250" height="128" rx="14" fill="url(#box)" stroke="#7c5634" stroke-width="3"/>
+    <text x="22" y="38" class="cn h">点击召集</text>
+    <text x="22" y="72" class="cn body">先校验当前房间人数</text>
+    <text x="22" y="102" class="cn small">未满才可发起</text>
+  </g>
+
+  <g transform="translate(52 350)">
+    <rect x="0" y="0" width="250" height="128" rx="14" fill="url(#tip)" stroke="#d9a34a" stroke-width="3"/>
+    <text x="22" y="38" class="cn tipText">6. 房间已满提示</text>
+    <text x="22" y="76" class="cn tipText">当前房间人数已满</text>
+    <text x="22" y="104" class="cn tipText">无法使用集结</text>
+  </g>
+
+  <g transform="translate(692 350)">
+    <rect x="0" y="0" width="250" height="128" rx="14" fill="url(#box)" stroke="#7c5634" stroke-width="3"/>
+    <text x="22" y="38" class="cn h">7. 发起成功</text>
+    <text x="22" y="72" class="cn body">扣除集结次数</text>
+    <text x="22" y="102" class="cn small">通知军团成员确认</text>
+  </g>
+
+  <path d="M497 270 V340" class="link"/>
+  <path d="M372 414 H312" class="thin"/>
+  <path d="M622 414 H680" class="link"/>
+
+  <g transform="translate(692 562)">
+    <rect x="0" y="0" width="250" height="146" rx="14" fill="url(#box)" stroke="#7c5634" stroke-width="3"/>
+    <text x="22" y="38" class="cn h">8. 成员确认弹窗</text>
+    <text x="22" y="72" class="cn body">前往 / 拒绝</text>
+    <text x="22" y="102" class="cn small">拒绝/超时不传送</text>
+    <text x="22" y="128" class="cn small">确认后再校验</text>
+  </g>
+
+  <path d="M817 478 V552" class="link"/>
+
+  <g transform="translate(1012 562)">
+    <rect x="0" y="0" width="250" height="146" rx="14" fill="url(#tip)" stroke="#d9a34a" stroke-width="3"/>
+    <text x="22" y="38" class="cn tipText">9. 确认时房间已满</text>
+    <text x="22" y="78" class="cn tipText">房间人数已满</text>
+    <text x="22" y="108" class="cn tipText">传送失败</text>
+  </g>
+
+  <g transform="translate(1328 562)">
+    <rect x="0" y="0" width="220" height="146" rx="14" fill="url(#tip)" stroke="#d9a34a" stroke-width="3"/>
+    <text x="18" y="38" class="cn tipText">10. 条件不足</text>
+    <text x="18" y="78" class="cn tipText">等级不足</text>
+    <text x="18" y="108" class="cn tipText">无法进入</text>
+  </g>
+
+  <g transform="translate(692 794)">
+    <rect x="0" y="0" width="250" height="98" rx="14" fill="#dff0cf" stroke="#6b8a3a" stroke-width="3"/>
+    <text x="22" y="38" class="cn h">满足条件</text>
+    <text x="22" y="72" class="cn body">传送进入场景</text>
+  </g>
+
+  <path d="M942 635 H1000" class="thin"/>
+  <path d="M1262 635 H1316" class="thin"/>
+  <path d="M817 708 V784" class="link"/>
+
+  <g transform="translate(52 828)">
+    <rect x="0" y="0" width="540" height="76" rx="14" fill="#fff8e9" stroke="#b68a4a" stroke-width="2"/>
+    <text x="24" y="32" class="cn body">发起校验失败：不发起集结，不扣次数，不进入冷却。</text>
+    <text x="24" y="60" class="cn body">成员拒绝 / 超时 / 不可传送：只影响该成员，不影响其他成员响应。</text>
+  </g>
+</svg>

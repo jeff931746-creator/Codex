@@ -8,7 +8,7 @@ from hook_utils import WORKSPACE, checkpoint_path, deny, git_diff_hash, in_scope
 
 DOC_EXTENSIONS = ('.md', '.txt', '.docx')
 SCAFFOLD_TEXT_EXTENSIONS = ('.md', '.txt')
-DESIGN_WORDS = ('GDD', 'gdd', '设计', '方案', '玩法', '系统', '活动', '经济', '商业化', '数值', '机制')
+DESIGN_WORDS = ('GDD', 'gdd', '设计', '方案', '功能', '玩法', '系统', '活动', '经济', '商业化', '数值', '机制')
 MECHANISM_PATHS = ('archive/资料/机制库/', 'reference/部门标准/策划/机制拆解/', 'archive/skills/skills/游戏机制拆解/')
 CAPABILITY_PATHS = ('reference/部门标准/', 'archive/skills/skills/', 'archive/方法论/', 'archive/资料/')
 PROMOTION_PATHS = ('archive/', 'reference/')
@@ -128,6 +128,8 @@ def requires_delivery_writing_check(path: str) -> bool:
     if path == DELIVERY_WRITING_STANDARD_PATH:
         return False
     if is_agent_internal(path) or not path.endswith(SCAFFOLD_TEXT_EXTENSIONS):
+        return False
+    if requires_design_review(path):
         return False
     return path.startswith('workspace/projects/') or path.startswith('archive/') or path.startswith('reference/')
 

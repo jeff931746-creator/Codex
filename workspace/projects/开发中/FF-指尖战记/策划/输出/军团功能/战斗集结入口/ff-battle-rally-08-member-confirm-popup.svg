@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="1525" viewBox="0 0 700 1525">
+  <defs>
+    <linearGradient id="yellowBtn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff76b"/><stop offset="0.55" stop-color="#f3df26"/><stop offset="1" stop-color="#d5b70f"/></linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4a2a17" stop-opacity="0.98"/><stop offset="1" stop-color="#1b0f08" stop-opacity="0.98"/></linearGradient>
+    <filter id="drop" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="7" stdDeviation="6" flood-color="#090605" flood-opacity="0.78"/></filter>
+    <style>
+      .cn { font-family: "PingFang SC", "STHeiti", "Microsoft YaHei", sans-serif; font-weight: 900; letter-spacing: 0; paint-order: stroke; stroke-linejoin: round; }
+      .label { fill: #fff2c1; stroke: #1b0d07; stroke-width: 4px; }
+      .plain { fill: #f6e6c0; stroke: none; }
+    </style>
+  </defs>
+  <image href="ff-battle-rally-reference.jpg" x="0" y="0" width="700" height="1525" preserveAspectRatio="xMidYMid meet"/>
+  <rect x="0" y="0" width="700" height="1525" fill="#080604" opacity="0.24"/>
+  <g transform="translate(88 560)" filter="url(#drop)">
+    <path d="M22 0 H494 C508 0 520 12 520 26 V268 C520 282 508 294 494 294 H22 C8 294 -4 282 -4 268 V26 C-4 12 8 0 22 0 Z" fill="url(#panel)" stroke="#e2b36b" stroke-width="4"/>
+    <path d="M34 24 H478 C487 24 494 31 494 40 V92 C494 101 487 108 478 108 H34 C25 108 18 101 18 92 V40 C18 31 25 24 34 24 Z" fill="#2a190e" stroke="#6d4728" stroke-width="2"/>
+    <text x="256" y="62" text-anchor="middle" class="cn label" font-size="30">盟主发起集结</text>
+    <text x="256" y="94" text-anchor="middle" class="cn label" font-size="21">前往当前玩法房间</text>
+    <text x="48" y="150" class="cn plain" font-size="19">确认后将再次校验房间人数</text>
+    <text x="48" y="181" class="cn plain" font-size="19">拒绝或超时不传送，保持原状态</text>
+    <text x="454" y="207" text-anchor="end" class="cn label" font-size="28">00:29</text>
+    <rect x="58" y="232" width="166" height="48" rx="13" fill="#c76e2c" stroke="#4c210d" stroke-width="4"/>
+    <text x="141" y="264" text-anchor="middle" class="cn label" font-size="24">前往</text>
+    <rect x="292" y="232" width="166" height="48" rx="13" fill="#4f4036" stroke="#20130c" stroke-width="4"/>
+    <text x="375" y="264" text-anchor="middle" class="cn label" font-size="24">拒绝</text>
+  </g>
+  <g transform="translate(627 1284)" filter="url(#drop)">
+    <circle cx="0" cy="0" r="47" fill="url(#yellowBtn)" stroke="#6a5608" stroke-width="4"/>
+    <circle cx="0" cy="0" r="39" fill="none" stroke="#fffaa0" stroke-width="3" opacity="0.92"/>
+    <text x="0" y="10" text-anchor="middle" class="cn" font-size="28" fill="#3f3404" stroke="none">技能</text>
+  </g>
+</svg>
