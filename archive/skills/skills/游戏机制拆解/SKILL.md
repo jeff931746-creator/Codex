@@ -7,6 +7,8 @@ description: 按当前机制拆解标准，对游戏玩法或系统进行事实�
 
 本 Skill 只执行当前拆解标准，不继承旧机制库写法。
 
+执行前必须读取 `/Users/mt/Documents/Codex-codex-work/reference/部门标准/策划/策划决策权规则.md`。本 Skill 只产出事实、分析、候选结论和建议，不替用户作出项目或策划选择。
+
 ## 真相源
 
 唯一当前标准：

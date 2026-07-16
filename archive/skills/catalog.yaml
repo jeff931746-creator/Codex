@@ -55,6 +55,13 @@ skills:
     owner: "mt"
     runtime_target: "/Users/mt/.codex/skills/mmd-to-image"
     notes: "将 Mermaid .mmd 或 fenced mermaid 代码块渲染为 PNG/SVG/PDF，封装 mmdc/npx 选择与输出检查。"
+  - name: "create-visual-assets"
+    path: "skills/create-visual-assets"
+    status: "active"
+    scope: "global"
+    owner: "mt"
+    runtime_target: "/Users/mt/.codex/skills/create-visual-assets"
+    notes: "视觉资产生成管线：SVG 由 Codex 直接编写，位图和图生图固定调用盘古 GPT-image-2。"
 repo:
   source_of_truth: "/Users/mt/Documents/Codex/tools/codex-skills-repo"
   runtime_skills_dir: "/Users/mt/.codex/skills"

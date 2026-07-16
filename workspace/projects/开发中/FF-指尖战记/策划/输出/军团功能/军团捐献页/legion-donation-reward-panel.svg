@@ -296,7 +296,7 @@
   <g filter="url(#shadow)">
     <path d="M280 788 H607 L635 815 L608 847 H279 L252 816 Z" fill="url(#titleWood)" stroke="#160b07" stroke-width="7" stroke-linejoin="round"/>
     <path d="M300 803 H588" stroke="#b5834d" stroke-width="4" opacity="0.7"/>
-    <text x="444" y="831" text-anchor="middle" class="cn cream-title" font-size="39">选择捐献档位</text>
+    <text x="444" y="831" text-anchor="middle" class="cn cream-title" font-size="39">选择捐献</text>
     <circle cx="287" cy="817" r="7" fill="#b98752" stroke="#2b1209" stroke-width="4"/>
     <circle cx="601" cy="817" r="7" fill="#b98752" stroke="#2b1209" stroke-width="4"/>
   </g>

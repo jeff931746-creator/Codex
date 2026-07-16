@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1400" viewBox="0 0 1800 1400">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#e8edf3"/>
+    </linearGradient>
+    <linearGradient id="header2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#173b62"/>
+      <stop offset="0.7" stop-color="#2f6f9f"/>
+      <stop offset="1" stop-color="#e58a35"/>
+    </linearGradient>
+    <filter id="shadow2" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#18364f" flood-opacity="0.15"/>
+    </filter>
+    <marker id="arr" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#3f6f93"/>
+    </marker>
+    <marker id="arrOrange" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#d77a2c"/>
+    </marker>
+    <style>
+      .cn{font-family:"PingFang SC","Microsoft YaHei",sans-serif}
+      .title{font-size:42px;font-weight:800;fill:#fff}
+      .subtitle{font-size:20px;fill:#dceaf5}
+      .section{font-size:24px;font-weight:800;fill:#163d5e}
+      .nodeTitle{font-size:21px;font-weight:800;fill:#243f54}
+      .body{font-size:18px;fill:#40586b}
+      .small{font-size:18px;fill:#556b7c}
+      .white{fill:#fff}
+      .panel{fill:#fff;stroke:#9eb1c0;stroke-width:2.5;filter:url(#shadow2)}
+      .blue{fill:#e9f3fa;stroke:#4c82aa;stroke-width:2.5;filter:url(#shadow2)}
+      .blueStrong{fill:#2f6f9f;stroke:#164d76;stroke-width:2.5;filter:url(#shadow2)}
+      .orange{fill:#fff0e2;stroke:#df8738;stroke-width:2.5;filter:url(#shadow2)}
+      .gray{fill:#eef1f4;stroke:#8494a0;stroke-width:2.5;filter:url(#shadow2)}
+      .success{fill:#eaf4ee;stroke:#5f8d72;stroke-width:2.5;filter:url(#shadow2)}
+      .fail{fill:#fff0e8;stroke:#c56f4c;stroke-width:2.5;filter:url(#shadow2)}
+      .decision{fill:#fff7df;stroke:#d78636;stroke-width:2.5;filter:url(#shadow2)}
+      .edge{fill:none;stroke:#3f6f93;stroke-width:3.5;marker-end:url(#arr)}
+      .edgeO{fill:none;stroke:#d77a2c;stroke-width:3.5;marker-end:url(#arrOrange)}
+      .edgeDash{fill:none;stroke:#708696;stroke-width:3;stroke-dasharray:8 7;marker-end:url(#arr)}
+      .label{font-size:18px;font-weight:700;fill:#325a77}
+      .legend{font-size:18px;font-weight:700;fill:#29475d}
+    </style>
+  </defs>
+
+  <rect width="1800" height="1400" fill="url(#bg2)"/>
+  <rect x="20" y="20" width="1760" height="1360" rx="26" fill="none" stroke="#7893a8" stroke-width="2"/>
+  <path d="M36 36H1764V108L1725 136H36Z" fill="url(#header2)" filter="url(#shadow2)"/>
+  <text x="70" y="82" class="cn title">军团科技 · UE 交互状态图</text>
+  <text x="72" y="116" class="cn subtitle">进入后查看军团等级、科技升级材料（名称待定）与科技树 → 选择节点 → 查看条件 → 点击升级 → 更新界面。</text>
+
+  <!-- legend and priority -->
+  <g transform="translate(45 155)">
+    <rect width="1710" height="115" rx="20" class="panel"/>
+    <text x="26" y="36" class="cn section">图例</text>
+    <rect x="112" y="17" width="28" height="28" rx="6" fill="#eef1f4" stroke="#8494a0" stroke-width="2"/><text x="150" y="38" class="cn legend">限制 / 不可操作</text>
+    <rect x="340" y="17" width="28" height="28" rx="6" fill="#e9f3fa" stroke="#4c82aa" stroke-width="2"/><text x="378" y="38" class="cn legend">页面 / 可查看状态</text>
+    <rect x="604" y="17" width="28" height="28" rx="6" fill="#fff0e2" stroke="#df8738" stroke-width="2"/><text x="642" y="38" class="cn legend">条件判断 / 待处理</text>
+    <rect x="908" y="17" width="28" height="28" rx="6" fill="#eaf4ee" stroke="#5f8d72" stroke-width="2"/><text x="946" y="38" class="cn legend">成功 / 已生效</text>
+    <rect x="1160" y="17" width="28" height="28" rx="6" fill="#fff0e8" stroke="#c56f4c" stroke-width="2"/><text x="1198" y="38" class="cn legend">失败 / 原因提示</text>
+    <text x="26" y="86" class="cn nodeTitle">检查顺序：</text>
+    <text x="177" y="86" class="cn body">无军团 ＞ 节点已完成 ＞ 前置节点未完成 ＞ 军团等级不足 ＞ 升级材料不足 ＞ 可升级</text>
+    <rect x="1100" y="61" width="578" height="35" rx="17" fill="#e7edf2"/>
+    <text x="1389" y="85" text-anchor="middle" class="cn small">不可升级节点仍可点击查看原因</text>
+  </g>
+
+  <!-- entry and page states -->
+  <g transform="translate(45 305)">
+    <rect width="1710" height="165" rx="22" class="panel"/>
+    <text x="24" y="38" class="cn section">1 · 进入界面与页面状态</text>
+    <g transform="translate(25 66)"><rect width="210" height="66" rx="16" class="blueStrong"/><text x="105" y="41" text-anchor="middle" class="cn nodeTitle white">点击“军团科技”</text></g>
+    <path d="M235 99H310" class="edge"/>
+    <g transform="translate(310 66)"><rect width="310" height="66" rx="16" class="blue"/><text x="155" y="29" text-anchor="middle" class="cn nodeTitle">进入后显示主要信息</text><text x="155" y="54" text-anchor="middle" class="cn body">军团等级 / 升级材料 / 科技树</text></g>
+    <path d="M620 99H705" class="edge"/>
+    <g transform="translate(705 50)"><path d="M135 0L270 49L135 98L0 49Z" class="decision"/><text x="135" y="43" text-anchor="middle" class="cn body">当前是否</text><text x="135" y="69" text-anchor="middle" class="cn nodeTitle">处于军团中？</text></g>
+    <path d="M975 99H1060" class="edge"/><text x="1010" y="85" class="cn label">是</text>
+    <g transform="translate(1060 55)"><rect width="285" height="88" rx="16" class="blue"/><text x="142" y="30" text-anchor="middle" class="cn nodeTitle">玩家处于军团中</text><text x="142" y="57" text-anchor="middle" class="cn body">显示军团等级、升级材料与科技树</text><text x="142" y="80" text-anchor="middle" class="cn body">显示默认推荐 / 最近节点详情</text></g>
+    <path d="M840 148V157H1400V99H1425" class="edgeO"/><text x="1070" y="154" class="cn label">否</text>
+    <g transform="translate(1425 55)"><rect width="260" height="88" rx="16" class="gray"/><text x="130" y="30" text-anchor="middle" class="cn nodeTitle">玩家当前无军团</text><text x="130" y="57" text-anchor="middle" class="cn body">已获得的科技效果继续展示</text><text x="130" y="80" text-anchor="middle" class="cn body">未完成节点不可升级；仍可查看</text></g>
+  </g>
+
+  <!-- select and state results -->
+  <g transform="translate(45 505)">
+    <rect width="1710" height="355" rx="22" class="panel"/>
+    <text x="24" y="38" class="cn section">2 · 科技节点状态判断与详情反馈</text>
+    <g transform="translate(30 65)"><rect width="250" height="62" rx="16" class="blueStrong"/><text x="125" y="39" text-anchor="middle" class="cn nodeTitle white">点击任意科技节点</text></g>
+    <path d="M280 96H365" class="edge"/>
+    <g transform="translate(365 45)"><path d="M155 0L310 51L155 102L0 51Z" class="decision"/><text x="155" y="34" text-anchor="middle" class="cn body">按顺序检查条件</text><text x="155" y="59" text-anchor="middle" class="cn body">显示第一个不满足的原因</text><text x="155" y="84" text-anchor="middle" class="cn body">全部满足时显示可升级</text></g>
+    <path d="M675 96H745" class="edge"/>
+    <g transform="translate(745 65)"><rect width="420" height="62" rx="16" class="blue"/><text x="210" y="27" text-anchor="middle" class="cn nodeTitle">节点选中高亮并切换底部详情</text><text x="210" y="52" text-anchor="middle" class="cn body">显示科技效果、升级要求、材料消耗和按钮</text></g>
+    <path d="M1165 96H1235" class="edge"/>
+    <g transform="translate(1235 65)"><rect width="435" height="62" rx="16" class="gray"/><text x="217" y="27" text-anchor="middle" class="cn nodeTitle">按钮仅“可升级”时可点击</text><text x="217" y="52" text-anchor="middle" class="cn body">其余状态按钮不可点击，并显示对应原因</text></g>
+
+    <!-- bus -->
+    <path d="M520 142V165H150" class="edgeDash"/>
+    <path d="M520 165H1570" stroke="#708696" stroke-width="3" stroke-dasharray="8 7"/>
+    <path d="M150 165V190M435 165V190M720 165V190M1005 165V190M1290 165V190M1570 165V190" stroke="#708696" stroke-width="3"/>
+
+    <g transform="translate(25 190)"><rect width="250" height="135" rx="16" class="gray"/><text x="125" y="29" text-anchor="middle" class="cn nodeTitle">无军团</text><text x="16" y="61" class="cn body">详情：科技效果保留，不可升级</text><text x="16" y="89" class="cn body">按钮：需加入军团</text><text x="16" y="117" class="cn small">未完成节点不可升级</text></g>
+    <g transform="translate(310 190)"><rect width="250" height="135" rx="16" class="success"/><text x="125" y="29" text-anchor="middle" class="cn nodeTitle">已完成</text><text x="16" y="61" class="cn body">节点保持点亮，科技效果生效</text><text x="16" y="89" class="cn body">按钮：已完成</text><text x="16" y="117" class="cn small">若军团等级低：后续受限</text></g>
+    <g transform="translate(595 190)"><rect width="250" height="135" rx="16" class="gray"/><text x="125" y="29" text-anchor="middle" class="cn nodeTitle">前置节点未完成</text><text x="16" y="61" class="cn body">详情：展示前置要求</text><text x="16" y="89" class="cn body">按钮：不可点击</text><text x="16" y="117" class="cn small">仍可点击节点预览效果</text></g>
+    <g transform="translate(880 190)"><rect width="250" height="135" rx="16" class="orange"/><text x="125" y="29" text-anchor="middle" class="cn nodeTitle">军团等级不足</text><text x="16" y="61" class="cn body">详情：当前 / 要求等级</text><text x="16" y="89" class="cn body">按钮：不可点击</text><text x="16" y="117" class="cn small">先提示军团等级要求</text></g>
+    <g transform="translate(1165 190)"><rect width="250" height="135" rx="16" class="fail"/><text x="125" y="29" text-anchor="middle" class="cn nodeTitle">科技升级材料不足</text><text x="16" y="61" class="cn body">详情：消耗缺口标红</text><text x="16" y="89" class="cn body">按钮：不可点击</text><text x="16" y="117" class="cn small">满足材料条件后可升级</text></g>
+    <g transform="translate(1450 190)"><rect width="235" height="135" rx="16" class="blue"/><text x="117" y="29" text-anchor="middle" class="cn nodeTitle">可升级</text><text x="15" y="61" class="cn body">详情：效果与升级材料消耗</text><text x="15" y="89" class="cn body">按钮：升级，可点击</text><text x="15" y="117" class="cn small">点击后再次检查条件</text></g>
+  </g>
+
+  <!-- settlement -->
+  <g transform="translate(45 895)">
+    <rect width="1710" height="405" rx="22" class="panel"/>
+    <text x="24" y="38" class="cn section">3 · 点击升级、再次检查条件与更新界面</text>
+    <g transform="translate(30 78)"><rect width="210" height="66" rx="16" class="blueStrong"/><text x="105" y="42" text-anchor="middle" class="cn nodeTitle white">点击“升级”</text></g>
+    <path d="M240 111H320" class="edge"/>
+    <g transform="translate(320 58)"><path d="M165 0L330 53L165 106L0 53Z" class="decision"/><text x="165" y="38" text-anchor="middle" class="cn body">点击升级后再次检查条件</text><text x="165" y="66" text-anchor="middle" class="cn body">处于军团 / 节点未完成 / 前置节点已完成</text><text x="165" y="91" text-anchor="middle" class="cn body">军团等级满足 / 升级材料足够</text></g>
+
+    <path d="M650 111H750" class="edgeO"/><text x="690" y="94" class="cn label">否</text>
+    <g transform="translate(750 62)"><rect width="320" height="98" rx="16" class="fail"/><text x="160" y="31" text-anchor="middle" class="cn nodeTitle">升级失败</text><text x="20" y="63" class="cn body">不扣升级材料，节点仍保持未完成</text><text x="20" y="88" class="cn body">详情区显示当前不满足的条件</text></g>
+
+    <path d="M485 164V220" class="edge"/><text x="500" y="200" class="cn label">是</text>
+    <g transform="translate(310 225)"><rect width="350" height="120" rx="16" class="success"/><text x="175" y="31" text-anchor="middle" class="cn nodeTitle">一次性完成升级</text><text x="20" y="62" class="cn body">扣除科技升级材料</text><text x="20" y="89" class="cn body">节点变为已完成，科技效果生效</text><text x="20" y="114" class="cn small">不产生半进度</text></g>
+
+    <path d="M660 285H760" class="edge"/>
+    <g transform="translate(760 225)"><rect width="330" height="120" rx="16" class="blue"/><text x="165" y="31" text-anchor="middle" class="cn nodeTitle">升级后更新界面</text><text x="20" y="62" class="cn body">更新升级材料数量、节点和连线</text><text x="20" y="89" class="cn body">详情显示科技效果已生效</text><text x="20" y="114" class="cn small">保持在科技树界面</text></g>
+
+    <path d="M1070 111H1160V285H1135" class="edgeDash"/>
+    <g transform="translate(1135 225)"><rect width="370" height="120" rx="16" class="blue"/><text x="185" y="31" text-anchor="middle" class="cn nodeTitle">界面显示当前结果</text><text x="20" y="62" class="cn body">升级材料 / 节点 / 连线 / 详情</text><text x="20" y="89" class="cn body">不满足的条件或已生效效果清晰可见</text><text x="20" y="114" class="cn small">成功与失败都停留在当前界面</text></g>
+
+    <path d="M1505 285H1650V111H1590" class="edge"/>
+    <g transform="translate(1280 70)"><rect width="310" height="82" rx="16" class="gray"/><text x="155" y="31" text-anchor="middle" class="cn nodeTitle">继续停留在科技树</text><text x="155" y="59" text-anchor="middle" class="cn body">选节点 / 查看原因 / 关闭页面</text></g>
+    <path d="M1435 70V50H155" class="edgeDash"/>
+    <text x="790" y="392" text-anchor="middle" class="cn small">失败反馈优先落在底部详情区；只有需要强提醒时，才追加短提示。</text>
+  </g>
+
+  <!-- boundary footer -->
+  <g transform="translate(45 1325)">
+    <rect width="1710" height="50" rx="18" fill="#173f65"/>
+    <text x="855" y="32" text-anchor="middle" class="cn body white">已完成节点与科技效果保留；当前军团等级决定后续升级范围。</text>
+  </g>
+</svg>

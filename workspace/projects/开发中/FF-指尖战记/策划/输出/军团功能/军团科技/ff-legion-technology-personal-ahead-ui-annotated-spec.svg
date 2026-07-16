@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="2250" viewBox="0 0 1900 2250">
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#f6f3ee"/></linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b3b22"/><stop offset="1" stop-color="#21150f"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe698"/><stop offset="1" stop-color="#bd7628"/></linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#65401f"/><stop offset="0.52" stop-color="#9b6328"/><stop offset="1" stop-color="#5a371d"/></linearGradient>
+    <linearGradient id="lockedMask" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#080706" stop-opacity=".94"/><stop offset=".72" stop-color="#17130f" stop-opacity=".84"/><stop offset="1" stop-color="#17130f" stop-opacity=".18"/></linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#3d2512" flood-opacity="0.28"/></filter>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#3d2512" flood-opacity="0.24"/></filter>
+    <marker id="pinkArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#ff6578"/></marker>
+    <style>
+      .cn{font-family:"PingFang SC","Microsoft YaHei",sans-serif}.title{font-size:42px;font-weight:900;fill:#29231f}.subtitle{font-size:20px;fill:#665c55}.uih{font-size:22px;font-weight:800;fill:#fff6df}.uis{font-size:15px;fill:#fff6df}.uit{font-size:13px;fill:#fff6df}.call{font-size:18px;font-weight:700;fill:#ff5268}.callSmall{font-size:15px;fill:#ff6578}.section{font-size:25px;font-weight:850;fill:#302824}.item{font-size:21px;font-weight:800;fill:#332b27}.body{font-size:17px;fill:#5f5550}.note{font-size:15px;fill:#7a706a}.pinkBox{fill:none;stroke:#ff6578;stroke-width:2.5;stroke-dasharray:8 5}.lead{fill:none;stroke:#ff6578;stroke-width:2.5;stroke-dasharray:7 5;marker-end:url(#pinkArrow)}
+    </style>
+  </defs>
+
+  <rect width="1900" height="2250" fill="url(#page)"/>
+  <rect x="26" y="26" width="1848" height="2198" rx="22" fill="none" stroke="#ded7d1" stroke-width="2"/>
+  <text x="950" y="78" text-anchor="middle" class="cn title">军团科技 · 低级科技纵向延伸 UE 说明</text>
+  <text x="950" y="116" text-anchor="middle" class="cn subtitle">上层科技未达当前军团解锁条件时，以遮罩表达不可操作区域</text>
+  <path d="M120 142H1780" stroke="#d7cec7" stroke-width="2"/>
+
+  <!-- 主界面：保留原军团科技 UE，仅叠加领先状态组件 -->
+  <g transform="translate(650 180)" filter="url(#shadow)">
+    <rect x="-15" y="-15" width="630" height="1316" rx="24" fill="#b9884b" stroke="#714722" stroke-width="4"/>
+    <image href="ff-legion-technology-ui-reference.png" x="0" y="0" width="600" height="1286" preserveAspectRatio="xMidYMid meet"/>
+    <!-- 移除原军团徽记、名称、军团等级与经验进度信息 -->
+    <path d="M22 90L34 78H566L578 90V248L566 260H34L22 248Z" fill="url(#dark)" stroke="#6d4a2e" stroke-width="2"/>
+    <path d="M42 96H558M42 241H558" stroke="#a27a49" stroke-width="2" opacity="0.38"/>
+    <rect x="0" y="0" width="600" height="1286" rx="6" fill="none" stroke="#f1cb82" stroke-width="3"/>
+
+    <!-- 1 总属性 -->
+    <g transform="translate(420 92)" filter="url(#soft)">
+      <path d="M0 8L8 0H151L159 8V35L151 43H8L0 35Z" fill="url(#dark)" stroke="#d4a153" stroke-width="3"/>
+      <rect x="16" y="23" width="6" height="10" fill="#d7a64f"/><rect x="26" y="17" width="6" height="16" fill="#e6bd68"/><rect x="36" y="10" width="6" height="23" fill="#f4d486"/>
+      <text x="101" y="29" text-anchor="middle" class="cn uis">总属性 ›</text>
+    </g>
+
+    <!-- 2/3 低级科技纵向长树：超出军团支持范围的上层统一遮罩 -->
+    <g transform="translate(75 132)" filter="url(#soft)">
+      <rect width="450" height="663" rx="18" fill="#17130f" opacity=".62" stroke="#9f7844" stroke-width="2"/>
+      <path d="M225 635V58" stroke="#d7ad65" stroke-width="6" opacity=".78"/>
+      <path d="M225 62L211 82H239Z" fill="#f3d28d"/>
+      <text x="225" y="34" text-anchor="middle" class="cn uis">↑ 向上滑动查看后续低级科技</text>
+      <g opacity=".72"><circle cx="225" cy="105" r="34" fill="#6f4925" stroke="#c79a56" stroke-width="4"/><text x="225" y="110" text-anchor="middle" class="cn uit">Lv.7</text><circle cx="150" cy="190" r="29" fill="#634222" stroke="#b78a4d" stroke-width="4"/><text x="150" y="195" text-anchor="middle" class="cn uit">3/3</text><circle cx="300" cy="190" r="29" fill="#634222" stroke="#b78a4d" stroke-width="4"/><text x="300" y="195" text-anchor="middle" class="cn uit">1/3</text><circle cx="225" cy="255" r="34" fill="#76502a" stroke="#c79a56" stroke-width="4"/><text x="225" y="260" text-anchor="middle" class="cn uit">Lv.6</text></g>
+      <rect x="1" y="45" width="448" height="245" rx="17" fill="url(#lockedMask)"/>
+      <g transform="translate(181 104)"><rect x="0" y="30" width="88" height="66" rx="12" fill="#16130f" stroke="#cfb17a" stroke-width="3"/><path d="M22 30V18A22 22 0 0 1 66 18V30" fill="none" stroke="#cfb17a" stroke-width="7"/><text x="44" y="60" text-anchor="middle" class="cn uih">锁定</text></g>
+      <text x="225" y="232" text-anchor="middle" class="cn uih">当前军团未解锁上层科技</text>
+      <text x="225" y="257" text-anchor="middle" class="cn uit">提升军团等级后解除遮罩</text>
+      <g transform="translate(22 285)">
+        <rect width="406" height="45" rx="19" fill="#3a291d" stroke="#efbd62" stroke-width="3"/>
+        <text x="203" y="29" text-anchor="middle" class="cn uis">当前军团支持至 Lv.5</text>
+      </g>
+      <circle cx="225" cy="385" r="35" fill="#a66b2d" stroke="#ffe09a" stroke-width="5"/><text x="225" y="381" text-anchor="middle" class="cn uih">Lv.5</text><text x="225" y="403" text-anchor="middle" class="cn uit">2/5</text>
+      <circle cx="145" cy="480" r="28" fill="#805126" stroke="#d7a75f" stroke-width="4"/><text x="145" y="485" text-anchor="middle" class="cn uit">3/3</text>
+      <circle cx="305" cy="480" r="28" fill="#805126" stroke="#d7a75f" stroke-width="4"/><text x="305" y="485" text-anchor="middle" class="cn uit">1/3</text>
+      <circle cx="225" cy="570" r="32" fill="#8d5c29" stroke="#d7a75f" stroke-width="4"/><text x="225" y="575" text-anchor="middle" class="cn uit">Lv.4</text>
+    </g>
+
+    <!-- 4 低级/高级切换 -->
+    <g transform="translate(98 820)" filter="url(#soft)">
+      <path d="M0 12L12 0H390L402 12V60L390 72H12L0 60Z" fill="url(#dark)" stroke="#d1a158" stroke-width="4"/>
+      <path d="M10 17L22 8H180L197 24V48L180 64H22L10 55Z" fill="url(#gold)" stroke="#ffe3a2" stroke-width="3"/>
+      <path d="M204 24L221 8H380L392 17V55L380 64H221L204 48Z" fill="#55374e" stroke="#9d79a8" stroke-width="3"/>
+      <text x="100" y="45" text-anchor="middle" class="cn uih" fill="#3d291b">低级科技</text>
+      <text x="300" y="45" text-anchor="middle" class="cn uih">高级科技</text>
+    </g>
+  </g>
+
+  <!-- 红色标注框 -->
+  <rect x="1070" y="272" width="159" height="43" class="pinkBox"/>
+  <rect x="726" y="330" width="448" height="245" class="pinkBox"/>
+  <rect x="725" y="312" width="450" height="663" class="pinkBox"/>
+  <rect x="748" y="1000" width="402" height="72" class="pinkBox"/>
+  <rect x="748" y="1175" width="454" height="195" class="pinkBox"/>
+
+  <!-- 左侧标注 -->
+  <g>
+    <rect x="105" y="430" width="330" height="52" rx="8" fill="#fff" stroke="#ff6578" stroke-width="2"/>
+    <text x="125" y="462" class="cn call">2. 上层未解锁遮罩</text>
+    <path d="M435 456H610V452H726" class="lead"/>
+    <rect x="90" y="720" width="370" height="52" rx="8" fill="#fff" stroke="#ff6578" stroke-width="2"/>
+    <text x="110" y="752" class="cn call">3. 低级科技纵向长树</text>
+    <path d="M460 746H610V720H725" class="lead"/>
+    <rect x="120" y="1204" width="330" height="52" rx="8" fill="#fff" stroke="#ff6578" stroke-width="2"/>
+    <text x="140" y="1236" class="cn call">5. 科技详情与升级操作区</text>
+    <path d="M450 1230H600V1260H748" class="lead"/>
+  </g>
+
+  <!-- 右侧标注 -->
+  <g>
+    <rect x="1435" y="260" width="260" height="52" rx="8" fill="#fff" stroke="#ff6578" stroke-width="2"/>
+    <text x="1455" y="292" class="cn call">1. 总属性入口</text>
+    <path d="M1435 286H1320V294H1229" class="lead"/>
+    <rect x="1405" y="1008" width="300" height="52" rx="8" fill="#fff" stroke="#ff6578" stroke-width="2"/>
+    <text x="1425" y="1040" class="cn call">4. 低级 / 高级科技切换</text>
+    <path d="M1405 1034H1240V1036H1150" class="lead"/>
+  </g>
+
+  <!-- 说明正文 -->
+  <g transform="translate(105 1530)">
+    <rect width="1690" height="610" rx="18" fill="#fff" stroke="#d7cec7" stroke-width="2"/>
+    <text x="34" y="54" class="cn section">界面规则说明</text>
+    <path d="M32 76H1658" stroke="#e2dad4" stroke-width="2"/>
+
+    <g transform="translate(35 108)">
+      <circle cx="15" cy="15" r="14" fill="#ff6578"/><text x="15" y="21" text-anchor="middle" class="cn note" fill="#fff">1</text>
+      <text x="42" y="22" class="cn item">总属性入口</text>
+      <text x="42" y="53" class="cn body">保留原总属性入口，不额外显示个人科技与军团上限对比组件。</text>
+
+      <circle cx="15" cy="103" r="14" fill="#ff6578"/><text x="15" y="109" text-anchor="middle" class="cn note" fill="#fff">2</text>
+      <text x="42" y="110" class="cn item">上层未解锁遮罩</text>
+      <text x="42" y="141" class="cn body">超出当前军团支持范围的上层科技统一覆盖深色遮罩，仅显示锁定原因。</text>
+
+      <circle cx="15" cy="191" r="14" fill="#ff6578"/><text x="15" y="197" text-anchor="middle" class="cn note" fill="#fff">3</text>
+      <text x="42" y="198" class="cn item">低级科技纵向长树</text>
+      <text x="42" y="229" class="cn body">所有低级科技保持在同一棵向上延伸的长树中，不再分页或显示额外领先提示。</text>
+    </g>
+
+    <g transform="translate(865 108)">
+      <circle cx="15" cy="15" r="14" fill="#ff6578"/><text x="15" y="21" text-anchor="middle" class="cn note" fill="#fff">4</text>
+      <text x="42" y="22" class="cn item">低级 / 高级科技切换</text>
+      <text x="42" y="53" class="cn body">保留原低级/高级科技切换操作。</text>
+      <circle cx="15" cy="103" r="14" fill="#ff6578"/><text x="15" y="109" text-anchor="middle" class="cn note" fill="#fff">5</text>
+      <text x="42" y="110" class="cn item">科技详情与升级操作区</text>
+      <text x="42" y="141" class="cn body">保留原节点详情、消耗与升级按钮。</text>
+    </g>
+
+    <g transform="translate(35 490)">
+      <rect width="1620" height="82" rx="14" fill="#fff5f6" stroke="#ff9aa6" stroke-width="2"/>
+      <text x="30" y="32" class="cn item" fill="#d64356">进入定位优先级</text>
+      <text x="222" y="32" class="cn body">默认定位当前军团可操作的最高节点</text>
+      <text x="530" y="32" class="cn body">＞ 新开放层级</text>
+      <text x="725" y="32" class="cn body">＞ 历史浏览位置</text>
+      <text x="942" y="32" class="cn body">＞ 首次默认层级</text>
+      <text x="30" y="62" class="cn note">上层科技保持在同一长树中，通过遮罩表达尚未解锁。</text>
+    </g>
+  </g>
+</svg>

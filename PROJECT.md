@@ -26,12 +26,16 @@ Runtime entry files such as `CODEX.md` and `CLAUDE.md` are thin pointers. Do not
 
 Use `archive/skills/skills/` as the project-local skill source when applicable. Read the corresponding `SKILL.md` and follow its workflow, while also following the current runtime's skill instructions.
 
+For every planning task, read `reference/部门标准/策划/策划决策权规则.md` first. Agents may analyze, recommend, draft, and inspect, but all planning choices, risk acceptance, rollback targets, and final delivery decisions belong to the user.
+
 ### Entry Selection
 
 Check this table before selecting a project-local skill. Stop at the first matching row; do not trigger multiple entries at once.
 
 | Scenario | Entry | Do not |
 |---|---|---|
+| Render Mermaid `.mmd` source or Mermaid code blocks to PNG/SVG/PDF | `mmd-to-image` | Do not route Mermaid rendering through the general visual-asset pipeline |
+| Create or edit SVG, icons, raster images, illustrations, concept art, mockups, or reference-image variants | `create-visual-assets` | Do not call a generic raster generator; SVG is authored directly and raster generation uses Pango `gpt-image-2` |
 | Analyze a game, break down mechanics, research competitors, or add game breakdowns to project knowledge | `游戏机制拆解` | Do not bypass the skill with free-form analysis |
 | Collect competitor or product information across platforms | `产品收集` | Do not invent fields before confirming schema |
 | Download Forevernine source materials | `forevernine-material-downloader` | Do not process items manually one by one |

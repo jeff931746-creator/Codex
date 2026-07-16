@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1900" viewBox="0 0 2400 1900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffaf0"/>
+      <stop offset="1" stop-color="#ead3ad"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#432919"/>
+      <stop offset="0.58" stop-color="#7a4a20"/>
+      <stop offset="1" stop-color="#b57c32"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff2c7"/>
+      <stop offset="1" stop-color="#f0cf8b"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0e5f8"/>
+      <stop offset="1" stop-color="#d6b8e8"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#edf6df"/>
+      <stop offset="1" stop-color="#d2e8ba"/>
+    </linearGradient>
+    <linearGradient id="gray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0ede8"/>
+      <stop offset="1" stop-color="#d9d3cb"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f8e6df"/>
+      <stop offset="1" stop-color="#ecc5b7"/>
+    </linearGradient>
+    <pattern id="grain" width="72" height="72" patternUnits="userSpaceOnUse">
+      <path d="M5 14H25M40 24H66M12 47H38M48 60H68" stroke="#9b6d37" stroke-width="1" opacity="0.1"/>
+      <circle cx="31" cy="64" r="1.5" fill="#8b5d30" opacity="0.12"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#51351e" flood-opacity="0.22"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#765132"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#76508a"/>
+    </marker>
+    <style>
+      .cn{font-family:"PingFang SC","Microsoft YaHei",sans-serif}
+      .title{font-size:48px;font-weight:850;fill:#fff5dc}
+      .subtitle{font-size:21px;fill:#f2d7a7}
+      .sectionTitle{font-size:27px;font-weight:800;fill:#3d2818}
+      .nodeTitle{font-size:22px;font-weight:800;fill:#3b281b}
+      .body{font-size:18px;fill:#5e4733}
+      .small{font-size:16px;fill:#735b45}
+      .tiny{font-size:14px;fill:#796653}
+      .white{fill:#fff7e4}
+      .panel{fill:#fff9ee;stroke:#a9783d;stroke-width:3}
+      .node{fill:url(#gold);stroke:#b47b2b;stroke-width:3}
+      .state{fill:url(#gray);stroke:#766f68;stroke-width:3}
+      .good{fill:url(#green);stroke:#73924f;stroke-width:3}
+      .advanced{fill:url(#purple);stroke:#83579a;stroke-width:3}
+      .warn{fill:url(#red);stroke:#aa6049;stroke-width:3}
+      .decision{fill:#fff7d8;stroke:#b47a22;stroke-width:3}
+      .edge{fill:none;stroke:#765132;stroke-width:3;marker-end:url(#arrow)}
+      .edgeP{fill:none;stroke:#76508a;stroke-width:3;marker-end:url(#arrowPurple)}
+      .dash{fill:none;stroke:#8a7158;stroke-width:3;stroke-dasharray:9 8;marker-end:url(#arrow)}
+      .label{font-size:15px;font-weight:700;fill:#6a4c31}
+      .tag{font-size:15px;font-weight:800;fill:#fff7e3}
+    </style>
+  </defs>
+
+  <rect width="2400" height="1900" fill="url(#bg)"/>
+  <rect width="2400" height="1900" fill="url(#grain)" opacity="0.7"/>
+  <rect x="24" y="24" width="2352" height="1852" rx="26" fill="none" stroke="#b58a55" stroke-width="3"/>
+
+  <path d="M46 48H2354V166L2318 198H46Z" fill="url(#header)" filter="url(#shadow)"/>
+  <text x="78" y="105" class="cn title">军团科技 · 交互状态关系图</text>
+  <text x="80" y="151" class="cn subtitle">保留原 UE：进入时先比较个人科技进度 P 与军团支持上限 G；低级多层沿环形链推进，高级科技在同一树盘切换。</text>
+
+  <!-- 01 进入与定位 -->
+  <g transform="translate(50 230)">
+    <rect width="750" height="510" rx="24" class="panel" filter="url(#shadow)"/>
+    <circle cx="42" cy="42" r="27" fill="#a85e27"/><text x="42" y="51" text-anchor="middle" class="cn nodeTitle white">1</text>
+    <text x="82" y="51" class="cn sectionTitle">进入页面与默认定位</text>
+    <path d="M28 78H722" stroke="#c7a06c" stroke-width="2"/>
+
+    <g transform="translate(245 95)"><rect width="260" height="62" rx="15" fill="#4b2f1c" stroke="#d4a352" stroke-width="3"/><text x="130" y="39" text-anchor="middle" class="cn nodeTitle white">进入军团科技页</text></g>
+    <path d="M375 157V194" class="edge"/>
+    <g transform="translate(225 196)"><path d="M150 0L300 62L150 124L0 62Z" class="decision"/><text x="150" y="48" text-anchor="middle" class="cn body">个人科技进度 P</text><text x="150" y="75" text-anchor="middle" class="cn body">是否大于军团上限 G？</text></g>
+
+    <path d="M225 258H140V338" class="edge"/><text x="155" y="239" class="cn label">P ＞ G</text>
+    <g transform="translate(25 340)"><rect width="320" height="132" rx="15" class="good"/><text x="160" y="31" text-anchor="middle" class="cn nodeTitle">显示军团最高科技页 G</text><text x="18" y="62" class="cn small">顶部常驻：个人 Lv.P｜军团上限 Lv.G</text><text x="18" y="89" class="cn small">首次提示：已学科技与属性全部保留</text><text x="18" y="116" class="cn tiny">继续升级受当前军团上限限制</text></g>
+
+    <path d="M525 258H615V338" class="edge"/><text x="565" y="239" class="cn label">P ≤ G</text>
+    <g transform="translate(405 340)"><rect width="320" height="132" rx="15" class="state"/><text x="160" y="31" text-anchor="middle" class="cn nodeTitle">按正常进入逻辑定位</text><text x="18" y="64" class="cn small">有新开放：定位新层级并清入口红点</text><text x="18" y="91" class="cn small">无新开放：恢复历史页签与位置</text><text x="18" y="116" class="cn tiny">首次进入：显示低级当前可学层</text></g>
+
+    <rect x="180" y="480" width="390" height="28" rx="14" fill="#6c4a2e"/><text x="375" y="500" text-anchor="middle" class="cn tiny white">进入优先级：P ＞ G 定位军团上限页 ＞ 正常定位逻辑</text>
+  </g>
+
+  <!-- 02 切换 -->
+  <g transform="translate(825 230)">
+    <rect width="725" height="510" rx="24" class="panel" filter="url(#shadow)"/>
+    <circle cx="42" cy="42" r="27" fill="#7e5a28"/><text x="42" y="51" text-anchor="middle" class="cn nodeTitle white">2</text>
+    <text x="82" y="51" class="cn sectionTitle">低级 / 高级切换状态</text>
+    <path d="M28 78H697" stroke="#c7a06c" stroke-width="2"/>
+
+    <g transform="translate(35 110)"><rect width="205" height="68" rx="15" class="node"/><text x="102" y="42" text-anchor="middle" class="cn nodeTitle">低级科技</text></g>
+    <g transform="translate(485 110)"><rect width="205" height="68" rx="15" class="advanced"/><text x="102" y="42" text-anchor="middle" class="cn nodeTitle">高级科技</text></g>
+    <path d="M240 144H485" class="edgeP"/><text x="362" y="127" text-anchor="middle" class="cn label">点击高级按钮</text>
+    <path d="M485 174H240" class="edge"/><text x="362" y="200" text-anchor="middle" class="cn label">点击低级按钮</text>
+
+    <g transform="translate(35 232)"><path d="M145 0L290 60L145 120L0 60Z" class="decision"/><text x="145" y="52" text-anchor="middle" class="cn body">高级科技范围</text><text x="145" y="78" text-anchor="middle" class="cn body">是否已开放？</text></g>
+    <path d="M180 352V397" class="edge"/><text x="196" y="381" class="cn label">未开放</text>
+    <g transform="translate(35 398)"><rect width="290" height="82" rx="15" class="warn"/><text x="145" y="31" text-anchor="middle" class="cn nodeTitle">保持低级界面</text><text x="145" y="59" text-anchor="middle" class="cn small">提示目标军团等级，不切页</text></g>
+
+    <path d="M325 292H390" class="edgeP"/><text x="353" y="275" class="cn label">已开放</text>
+    <g transform="translate(390 232)"><rect width="300" height="120" rx="15" class="advanced"/><text x="150" y="32" text-anchor="middle" class="cn nodeTitle">切入高级科技</text><text x="150" y="62" text-anchor="middle" class="cn small">首次：定位新开放/可学节点</text><text x="150" y="87" text-anchor="middle" class="cn small">再次：恢复高级上次位置</text><text x="150" y="110" text-anchor="middle" class="cn tiny">进入后清除高级按钮红点</text></g>
+    <g transform="translate(390 380)"><rect width="300" height="100" rx="15" class="state"/><text x="150" y="32" text-anchor="middle" class="cn nodeTitle">切换时保存当前范围</text><text x="150" y="62" text-anchor="middle" class="cn small">记录浏览位置与选中节点</text><text x="150" y="86" text-anchor="middle" class="cn tiny">两类科技互不覆盖浏览状态</text></g>
+  </g>
+
+  <!-- 03 节点状态 -->
+  <g transform="translate(1575 230)">
+    <rect width="775" height="750" rx="24" class="panel" filter="url(#shadow)"/>
+    <circle cx="42" cy="42" r="27" fill="#76508a"/><text x="42" y="51" text-anchor="middle" class="cn nodeTitle white">3</text>
+    <text x="82" y="51" class="cn sectionTitle">节点状态与点击反馈</text>
+    <path d="M28 78H747" stroke="#c7a06c" stroke-width="2"/>
+
+    <g transform="translate(247 100)"><rect width="280" height="62" rx="15" fill="#4b2f1c" stroke="#d4a352" stroke-width="3"/><text x="140" y="39" text-anchor="middle" class="cn nodeTitle white">点击当前界面的科技节点</text></g>
+    <path d="M387 162V204" class="edge"/>
+    <g transform="translate(242 205)"><path d="M145 0L290 58L145 116L0 58Z" class="decision"/><text x="145" y="50" text-anchor="middle" class="cn body">当前节点等级</text><text x="145" y="76" text-anchor="middle" class="cn body">处于哪种状态？</text></g>
+
+    <path d="M242 263H112V350" class="edge"/><text x="126" y="244" class="cn label">0 级 / 未学习</text>
+    <g transform="translate(25 352)"><rect width="245" height="158" rx="15" class="state"/><text x="122" y="31" text-anchor="middle" class="cn nodeTitle">未学习</text><text x="18" y="64" class="cn small">条件满足：按钮“学习”</text><text x="18" y="92" class="cn small">条件不足：按钮置灰</text><text x="18" y="120" class="cn small">分别展示等级 / 前置 / 科技点</text><text x="18" y="146" class="cn tiny">锁定节点仍可看详情</text></g>
+
+    <path d="M387 321V350" class="edge"/><text x="399" y="341" class="cn label">已学习未满级</text>
+    <g transform="translate(280 352)"><rect width="250" height="158" rx="15" class="good"/><text x="125" y="31" text-anchor="middle" class="cn nodeTitle">已学习未满级</text><text x="18" y="64" class="cn small">显示当前等级与已生效效果</text><text x="18" y="92" class="cn small">显示下一等级效果</text><text x="18" y="120" class="cn small">条件满足：按钮“升级”</text><text x="18" y="146" class="cn tiny">条件不足时显示具体原因</text></g>
+
+    <path d="M532 263H660V350" class="edge"/><text x="580" y="244" class="cn label">已满级</text>
+    <g transform="translate(540 352)"><rect width="210" height="158" rx="15" class="node"/><text x="105" y="31" text-anchor="middle" class="cn nodeTitle">已满级</text><text x="16" y="66" class="cn small">节点保持点亮</text><text x="16" y="94" class="cn small">仅显示已生效效果</text><text x="16" y="122" class="cn small">按钮显示“已满级”</text><text x="16" y="146" class="cn tiny">不可再次提交</text></g>
+
+    <path d="M148 510V560H387" class="edge"/><path d="M405 510V560" class="edge"/><path d="M645 510V560H387" class="edge"/>
+    <g transform="translate(227 570)"><rect width="320" height="104" rx="15" fill="#f8f1e5" stroke="#5f92a6" stroke-width="3"/><text x="160" y="34" text-anchor="middle" class="cn nodeTitle">统一刷新底部详情框</text><text x="160" y="65" text-anchor="middle" class="cn small">节点高亮、状态、条件、效果</text><text x="160" y="90" text-anchor="middle" class="cn tiny">升级按钮随选中节点同步变化</text></g>
+  </g>
+
+  <!-- 04 学习/升级 -->
+  <g transform="translate(50 780)">
+    <rect width="1500" height="660" rx="24" class="panel" filter="url(#shadow)"/>
+    <circle cx="42" cy="42" r="27" fill="#58823e"/><text x="42" y="51" text-anchor="middle" class="cn nodeTitle white">4</text>
+    <text x="82" y="51" class="cn sectionTitle">学习 / 升级提交与结果回路</text>
+    <path d="M28 78H1472" stroke="#c7a06c" stroke-width="2"/>
+
+    <g transform="translate(45 120)"><rect width="230" height="68" rx="15" fill="#b87927" stroke="#f1c86c" stroke-width="3"/><text x="115" y="42" text-anchor="middle" class="cn nodeTitle white">点击学习 / 升级</text></g>
+    <path d="M275 154H365" class="edge"/>
+    <g transform="translate(365 96)"><path d="M155 0L310 58L155 116L0 58Z" class="decision"/><text x="155" y="49" text-anchor="middle" class="cn body">提交时再次校验</text><text x="155" y="75" text-anchor="middle" class="cn body">全部条件成立？</text></g>
+
+    <path d="M520 212V278" class="edge"/><text x="534" y="251" class="cn label">不成立</text>
+    <g transform="translate(330 280)"><rect width="380" height="130" rx="16" class="warn"/><text x="190" y="35" text-anchor="middle" class="cn nodeTitle">学习 / 升级失败</text><text x="22" y="72" class="cn body">显示：等级不足 / 前置未完成 / 科技点不足</text><text x="22" y="103" class="cn small">节点状态不变，刷新当前详情</text></g>
+
+    <path d="M675 154H780" class="edge"/><text x="720" y="137" class="cn label">成立</text>
+    <g transform="translate(780 100)"><rect width="310" height="108" rx="16" class="good"/><text x="155" y="34" text-anchor="middle" class="cn nodeTitle">学习 / 升级成功</text><text x="22" y="69" class="cn body">扣除科技点，节点等级 +1</text><text x="22" y="96" class="cn small">科技效果立即进入已生效状态</text></g>
+    <path d="M935 208V258" class="edge"/>
+    <g transform="translate(745 260)"><rect width="380" height="150" rx="16" class="good"/><text x="190" y="34" text-anchor="middle" class="cn nodeTitle">成功后的统一刷新</text><text x="22" y="70" class="cn body">节点等级、科技点、当前详情</text><text x="22" y="101" class="cn body">后续节点状态、总属性</text><text x="22" y="132" class="cn small">若达到满级，按钮切为“已满级”</text></g>
+
+    <path d="M1125 335H1165V154H1215" class="edge"/>
+    <g transform="translate(1215 96)"><path d="M120 0L240 58L120 116L0 58Z" class="decision"/><text x="120" y="40" text-anchor="middle" class="cn small">进入 / 切换 / 刷新后</text><text x="120" y="65" text-anchor="middle" class="cn body">仍有可升级节点？</text></g>
+    <path d="M1335 212V278" class="edge"/><text x="1348" y="251" class="cn label">没有</text>
+    <g transform="translate(1160 280)"><rect width="350" height="130" rx="16" class="state"/><text x="175" y="33" text-anchor="middle" class="cn nodeTitle">无可升级节点</text><text x="22" y="68" class="cn body">仍有未满节点：显示缺少条件</text><text x="22" y="99" class="cn body">全部满级：显示“当前科技已满级”</text></g>
+
+    <path d="M520 410V505H750" class="edge"/><path d="M935 410V505H750" class="edge"/><path d="M1335 410V505H750" class="edge"/>
+    <g transform="translate(520 512)"><rect width="460" height="92" rx="17" fill="#4b3020" stroke="#d5aa68" stroke-width="3"/><text x="230" y="34" text-anchor="middle" class="cn nodeTitle white">回到当前科技树</text><text x="230" y="65" text-anchor="middle" class="cn small white">继续选节点 / 切换范围 / 查看总属性 / 返回</text></g>
+    <path d="M1455 154H1475V558H980" class="edge"/><text x="1463" y="198" class="cn label">有</text>
+    <path d="M520 558H285V188" class="dash"/>
+  </g>
+
+  <!-- 05 总属性 -->
+  <g transform="translate(1575 1020)">
+    <rect width="775" height="420" rx="24" class="panel" filter="url(#shadow)"/>
+    <circle cx="42" cy="42" r="27" fill="#96722d"/><text x="42" y="51" text-anchor="middle" class="cn nodeTitle white">5</text>
+    <text x="82" y="51" class="cn sectionTitle">总属性浮层与空态</text>
+    <path d="M28 78H747" stroke="#c7a06c" stroke-width="2"/>
+
+    <g transform="translate(40 112)"><rect width="220" height="62" rx="15" fill="#4b2f1c" stroke="#d4a352" stroke-width="3"/><text x="110" y="39" text-anchor="middle" class="cn nodeTitle white">点击顶部“总属性”</text></g>
+    <path d="M260 143H330" class="edge"/>
+    <g transform="translate(330 92)"><path d="M125 0L250 51L125 102L0 51Z" class="decision"/><text x="125" y="44" text-anchor="middle" class="cn body">已有生效</text><text x="125" y="69" text-anchor="middle" class="cn body">科技属性？</text></g>
+
+    <path d="M580 143H645V205" class="edge"/><text x="606" y="126" class="cn label">有</text>
+    <g transform="translate(525 207)"><rect width="220" height="115" rx="15" class="good"/><text x="110" y="31" text-anchor="middle" class="cn nodeTitle">属性汇总</text><text x="15" y="65" class="cn small">低级已生效 + 高级已生效</text><text x="15" y="92" class="cn tiny">按属性类型合并显示</text></g>
+
+    <path d="M455 194V247H350" class="edge"/><text x="409" y="228" class="cn label">无</text>
+    <g transform="translate(55 207)"><rect width="295" height="115" rx="15" class="state"/><text x="147" y="31" text-anchor="middle" class="cn nodeTitle">总属性空态</text><text x="18" y="66" class="cn small">显示“暂无已生效科技属性”</text><text x="18" y="93" class="cn tiny">保留关闭按钮，不引导切换树</text></g>
+
+    <path d="M202 322V365H388" class="edge"/><path d="M635 322V365H388" class="edge"/>
+    <rect x="275" y="350" width="225" height="48" rx="14" fill="#6a4a32"/><text x="388" y="381" text-anchor="middle" class="cn body white">关闭后返回原浏览位置</text>
+  </g>
+
+  <!-- 06 红点 -->
+  <g transform="translate(50 1490)">
+    <rect width="2300" height="335" rx="24" fill="#fff8ea" stroke="#a9783d" stroke-width="3" filter="url(#shadow)"/>
+    <circle cx="42" cy="42" r="27" fill="#b74f3f"/><text x="42" y="51" text-anchor="middle" class="cn nodeTitle white">6</text>
+    <text x="82" y="51" class="cn sectionTitle">红点生命周期与页面总回路</text>
+    <path d="M28 78H2272" stroke="#c7a06c" stroke-width="2"/>
+
+    <g transform="translate(45 110)"><rect width="310" height="82" rx="15" class="good"/><text x="155" y="31" text-anchor="middle" class="cn nodeTitle">军团升级产生新开放内容</text><text x="155" y="59" text-anchor="middle" class="cn small">记录“未查看”状态</text></g>
+    <path d="M355 151H455" class="edge"/>
+    <g transform="translate(455 110)"><rect width="310" height="82" rx="15" class="warn"/><text x="155" y="31" text-anchor="middle" class="cn nodeTitle">军团科技入口红点</text><text x="155" y="59" text-anchor="middle" class="cn small">进入科技页后清除</text></g>
+    <path d="M765 151H865" class="edge"/>
+    <g transform="translate(865 110)"><rect width="350" height="82" rx="15" class="warn"/><text x="175" y="31" text-anchor="middle" class="cn nodeTitle">低级层段 / 高级按钮红点</text><text x="175" y="59" text-anchor="middle" class="cn small">进入对应范围并看见新内容后清除</text></g>
+    <path d="M1215 151H1315" class="edge"/>
+    <g transform="translate(1315 110)"><rect width="305" height="82" rx="15" class="good"/><text x="152" y="31" text-anchor="middle" class="cn nodeTitle">未查看状态结束</text><text x="152" y="59" text-anchor="middle" class="cn small">后续新开放时可再次触发</text></g>
+    <path d="M1620 151H1720" class="edge"/>
+    <g transform="translate(1720 110)"><rect width="525" height="82" rx="15" class="state"/><text x="262" y="31" text-anchor="middle" class="cn nodeTitle">多个新内容同时开放</text><text x="262" y="59" text-anchor="middle" class="cn small">入口红点进入即清；各范围红点分别在查看后清除</text></g>
+
+    <g transform="translate(45 232)"><rect width="2200" height="65" rx="15" fill="url(#header)"/>
+      <text x="1100" y="41" text-anchor="middle" class="cn body white">进入并定位 → 浏览低级环形层 / 切换高级 → 选中节点 → 查看状态 → 学习或升级 → 刷新节点与总属性 → 继续操作或返回；所有状态均停留在原军团科技 UE 内。</text>
+    </g>
+  </g>
+
+  <!-- 跨区关系 -->
+  <path d="M800 485H825" class="edge"/>
+  <path d="M1550 485H1575" class="edge"/>
+  <path d="M1187 740V760H1385V876" class="dash"/><text x="1230" y="753" class="cn label">进入 / 切换后检查当前范围</text>
+  <path d="M1802 852H1550" class="edge"/><text x="1676" y="835" text-anchor="middle" class="cn label">详情按钮可用时进入 4</text>
+  <path d="M1962 980V1020" class="edge"/>
+</svg>

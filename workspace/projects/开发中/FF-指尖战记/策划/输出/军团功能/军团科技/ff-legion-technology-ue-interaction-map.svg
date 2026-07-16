@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="3300" viewBox="0 0 2200 3300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf7ef"/><stop offset="1" stop-color="#efe3d0"/></linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff7d8"/><stop offset="1" stop-color="#e8ca91"/></linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#50301c"/><stop offset="1" stop-color="#21120b"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#5b3c20" flood-opacity="0.18"/></filter>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#ffd15e" flood-opacity="0.9"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#735236"/></marker>
+    <symbol id="screenBase" viewBox="0 0 300 660">
+      <rect x="0" y="0" width="300" height="660" rx="20" fill="#d8bb86" stroke="#7d542c" stroke-width="4" filter="url(#shadow)"/>
+      <rect x="8" y="8" width="284" height="612" rx="15" fill="#1d140f" stroke="#d1a45a" stroke-width="2"/>
+      <image href="ff-legion-technology-ui-reference.png" x="10" y="10" width="280" height="607" preserveAspectRatio="xMidYMid meet"/>
+      <rect x="8" y="620" width="284" height="32" rx="8" fill="#f6e4b8" stroke="#9a6b37" stroke-width="2"/>
+    </symbol>
+    <style>
+      .cn{font-family:"PingFang SC","Microsoft YaHei",sans-serif}.title{font-size:44px;font-weight:800;fill:#382516}.sub{font-size:20px;fill:#765a40}.h{font-size:23px;font-weight:800;fill:#3d2919}.body{font-size:18px;fill:#634a34}.small{font-size:16px;fill:#765f49}.white{fill:#fff1c8}.edge{fill:none;stroke:#735236;stroke-width:4;marker-end:url(#arrow)}.edge2{fill:none;stroke:#95734f;stroke-width:3;marker-end:url(#arrow)}.dash{fill:none;stroke:#70859a;stroke-width:3;stroke-dasharray:10 8;marker-end:url(#arrow)}.decision{fill:#fff5d1;stroke:#aa7927;stroke-width:3;filter:url(#shadow)}.note{fill:#eaf1f8;stroke:#6f8ba6;stroke-width:2}.success{fill:#e3f0d8;stroke:#718d4c;stroke-width:3}.warn{fill:#f8dfd6;stroke:#a85f48;stroke-width:3}.purple{fill:#eee7f6;stroke:#81689a;stroke-width:3}.label{font-size:17px;font-weight:800;fill:#744c28}.badge{font-size:19px;font-weight:800;fill:#fff}.screen-label{font-size:17px;font-weight:800;fill:#3d2919}
+    </style>
+  </defs>
+
+  <rect width="2200" height="3300" fill="url(#bg)"/>
+  <rect x="34" y="30" width="2132" height="3235" rx="24" fill="none" stroke="#b99560" stroke-width="3"/>
+  <text x="70" y="92" class="cn title">军团科技 UE 交互图</text>
+  <text x="70" y="132" class="cn sub">玩家直接点击当前界面中的科技节点，由 UE 展示等级锁、前置锁、可学习与结果状态。</text>
+
+  <!-- 左右规则说明 -->
+  <g transform="translate(90 205)"><rect width="600" height="190" rx="16" class="note"/><text x="28" y="40" class="cn h">军团等级与科技层级</text><text x="28" y="82" class="cn body">军团等级决定当前可学习的科技层级。</text><text x="28" y="119" class="cn body">等级不足：显示军团等级资格锁。</text><text x="28" y="156" class="cn body">军团升级：只解除对应层级的等级锁。</text></g>
+  <g transform="translate(1510 205)"><rect width="600" height="190" rx="16" class="note"/><text x="28" y="40" class="cn h">低级 / 高级页面差异</text><text x="28" y="82" class="cn body">低级：铜橙色、普通节点、简洁连线。</text><text x="28" y="119" class="cn body">高级：紫金色、大型节点、更强光效与装饰。</text><text x="28" y="156" class="cn body">高级节点的前置关系用连线和锁链直接表达。</text></g>
+
+  <!-- 低级 / 高级页签切换状态 -->
+  <g transform="translate(70 430)" filter="url(#shadow)">
+    <rect width="730" height="420" rx="18" class="note"/>
+    <text x="28" y="43" class="cn h">低级 / 高级科技切换状态</text>
+    <text x="28" y="105" class="cn body">① 高级页未开放</text>
+    <rect x="250" y="70" width="180" height="56" rx="10" fill="#d59a3c" stroke="#ffe0a0" stroke-width="3"/><text x="340" y="105" text-anchor="middle" class="cn h">低级科技</text>
+    <rect x="445" y="70" width="240" height="56" rx="10" fill="#77736c" stroke="#aaa39a" stroke-width="2"/><text x="565" y="104" text-anchor="middle" class="cn body" fill="#f4ede4">高级科技 🔒 Lv.6</text>
+    <text x="28" y="205" class="cn body">② 高级页刚开放</text>
+    <rect x="250" y="170" width="180" height="56" rx="10" fill="#6f5a42"/><text x="340" y="205" text-anchor="middle" class="cn body" fill="#f5e9d7">低级科技</text>
+    <rect x="445" y="170" width="240" height="56" rx="10" fill="#b58a3c" stroke="#ffda65" stroke-width="4" filter="url(#glow)"/><text x="565" y="205" text-anchor="middle" class="cn h">高级科技</text><circle cx="680" cy="170" r="16" fill="#d54a3d"/><text x="680" y="177" text-anchor="middle" class="cn badge">!</text>
+    <text x="28" y="305" class="cn body">③ 已进入高级页</text>
+    <rect x="250" y="270" width="180" height="56" rx="10" fill="#6f5a42"/><text x="340" y="305" text-anchor="middle" class="cn body" fill="#f5e9d7">低级科技</text>
+    <rect x="445" y="270" width="240" height="56" rx="10" fill="#7c5a91" stroke="#e1c2ff" stroke-width="4"/><text x="565" y="305" text-anchor="middle" class="cn h" fill="#fff2ff">高级科技</text>
+    <text x="28" y="375" class="cn body">切回低级页：点击左页签，两页分别保留上次浏览位置。</text>
+  </g>
+  <path d="M800 710H1645V1110H1780" class="dash"/><text x="1040" y="688" class="cn label">军团等级达到 → 高级页签解锁</text>
+
+  <!-- 01 默认科技页 -->
+  <g transform="translate(950 175)">
+    <use href="#screenBase" width="300" height="660"/>
+    <g transform="translate(24 52)"><rect width="122" height="42" rx="9" fill="#d59a3c" stroke="#ffe0a0" stroke-width="3"/><text x="61" y="28" text-anchor="middle" class="cn small">低级科技</text><rect x="130" width="122" height="42" rx="9" fill="#6e6b66" stroke="#aaa39a" stroke-width="2"/><text x="191" y="27" text-anchor="middle" class="cn small" fill="#f5eee6">高级 🔒</text></g>
+    <circle cx="18" cy="18" r="25" fill="#a84f32" stroke="#f2c56e" stroke-width="3"/><text x="18" y="25" text-anchor="middle" class="cn badge">01</text>
+    <text x="150" y="644" text-anchor="middle" class="cn screen-label">低级科技页·高级页未开放</text>
+  </g>
+  <path d="M1100 835V895" class="edge"/><text x="1120" y="875" class="cn label">点击未学习科技节点</text>
+
+  <!-- 等级资格判断 -->
+  <polygon points="1100,890 1300,980 1100,1070 900,980" class="decision"/>
+  <text x="1100" y="968" text-anchor="middle" class="cn h">当前军团等级</text><text x="1100" y="1002" text-anchor="middle" class="cn h">是否满足该科技层级？</text>
+
+  <!-- 02 低级科技等级锁 -->
+  <path d="M900 980H520V1080" class="edge2"/><text x="650" y="952" class="cn label">等级不足</text>
+  <g transform="translate(120 1080)">
+    <use href="#screenBase" width="300" height="660"/>
+    <rect x="10" y="10" width="280" height="607" rx="14" fill="#17120f" opacity="0.46"/>
+    <g transform="translate(24 52)"><rect width="122" height="42" rx="9" fill="#d59a3c" stroke="#ffe0a0" stroke-width="3"/><text x="61" y="28" text-anchor="middle" class="cn small">低级科技</text><rect x="130" width="122" height="42" rx="9" fill="#6e6b66"/><text x="191" y="27" text-anchor="middle" class="cn small" fill="#f5eee6">高级 🔒</text></g>
+    <g transform="translate(30 270)" filter="url(#shadow)"><rect width="240" height="135" rx="14" fill="url(#paper)" stroke="#9c6c31" stroke-width="3"/><text x="120" y="38" text-anchor="middle" class="cn h">低级科技未解锁</text><text x="120" y="76" text-anchor="middle" class="cn body">军团等级不足</text><text x="120" y="108" text-anchor="middle" class="cn small">提升军团等级后开放</text></g>
+    <circle cx="18" cy="18" r="25" fill="#a84f32" stroke="#f2c56e" stroke-width="3"/><text x="18" y="25" text-anchor="middle" class="cn badge">02</text>
+    <text x="150" y="644" text-anchor="middle" class="cn screen-label">低级科技·等级锁定</text>
+  </g>
+  <g transform="translate(70 1770)"><rect width="400" height="115" rx="14" class="note"/><text x="25" y="38" class="cn h">点击锁定节点</text><text x="25" y="75" class="cn body">显示当前军团等级和目标层级要求。</text></g>
+
+  <!-- 所点节点直接呈现 UE 状态 -->
+  <path d="M1100 1070V1160" class="edge"/><text x="1120" y="1128" class="cn label">等级已满足</text>
+  <g transform="translate(870 1160)" filter="url(#shadow)"><rect width="460" height="145" rx="18" fill="#f7edcf" stroke="#a57935" stroke-width="3"/><text x="230" y="48" text-anchor="middle" class="cn h">打开所点科技节点</text><text x="230" y="87" text-anchor="middle" class="cn body">沿用当前界面与节点所属层级</text><text x="230" y="119" text-anchor="middle" class="cn body">直接展示节点当前状态</text></g>
+
+  <!-- 03 新层级开放 -->
+  <path d="M420 1740V1940H1740V1710" class="dash"/><text x="730" y="1910" class="cn label">军团等级提升 → 新层级开放</text>
+  <g transform="translate(1780 1080)">
+    <use href="#screenBase" width="300" height="660"/>
+    <g transform="translate(24 52)"><rect width="122" height="42" rx="9" fill="#6f5a42"/><text x="61" y="28" text-anchor="middle" class="cn small" fill="#f5e9d7">低级科技</text><rect x="130" width="122" height="42" rx="9" fill="#7c5a91" stroke="#e1c2ff" stroke-width="4" filter="url(#glow)"/><text x="191" y="28" text-anchor="middle" class="cn small" fill="#fff2ff">高级科技</text></g>
+    <rect x="22" y="120" width="256" height="90" rx="14" class="success" filter="url(#glow)"/><text x="150" y="154" text-anchor="middle" class="cn h">军团等级提升</text><text x="150" y="187" text-anchor="middle" class="cn body">高级科技页已开放</text>
+    <circle cx="272" cy="45" r="18" fill="#d54a3d" stroke="#ffd272" stroke-width="3"/><text x="272" y="52" text-anchor="middle" class="cn badge">!</text>
+    <rect x="48" y="255" width="204" height="175" rx="22" fill="none" stroke="#d8b0ff" stroke-width="7" filter="url(#glow)"/>
+    <circle cx="18" cy="18" r="25" fill="#a84f32" stroke="#f2c56e" stroke-width="3"/><text x="18" y="25" text-anchor="middle" class="cn badge">03</text>
+    <text x="150" y="644" text-anchor="middle" class="cn screen-label">高级科技页·已进入</text>
+  </g>
+  <g transform="translate(1670 1770)"><rect width="430" height="145" rx="14" class="note"/><text x="25" y="38" class="cn h">高级页切换感知</text><text x="25" y="75" class="cn body">1. 军团升级后移除页签锁</text><text x="25" y="105" class="cn body">2. 高级页签显示红点与呼吸光</text><text x="25" y="135" class="cn body">3. 点击切换，首次进入高亮新节点</text></g>
+  <path d="M1780 1410H1450V1232H1330" class="edge2"/><text x="1440" y="1382" class="cn label">进入新层级并点击节点</text>
+
+  <!-- 04 节点前置锁：由 UE 直接表达 -->
+  <path d="M1330 1232H1550V2020" class="edge2"/><text x="1370" y="1204" class="cn label">节点状态：前置锁定</text>
+  <g transform="translate(1780 1990)">
+    <use href="#screenBase" width="300" height="660"/>
+    <rect x="10" y="10" width="280" height="607" rx="14" fill="#17120f" opacity="0.38"/>
+    <g transform="translate(24 52)"><rect width="122" height="42" rx="9" fill="#6f5a42"/><text x="61" y="28" text-anchor="middle" class="cn small" fill="#f5e9d7">低级科技</text><rect x="130" width="122" height="42" rx="9" fill="#7c5a91" stroke="#e1c2ff" stroke-width="4"/><text x="191" y="28" text-anchor="middle" class="cn small" fill="#fff2ff">高级科技</text></g>
+    <path d="M92 250C125 215 170 215 207 250" fill="none" stroke="#d7b9ef" stroke-width="8" stroke-dasharray="12 8"/>
+    <g transform="translate(28 285)" filter="url(#shadow)"><rect width="244" height="145" rx="14" fill="#eee7f6" stroke="#806899" stroke-width="3"/><text x="122" y="39" text-anchor="middle" class="cn h">当前科技未解锁</text><text x="122" y="78" text-anchor="middle" class="cn body">前置科技未完成</text><text x="122" y="113" text-anchor="middle" class="cn small">查看高亮连线中的前置节点</text></g>
+    <circle cx="18" cy="18" r="25" fill="#a84f32" stroke="#f2c56e" stroke-width="3"/><text x="18" y="25" text-anchor="middle" class="cn badge">04</text>
+    <text x="150" y="644" text-anchor="middle" class="cn screen-label">高级科技节点·前置锁定</text>
+  </g>
+  <g transform="translate(1670 2710)"><rect width="430" height="120" rx="14" class="purple"/><text x="25" y="38" class="cn h">锁定状态来自节点本身</text><text x="25" y="75" class="cn body">用锁链、连线高亮和缺少条件直接表达。</text></g>
+
+  <!-- 05 可学习状态 -->
+  <path d="M1100 1305V1770" class="edge"/><text x="1120" y="1370" class="cn label">节点状态：可学习</text>
+  <g transform="translate(950 1770)">
+    <use href="#screenBase" width="300" height="660"/>
+    <rect x="35" y="480" width="230" height="92" rx="14" fill="#1f150e" opacity="0.94" stroke="#d4a54d" stroke-width="3"/>
+    <text x="150" y="514" text-anchor="middle" class="cn h white">学习条件已满足</text>
+    <rect x="72" y="535" width="156" height="48" rx="11" fill="#dca848" stroke="#ffe09a" stroke-width="3" filter="url(#glow)"/><text x="150" y="566" text-anchor="middle" class="cn h">学习科技</text>
+    <circle cx="18" cy="18" r="25" fill="#a84f32" stroke="#f2c56e" stroke-width="3"/><text x="18" y="25" text-anchor="middle" class="cn badge">05</text>
+    <text x="150" y="644" text-anchor="middle" class="cn screen-label">科技可学习</text>
+  </g>
+  <path d="M1100 2430V2490" class="edge"/><text x="1120" y="2470" class="cn label">点击「学习科技」</text>
+  <polygon points="1100,2485 1310,2575 1100,2665 890,2575" class="decision"/>
+  <text x="1100" y="2563" text-anchor="middle" class="cn h">提交时，该节点的学习条件</text><text x="1100" y="2597" text-anchor="middle" class="cn h">是否仍然成立？</text>
+
+  <!-- 06 成功 -->
+  <path d="M1000 2660H700V2710" class="edge2"/><text x="800" y="2635" class="cn label">学习成功</text>
+  <g transform="translate(480 2640)">
+    <use href="#screenBase" width="300" height="660"/>
+    <rect x="10" y="10" width="280" height="607" rx="14" fill="#17120f" opacity="0.45"/>
+    <g transform="translate(32 270)" filter="url(#shadow)"><rect width="236" height="165" rx="14" fill="url(#paper)" stroke="#b38331" stroke-width="3"/><circle cx="118" cy="43" r="25" fill="#e7b94f"/><path d="M104 43l10 11 20-25" fill="none" stroke="#55351d" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text x="118" y="91" text-anchor="middle" class="cn h">科技学习成功</text><text x="118" y="126" text-anchor="middle" class="cn body">收益已生效</text><text x="118" y="151" text-anchor="middle" class="cn small">刷新关联节点的解锁状态</text></g>
+    <circle cx="18" cy="18" r="25" fill="#a84f32" stroke="#f2c56e" stroke-width="3"/><text x="18" y="25" text-anchor="middle" class="cn badge">06</text>
+    <text x="150" y="644" text-anchor="middle" class="cn screen-label">学习成功</text>
+  </g>
+
+  <!-- 07 失败 -->
+  <path d="M1200 2660H1500V2710" class="edge2"/><text x="1330" y="2635" class="cn label">学习失败</text>
+  <g transform="translate(1420 2640)">
+    <use href="#screenBase" width="300" height="660"/>
+    <rect x="10" y="10" width="280" height="607" rx="14" fill="#17120f" opacity="0.45"/>
+    <g transform="translate(32 270)" filter="url(#shadow)"><rect width="236" height="165" rx="14" fill="#f7dfd6" stroke="#a75f48" stroke-width="3"/><path d="M118 22l30 54H88Z" fill="#d78945"/><text x="118" y="66" text-anchor="middle" class="cn h">!</text><text x="118" y="103" text-anchor="middle" class="cn h">科技学习失败</text><text x="118" y="136" text-anchor="middle" class="cn body">显示当前不满足条件</text><text x="118" y="158" text-anchor="middle" class="cn small">科技状态不变</text></g>
+    <circle cx="18" cy="18" r="25" fill="#a84f32" stroke="#f2c56e" stroke-width="3"/><text x="18" y="25" text-anchor="middle" class="cn badge">07</text>
+    <text x="150" y="644" text-anchor="middle" class="cn screen-label">学习失败</text>
+  </g>
+
+  <g transform="translate(835 3140)"><rect width="530" height="95" rx="14" class="note"/><text x="265" y="37" text-anchor="middle" class="cn h">结果处理</text><text x="265" y="70" text-anchor="middle" class="cn body">成功：刷新节点与后续解锁　·　失败：保留原状态并提示原因</text></g>
+</svg>

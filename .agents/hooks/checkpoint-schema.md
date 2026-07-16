@@ -1,6 +1,6 @@
 # Independent Review Checkpoint Schema
 
-Strict `knowledge-asset` changes require a passing independent review checkpoint before delivery.
+Strict `knowledge-asset` changes require a completed independent inspection checkpoint before delivery. The reviewer reports findings but does not approve or reject the change; unresolved findings require an explicit user decision.
 
 Checkpoint path:
 
@@ -16,7 +16,7 @@ Required fields:
 |---|---|
 | `flow_intensity` | `strict` |
 | `task_type` | `knowledge-asset` |
-| `result` | `pass` |
+| `result` | `reviewed` |
 | `reviewer_role` | contains `independent` |
 | `reviewer_runtime` | non-empty and different from `main_runtime` |
 | `main_runtime` | runtime that authored/integrates the change |
@@ -26,7 +26,8 @@ Required fields:
 | `required_plan_fields.automation_entrypoints_checked` | non-empty |
 | `required_plan_fields.source_of_truth` | non-empty |
 | `reviewed_diff_hash` | current diff hash for the reviewed scope |
-| `blocking_findings` | empty list |
+| `findings` | list of findings; may be empty |
+| `user_message_excerpt` | required when `findings` is not empty; this excerpt is the user decision and must match a user-authored runtime message |
 | `expires_at` | future timestamp |
 
-The checkpoint proves a review gate happened for the current scoped diff. Any later edit inside the reviewed scope changes the hash and invalidates the checkpoint. It does not replace human judgment or user approval.
+The checkpoint proves an independent inspection happened for the current scoped diff. Any later edit inside the reviewed scope changes the hash and invalidates the checkpoint. It does not grant the reviewer decision authority and does not replace user approval.

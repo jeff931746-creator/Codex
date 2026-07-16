@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="2000" viewBox="0 0 1800 2000">
+  <defs>
+    <linearGradient id="pageBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf7ef"/><stop offset="1" stop-color="#eee1cd"/></linearGradient>
+    <linearGradient id="gameBg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24201d"/><stop offset="0.55" stop-color="#151312"/><stop offset="1" stop-color="#21160f"/></linearGradient>
+    <linearGradient id="bronze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffcf66"/><stop offset="1" stop-color="#a85b20"/></linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9b2ff"/><stop offset="0.55" stop-color="#7d4a9a"/><stop offset="1" stop-color="#3e2753"/></linearGradient>
+    <linearGradient id="disabled" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#77736c"/><stop offset="1" stop-color="#4a4844"/></linearGradient>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="150%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#513416" flood-opacity="0.22"/></filter>
+    <filter id="goldGlow" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#ffd767" flood-opacity="0.9"/></filter>
+    <filter id="purpleGlow" x="-60%" y="-60%" width="220%" height="220%"><feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#d7a9ff" flood-opacity="0.9"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#7d5b38"/></marker>
+    <symbol id="lock" viewBox="0 0 40 48"><path d="M9 20V14C9 5 31 5 31 14V20" fill="none" stroke="#f4eadb" stroke-width="5" stroke-linecap="round"/><rect x="4" y="19" width="32" height="26" rx="6" fill="#625f5a" stroke="#b8b0a6" stroke-width="3"/><circle cx="20" cy="31" r="4" fill="#e7d8c4"/><path d="M20 34V39" stroke="#e7d8c4" stroke-width="3"/></symbol>
+    <symbol id="check" viewBox="0 0 36 36"><circle cx="18" cy="18" r="17" fill="#8aa460"/><path d="M9 18l6 6 13-15" fill="none" stroke="#fff8dc" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <style>
+      .cn{font-family:"PingFang SC","Microsoft YaHei",sans-serif}.title{font-size:48px;font-weight:800;fill:#352416}.sub{font-size:22px;fill:#70583f}.h1{font-size:30px;font-weight:800;fill:#3b291a}.h2{font-size:24px;font-weight:800;fill:#3b291a}.body{font-size:20px;fill:#634c37}.small{font-size:17px;fill:#78634f}.white{fill:#fff4dc}.muted{fill:#c8bcae}.line{fill:none;stroke:#d58b36;stroke-width:7;stroke-linecap:round}.lineDone{fill:none;stroke:#e9b64c;stroke-width:9;stroke-linecap:round;filter:url(#goldGlow)}.lineLocked{fill:none;stroke:#6c6864;stroke-width:6;stroke-dasharray:13 10}.call{fill:none;stroke:#7d5b38;stroke-width:4;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <rect width="1800" height="2000" fill="url(#pageBg)"/>
+  <rect x="28" y="28" width="1744" height="1944" rx="28" fill="none" stroke="#b9945d" stroke-width="3"/>
+  <text x="70" y="92" class="cn title">军团科技：低级 / 高级切换 UE 示意</text>
+  <text x="70" y="138" class="cn sub">双段切换器只负责科技类型；各类科技内部的多层成长由科技树结构表达。</text>
+
+  <!-- 主界面 -->
+  <g transform="translate(70 190)" filter="url(#shadow)">
+    <rect width="930" height="1700" rx="28" fill="#c3975a" stroke="#744921" stroke-width="5"/>
+    <rect x="14" y="14" width="902" height="1672" rx="22" fill="url(#gameBg)" stroke="#d8ad67" stroke-width="3"/>
+    <text x="45" y="62" class="cn h1 white">军团科技</text>
+    <text x="885" y="60" text-anchor="end" class="cn small muted">军团 Lv.5</text>
+
+    <!-- 双段切换器 -->
+    <g transform="translate(95 92)">
+      <rect width="740" height="92" rx="18" fill="#34271d" stroke="#8f6c43" stroke-width="3"/>
+      <rect x="6" y="6" width="360" height="80" rx="14" fill="url(#bronze)" stroke="#ffe19a" stroke-width="3"/>
+      <text x="186" y="57" text-anchor="middle" class="cn h2">低级科技</text>
+      <rect x="374" y="6" width="360" height="80" rx="14" fill="url(#disabled)" stroke="#918b83" stroke-width="2"/>
+      <use href="#lock" x="410" y="23" width="28" height="34"/>
+      <text x="565" y="48" text-anchor="middle" class="cn h2 muted">高级科技</text>
+      <text x="565" y="71" text-anchor="middle" class="cn small muted">军团 Lv.6 开放</text>
+    </g>
+
+    <rect x="55" y="220" width="820" height="1390" rx="22" fill="#12100f" stroke="#66523e" stroke-width="3"/>
+    <text x="465" y="275" text-anchor="middle" class="cn h1 white">低级科技 · 第2层</text>
+    <text x="465" y="310" text-anchor="middle" class="cn small muted">上下拖动查看各层，解锁后自动定位新层</text>
+
+    <!-- 层级轴 -->
+    <path d="M820 410V1450" stroke="#4f4841" stroke-width="5"/>
+    <circle cx="820" cy="505" r="18" fill="#8ba25e"/><text x="780" y="513" text-anchor="end" class="cn small white">第1层</text>
+    <circle cx="820" cy="865" r="23" fill="#e0a13d" filter="url(#goldGlow)"/><text x="780" y="873" text-anchor="end" class="cn small white">第2层</text>
+    <circle cx="820" cy="1260" r="18" fill="#625f5b"/><text x="780" y="1268" text-anchor="end" class="cn small muted">第3层</text>
+
+    <!-- 连线 -->
+    <path d="M300 560L405 760M465 560V760M630 560L525 760" class="lineDone"/>
+    <path d="M405 900L320 1145M525 900L610 1145" class="lineLocked"/>
+
+    <!-- 第1层 -->
+    <rect x="80" y="370" width="160" height="45" rx="22" fill="#52613c"/><text x="160" y="399" text-anchor="middle" class="cn small white">第1层·已完成</text>
+    <g transform="translate(240 445)"><circle cx="60" cy="60" r="57" fill="#775126" stroke="#e2b45c" stroke-width="5"/><path d="M32 72L61 36L88 72Z" fill="#f4c35e"/><use href="#check" x="82" y="4" width="36" height="36"/></g>
+    <g transform="translate(405 445)"><circle cx="60" cy="60" r="57" fill="#775126" stroke="#e2b45c" stroke-width="5"/><path d="M31 58H89M60 29V87" stroke="#f4c35e" stroke-width="10" stroke-linecap="round"/><use href="#check" x="82" y="4" width="36" height="36"/></g>
+    <g transform="translate(570 445)"><circle cx="60" cy="60" r="57" fill="#775126" stroke="#e2b45c" stroke-width="5"/><path d="M31 76L60 30L90 76" fill="none" stroke="#f4c35e" stroke-width="9"/><use href="#check" x="82" y="4" width="36" height="36"/></g>
+
+    <!-- 第2层 -->
+    <rect x="80" y="720" width="180" height="45" rx="22" fill="#b36d27" filter="url(#goldGlow)"/><text x="170" y="749" text-anchor="middle" class="cn small white">第2层·当前可学</text>
+    <g transform="translate(335 755)" filter="url(#goldGlow)"><circle cx="70" cy="70" r="67" fill="#683b1e" stroke="#ffc85d" stroke-width="8"/><path d="M36 86L70 38L104 86" fill="none" stroke="#ffcf68" stroke-width="11"/><rect x="32" y="116" width="76" height="30" rx="12" fill="#e2a43c"/><text x="70" y="138" text-anchor="middle" class="cn small">可学习</text></g>
+    <g transform="translate(485 755)"><circle cx="70" cy="70" r="67" fill="#4c3425" stroke="#bb7e35" stroke-width="6"/><path d="M41 70H99M70 41V99" stroke="#d49b4d" stroke-width="10"/><rect x="32" y="116" width="76" height="30" rx="12" fill="#69513b"/><text x="70" y="138" text-anchor="middle" class="cn small muted">0/3</text></g>
+
+    <!-- 第3层 -->
+    <rect x="80" y="1085" width="260" height="45" rx="22" fill="#4e4b48"/><text x="210" y="1114" text-anchor="middle" class="cn small muted">第3层·前置完成 2/4</text>
+    <g opacity="0.62">
+      <g transform="translate(245 1130)"><circle cx="75" cy="75" r="70" fill="#343230" stroke="#6e6964" stroke-width="6"/><use href="#lock" x="56" y="49" width="40" height="48"/></g>
+      <g transform="translate(535 1130)"><circle cx="75" cy="75" r="70" fill="#343230" stroke="#6e6964" stroke-width="6"/><use href="#lock" x="56" y="49" width="40" height="48"/></g>
+    </g>
+    <rect x="180" y="1335" width="570" height="125" rx="16" fill="#2e2925" stroke="#74685d" stroke-width="2"/>
+    <text x="465" y="1380" text-anchor="middle" class="cn h2 muted">下一层保留轮廓</text>
+    <text x="465" y="1420" text-anchor="middle" class="cn body muted">点击锁定节点，高亮第2层中缺少的前置</text>
+    <text x="465" y="1570" text-anchor="middle" class="cn small muted">页面保留上次浏览位置：低级科技·第2层</text>
+  </g>
+
+  <!-- 右侧切换状态 -->
+  <g transform="translate(1040 190)">
+    <rect width="690" height="820" rx="24" fill="#eaf1f8" stroke="#718ca7" stroke-width="3"/>
+    <text x="35" y="55" class="cn h1">双段切换器的3种状态</text>
+
+    <g transform="translate(35 95)">
+      <rect width="620" height="180" rx="18" fill="#fffaf0" stroke="#bba276" stroke-width="2"/>
+      <circle cx="38" cy="38" r="22" fill="#9a7650"/><text x="38" y="46" text-anchor="middle" class="cn h2 white">1</text>
+      <text x="76" y="45" class="cn h2">高级科技未开放</text>
+      <rect x="45" y="78" width="245" height="64" rx="13" fill="url(#bronze)"/><text x="168" y="119" text-anchor="middle" class="cn h2">低级科技</text>
+      <rect x="305" y="78" width="270" height="64" rx="13" fill="url(#disabled)"/><use href="#lock" x="330" y="92" width="30" height="36"/><text x="455" y="108" text-anchor="middle" class="cn body muted">高级科技</text><text x="455" y="132" text-anchor="middle" class="cn small muted">Lv.6 开放</text>
+      <text x="45" y="166" class="cn small">可点击锁定区域查看开放条件，不执行页面切换。</text>
+    </g>
+
+    <path d="M345 285V330" class="call"/>
+    <g transform="translate(35 335)">
+      <rect width="620" height="180" rx="18" fill="#fffaf0" stroke="#c99d44" stroke-width="3"/>
+      <circle cx="38" cy="38" r="22" fill="#c1882f"/><text x="38" y="46" text-anchor="middle" class="cn h2 white">2</text>
+      <text x="76" y="45" class="cn h2">军团升级，高级页刚开放</text>
+      <rect x="45" y="78" width="245" height="64" rx="13" fill="#70553b"/><text x="168" y="119" text-anchor="middle" class="cn h2 muted">低级科技</text>
+      <rect x="305" y="78" width="270" height="64" rx="13" fill="#b78b38" stroke="#ffdb67" stroke-width="5" filter="url(#goldGlow)"/><text x="440" y="119" text-anchor="middle" class="cn h2">高级科技</text><circle cx="570" cy="78" r="18" fill="#d54a3d"/><text x="570" y="86" text-anchor="middle" class="cn h2 white">!</text>
+      <text x="45" y="166" class="cn small">移除锁定，用红点与呼吸光提示玩家首次切换。</text>
+    </g>
+
+    <path d="M345 525V570" class="call"/>
+    <g transform="translate(35 575)">
+      <rect width="620" height="180" rx="18" fill="#fffaf0" stroke="#81689a" stroke-width="3"/>
+      <circle cx="38" cy="38" r="22" fill="#76518c"/><text x="38" y="46" text-anchor="middle" class="cn h2 white">3</text>
+      <text x="76" y="45" class="cn h2">已切换至高级科技页</text>
+      <rect x="45" y="78" width="245" height="64" rx="13" fill="#70553b"/><text x="168" y="119" text-anchor="middle" class="cn h2 muted">低级科技</text>
+      <rect x="305" y="78" width="270" height="64" rx="13" fill="url(#purple)" stroke="#e1c3ff" stroke-width="4" filter="url(#purpleGlow)"/><text x="440" y="119" text-anchor="middle" class="cn h2 white">高级科技</text>
+      <text x="45" y="166" class="cn small">高级页签保持选中；点击左侧即可切回低级页。</text>
+    </g>
+  </g>
+
+  <!-- 视觉差异 -->
+  <g transform="translate(1040 1050)">
+    <rect width="690" height="440" rx="24" fill="#f7eedf" stroke="#b58c57" stroke-width="3"/>
+    <text x="35" y="55" class="cn h1">两类科技的页面表现差异</text>
+    <g transform="translate(35 90)">
+      <rect width="295" height="285" rx="20" fill="#2a1d14" stroke="#d18b39" stroke-width="4"/>
+      <text x="148" y="43" text-anchor="middle" class="cn h2 white">低级科技</text>
+      <circle cx="85" cy="125" r="46" fill="#6f4422" stroke="#e8aa48" stroke-width="6"/><circle cx="210" cy="125" r="46" fill="#6f4422" stroke="#e8aa48" stroke-width="6"/><path d="M127 125H168" class="line"/>
+      <text x="148" y="208" text-anchor="middle" class="cn body white">铜橙色·普通节点</text>
+      <text x="148" y="242" text-anchor="middle" class="cn small muted">结构清晰，光效克制</text>
+    </g>
+    <g transform="translate(360 90)">
+      <rect width="295" height="285" rx="20" fill="#201728" stroke="#a879c8" stroke-width="4"/>
+      <text x="148" y="43" text-anchor="middle" class="cn h2 white">高级科技</text>
+      <circle cx="85" cy="125" r="54" fill="#4c2e5c" stroke="#d2a1f0" stroke-width="8" filter="url(#purpleGlow)"/><circle cx="210" cy="125" r="54" fill="#4c2e5c" stroke="#d2a1f0" stroke-width="8" filter="url(#purpleGlow)"/><path d="M137 125H158" stroke="#d8b2f4" stroke-width="9" filter="url(#purpleGlow)"/>
+      <text x="148" y="208" text-anchor="middle" class="cn body white">紫金色·大型节点</text>
+      <text x="148" y="242" text-anchor="middle" class="cn small muted">强光效、装饰边框与前置锁链</text>
+    </g>
+  </g>
+
+  <!-- 交互边界 -->
+  <g transform="translate(1040 1530)">
+    <rect width="690" height="360" rx="24" fill="#eaf1f8" stroke="#718ca7" stroke-width="3"/>
+    <text x="35" y="55" class="cn h1">交互规则</text>
+    <text x="45" y="112" class="cn body">1. 双段控件是“页面切换器”，不使用开启/关闭式滑块。</text>
+    <text x="45" y="162" class="cn body">2. 高级页未开放时可点击查看条件，但不切换页面。</text>
+    <text x="45" y="212" class="cn body">3. 切换使用横向滑动/淡入，低级与高级页各自保留位置。</text>
+    <text x="45" y="262" class="cn body">4. 科技内部层数不进入切换器，统一由树结构与层级轴表达。</text>
+    <rect x="45" y="292" width="600" height="42" rx="12" fill="#dce9f4"/><text x="345" y="320" text-anchor="middle" class="cn small">两个维度：科技类型用切换器，内部层级用科技树。</text>
+  </g>
+</svg>

@@ -1,0 +1,13 @@
+interface:
+  display_name: "Create Visual Assets"
+  short_description: "Route SVG and raster creation through the right pipeline"
+  default_prompt: "Use $create-visual-assets to create this visual asset with the correct SVG or Pango image workflow."
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "pango-skillsrv"
+      description: "Company Pango MCP server used for GPT-image-2 raster generation"
+      transport: "streamable_http"
+      url: "https://pango.forevernine.net/api/v2/mcp"
+policy:
+  allow_implicit_invocation: true

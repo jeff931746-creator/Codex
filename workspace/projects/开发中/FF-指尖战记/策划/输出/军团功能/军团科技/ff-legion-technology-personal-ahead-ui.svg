@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1680" viewBox="0 0 2200 1680">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff9ee"/><stop offset="1" stop-color="#e4c899"/></linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff8e8"/><stop offset="1" stop-color="#ead0a0"/></linearGradient>
+    <linearGradient id="dark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5b3b22"/><stop offset="1" stop-color="#1e140f"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe698"/><stop offset="1" stop-color="#bd7628"/></linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#65401f"/><stop offset="0.52" stop-color="#9b6328"/><stop offset="1" stop-color="#5a371d"/></linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eff7de"/><stop offset="1" stop-color="#cfe4aa"/></linearGradient>
+    <linearGradient id="gray" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0ede7"/><stop offset="1" stop-color="#d2cbc1"/></linearGradient>
+    <pattern id="grain" width="68" height="68" patternUnits="userSpaceOnUse"><path d="M5 12H26M39 24H64M10 46H35M45 58H66" stroke="#906535" stroke-width="1" opacity="0.11"/></pattern>
+    <filter id="shadow" x="-25%" y="-25%" width="150%" height="160%"><feDropShadow dx="0" dy="9" stdDeviation="10" flood-color="#3d2512" flood-opacity="0.28"/></filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="145%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#3d2512" flood-opacity="0.2"/></filter>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#ffd26a" flood-opacity="0.8"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#9a672f"/></marker>
+    <style>
+      .cn{font-family:"PingFang SC","Microsoft YaHei",sans-serif}.title{font-size:48px;font-weight:900;fill:#332216}.sub{font-size:21px;fill:#70543a}.panelTitle{font-size:28px;font-weight:850;fill:#3e2919}.h{font-size:22px;font-weight:800;fill:#3d291b}.body{font-size:18px;fill:#604832}.small{font-size:15px;fill:#6e5944}.tiny{font-size:13px;fill:#76634f}.white{fill:#fff6df}.muted{fill:#ded5ca}.edge{fill:none;stroke:#9a672f;stroke-width:4;marker-end:url(#arrow)}
+    </style>
+  </defs>
+
+  <rect width="2200" height="1680" fill="url(#bg)"/>
+  <rect width="2200" height="1680" fill="url(#grain)" opacity="0.75"/>
+  <rect x="24" y="24" width="2152" height="1632" rx="28" fill="none" stroke="#b48a55" stroke-width="3"/>
+  <path d="M48 48H2152L2164 60V1620L2152 1632H48L36 1620V60Z" fill="none" stroke="#fff2d1" stroke-width="2"/>
+
+  <path d="M55 58H1280L1310 88L1280 118H55Z" fill="url(#paper)" stroke="#b58242" stroke-width="3" filter="url(#shadow)"/>
+  <text x="78" y="96" class="cn title">军团科技 · 个人进度领先状态 UE</text>
+  <text x="78" y="145" class="cn sub">当个人科技进度 P ＞ 当前军团支持上限 G：默认显示军团最高科技页 G，同时明确“个人成果保留、继续升级受限”。</text>
+
+  <!-- 主界面 -->
+  <g transform="translate(105 210)" filter="url(#shadow)">
+    <rect x="-20" y="-20" width="640" height="1342" rx="30" fill="#c89b5d" stroke="#70451f" stroke-width="5"/>
+    <image href="ff-legion-technology-ui-reference.png" x="0" y="0" width="600" height="1286" preserveAspectRatio="xMidYMid meet"/>
+    <!-- 移除原军团徽记、名称、军团等级与经验进度信息 -->
+    <path d="M22 90L34 78H566L578 90V248L566 260H34L22 248Z" fill="url(#dark)" stroke="#6d4a2e" stroke-width="2"/>
+    <path d="M42 96H558M42 241H558" stroke="#a27a49" stroke-width="2" opacity="0.38"/>
+    <rect x="0" y="0" width="600" height="1286" rx="8" fill="none" stroke="#f2d08a" stroke-width="3"/>
+
+    <!-- 顶部常驻对比 -->
+    <g transform="translate(147 102)" filter="url(#glow)">
+      <path d="M0 12L12 0H294L306 12V96L294 108H12L0 96Z" fill="url(#dark)" stroke="#e1b45e" stroke-width="4"/>
+      <text x="78" y="31" text-anchor="middle" class="cn small muted">我的科技</text>
+      <text x="78" y="68" text-anchor="middle" class="cn panelTitle white">Lv.8</text>
+      <path d="M145 18V88" stroke="#8c6b43" stroke-width="2"/>
+      <text x="222" y="31" text-anchor="middle" class="cn small muted">军团上限</text>
+      <text x="222" y="68" text-anchor="middle" class="cn panelTitle white">Lv.5</text>
+      <rect x="94" y="82" width="118" height="35" rx="17" fill="#d89a38" stroke="#ffe39b" stroke-width="2"/>
+      <text x="153" y="105" text-anchor="middle" class="cn small white">领先 3 级</text>
+    </g>
+
+    <!-- 总属性入口保持独立 -->
+    <g transform="translate(420 218)" filter="url(#softShadow)">
+      <path d="M0 8L8 0H151L159 8V35L151 43H8L0 35Z" fill="url(#dark)" stroke="#d4a153" stroke-width="3"/>
+      <rect x="16" y="23" width="6" height="10" fill="#d7a64f"/><rect x="26" y="17" width="6" height="16" fill="#e6bd68"/><rect x="36" y="10" width="6" height="23" fill="#f4d486"/>
+      <text x="101" y="29" text-anchor="middle" class="cn small white">总属性 ›</text>
+    </g>
+
+    <!-- 首次进入提示 -->
+    <g transform="translate(58 270)" filter="url(#shadow)">
+      <path d="M0 14L14 0H456L470 14V78L456 92H14L0 78Z" fill="url(#amber)" stroke="#f0c76f" stroke-width="4"/>
+      <circle cx="45" cy="43" r="22" fill="#e4ab45" stroke="#ffe5a2" stroke-width="3"/>
+      <path d="M45 29V47M45 60V61" stroke="#4b2e18" stroke-width="5" stroke-linecap="round"/>
+      <text x="80" y="31" class="cn h white">个人科技进度领先</text>
+      <text x="80" y="58" class="cn small white">已学成果保留 · 当前军团支持至 Lv.5</text>
+      <text x="80" y="80" class="cn tiny white">当前页可正常升级，超过 Lv.5 的后续成长受限</text>
+      <circle cx="447" cy="23" r="12" fill="#3d291c" stroke="#b98a4a" stroke-width="2"/><path d="M442 18L452 28M452 18L442 28" stroke="#f5ddb0" stroke-width="2"/>
+    </g>
+
+    <!-- 当前页标识 -->
+    <g transform="translate(148 397)" filter="url(#softShadow)">
+      <path d="M0 10L10 0H284L294 10V47L284 57H10L0 47Z" fill="#31231b" stroke="#d3a058" stroke-width="3"/>
+      <text x="147" y="36" text-anchor="middle" class="cn h white">当前军团最高科技 · Lv.5</text>
+    </g>
+
+    <!-- 树盘边界说明 -->
+    <g transform="translate(105 806)">
+      <rect width="390" height="48" rx="20" fill="#2b211b" opacity="0.92" stroke="#b88c51" stroke-width="2"/>
+      <text x="195" y="31" text-anchor="middle" class="cn small white">当前页受军团支持 · 满足条件仍可正常升级</text>
+    </g>
+
+    <!-- 原切换器位置 -->
+    <g transform="translate(98 900)" filter="url(#shadow)">
+      <path d="M0 12L12 0H390L402 12V60L390 72H12L0 60Z" fill="url(#dark)" stroke="#d1a158" stroke-width="4"/>
+      <path d="M10 17L22 8H180L197 24V48L180 64H22L10 55Z" fill="url(#gold)" stroke="#ffe3a2" stroke-width="3"/>
+      <path d="M204 24L221 8H380L392 17V55L380 64H221L204 48Z" fill="#55374e" stroke="#9d79a8" stroke-width="3"/>
+      <text x="100" y="45" text-anchor="middle" class="cn h">低级科技</text>
+      <text x="300" y="45" text-anchor="middle" class="cn h white">高级科技</text>
+    </g>
+
+    <rect x="0" y="1286" width="600" height="44" rx="7" fill="#f0d5a2" stroke="#8d5a29" stroke-width="3"/>
+    <text x="300" y="1316" text-anchor="middle" class="cn h">P ＞ G · 默认显示军团最高科技页</text>
+  </g>
+
+  <!-- 右侧：组件说明 -->
+  <g transform="translate(805 210)">
+    <path d="M0 20L20 0H1260L1280 20V1260L1260 1280H20L0 1260Z" fill="url(#paper)" stroke="#a77638" stroke-width="4" filter="url(#shadow)"/>
+    <text x="42" y="58" class="cn panelTitle">界面组件与状态变化</text>
+    <path d="M30 86H1250" stroke="#c59a61" stroke-width="2"/>
+
+    <!-- 01 -->
+    <g transform="translate(45 120)">
+      <circle cx="30" cy="30" r="25" fill="#aa682d"/><text x="30" y="38" text-anchor="middle" class="cn h white">1</text>
+      <text x="72" y="38" class="cn panelTitle">顶部常驻对比：让玩家一眼知道自己领先</text>
+      <rect x="0" y="78" width="1170" height="190" rx="20" fill="#fff8e9" stroke="#b58549" stroke-width="3"/>
+      <g transform="translate(45 112)" filter="url(#glow)">
+        <rect width="440" height="116" rx="18" fill="url(#dark)" stroke="#dfb15e" stroke-width="4"/>
+        <text x="105" y="34" text-anchor="middle" class="cn small muted">我的科技</text><text x="105" y="78" text-anchor="middle" class="cn panelTitle white">Lv.8</text>
+        <path d="M218 18V94" stroke="#846441" stroke-width="2"/>
+        <text x="330" y="34" text-anchor="middle" class="cn small muted">军团上限</text><text x="330" y="78" text-anchor="middle" class="cn panelTitle white">Lv.5</text>
+        <rect x="169" y="88" width="102" height="34" rx="17" fill="#d79734"/><text x="220" y="111" text-anchor="middle" class="cn small white">领先 3 级</text>
+      </g>
+      <text x="535" y="131" class="cn body">只在 P ＞ G 时出现；使用金色“领先”语义，不使用红色降级警告。</text>
+      <text x="535" y="169" class="cn body">玩家即使关闭首次提示，仍能随时确认个人进度与军团上限。</text>
+      <text x="535" y="207" class="cn body">“总属性”保持为独立入口，不与领先状态合并。</text>
+    </g>
+
+    <!-- 02 -->
+    <g transform="translate(45 420)">
+      <circle cx="30" cy="30" r="25" fill="#b18431"/><text x="30" y="38" text-anchor="middle" class="cn h white">2</text>
+      <text x="72" y="38" class="cn panelTitle">首次进入提示：解释成果保留与当前限制</text>
+      <rect x="0" y="78" width="1170" height="190" rx="20" fill="#fff8e9" stroke="#b58549" stroke-width="3"/>
+      <g transform="translate(42 112)">
+        <path d="M0 14L14 0H520L534 14V105L520 119H14L0 105Z" fill="url(#amber)" stroke="#edc36b" stroke-width="4"/>
+        <text x="32" y="38" class="cn h white">个人科技进度领先</text>
+        <text x="32" y="73" class="cn small white">已学科技与属性全部保留</text>
+        <text x="32" y="99" class="cn small white">当前页可正常升级；超过 Lv.5 的后续成长受军团上限限制</text>
+      </g>
+      <text x="625" y="139" class="cn body">非阻断横幅，首次进入 P ＞ G 状态时出现一次。</text>
+      <text x="625" y="177" class="cn body">关闭后不重复打扰；顶部等级对比继续常驻。</text>
+      <text x="625" y="215" class="cn body">避免使用“科技降级、属性失效、重新学习”等表述。</text>
+    </g>
+
+    <!-- 03 -->
+    <g transform="translate(45 720)">
+      <circle cx="30" cy="30" r="25" fill="#6e914c"/><text x="30" y="38" text-anchor="middle" class="cn h white">3</text>
+      <text x="72" y="38" class="cn panelTitle">树盘定位：只改变初始视图，不改变个人进度</text>
+      <rect x="0" y="78" width="1170" height="180" rx="20" fill="#fff8e9" stroke="#b58549" stroke-width="3"/>
+      <g transform="translate(40 112)"><rect width="390" height="76" rx="18" fill="#31231b" stroke="#d3a058" stroke-width="3"/><text x="195" y="33" text-anchor="middle" class="cn h white">当前军团最高科技 · Lv.5</text><text x="195" y="59" text-anchor="middle" class="cn small muted">我的科技已达 Lv.8</text></g>
+      <path d="M456 150H548" class="edge"/>
+      <g transform="translate(570 108)"><rect width="550" height="88" rx="18" fill="url(#green)" stroke="#73934f" stroke-width="3"/><text x="275" y="29" text-anchor="middle" class="cn h">默认显示军团上限页 G</text><text x="275" y="56" text-anchor="middle" class="cn small">页内节点满足条件仍可正常升级</text><text x="275" y="78" text-anchor="middle" class="cn tiny">总属性继续计算个人全部已生效属性</text></g>
+      <text x="40" y="232" class="cn small">进入优先级：P ＞ G 定位军团上限页 ＞ 新开放层级 ＞ 历史浏览位置 ＞ 首次默认。</text>
+    </g>
+
+    <!-- 04 -->
+    <g transform="translate(45 1000)">
+      <circle cx="30" cy="30" r="25" fill="#77695c"/><text x="30" y="38" text-anchor="middle" class="cn h white">4</text>
+      <text x="72" y="38" class="cn panelTitle">状态退出：军团追平后恢复正常界面</text>
+      <g transform="translate(0 78)"><rect width="350" height="110" rx="18" fill="#fff4d6" stroke="#c68a2d" stroke-width="3"/><text x="175" y="33" text-anchor="middle" class="cn h">P ＞ G</text><text x="175" y="65" text-anchor="middle" class="cn small">显示“领先”状态与军团上限页</text><text x="175" y="90" text-anchor="middle" class="cn tiny">已学科技与属性保留</text></g>
+      <path d="M350 133H430" class="edge"/>
+      <g transform="translate(450 78)"><rect width="300" height="110" rx="18" fill="#f1eee8" stroke="#847a70" stroke-width="3"/><text x="150" y="33" text-anchor="middle" class="cn h">P ＝ G</text><text x="150" y="65" text-anchor="middle" class="cn small">移除领先标签</text><text x="150" y="90" text-anchor="middle" class="cn tiny">恢复正常进入定位</text></g>
+      <path d="M750 133H830" class="edge"/>
+      <g transform="translate(850 78)"><rect width="320" height="110" rx="18" fill="url(#green)" stroke="#73934f" stroke-width="3"/><text x="160" y="33" text-anchor="middle" class="cn h">P ＜ G</text><text x="160" y="65" text-anchor="middle" class="cn small">正常显示个人当前成长位置</text><text x="160" y="90" text-anchor="middle" class="cn tiny">军团上限不构成阻塞</text></g>
+    </g>
+  </g>
+
+  <!-- 底部结论 -->
+  <g transform="translate(105 1570)">
+    <path d="M0 12L12 0H1966L1978 12V52L1966 64H12L0 52Z" fill="url(#dark)" stroke="#d1a05b" stroke-width="3"/>
+    <text x="989" y="40" text-anchor="middle" class="cn body white">体验目标：玩家感知到“我领先于当前军团”，而不是“我的科技被降级”；成果持续有效，只有后续升级空间受到当前军团上限约束。</text>
+  </g>
+</svg>

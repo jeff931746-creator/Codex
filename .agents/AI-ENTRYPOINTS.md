@@ -38,6 +38,7 @@ Open only linked memory files needed for the current task.
 | Factuality, review discipline, Git hygiene | `.agents/rules/quality-gates.md` |
 | Workflow layers and capability lookup | `.agents/rules/workflow-chain.md` |
 | Department standards | `reference/部门标准/` |
+| Planning decision authority | `reference/部门标准/策划/策划决策权规则.md` |
 | Delivery writing standard | `reference/部门标准/通用/交付型文档写作标准.md` |
 | Runtime hook logic and adapter examples | `.agents/hooks/`, `.agents/adapters/` |
 

@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1700" viewBox="0 0 2400 1700">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f9f4ea"/>
+      <stop offset="1" stop-color="#eee1cc"/>
+    </linearGradient>
+    <linearGradient id="root" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#57402d"/>
+      <stop offset="1" stop-color="#24170f"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff4c8"/>
+      <stop offset="1" stop-color="#e5c37d"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="7" stdDeviation="8" flood-color="#6c4b2c" flood-opacity="0.18"/>
+    </filter>
+    <marker id="arrow-brown" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#725137"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#557a9b"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#64835b"/>
+    </marker>
+    <style>
+      .cn{font-family:"PingFang SC","Microsoft YaHei",sans-serif}
+      .title{font-size:42px;font-weight:800;fill:#352315}
+      .subtitle{font-size:21px;fill:#765a3e}
+      .root-title{font-size:34px;font-weight:800;fill:#fff1c4}
+      .root-sub{font-size:19px;fill:#e6d3a8}
+      .branch-title{font-size:25px;font-weight:800;fill:#382718}
+      .node-title{font-size:20px;font-weight:700;fill:#3f2e20}
+      .node-body{font-size:17px;fill:#654e39}
+      .small{font-size:16px;fill:#76614e}
+      .white{fill:#fff3d1}
+      .branch{fill:none;stroke-width:7;stroke-linecap:round}
+      .flow{fill:none;stroke:#725137;stroke-width:3;marker-end:url(#arrow-brown)}
+      .flow-blue{fill:none;stroke:#557a9b;stroke-width:3;marker-end:url(#arrow-blue)}
+      .flow-green{fill:none;stroke:#64835b;stroke-width:3;marker-end:url(#arrow-green)}
+      .card{stroke-width:3;filter:url(#shadow)}
+      .index{font-size:18px;font-weight:800;fill:#fff}
+    </style>
+  </defs>
+
+  <rect width="2400" height="1700" fill="url(#bg)"/>
+  <rect x="32" y="28" width="2336" height="1640" rx="28" fill="none" stroke="#b99663" stroke-width="3"/>
+  <text x="72" y="90" class="cn title">军团科技交互脑图</text>
+  <text x="72" y="130" class="cn subtitle">先确认交互对象、状态、条件与玩家反馈；通过后再转成逐步交互流程图。</text>
+
+  <!-- central root -->
+  <g transform="translate(930 650)" filter="url(#shadow)">
+    <rect width="540" height="300" rx="42" fill="url(#root)" stroke="#c89543" stroke-width="5"/>
+    <circle cx="270" cy="82" r="46" fill="#d3a34e" stroke="#f6daa0" stroke-width="4"/>
+    <path d="M247 80h46M270 57v46M252 65l36 30M288 65l-36 30" stroke="#352315" stroke-width="7" stroke-linecap="round"/>
+    <text x="270" y="158" text-anchor="middle" class="cn root-title">军团科技交互</text>
+    <text x="270" y="204" text-anchor="middle" class="cn root-sub">玩家查看科技状态</text>
+    <text x="270" y="236" text-anchor="middle" class="cn root-sub">理解解锁条件</text>
+    <text x="270" y="268" text-anchor="middle" class="cn root-sub">完成学习并获得反馈</text>
+  </g>
+
+  <!-- main branches -->
+  <path d="M930 735C770 650 740 455 620 420" class="branch" stroke="#b47b43"/>
+  <path d="M930 875C760 960 755 1120 630 1180" class="branch" stroke="#6f8e62"/>
+  <path d="M1470 720C1620 650 1660 385 1780 340" class="branch" stroke="#8a6ca6"/>
+  <path d="M1470 790C1640 800 1685 815 1790 815" class="branch" stroke="#b15f58"/>
+  <path d="M1470 890C1645 985 1650 1250 1780 1320" class="branch" stroke="#638d89"/>
+
+  <!-- 1 level relation -->
+  <g transform="translate(70 245)">
+    <rect width="610" height="365" rx="24" fill="#f7eee4" stroke="#b47b43" class="card"/>
+    <circle cx="42" cy="42" r="25" fill="#b47b43"/><text x="42" y="49" text-anchor="middle" class="cn index">1</text>
+    <text x="82" y="50" class="cn branch-title">军团等级与科技层级</text>
+    <g transform="translate(34 88)">
+      <rect width="542" height="66" rx="14" fill="#fff" stroke="#c99c6d" stroke-width="2"/>
+      <text x="271" y="29" text-anchor="middle" class="cn node-title">军团等级</text>
+      <text x="271" y="53" text-anchor="middle" class="cn node-body">决定当前可学习的科技层级</text>
+    </g>
+    <path d="M305 154V183" class="flow"/>
+    <g transform="translate(34 183)">
+      <rect width="252" height="130" rx="14" fill="#e8e3dc" stroke="#81766b" stroke-width="2"/>
+      <text x="126" y="31" text-anchor="middle" class="cn node-title">等级不足</text>
+      <text x="18" y="67" class="cn node-body">低级/高级节点灰态</text>
+      <text x="18" y="97" class="cn small">军团等级资格锁</text>
+    </g>
+    <g transform="translate(324 183)">
+      <rect width="252" height="130" rx="14" fill="#edf4e6" stroke="#6f8d62" stroke-width="2"/>
+      <text x="126" y="31" text-anchor="middle" class="cn node-title">等级满足</text>
+      <text x="18" y="67" class="cn node-body">解除该层级的等级锁</text>
+      <text x="18" y="97" class="cn small">再判断前置科技</text>
+    </g>
+  </g>
+
+  <!-- 2 new tier awareness -->
+  <g transform="translate(90 875)">
+    <rect width="620" height="430" rx="24" fill="#edf4e9" stroke="#6f8e62" class="card"/>
+    <circle cx="42" cy="42" r="25" fill="#6f8e62"/><text x="42" y="49" text-anchor="middle" class="cn index">2</text>
+    <text x="82" y="50" class="cn branch-title">新科技层级的玩家感知</text>
+    <g transform="translate(34 88)"><rect width="552" height="68" rx="14" fill="#fff" stroke="#8baa80" stroke-width="2"/><text x="276" y="29" text-anchor="middle" class="cn node-title">A. 军团升级反馈</text><text x="276" y="53" text-anchor="middle" class="cn node-body">提示获得新科技层级资格</text></g>
+    <path d="M310 156V179" class="flow-green"/>
+    <g transform="translate(34 179)"><rect width="552" height="68" rx="14" fill="#fff" stroke="#8baa80" stroke-width="2"/><text x="276" y="29" text-anchor="middle" class="cn node-title">B. 科技入口提示</text><text x="276" y="53" text-anchor="middle" class="cn node-body">未查看新层级时保留提示标记</text></g>
+    <path d="M310 247V270" class="flow-green"/>
+    <g transform="translate(34 270)"><rect width="552" height="68" rx="14" fill="#fff" stroke="#8baa80" stroke-width="2"/><text x="276" y="29" text-anchor="middle" class="cn node-title">C. 进入后定位</text><text x="276" y="53" text-anchor="middle" class="cn node-body">定位新开放层级，等级锁消失</text></g>
+    <text x="34" y="382" class="cn node-body">前置已完成：提示可学习　·　前置未完成：切换为前置科技锁</text>
+  </g>
+
+  <!-- 3 hierarchy and lock reasons -->
+  <g transform="translate(1720 170)">
+    <rect width="590" height="430" rx="24" fill="#f2ebf7" stroke="#8a6ca6" class="card"/>
+    <circle cx="42" cy="42" r="25" fill="#8a6ca6"/><text x="42" y="49" text-anchor="middle" class="cn index">3</text>
+    <text x="82" y="50" class="cn branch-title">低级与高级科技</text>
+    <g transform="translate(34 90)">
+      <rect width="230" height="112" rx="14" fill="#fff" stroke="#a58db8" stroke-width="2"/>
+      <text x="115" y="36" text-anchor="middle" class="cn node-title">低级科技</text>
+      <text x="115" y="72" text-anchor="middle" class="cn node-body">先完成学习</text>
+    </g>
+    <path d="M264 146H326" class="flow"/>
+    <g transform="translate(326 90)">
+      <rect width="230" height="112" rx="14" fill="#fff" stroke="#a58db8" stroke-width="2"/>
+      <text x="115" y="36" text-anchor="middle" class="cn node-title">高级科技</text>
+      <text x="115" y="72" text-anchor="middle" class="cn node-body">后解除前置限制</text>
+    </g>
+    <g transform="translate(34 238)">
+      <rect width="522" height="72" rx="14" fill="#e9e4de" stroke="#81766b" stroke-width="2"/>
+      <text x="20" y="29" class="cn node-title">■ 军团等级资格锁</text>
+      <text x="20" y="55" class="cn node-body">提升军团等级后解除</text>
+    </g>
+    <g transform="translate(34 326)">
+      <rect width="522" height="72" rx="14" fill="#ece5f3" stroke="#8a6ca6" stroke-width="2"/>
+      <text x="20" y="29" class="cn node-title">◆ 前置科技锁</text>
+      <text x="20" y="55" class="cn node-body">学完指定低级科技后解除</text>
+    </g>
+  </g>
+
+  <!-- 4 node interaction -->
+  <g transform="translate(1710 635)">
+    <rect width="620" height="470" rx="24" fill="#f8eae8" stroke="#b15f58" class="card"/>
+    <circle cx="42" cy="42" r="25" fill="#b15f58"/><text x="42" y="49" text-anchor="middle" class="cn index">4</text>
+    <text x="82" y="50" class="cn branch-title">科技节点学习交互</text>
+    <g transform="translate(34 88)"><rect width="552" height="62" rx="14" fill="#fff" stroke="#ca8a85" stroke-width="2"/><text x="276" y="38" text-anchor="middle" class="cn node-title">点击科技节点</text></g>
+    <path d="M310 150V172" class="flow"/>
+    <g transform="translate(34 172)"><rect width="552" height="62" rx="14" fill="#fff" stroke="#ca8a85" stroke-width="2"/><text x="276" y="38" text-anchor="middle" class="cn node-title">1. 是否已学习？</text></g>
+    <path d="M310 234V256" class="flow"/>
+    <g transform="translate(34 256)"><rect width="552" height="62" rx="14" fill="#fff" stroke="#ca8a85" stroke-width="2"/><text x="276" y="38" text-anchor="middle" class="cn node-title">2. 军团等级资格是否满足？</text></g>
+    <path d="M310 318V340" class="flow"/>
+    <g transform="translate(34 340)"><rect width="552" height="62" rx="14" fill="#fff" stroke="#ca8a85" stroke-width="2"/><text x="276" y="38" text-anchor="middle" class="cn node-title">3. 低级/前置科技是否完成？</text></g>
+    <text x="34" y="438" class="cn node-body">全部满足 → 可学习　·　任一不满足 → 显示具体原因</text>
+  </g>
+
+  <!-- 5 results and boundaries -->
+  <g transform="translate(1700 1175)">
+    <rect width="630" height="395" rx="24" fill="#e9f2f0" stroke="#638d89" class="card"/>
+    <circle cx="42" cy="42" r="25" fill="#638d89"/><text x="42" y="49" text-anchor="middle" class="cn index">5</text>
+    <text x="82" y="50" class="cn branch-title">学习结果与状态保留</text>
+    <g transform="translate(34 90)">
+      <rect width="270" height="110" rx="14" fill="#edf5e8" stroke="#6f9166" stroke-width="2"/>
+      <text x="135" y="34" text-anchor="middle" class="cn node-title">学习成功</text>
+      <text x="135" y="69" text-anchor="middle" class="cn node-body">节点点亮，收益生效</text>
+      <text x="135" y="94" text-anchor="middle" class="cn small">刷新后续科技状态</text>
+    </g>
+    <g transform="translate(326 90)">
+      <rect width="270" height="110" rx="14" fill="#fff0e8" stroke="#b36a52" stroke-width="2"/>
+      <text x="135" y="34" text-anchor="middle" class="cn node-title">学习失败</text>
+      <text x="135" y="69" text-anchor="middle" class="cn node-body">科技状态不变</text>
+      <text x="135" y="94" text-anchor="middle" class="cn small">提示当前失败原因</text>
+    </g>
+    <g transform="translate(34 232)">
+      <rect width="562" height="125" rx="14" fill="#fff" stroke="#84a7a1" stroke-width="2"/>
+      <text x="20" y="31" class="cn node-title">状态保留边界</text>
+      <text x="20" y="65" class="cn node-body">· 换入低等级军团：已学节点与收益保留，后续学习受限</text>
+      <text x="20" y="96" class="cn node-body">· 学习失败：保持已有科技状态，并展示具体原因</text>
+    </g>
+  </g>
+
+  <!-- footer -->
+  <g transform="translate(760 1530)">
+    <rect width="880" height="90" rx="18" fill="url(#gold)" stroke="#a97b2d" stroke-width="3"/>
+    <text x="440" y="35" text-anchor="middle" class="cn node-title">从脑图转为流程图时的主线</text>
+    <text x="440" y="66" text-anchor="middle" class="cn node-body">进入科技页 → 查看节点 → 判断等级资格 → 判断前置 → 学习结果</text>
+  </g>
+</svg>

@@ -58,9 +58,9 @@ Applies to all review and analysis tasks, including numeric review, GDD review, 
 
 ### Review Quality, Not Mere Existence
 
-When giving a positive conclusion, do not use `the design exists` as the basis. The judgment must answer whether the design is good, reasonable, coherent, and sufficient.
+When reporting a positive quality assessment, do not use `the design exists` as the basis. The assessment must answer whether the design is reasonable, coherent, and sufficient against the stated criteria. This report is decision support and does not approve the design.
 
-Self-check: before writing `达标`, `通过`, or `合格`, ask whether the basis is merely `X exists`. If yes, add quality evaluation.
+Self-check: before writing `符合判据`, `未发现问题`, or another positive assessment, ask whether the basis is merely `X exists`. If yes, add quality evaluation. Do not use `通过` or `批准` as an Agent-owned planning decision.
 
 ### Two Quality Layers
 
@@ -71,7 +71,7 @@ After going through individual criteria, do a global check.
 
 ### Stage Boundary
 
-An agent may evaluate design quality in terms of function, structure, and direction when evidence supports it.
+An agent may assess design quality in terms of function, structure, and direction when evidence supports it, but the assessment is decision support. The Agent may report conformity, risks, and recommendations; only the user may accept the design, choose a direction, or declare it ready for delivery.
 
 An agent must not evaluate numeric quality such as specific parameters, curve slopes, or exact balance without data.
 

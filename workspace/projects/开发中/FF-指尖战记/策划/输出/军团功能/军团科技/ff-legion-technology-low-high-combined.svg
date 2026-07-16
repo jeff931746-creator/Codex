@@ -1,0 +1,263 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1800" viewBox="0 0 2400 1800">
+  <defs>
+    <linearGradient id="pageBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff9ed"/>
+      <stop offset="0.58" stop-color="#f1dfc3"/>
+      <stop offset="1" stop-color="#d7b98b"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff7e4"/>
+      <stop offset="1" stop-color="#e6c895"/>
+    </linearGradient>
+    <linearGradient id="darkFrame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6b492b"/>
+      <stop offset="0.45" stop-color="#271a12"/>
+      <stop offset="1" stop-color="#110b08"/>
+    </linearGradient>
+    <linearGradient id="bronze" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd77b"/>
+      <stop offset="0.48" stop-color="#cc812d"/>
+      <stop offset="1" stop-color="#713714"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e6bcff"/>
+      <stop offset="0.5" stop-color="#9460b2"/>
+      <stop offset="1" stop-color="#432653"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d9edb9"/>
+      <stop offset="1" stop-color="#6e914d"/>
+    </linearGradient>
+    <pattern id="grain" width="70" height="70" patternUnits="userSpaceOnUse">
+      <path d="M4 12H26M38 22H64M9 48H36M45 59H67" stroke="#8c663c" stroke-width="1.2" opacity="0.1"/>
+      <circle cx="30" cy="61" r="1.5" fill="#8c663c" opacity="0.12"/>
+    </pattern>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#321c0c" flood-opacity="0.28"/>
+    </filter>
+    <filter id="softShadow" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#321c0c" flood-opacity="0.22"/>
+    </filter>
+    <filter id="goldGlow" x="-70%" y="-70%" width="240%" height="240%">
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#ffc957" flood-opacity="0.88"/>
+    </filter>
+    <filter id="purpleGlow" x="-70%" y="-70%" width="240%" height="240%">
+      <feDropShadow dx="0" dy="0" stdDeviation="11" flood-color="#d9a2ff" flood-opacity="0.9"/>
+    </filter>
+    <marker id="arrowGold" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#a86623"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="10" markerHeight="10" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#7f4b99"/>
+    </marker>
+    <symbol id="lock" viewBox="0 0 42 50">
+      <path d="M9 21V14C9 4 33 4 33 14V21" fill="none" stroke="#efe5d6" stroke-width="5" stroke-linecap="round"/>
+      <rect x="4" y="20" width="34" height="27" rx="6" fill="#514b4f" stroke="#b9acb8" stroke-width="3"/>
+      <circle cx="21" cy="32" r="4" fill="#f5eddf"/><path d="M21 35V40" stroke="#f5eddf" stroke-width="3"/>
+    </symbol>
+    <style>
+      .cn{font-family:"PingFang SC","Microsoft YaHei",sans-serif}
+      .title{font-size:48px;font-weight:900;fill:#302013}
+      .sub{font-size:22px;fill:#70563e}
+      .panelTitle{font-size:27px;font-weight:900;fill:#3c2818}
+      .h{font-size:22px;font-weight:800;fill:#3c2919}
+      .body{font-size:18px;fill:#604a35}
+      .small{font-size:15px;fill:#705b47}
+      .tiny{font-size:13px;fill:#75614d}
+      .white{fill:#fff5df}
+      .muted{fill:#d7cec2}
+      .goldEdge{fill:none;stroke:#a86623;stroke-width:4;marker-end:url(#arrowGold)}
+      .purpleEdge{fill:none;stroke:#7f4b99;stroke-width:4;marker-end:url(#arrowPurple)}
+      .dash{fill:none;stroke-dasharray:11 8}
+    </style>
+  </defs>
+
+  <rect width="2400" height="1800" fill="url(#pageBg)"/>
+  <rect width="2400" height="1800" fill="url(#grain)" opacity="0.7"/>
+  <rect x="28" y="28" width="2344" height="1744" rx="28" fill="none" stroke="#ae824c" stroke-width="3"/>
+  <path d="M50 40H2350L2362 52V1748L2350 1760H50L38 1748V52Z" fill="none" stroke="#fff4d8" stroke-width="2" opacity="0.8"/>
+
+  <path d="M58 58H1100L1130 88L1100 118H58Z" fill="url(#paper)" stroke="#b68443" stroke-width="3" filter="url(#softShadow)"/>
+  <text x="78" y="96" class="cn title">军团科技：低级多层 × 高级科技 × 总属性</text>
+  <text x="78" y="145" class="cn sub">一套原 UE、一个科技树位置、两个可切换数据状态；玩家只学习当前界面的科技。</text>
+
+  <!-- 中央：唯一主界面 -->
+  <g transform="translate(865 205)" filter="url(#shadow)">
+    <rect x="-22" y="-22" width="646" height="1344" rx="30" fill="#c79c60" stroke="#73471f" stroke-width="5"/>
+    <image href="ff-legion-technology-ui-reference.png" x="0" y="0" width="600" height="1297" preserveAspectRatio="xMidYMid meet"/>
+    <rect x="0" y="0" width="600" height="1297" rx="8" fill="none" stroke="#f2cf83" stroke-width="3"/>
+
+    <!-- 顶部总属性入口：贴近军团信息区 -->
+    <g transform="translate(355 118)" filter="url(#softShadow)">
+      <path d="M0 10L10 0H187L197 10V53L187 63H10L0 53Z" fill="url(#darkFrame)" stroke="#d5a351" stroke-width="4"/>
+      <rect x="18" y="33" width="8" height="14" rx="2" fill="#d7a64f"/>
+      <rect x="31" y="24" width="8" height="23" rx="2" fill="#e7bd66"/>
+      <rect x="44" y="14" width="8" height="33" rx="2" fill="#f6d989"/>
+      <text x="119" y="40" text-anchor="middle" class="cn h white">总属性</text>
+      <path d="M171 21L181 31L171 42" fill="none" stroke="#f1cf86" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- 原环形科技链上的多层分段 -->
+    <path d="M79 808C24 704 35 557 112 461" fill="none" stroke="#83a15f" stroke-width="12" stroke-linecap="round" stroke-dasharray="23 10" opacity="0.92"/>
+    <path d="M112 461C176 383 275 349 373 377" fill="none" stroke="#e6a23a" stroke-width="14" stroke-linecap="round" filter="url(#goldGlow)"/>
+    <path d="M373 377C477 406 548 507 553 618" fill="none" stroke="#85817c" stroke-width="12" stroke-linecap="round" stroke-dasharray="18 11" opacity="0.95"/>
+    <g transform="translate(32 758)"><rect width="170" height="38" rx="18" fill="#647b43" stroke="#c9e4a4" stroke-width="2"/><text x="85" y="26" text-anchor="middle" class="cn small white">低级 · 第1层 已学</text></g>
+    <g transform="translate(46 430)" filter="url(#goldGlow)"><rect width="183" height="40" rx="19" fill="#b66f22" stroke="#ffe09a" stroke-width="3"/><text x="92" y="27" text-anchor="middle" class="cn small white">低级 · 第2层 当前</text></g>
+    <g transform="translate(388 390)"><rect width="178" height="38" rx="18" fill="#54514d" stroke="#9a958f" stroke-width="2"/><text x="89" y="26" text-anchor="middle" class="cn small muted">低级 · 第3层 锁定</text></g>
+
+    <!-- 切换器紧贴详情框上沿 -->
+    <g transform="translate(92 905)" filter="url(#shadow)">
+      <path d="M0 13L13 0H390L403 13V62L390 75H13L0 62Z" fill="url(#darkFrame)" stroke="#d3a158" stroke-width="4"/>
+      <path d="M10 18L23 8H182L199 25V51L182 67H23L10 57Z" fill="url(#bronze)" stroke="#ffe2a0" stroke-width="4" filter="url(#goldGlow)"/>
+      <path d="M204 25L221 8H380L393 18V57L380 67H221L204 51Z" fill="url(#purple)" stroke="#cfa6e5" stroke-width="3" opacity="0.72"/>
+      <polygon points="201,5 218,37 201,70 184,37" fill="#3e2818" stroke="#d7a85b" stroke-width="3"/>
+      <text x="102" y="47" text-anchor="middle" class="cn h white">低级科技</text>
+      <text x="301" y="47" text-anchor="middle" class="cn h white">高级科技</text>
+      <circle cx="388" cy="4" r="18" fill="#c8493e" stroke="#ffd375" stroke-width="3"/>
+      <text x="388" y="12" text-anchor="middle" class="cn h white">!</text>
+    </g>
+    <g transform="translate(80 990)">
+      <path d="M0 0H440" stroke="#f0c66f" stroke-width="3" opacity="0.78"/>
+      <text x="220" y="28" text-anchor="middle" class="cn small white">切换只替换上方树盘；详情、科技点与升级按钮保持原位</text>
+    </g>
+    <rect x="0" y="1297" width="600" height="45" rx="7" fill="#f3d9a5" stroke="#8d5b29" stroke-width="3"/>
+    <text x="300" y="1327" text-anchor="middle" class="cn h">原 UE 主界面 · 当前显示低级科技</text>
+  </g>
+
+  <!-- 左侧：低级科技多层的环形解释 -->
+  <g transform="translate(75 255)" filter="url(#shadow)">
+    <path d="M0 20L20 0H650L670 20V970L650 990H20L0 970Z" fill="url(#paper)" stroke="#a87230" stroke-width="4"/>
+    <path d="M20 78H650" stroke="#c69b60" stroke-width="2"/>
+    <text x="34" y="54" class="cn panelTitle">低级科技：原环形链内分层</text>
+    <text x="34" y="108" class="cn body">层级沿环形推进，不额外创建纵向树或新页面。</text>
+
+    <g transform="translate(335 450)">
+      <circle r="215" fill="#241b15" stroke="#795532" stroke-width="12"/>
+      <circle r="152" fill="#17120f" stroke="#513a27" stroke-width="7"/>
+      <circle r="80" fill="#302117" stroke="#c08a43" stroke-width="8"/>
+      <path d="M-188 104A215 215 0 0 1 -183 -113" fill="none" stroke="#83a15f" stroke-width="26" stroke-linecap="round"/>
+      <path d="M-164 -139A215 215 0 0 1 52 -209" fill="none" stroke="#e6a23a" stroke-width="28" stroke-linecap="round" filter="url(#goldGlow)"/>
+      <path d="M81 -199A215 215 0 0 1 212 35" fill="none" stroke="#74716d" stroke-width="26" stroke-linecap="round" stroke-dasharray="18 12"/>
+      <path d="M203 70A215 215 0 0 1 75 201" fill="none" stroke="#47433f" stroke-width="26" stroke-linecap="round" stroke-dasharray="18 12"/>
+      <g fill="#38271a" stroke="#d69b48" stroke-width="5">
+        <circle cx="-198" cy="55" r="30"/><circle cx="-200" cy="-60" r="30"/><circle cx="-120" cy="-178" r="30"/>
+      </g>
+      <g fill="#4c331b" stroke="#ffd169" stroke-width="6" filter="url(#goldGlow)">
+        <circle cx="-25" cy="-213" r="32"/><circle cx="78" cy="-200" r="32"/>
+      </g>
+      <g fill="#343230" stroke="#77736f" stroke-width="5">
+        <circle cx="174" cy="-126" r="30"/><circle cx="212" cy="-18" r="30"/><circle cx="175" cy="111" r="30"/>
+      </g>
+      <g fill="#2c2927" stroke="#5f5a55" stroke-width="5">
+        <circle cx="90" cy="195" r="30"/><circle cx="-42" cy="211" r="30"/>
+      </g>
+      <text y="-10" text-anchor="middle" class="cn panelTitle white">低级科技</text>
+      <text y="24" text-anchor="middle" class="cn small muted">同一环形链分段成长</text>
+      <use href="#lock" x="153" y="-153" width="34" height="40"/>
+      <use href="#lock" x="196" y="-39" width="34" height="40"/>
+    </g>
+
+    <g transform="translate(62 735)">
+      <rect width="546" height="55" rx="15" fill="#eef5df" stroke="#7f9c58" stroke-width="3"/>
+      <circle cx="28" cy="28" r="11" fill="#83a15f"/><text x="52" y="35" class="cn body">第1层：已生效，继续保留属性</text>
+    </g>
+    <g transform="translate(62 805)">
+      <rect width="546" height="55" rx="15" fill="#fff0cf" stroke="#d18a2e" stroke-width="3"/>
+      <circle cx="28" cy="28" r="11" fill="#e6a23a"/><text x="52" y="35" class="cn body">第2层：当前可学习，节点逐个升级</text>
+    </g>
+    <g transform="translate(62 875)">
+      <rect width="546" height="55" rx="15" fill="#e6e2dc" stroke="#77736f" stroke-width="3"/>
+      <circle cx="28" cy="28" r="11" fill="#77736f"/><text x="52" y="35" class="cn body">后续层：留在环形后段，满足条件后开放</text>
+    </g>
+  </g>
+
+  <!-- 右侧上：总属性汇总 -->
+  <g transform="translate(1585 220)" filter="url(#shadow)">
+    <path d="M0 18L18 0H700L718 18V360L700 378H18L0 360Z" fill="url(#paper)" stroke="#9a7749" stroke-width="4"/>
+    <text x="34" y="52" class="cn panelTitle">总属性：跨树汇总，不随切换变化</text>
+    <path d="M24 76H694" stroke="#c69b60" stroke-width="2"/>
+    <g transform="translate(45 105)">
+      <rect width="180" height="92" rx="18" fill="#fff0d0" stroke="#c57e28" stroke-width="4"/>
+      <text x="90" y="38" text-anchor="middle" class="cn h">低级已生效</text>
+      <text x="90" y="70" text-anchor="middle" class="cn body">攻击 +12%</text>
+    </g>
+    <text x="250" y="163" text-anchor="middle" class="cn title">+</text>
+    <g transform="translate(275 105)">
+      <rect width="180" height="92" rx="18" fill="#eee0f5" stroke="#8653a0" stroke-width="4"/>
+      <text x="90" y="38" text-anchor="middle" class="cn h">高级已生效</text>
+      <text x="90" y="70" text-anchor="middle" class="cn body">攻击 +8%</text>
+    </g>
+    <text x="480" y="163" text-anchor="middle" class="cn title">=</text>
+    <g transform="translate(505 105)" filter="url(#goldGlow)">
+      <rect width="168" height="92" rx="18" fill="url(#darkFrame)" stroke="#e6b45f" stroke-width="4"/>
+      <text x="84" y="38" text-anchor="middle" class="cn h white">当前总加成</text>
+      <text x="84" y="72" text-anchor="middle" class="cn h white">攻击 +20%</text>
+    </g>
+    <g transform="translate(45 228)">
+      <rect width="628" height="98" rx="17" fill="#f7ead2" stroke="#b8915d" stroke-width="3"/>
+      <text x="24" y="35" class="cn body">入口固定在军团信息区附近，点击打开汇总浮层。</text>
+      <text x="24" y="70" class="cn body">浮层按属性类型归并低级 + 高级全部已生效加成。</text>
+    </g>
+  </g>
+
+  <!-- 右侧下：高级科技同位树 -->
+  <g transform="translate(1585 645)" filter="url(#shadow)">
+    <path d="M0 20L20 0H700L720 20V845L700 865H20L0 845Z" fill="#eadff0" stroke="#74458c" stroke-width="4"/>
+    <path d="M20 78H700" stroke="#ab82bd" stroke-width="2"/>
+    <text x="34" y="54" class="cn panelTitle">高级科技：同位置替换为高级树</text>
+    <text x="34" y="108" class="cn body">点击高级科技后，只替换树盘数据、节点纹样与连线色彩。</text>
+
+    <g transform="translate(360 415)">
+      <circle r="230" fill="#25172e" stroke="#6c4181" stroke-width="12"/>
+      <circle r="155" fill="#19101f" stroke="#4b3158" stroke-width="7"/>
+      <circle r="82" fill="#392344" stroke="#d2a0ed" stroke-width="9" filter="url(#purpleGlow)"/>
+      <g fill="none" stroke="#bc7dde" stroke-width="9" filter="url(#purpleGlow)">
+        <path d="M0 -82V-192"/><path d="M-58 -58L-144 -144"/><path d="M58 -58L144 -144"/>
+        <path d="M-82 0H-202"/><path d="M82 0H202"/><path d="M-58 58L-144 144"/><path d="M58 58L144 144"/><path d="M0 82V192"/>
+      </g>
+      <g fill="#5c366e" stroke="#dbabf5" stroke-width="6">
+        <circle cy="-202" r="37"/><circle cx="-151" cy="-151" r="37"/><circle cx="151" cy="-151" r="37"/>
+        <circle cx="-151" cy="151" r="37"/><circle cx="151" cy="151" r="37"/><circle cy="202" r="37"/>
+      </g>
+      <g fill="#39333c" stroke="#716776" stroke-width="6">
+        <circle cx="-207" r="37"/><circle cx="207" r="37"/>
+      </g>
+      <use href="#lock" x="-225" y="-23" width="38" height="46"/>
+      <use href="#lock" x="188" y="-23" width="38" height="46"/>
+      <text y="-9" text-anchor="middle" class="cn panelTitle white">高级科技</text>
+      <text y="26" text-anchor="middle" class="cn small muted">保留原环形构图</text>
+    </g>
+    <g transform="translate(48 682)">
+      <rect width="624" height="126" rx="18" fill="#f8f0fb" stroke="#9a6caf" stroke-width="3"/>
+      <text x="24" y="36" class="cn body">• 玩家在高级界面点击节点，就学习当前高级科技。</text>
+      <text x="24" y="72" class="cn body">• 前置不足的节点原位锁定，可提示切回所需低级节点。</text>
+      <text x="24" y="108" class="cn body">• 切回低级时，仍回到上次浏览的低级层段。</text>
+    </g>
+  </g>
+
+  <!-- 结构关系：不是玩家判断流程 -->
+  <path d="M745 726C806 726 817 696 850 696" class="goldEdge"/>
+  <rect x="735" y="652" width="174" height="48" rx="18" fill="#fff2d7" stroke="#c28331" stroke-width="3"/>
+  <text x="822" y="683" text-anchor="middle" class="cn small">环形分段落在主树盘</text>
+
+  <path d="M1585 1155C1526 1155 1500 1100 1468 1055" class="purpleEdge"/>
+  <rect x="1450" y="1164" width="180" height="48" rx="18" fill="#f0e3f6" stroke="#88549f" stroke-width="3"/>
+  <text x="1540" y="1195" text-anchor="middle" class="cn small">切换后同位替换树盘</text>
+
+  <path d="M1464 338C1515 338 1535 334 1585 334" class="goldEdge"/>
+  <rect x="1434" y="270" width="174" height="48" rx="18" fill="#fff2d7" stroke="#b27a34" stroke-width="3"/>
+  <text x="1521" y="301" text-anchor="middle" class="cn small">点击查看统一汇总</text>
+
+  <!-- 底部结论条 -->
+  <g transform="translate(75 1570)" filter="url(#shadow)">
+    <path d="M0 18L18 0H2232L2250 18V142L2232 160H18L0 142Z" fill="url(#darkFrame)" stroke="#c99a50" stroke-width="4"/>
+    <text x="38" y="50" class="cn panelTitle white">完整表达</text>
+    <text x="220" y="50" class="cn body white">低级科技在原环形链中分层推进；高级科技在同一树盘位置切换显示；两类已生效属性始终进入同一总属性汇总。</text>
+    <path d="M40 76H2210" stroke="#8d6b42" stroke-width="2"/>
+    <g transform="translate(48 96)"><circle cx="12" cy="12" r="10" fill="#e5a13a"/><text x="34" y="19" class="cn body white">界面结构不变</text></g>
+    <g transform="translate(360 96)"><circle cx="12" cy="12" r="10" fill="#83a15f"/><text x="34" y="19" class="cn body white">低级层级沿环形表达</text></g>
+    <g transform="translate(770 96)"><circle cx="12" cy="12" r="10" fill="#b77bd8"/><text x="34" y="19" class="cn body white">高级树同位切换</text></g>
+    <g transform="translate(1120 96)"><circle cx="12" cy="12" r="10" fill="#f0c568"/><text x="34" y="19" class="cn body white">详情与升级操作沿用</text></g>
+    <g transform="translate(1540 96)"><circle cx="12" cy="12" r="10" fill="#e7d27b"/><text x="34" y="19" class="cn body white">总属性合并低级 + 高级</text></g>
+  </g>
+</svg>

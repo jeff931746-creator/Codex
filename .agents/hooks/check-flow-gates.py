@@ -120,6 +120,24 @@ def load_checkpoint() -> tuple[dict | None, str]:
     return data, 'ok'
 
 
+def collect_user_evidence_texts(payload: object) -> list[str]:
+    texts: list[str] = []
+    stack = [payload]
+    while stack:
+        item = stack.pop()
+        if isinstance(item, dict):
+            role = str(item.get('role') or item.get('author_role') or item.get('authorRole') or '').lower()
+            item_type = str(item.get('type') or item.get('message_type') or '').lower()
+            if role == 'user' or item_type in {'user_message', 'user-message'}:
+                texts.append(json.dumps(item, ensure_ascii=False, sort_keys=True))
+            for value in item.values():
+                if isinstance(value, (dict, list)):
+                    stack.append(value)
+        elif isinstance(item, list):
+            stack.extend(value for value in item if isinstance(value, (dict, list)))
+    return texts
+
+
 def load_scope() -> tuple[list[str], bool]:
     if not SCOPE_FILE.exists():
         return [], False
@@ -147,19 +165,23 @@ def active_task_scope() -> list[str]:
     return sorted(set(normalize_path(str(p)) for p in scope if str(p).strip()))
 
 
-def checkpoint_valid(checkpoint: dict, diff_hash: str, changed: list[str]) -> tuple[bool, str]:
+def checkpoint_valid(checkpoint: dict, diff_hash: str, changed: list[str], user_evidence_texts: list[str]) -> tuple[bool, str]:
     now = int(time.time())
     if checkpoint.get('task_type') != 'knowledge-asset':
         return False, 'task_type is not knowledge-asset'
     if checkpoint.get('flow_intensity') != 'strict':
         return False, 'flow_intensity is not strict'
-    if checkpoint.get('result') != 'pass':
-        return False, 'review result is not pass'
+    if checkpoint.get('result') != 'reviewed':
+        return False, 'independent inspection is not complete'
     if checkpoint.get('reviewed_diff_hash') != diff_hash:
         return False, 'reviewed diff hash does not match current diff'
-    blocking = checkpoint.get('blocking_findings')
-    if blocking not in ([], None):
-        return False, 'checkpoint contains blocking findings'
+    findings = checkpoint.get('findings')
+    if findings not in ([], None):
+        excerpt = str(checkpoint.get('user_message_excerpt') or '').strip()
+        if not excerpt:
+            return False, 'review findings remain without a user_message_excerpt'
+        if not any(excerpt in text for text in user_evidence_texts):
+            return False, 'user_message_excerpt was not observed in a user-authored runtime message'
     created_at = int(checkpoint.get('created_at') or 0)
     expires_at = int(checkpoint.get('expires_at') or 0)
     if created_at <= 0:
@@ -195,9 +217,10 @@ def checkpoint_valid(checkpoint: dict, diff_hash: str, changed: list[str]) -> tu
 
 def main() -> int:
     try:
-        json.load(sys.stdin)
+        payload = json.load(sys.stdin)
     except Exception:
-        pass
+        payload = {}
+    user_evidence_texts = collect_user_evidence_texts(payload)
     task_scope = active_task_scope()
     all_changed = changed_paths(task_scope or None)
     if not all_changed:
@@ -234,7 +257,7 @@ def main() -> int:
               f'Runtime: {RUNTIME}\nChanged paths: {", ".join(changed[:12])}\n'
               'Run an independent review, then record it with .agents/hooks/checkpoint-independent-review.py.', flush=True)
         return 2
-    ok, reason = checkpoint_valid(checkpoint, diff_hash, changed)
+    ok, reason = checkpoint_valid(checkpoint, diff_hash, changed, user_evidence_texts)
     if not ok:
         print('BLOCKED: long-term workflow assets changed but independent review checkpoint is invalid.\n'
               f'Reason: {reason}\nRuntime: {RUNTIME}\nChanged paths: {", ".join(changed[:12])}\n'

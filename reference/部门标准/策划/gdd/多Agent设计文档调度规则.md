@@ -1,206 +1,115 @@
-# 多Agent设计文档调度规则
+# 多 Agent 设计文档调度规则
 
-## 定位
+## 这份规则处理什么
 
-本文件定义多 Agent GDD 写作的底层调度语义：上下文如何装配、阶段状态如何保存、打回如何回滚、打回循环如何熔断、checkpoint 如何恢复。
-
-本文件不定义阶段顺序。阶段顺序见 `多Agent设计文档工作流.md`。
+本文件定义多 Agent GDD 写作的状态、上下文、返回、checkpoint 和恢复语义。阶段顺序见 `多Agent设计文档工作流.md`；所有策划选择必须遵守 `../策划决策权规则.md`。
 
 ## 路由与证据读取边界
 
-主 Agent 在确认是否进入 GDD 写作流程时，只允许装配路由上下文：
+主 Agent 在确认是否进入 GDD 写作流程时，只装配用户原始请求、目标与参考路径清单、工作区规则、执行入口、工作流、调度规则和可用能力。
 
-- 用户原始请求
-- 用户显式提供的目标路径和参考路径清单
-- 工作区入口规则
-- 任务流路由规则
-- `gdd-write` 执行入口
-- 本工作流和本调度规则
-- 当前运行时可用的子 Agent / delegation 能力
-
-命中 GDD 写作流程后，参考 GDD、历史记忆、机制资料、竞品资料、业务正文、已有设计文档正文等业务证据，必须作为 G1 输入交给子 Agent 首次读取并还原设计目的。
-
-主 Agent 在 G1 之前不得：
-
-- 提炼设计目的、交付对象或正文结构
-- 提炼手段框架
-- 提炼设计边界
-- 判断结构依据、独立功能结构或功能定位
-- 从历史记忆合成方案方向
-- 把参考资料中的机制关系改写成候选方案
-- 输出“我会把 X 设计成 Y”这类设计结论
-
-如果主 Agent 已经越界读取并解释了业务证据，该解释只能作为污染风险记录，不得作为 G1/M1 证据；必须重新启动 G1，让子 Agent 在不继承该业务结论的任务包中完成设计目的还原。
+业务证据由 G1 首次解释。主 Agent 在 G1 前不得提炼目的、手段、边界、对象、结构、独立功能或方案方向。已越界形成的解释不得作为工作流证据。
 
 ## 状态字典
 
-执行过程中维护一个全局状态 S，至少包含：
+状态 S 至少包含：
 
-- confirmed_facts
-- unknown_facts
-- candidate_design_purposes
-- candidate_upper_game_framework
-- candidate_core_or_system_loop
-- candidate_loop_gap
-- non_purpose_materials
-- confirmed_design_purpose
-- confirmed_loop_basis
-- confirmed_loop_gap
-- confirmed_exploration_boundary
-- candidate_means_frameworks
-- candidate_design_objects
-- candidate_delivery_objects
-- candidate_structure_bases
-- confirmed_means_framework
-- confirmed_design_object
-- confirmed_delivery_objects
-- confirmed_delivery_boundary
-- confirmed_structure_basis
-- confirmed_features
-- confirmed_ue
-- direction_validation_pending_items
-- formal_gdd_blockers
-- model_optimization_outputs
-- diff_guard_reports
-- independent_review_records
-- stage_outputs
-- return_opinions
-- stage_snapshots
-- return_counters
+- confirmed_facts / unknown_facts
+- candidate_design_purposes / candidate_means_frameworks
+- candidate_design_objects / candidate_delivery_objects / candidate_structure_bases
+- user_confirmations（U1-U5）
+- confirmed_design_purpose / confirmed_exploration_boundary
+- confirmed_means_framework / confirmed_design_object / confirmed_delivery_boundary / confirmed_structure_basis
+- confirmed_features / confirmed_rules / confirmed_states / confirmed_ue
+- direction_validation_pending_items / formal_gdd_blockers
+- model_optimization_outputs / diff_check_reports / independent_review_reports
+- stage_outputs / suggested_return_options / stage_snapshots / return_counters
 
-## 阶段快照
+`confirmed_*` 字段只能由对应用户确认生成，不能由 Agent 推荐、检查结论或 checkpoint 自行生成。
 
-进入 G1-G6 任一阶段前，必须记录当前状态快照。
+## 用户确认记录
 
-跨阶段打回时，必须：
+U1-U5 的记录必须包含：
 
-1. 回滚到目标阶段进入前的快照。
-2. 追加本次打回意见。
-3. 标记目标阶段之后的产物为作废。
-4. 从目标阶段重新执行。
+- confirmation_stage
+- confirmed_object
+- user_message_excerpt
+- source=`user`
+- target_artifact_hash 或对应输入版本
+- recorded_at
 
-禁止在跨阶段打回后继续保留被打回阶段之后的中间结论作为上下文事实。
+Agent 不得根据沉默、上下文推断、历史选择或“继续分析”生成确认。用户一次合并确认多个节点时，仍需分别记录。
+
+## 阶段快照与返回
+
+进入 G1-G6、C4 或独立审核前记录状态快照。
+
+Agent 发现问题时只记录：发现位置、证据、影响、可选返回阶段、各选项后果和推荐项。未获得用户决定前不得回滚或使后续产物失效。
+
+用户决定返回后：
+
+1. 回滚到用户指定阶段进入前的快照。
+2. 追加用户决定和 Agent 报告。
+3. 标记该阶段之后受影响的产物为待重做。
+4. 从用户指定阶段继续。
 
 ## 上下文装配
 
-每次调用 Agent 时，只装配当前阶段所需上下文：
+每次调用 Agent 时，只装配当前阶段所需的已确认事实、未覆盖事实、用户确认结论、当前任务、当前原则、角色卡、禁止事项和输出要求。
 
-- 已确认事实
-- 未覆盖事实
-- 当前阶段任务
-- 当前阶段判断原则
-- 当前角色卡
-- 当前禁止事项
-- 当前输出要求
+用户确认节点不调用 Agent 代替决策。主 Agent 只把上一阶段材料整理为：候选、证据、影响、风险、推荐和待用户决定项。
 
-不得把所有阶段判断原则一次性塞入上下文。
+## 模型文本优化与差异检查
 
-主策 Agent 使用同一基础身份，但在不同确认点注入不同判断原则：
+DeepSeek 等模型只能作为 G5 后的文本优化工具并产出候选稿：
 
-- M1：`主策/M1-目标与边界判断原则.md`
-- M2：`主策/M2-循环闭环判断原则.md`
-- M3：`主策/M3-落地可执行性判断原则.md`
-- M4：`主策/M4-交付一致性判断原则.md`
+1. 只使用统一 LLM 入口。
+2. 输入只包含 G5 草稿、U1-U3 确认结论、资料覆盖范围、待确认项、写作原则和优化提示词。
+3. 不补玩法、奖励、数值、系统能力或项目事实。
+4. 写入新文件或候选槽位，不覆盖用户确认版本。
+5. 标记为候选稿，直到 U4 明确选择。
 
-禁止用一个巨大主策 Role-Card 覆盖所有确认点。
+Agent 对候选稿只检查新增事实、信息丢失、结构污染、技术越界和规则归位，并把差异交给用户。Agent 不得自行选择 G5 原稿或优化稿。
 
-## 模型文本优化与差异守门
+## 同一问题重复出现时
 
-DeepSeek 等 LLM 可以作为 G5 后的文本优化工具，但只能产出候选稿。
+问题重复按 `(发现阶段 -> 建议返回阶段 -> reason_hash)` 记录。相同问题第三次出现时，Agent 必须停止自动执行，向用户提供：
 
-启用模型文本优化时，必须满足：
+- 继续补资料。
+- 降级为方向验证稿。
+- 保留风险继续。
+- 停止方向。
 
-1. 只通过统一 LLM 入口调用，例如 `archive/tools/lib/llm_client.py`；不得恢复 runtime 专属 wrapper，也不得在业务脚本中散落 key、endpoint 或鉴权逻辑。
-2. 输入上下文只包含 G5 草稿、M1-M3 已确认结论、当前资料覆盖范围、待确认项、G5 写作原则和明确优化提示词。M4 在 G5-D 之后执行，不得作为模型优化输入前置条件。
-3. 提示词必须要求模型只使用输入资料；资料未覆盖的内容标注“资料未覆盖”，不得补玩法、奖励、数值、系统能力或项目事实。
-4. 输出必须写入新文件或候选稿槽位，不得覆盖 G5 原稿或用户指定的正式文档。
-5. 输出状态必须标记为候选稿、待验收稿或 DeepSeek 优化稿；在 M4、G6 和 `gdd-review` 通过前，不得命名或汇报为正式可交付版。
-
-模型优化后，主 Agent 必须先做差异守门，再送 M4：
-
-- 新增事实：是否新增输入资料没有覆盖的玩法、奖励、数值、系统能力或结论。
-- 信息丢失：是否删失原稿关键限制、边界、待确认项、功能级契约或玩家反馈。
-- 结构污染：是否引入“触发条件”“操作与响应”“边界与异常”“附属规则”等检查项式标题。
-- 技术越界：是否写入字段结构、接口协议、重试、幂等、并发、补偿队列、日志、埋点、存储等实现层内容。
-- 规则归位：规则是否仍跟随实际生效的功能场景，而不是被集中成独立规则清单。
-
-差异守门只判断候选稿是否可进入 M4，不是正式验收。DeepSeek 自检和主 Agent 自检都不能替代 G6 或正式 `gdd-review`。
-
-## 打回记录
-
-任何打回都必须记录：
-
-- 源阶段
-- 目标阶段
-- 阻塞原因
-- 必须修改的产物
-- 是否影响已确认目标、循环或功能点
-
-不允许只写“质量不够”“再优化一下”。
-
-## 熔断计数
-
-打回计数按 `(源阶段 -> 目标阶段)` 记录，不使用全局单一计数器。
-
-- 同阶段循环打回：最多 2 次。
-- 主策节点退回上一子阶段：最多 2 次。
-- G6 跨阶段打回：同一目标阶段最多 1 次。
-- 同一问题第三次出现：必须进入主策裁决。
-
-工程实现可增加 `reason_hash` 区分同源不同问题，但标准只强制阶段路径计数和同问题重复识别。
-
-## 主策裁决
-
-触发熔断时，主策只能选择三类裁决：
-
-- 补资料：明确需要补什么资料，回到 G1。
-- 降级为方向验证稿：明确哪些问题作为方向验证保留项保留。
-- 停止方向：说明当前方向为何无法继续成立。
+Agent 可以推荐，但只能由用户选择。
 
 ## 分段落盘
 
-每个主策确认点都必须形成可恢复 checkpoint：
+- U1 后：G1/G2 材料和用户确认的目的、循环、缺口、边界。
+- U2 后：用户选择的手段、对象、交付边界和结构依据。
+- U3 后：用户确认的功能、规则、状态和 UE 方向。
+- G5-D 后：原稿、候选稿、模型输入摘要、提示词版本和差异报告。
+- U4 后：用户确认的待检查正文版本。
+- G6 后：与正文分离的交付状态检查报告。
+- gdd-review 后：与正文分离的独立审核报告。
+- U5 后：用户最终处理决定。
 
-- M1 通过后，落盘 G1/G2 产物、已锁定设计目的、循环依据、当前缺口、非目的内容和探索边界。
-- M2 通过后，落盘已确认的手段框架、设计对象、交付对象边界和结构依据。
-- M3 通过后，落盘已确认功能点、规则、状态和 UE 要求。
-- G5-D 模型优化后，落盘候选稿、模型输入摘要、提示词版本和差异守门报告。
-- M4 通过后，落盘待验收文档草稿。
-- G6 通过后，保留 M4 已确认正文作为交付版本，并单独落盘 G6 交付验收记录；不得把验收记录追加到交付正文。
-
-推荐落盘位置：
-
-`workspace/tmp/agent-checkpoints/gdd-write/<doc-id>/`
-
-G6 交付验收记录也保存在该 checkpoint 目录。用户指定的正式 GDD 路径只保存设计正文，不保存阶段裁决、验收依据或审核结论。
-
-如果运行中断，应优先从最近一个已确认 checkpoint 恢复，而不是从头重跑。
+推荐位置：`workspace/tmp/agent-checkpoints/gdd-write/<doc-id>/`。
 
 ## 方向验证稿与正式 GDD
 
-方向验证稿与正式 GDD 的质量标准由 `多Agent设计文档判断原则/子Agent/交付验收原则.md` 定义。
-
-调度层只处理交付分支：
-
-- 方向验证稿在 G6 通过后可交付。
-- 正式 GDD 在 G6 通过后，必须继续调用 `gdd-review`。
-- G6 和 `gdd-review` 的结论均为独立流程记录，不得回写为 GDD 章节或附录。
-- 正式 `gdd-review` 必须由非生产者执行。参与 G5 写作、DeepSeek 上下文装配、提示词编写、候选稿修改、blocking issue 修复的主 Agent 或写作 Agent，都不能作为该稿件的唯一正式通过验收者。
-- DeepSeek 自检、主 Agent 自检、差异守门报告都只能作为验收材料，不能作为正式通过结论。
-- `gdd-review` 通过前，正式 GDD 不得视为正式交付完成；若当前运行环境没有可用的非生产者 reviewer，只能交付“已完成自检，未完成正式独立验收”的状态说明。
-- 正式 GDD 阻塞项不得在调度层降级为普通待确认项。
+- G6 只报告交付状态，不决定是否通过。
+- 正式 GDD 分支在 G6 后调用非生产者 `gdd-review`，审核只报告问题与建议。
+- 方向验证稿和正式 GDD 都必须由 U5 决定是否交付、带风险接受、返回修改或停止。
+- Agent 自检、G6、独立审核和外部模型均不能输出具有最终效力的“通过”。
+- 用户决定带风险交付时，必须保留未关闭问题和影响说明，不得伪装为无风险通过。
 
 ## 交付前检查
 
-交付前必须确认：
-
-- 工作流已读。
-- 调度规则已读。
-- 当前阶段对应判断原则已读。
-- 主策确认点均有明确结论。
-- 手段框架裁决已完成，并被后续结构依据和独立功能承接。
-- 打回计数未超限，或已完成主策裁决。
-- 当前节点判断原则和输出模板已应用。
-- 若启用 DeepSeek 等 LLM 文本优化，候选稿、提示词版本和差异守门报告已落盘。
-- 交付验收已通过。
-- 正式 GDD 已通过非生产者 `gdd-review`。
+- 工作流、调度规则和策划决策权规则已读。
+- G1/G2/G3/G4/G5/C4/G6 有真实 Agent 证据；正式 GDD 另有独立审核证据。
+- U1-U5 有明确用户确认记录。
+- 正文与对应用户确认版本一致。
+- 模型候选稿未覆盖用户确认版本。
+- G6 和独立审核报告与正文分离。
+- 未关闭问题、风险和用户处理决定已记录。
+- Agent 没有替用户选择、打回、接受风险或宣布交付。

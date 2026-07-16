@@ -106,8 +106,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument('--main-runtime', default=None, help='Main editing runtime identity. Defaults to --runtime.')
     parser.add_argument('--reviewer-runtime', required=True)
     parser.add_argument('--reviewer-role', default='independent-review')
-    parser.add_argument('--result', choices=['pass', 'fail'], required=True)
-    parser.add_argument('--blocking-findings', default='[]', help='JSON list of blocking findings')
+    parser.add_argument('--result', choices=['reviewed', 'incomplete'], required=True)
+    parser.add_argument('--findings', default='[]', help='JSON list of review findings; reviewer does not approve or reject')
+    parser.add_argument('--user-message-excerpt', default='', help='Direct excerpt containing the user decision when findings remain')
     parser.add_argument('--similar-assets-scanned', action='append', default=[])
     parser.add_argument('--rules-read', action='append', default=[])
     parser.add_argument('--automation-entrypoints-checked', action='append', default=[])
@@ -140,11 +141,14 @@ def main() -> int:
         print('Reviewed scope has no changed long-term assets; checkpoint not written.')
         return 1
     try:
-        blocking = json.loads(args.blocking_findings)
-        if not isinstance(blocking, list):
+        findings = json.loads(args.findings)
+        if not isinstance(findings, list):
             raise ValueError
     except Exception:
-        print('--blocking-findings must be a JSON list')
+        print('--findings must be a JSON list')
+        return 2
+    if findings and not args.user_message_excerpt.strip():
+        print('non-empty --findings require --user-message-excerpt')
         return 2
     now = int(time.time())
     checkpoint = {
@@ -162,7 +166,8 @@ def main() -> int:
             'source_of_truth': args.source_of_truth,
         },
         'reviewed_diff_hash': current_diff_hash(scope),
-        'blocking_findings': blocking,
+        'findings': findings,
+        'user_message_excerpt': args.user_message_excerpt.strip(),
         'created_at': now,
         'expires_at': now + args.ttl_seconds,
     }

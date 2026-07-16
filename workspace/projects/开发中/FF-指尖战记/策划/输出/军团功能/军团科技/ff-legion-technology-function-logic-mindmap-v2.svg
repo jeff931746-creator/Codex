@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#e8edf3"/></linearGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#173b62"/><stop offset="0.7" stop-color="#2f6f9f"/><stop offset="1" stop-color="#e58a35"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#18364f" flood-opacity="0.15"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#3f7095"/></marker>
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#d77b2d"/></marker>
+    <style>
+      .cn{font-family:"PingFang SC","Microsoft YaHei",sans-serif}.title{font-size:42px;font-weight:800;fill:#fff}.subtitle{font-size:20px;fill:#dceaf5}.section{font-size:25px;font-weight:800;fill:#173f61}.nodeTitle{font-size:21px;font-weight:800;fill:#29475d}.body{font-size:18px;fill:#40586b}.small{font-size:18px;fill:#586d7d}.white{fill:#fff}.panel{fill:#fff;stroke:#90a8ba;stroke-width:2.5;filter:url(#shadow)}.blue{fill:#eaf3fa;stroke:#4f83aa;stroke-width:2.5;filter:url(#shadow)}.blueStrong{fill:#2f6f9f;stroke:#174e76;stroke-width:2.5;filter:url(#shadow)}.orange{fill:#fff0e2;stroke:#df8738;stroke-width:2.5;filter:url(#shadow)}.gray{fill:#eef1f4;stroke:#8494a0;stroke-width:2.5;filter:url(#shadow)}.good{fill:#eaf4ee;stroke:#5f8d72;stroke-width:2.5;filter:url(#shadow)}.fail{fill:#fff0e8;stroke:#c56f4c;stroke-width:2.5;filter:url(#shadow)}.edge{fill:none;stroke:#3f7095;stroke-width:3.5;marker-end:url(#arrow)}.edgeO{fill:none;stroke:#d77b2d;stroke-width:3.5;marker-end:url(#arrowOrange)}
+    </style>
+  </defs>
+  <rect width="1800" height="1200" fill="url(#bg)"/><rect x="20" y="20" width="1760" height="1160" rx="26" fill="none" stroke="#7893a8" stroke-width="2"/>
+  <path d="M36 36H1764V108L1725 136H36Z" fill="url(#header)" filter="url(#shadow)"/>
+  <text x="70" y="82" class="cn title">军团科技 · 功能逻辑流程图</text>
+  <text x="72" y="116" class="cn subtitle">选择科技节点 → 按顺序检查升级条件 → 完成升级或显示原因；离团与换团不清除已完成节点和科技效果。</text>
+
+  <!-- 1 选择节点 -->
+  <g transform="translate(45 165)">
+    <rect width="500" height="945" rx="24" class="panel"/><circle cx="42" cy="42" r="27" fill="#2f6f9f"/><text x="42" y="50" text-anchor="middle" class="cn nodeTitle white">1</text><text x="82" y="50" class="cn section">选择科技节点</text><path d="M28 78H472" stroke="#c4d2dc" stroke-width="2"/>
+    <g transform="translate(50 130)"><rect width="400" height="80" rx="16" class="blueStrong"/><text x="200" y="49" text-anchor="middle" class="cn nodeTitle white">进入军团科技界面</text></g>
+    <path d="M250 210V270" class="edge"/>
+    <g transform="translate(50 275)"><rect width="400" height="100" rx="16" class="blue"/><text x="200" y="34" text-anchor="middle" class="cn nodeTitle">查看科技树</text><text x="200" y="67" text-anchor="middle" class="cn body">界面显示节点、连接线和当前状态</text><text x="200" y="92" text-anchor="middle" class="cn small">不可升级的节点仍可查看</text></g>
+    <path d="M250 375V435" class="edge"/>
+    <g transform="translate(50 440)"><rect width="400" height="80" rx="16" class="orange"/><text x="200" y="49" text-anchor="middle" class="cn nodeTitle">点击一个科技节点</text></g>
+    <path d="M250 520V580" class="edgeO"/>
+    <g transform="translate(50 585)"><rect width="400" height="155" rx="16" class="blue"/><text x="200" y="34" text-anchor="middle" class="cn nodeTitle">查看当前节点详情</text><text x="24" y="72" class="cn body">节点名称与科技效果</text><text x="24" y="104" class="cn body">前置节点要求与军团等级要求</text><text x="24" y="136" class="cn body">科技升级材料消耗与按钮状态</text></g>
+    <path d="M250 740V800" class="edge"/>
+    <g transform="translate(50 805)"><rect width="400" height="90" rx="16" class="gray"/><text x="200" y="34" text-anchor="middle" class="cn nodeTitle">根据详情决定下一步</text><text x="200" y="65" text-anchor="middle" class="cn body">切换节点、点击“升级”或离开界面</text></g>
+  </g>
+
+  <path d="M545 640H625" class="edge"/>
+
+  <!-- 2 检查升级 -->
+  <g transform="translate(625 165)">
+    <rect width="550" height="945" rx="24" class="panel"/><circle cx="42" cy="42" r="27" fill="#df8435"/><text x="42" y="50" text-anchor="middle" class="cn nodeTitle white">2</text><text x="82" y="50" class="cn section">检查并完成升级</text><path d="M28 78H522" stroke="#c4d2dc" stroke-width="2"/>
+    <g transform="translate(70 105)"><rect width="410" height="72" rx="16" class="orange"/><text x="205" y="43" text-anchor="middle" class="cn nodeTitle">玩家点击“升级”</text></g>
+    <path d="M275 177V220" class="edgeO"/>
+    <g transform="translate(55 225)"><rect width="440" height="220" rx="16" class="orange"/><text x="220" y="34" text-anchor="middle" class="cn nodeTitle">按顺序检查升级条件</text><text x="24" y="72" class="cn body">1. 玩家当前处于军团中</text><text x="24" y="104" class="cn body">2. 目标节点尚未完成</text><text x="24" y="136" class="cn body">3. 前置节点已完成</text><text x="24" y="168" class="cn body">4. 当前军团等级满足要求</text><text x="24" y="200" class="cn body">5. 科技升级材料足够（名称待定）</text></g>
+    <path d="M275 445V492" class="edge"/>
+    <g transform="translate(55 495)"><path d="M220 0L440 70L220 140L0 70Z" fill="#fff7df" stroke="#d78636" stroke-width="2.5" filter="url(#shadow)"/><text x="220" y="62" text-anchor="middle" class="cn body">五项条件</text><text x="220" y="94" text-anchor="middle" class="cn nodeTitle">是否全部满足？</text></g>
+    <path d="M275 635V690H135" class="edgeO"/>
+    <g transform="translate(25 695)"><rect width="245" height="145" rx="16" class="fail"/><text x="122" y="34" text-anchor="middle" class="cn nodeTitle">有条件不满足</text><text x="18" y="72" class="cn body">不扣升级材料</text><text x="18" y="103" class="cn body">不改变节点状态</text><text x="18" y="132" class="cn small">显示第一个不满足的原因</text></g>
+    <path d="M275 635V690H415" class="edge"/>
+    <g transform="translate(280 695)"><rect width="245" height="145" rx="16" class="good"/><text x="122" y="34" text-anchor="middle" class="cn nodeTitle">条件全部满足</text><text x="18" y="72" class="cn body">扣除升级材料</text><text x="18" y="103" class="cn body">节点变为已完成</text><text x="18" y="132" class="cn small">对应科技效果生效</text></g>
+    <path d="M147 840V875H275" class="edge"/><path d="M402 840V875H275" class="edge"/>
+    <g transform="translate(70 875)"><rect width="410" height="55" rx="16" class="blue"/><text x="205" y="35" text-anchor="middle" class="cn nodeTitle">更新材料数量、节点、连线和详情</text></g>
+  </g>
+
+  <path d="M1175 640H1255" class="edgeO"/>
+
+  <!-- 3 离团换团 -->
+  <g transform="translate(1255 165)">
+    <rect width="500" height="945" rx="24" class="panel"/><circle cx="42" cy="42" r="27" fill="#718493"/><text x="42" y="50" text-anchor="middle" class="cn nodeTitle white">3</text><text x="82" y="50" class="cn section">离团 / 换团后的状态</text><path d="M28 78H472" stroke="#c4d2dc" stroke-width="2"/>
+    <g transform="translate(50 115)"><rect width="400" height="120" rx="16" class="good"/><text x="200" y="34" text-anchor="middle" class="cn nodeTitle">已获得内容保持不变</text><text x="24" y="72" class="cn body">已完成节点和科技效果保留</text><text x="24" y="103" class="cn body">未消耗的科技升级材料保留</text></g>
+    <path d="M250 235V295" class="edge"/>
+    <g transform="translate(50 300)"><path d="M200 0L400 65L200 130L0 65Z" fill="#fff7df" stroke="#d78636" stroke-width="2.5" filter="url(#shadow)"/><text x="200" y="56" text-anchor="middle" class="cn body">玩家当前的</text><text x="200" y="86" text-anchor="middle" class="cn nodeTitle">军团关系发生哪种变化？</text></g>
+    <path d="M250 430V485H125" class="edge"/>
+    <g transform="translate(25 490)"><rect width="220" height="150" rx="16" class="gray"/><text x="110" y="34" text-anchor="middle" class="cn nodeTitle">离团 / 无军团</text><text x="16" y="72" class="cn body">科技效果继续生效</text><text x="16" y="103" class="cn body">升级材料继续保留</text><text x="16" y="133" class="cn body">不可继续升级</text></g>
+    <path d="M250 430V485H375" class="edgeO"/>
+    <g transform="translate(255 490)"><rect width="220" height="150" rx="16" class="orange"/><text x="110" y="34" text-anchor="middle" class="cn nodeTitle">加入其他军团</text><text x="16" y="72" class="cn body">已完成节点不变</text><text x="16" y="103" class="cn body">科技效果不回收</text><text x="16" y="133" class="cn body">按当前军团等级判断</text></g>
+    <path d="M135 640V700H250" class="edge"/><path d="M365 640V700H250" class="edge"/>
+    <g transform="translate(50 705)"><rect width="400" height="125" rx="16" class="blue"/><text x="200" y="34" text-anchor="middle" class="cn nodeTitle">重新判断后续升级范围</text><text x="24" y="72" class="cn body">军团等级满足：允许继续升级</text><text x="24" y="104" class="cn body">军团等级不足：对应节点不可升级</text></g>
+    <path d="M250 830V875" class="edge"/>
+    <g transform="translate(50 875)"><rect width="400" height="55" rx="16" class="good"/><text x="200" y="35" text-anchor="middle" class="cn nodeTitle">既有节点、效果和材料始终保留</text></g>
+  </g>
+</svg>

@@ -315,7 +315,32 @@ def checkpoint_time_ok(data: dict) -> bool:
     return int(data.get('expires_at') or 0) > now()
 
 
-def require_checkpoint(name: str, changed: list[str], result: str = 'pass', hash_required: bool = False, independent: bool = False) -> str | None:
+def collect_user_evidence_texts(payload: object) -> list[str]:
+    texts: list[str] = []
+    stack = [payload]
+    while stack:
+        item = stack.pop()
+        if isinstance(item, dict):
+            role = str(item.get('role') or item.get('author_role') or item.get('authorRole') or '').lower()
+            item_type = str(item.get('type') or item.get('message_type') or '').lower()
+            if role == 'user' or item_type in {'user_message', 'user-message'}:
+                texts.append(json.dumps(item, ensure_ascii=False, sort_keys=True))
+            for value in item.values():
+                if isinstance(value, (dict, list)):
+                    stack.append(value)
+        elif isinstance(item, list):
+            stack.extend(value for value in item if isinstance(value, (dict, list)))
+    return texts
+
+
+def require_checkpoint(
+    name: str,
+    changed: list[str],
+    result: str = 'pass',
+    hash_required: bool = False,
+    independent: bool = False,
+    user_evidence_texts: list[str] | None = None,
+) -> str | None:
     data = read_json(checkpoint_path(name))
     if not data:
         return f'{name} missing'
@@ -329,13 +354,20 @@ def require_checkpoint(name: str, changed: list[str], result: str = 'pass', hash
         return f'{name} reviewer_runtime must differ from main_runtime'
     if data.get('blocking_findings') not in ([], None):
         return f'{name} contains blocking findings'
+    if data.get('findings') not in ([], None):
+        excerpt = str(data.get('user_message_excerpt') or '').strip()
+        if not excerpt:
+            return f'{name} contains findings without user_message_excerpt'
+        if not any(excerpt in text for text in (user_evidence_texts or [])):
+            return f'{name} user_message_excerpt was not observed in a user-authored runtime message'
     if hash_required and data.get('reviewed_diff_hash') != git_diff_hash(data.get('scope_paths') or []):
         return f'{name} diff hash does not match current scoped diff'
     return None
 
 
 def main() -> int:
-    load_payload()
+    payload = load_payload()
+    user_evidence_texts = collect_user_evidence_texts(payload)
     changed = scoped_project_changed_paths(['.'])
     if not changed:
         return 0
@@ -354,7 +386,7 @@ def main() -> int:
         if reason:
             failures.append('standard-read: ' + reason)
     if design:
-        reason = require_checkpoint('design-review.json', design, hash_required=True, independent=True)
+        reason = require_checkpoint('design-review.json', design, result='reviewed', hash_required=True, independent=True, user_evidence_texts=user_evidence_texts)
         if reason:
             failures.append('design-review: ' + reason)
     if capability:
@@ -366,7 +398,7 @@ def main() -> int:
         if reason:
             failures.append('promotion-approval: ' + reason)
     if semantic:
-        reason = require_checkpoint('semantic-review.json', semantic, hash_required=True, independent=True)
+        reason = require_checkpoint('semantic-review.json', semantic, result='reviewed', hash_required=True, independent=True, user_evidence_texts=user_evidence_texts)
         if reason:
             failures.append('semantic-review: ' + reason)
     if scaffold:

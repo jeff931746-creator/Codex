@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1700" viewBox="0 0 1900 1700">
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#57433b" flood-opacity="0.22"/>
+    </filter>
+    <marker id="dot" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5">
+      <circle cx="3.5" cy="3.5" r="3.2" fill="#ef7789"/>
+    </marker>
+    <style>
+      text { font-family: "PingFang SC", "Microsoft YaHei", sans-serif; }
+      .page-title { font-size: 42px; font-weight: 900; fill: #3a2d27; }
+      .sub-title { font-size: 20px; font-weight: 700; fill: #8c7770; }
+      .label-box { fill: #fff; stroke: #ef8b9a; stroke-width: 3; rx: 12; }
+      .label-num { font-size: 20px; font-weight: 900; fill: #ef687f; }
+      .label-main { font-size: 23px; font-weight: 900; fill: #58433c; }
+      .label-sub { font-size: 17px; font-weight: 600; fill: #8c7770; }
+      .lead { fill: none; stroke: #ef8b9a; stroke-width: 3; stroke-dasharray: 8 7; marker-end: url(#dot); }
+      .target { fill: none; stroke: #ef8b9a; stroke-width: 3; stroke-dasharray: 10 7; rx: 8; }
+      .section-tag { fill: #ef7789; }
+      .section-tag-text { font-size: 18px; font-weight: 900; fill: #fff; }
+    </style>
+  </defs>
+
+  <rect width="1900" height="1700" fill="#f7f4f1"/>
+  <text x="950" y="64" text-anchor="middle" class="page-title">军团捐献界面说明</text>
+  <text x="950" y="101" text-anchor="middle" class="sub-title">界面区域、信息字段与操作入口标注</text>
+
+  <!-- 底图 -->
+  <g filter="url(#shadow)">
+    <rect x="519" y="139" width="862" height="1292" rx="10" fill="#ddd4ca"/>
+    <image href="legion-donation-pango-effect-v8.png" x="525" y="145" width="850" height="1275" preserveAspectRatio="none"/>
+  </g>
+
+  <!-- 目标区域框 -->
+  <rect x="568" y="160" width="760" height="187" class="target"/>
+  <rect x="563" y="359" width="770" height="314" class="target"/>
+  <rect x="563" y="686" width="770" height="308" class="target"/>
+  <rect x="563" y="1008" width="770" height="394" class="target"/>
+
+  <!-- 左侧标注 1 -->
+  <g>
+    <rect x="52" y="178" width="390" height="80" class="label-box"/>
+    <text x="76" y="209" class="label-num">1</text>
+    <text x="108" y="209" class="label-main">页面标题与关闭入口</text>
+    <text x="76" y="238" class="label-sub">标识当前功能，关闭返回上一层。</text>
+    <path d="M442 218H510L742 234" class="lead"/>
+  </g>
+
+  <!-- 左侧标注 2 -->
+  <g>
+    <rect x="52" y="379" width="390" height="80" class="label-box"/>
+    <text x="76" y="410" class="label-num">2</text>
+    <text x="108" y="410" class="label-main">当前军团建设等级</text>
+    <text x="76" y="439" class="label-sub">展示当前军团建设等级与主题图标。</text>
+    <path d="M442 419H508L862 423" class="lead"/>
+  </g>
+
+  <!-- 左侧标注 3 -->
+  <g>
+    <rect x="52" y="500" width="390" height="98" class="label-box"/>
+    <text x="76" y="531" class="label-num">3</text>
+    <text x="108" y="531" class="label-main">军团经验进度</text>
+    <text x="76" y="560" class="label-sub">进度条显示当前值 / 目标值；</text>
+    <text x="76" y="585" class="label-sub">下方补充距离下一级的缺口。</text>
+    <path d="M442 549H507L943 544" class="lead"/>
+  </g>
+
+  <!-- 左侧标注 4 -->
+  <g>
+    <rect x="52" y="717" width="390" height="80" class="label-box"/>
+    <text x="76" y="748" class="label-num">4</text>
+    <text x="108" y="748" class="label-main">军团等级成长方向</text>
+    <text x="76" y="777" class="label-sub">短箭头表示 Lv.1 向 Lv.2 的成长关系。</text>
+    <path d="M442 757H509L950 724" class="lead"/>
+  </g>
+
+  <!-- 左侧标注 5 -->
+  <g>
+    <rect x="52" y="838" width="390" height="98" class="label-box"/>
+    <text x="76" y="869" class="label-num">5</text>
+    <text x="108" y="869" class="label-main">各等级解锁内容</text>
+    <text x="76" y="898" class="label-sub">功能图标＋文字说明，左右分别对应</text>
+    <text x="76" y="923" class="label-sub">Lv.1 与 Lv.2 的解锁权益。</text>
+    <path d="M442 887H509L690 851" class="lead"/>
+  </g>
+
+  <!-- 右侧标注 6 -->
+  <g>
+    <rect x="1458" y="1009" width="390" height="80" class="label-box"/>
+    <text x="1482" y="1040" class="label-num">6</text>
+    <text x="1514" y="1040" class="label-main">本级排行入口</text>
+    <text x="1482" y="1069" class="label-sub">查看当前军团等级内的捐献排行。</text>
+    <path d="M1458 1049H1395L1283 1025" class="lead"/>
+  </g>
+
+  <!-- 右侧标注 7 -->
+  <g>
+    <rect x="1458" y="1113" width="390" height="98" class="label-box"/>
+    <text x="1482" y="1144" class="label-num">7</text>
+    <text x="1514" y="1144" class="label-main">捐献奖励预览</text>
+    <text x="1482" y="1173" class="label-sub">展示本次捐献可获得的奖励类型</text>
+    <text x="1482" y="1198" class="label-sub">及对应数量。</text>
+    <path d="M1458 1162H1395L1064 1125" class="lead"/>
+  </g>
+
+  <!-- 右侧标注 8 -->
+  <g>
+    <rect x="1458" y="1240" width="390" height="98" class="label-box"/>
+    <text x="1482" y="1271" class="label-num">8</text>
+    <text x="1514" y="1271" class="label-main">捐献材料与消耗数量</text>
+    <text x="1482" y="1300" class="label-sub">小型道具图标表示消耗材料，</text>
+    <text x="1482" y="1325" class="label-sub">`100 / 1` 显示持有数与单次需求。</text>
+    <path d="M1458 1289H1395L986 1299" class="lead"/>
+  </g>
+
+  <!-- 右侧标注 9 -->
+  <g>
+    <rect x="1458" y="1366" width="390" height="80" class="label-box"/>
+    <text x="1482" y="1397" class="label-num">9</text>
+    <text x="1514" y="1397" class="label-main">操作提示角标</text>
+    <text x="1482" y="1426" class="label-sub">红色感叹号用于标识当前需要处理。</text>
+    <path d="M1458 1406H1395L1087 1368" class="lead"/>
+  </g>
+
+  <!-- 右侧标注 10 -->
+  <g>
+    <rect x="1458" y="1470" width="390" height="80" class="label-box"/>
+    <text x="1482" y="1501" class="label-num">10</text>
+    <text x="1525" y="1501" class="label-main">捐献主操作按钮</text>
+    <text x="1482" y="1530" class="label-sub">点击后提交本次军团捐献。</text>
+    <path d="M1458 1510H1394L1010 1376" class="lead"/>
+  </g>
+
+  <!-- 底部说明 -->
+  <g transform="translate(525 1574)">
+    <rect width="850" height="78" rx="14" fill="#fff" stroke="#ded5d0" stroke-width="2"/>
+    <rect x="22" y="20" width="94" height="38" rx="19" class="section-tag"/>
+    <text x="69" y="46" text-anchor="middle" class="section-tag-text">操作顺序</text>
+    <text x="142" y="47" class="label-main">查看军团成长 → 确认捐献奖励 → 确认消耗 → 提交捐献</text>
+  </g>
+</svg>

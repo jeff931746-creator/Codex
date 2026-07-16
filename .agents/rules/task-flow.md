@@ -4,6 +4,9 @@ Unified task classification, gate definitions, plan requirements, delegation rul
 
 ## Global Rules
 
+- For every planning-related task, the user is the only content decision-maker. Apply `reference/部门标准/策划/策划决策权规则.md` before any narrower planning standard or skill.
+- Agents may analyze, recommend, draft, execute confirmed choices, and report validation findings. They must not select planning directions, approve designs, choose rollback targets, accept risks, stop directions, or declare final delivery on the user's behalf.
+- A planning-stage transition that changes purpose, scope, means, structure, core rules, document version, rollback target, or delivery status requires explicit user confirmation. Silence and inferred intent are not confirmation.
 - Classify every new task as `quick`, `standard`, or `strict`.
 - `standard` and `strict` tasks must specify a task type and plan before execution.
 - `strict` tasks must not skip planning.
@@ -54,7 +57,7 @@ Do not trigger this route for:
 
 When `analysis`, `doc-change`, or `knowledge-asset` work produces a Markdown or text deliverable, apply `reference/部门标准/通用/交付型文档写作标准.md` before `review`, `self-review`, or `validation`.
 
-Exception: documents covered by the GDD writing or review route do not use the general delivery-writing standard as a content or structure judge. Their正文 quality is judged only by the current G4/M3/G5/M4/G6 and independent-review principles; the output template remains non-normative.
+Exception: documents covered by the GDD writing or review route do not use the general delivery-writing standard as a content or structure judge. Their正文 quality is assessed through G4/U3/G5/C4/U4/G6 and independent-review principles; the output template remains non-normative, and all content decisions remain with the user.
 
 The standard is a content standard. It defines the first-principles priority for deliverables: decision value first, then conclusion, mechanism, boundary, flow, and necessary evidence.
 
@@ -66,13 +69,13 @@ When creating a new game design document, feature requirements document, system 
 
 This route applies to the design-forming process itself, not only to files written to disk. It is required when the user asks for a game feature design, gameplay/activity/economy/monetization design, system design, requirements draft, direction validation draft, proposal, or feature plan, including when the requested output is chat-only, exploratory, "just a draft", "first direction", `方向稿`, `初稿`, `不落文件`, or based on an existing GDD/reference document such as `参考已有 GDD 做新方案`.
 
-Do not bypass the route by saying the output is not a formal document, will not be written to a file, is only for discussion, or is only a preliminary version. Before G1-G6 have produced real sub-agent evidence and the required main-planner decisions, the main agent may only deliver process status, rule/standard summaries, blocking questions, or workflow plans. It must not deliver the actual feature scheme, partial feature scheme, final design direction, section draft, or complete draft in the main thread.
+Do not bypass the route by saying the output is not a formal document, will not be written to a file, is only for discussion, or is only a preliminary version. Before the required Agent stages and user confirmations have produced real evidence, the main agent may only deliver process status, rule/standard summaries, blocking questions, candidate materials, or workflow plans. It must not treat any feature scheme, partial feature scheme, design direction, section draft, or complete draft as confirmed before the corresponding user confirmation point.
 
 The GDD writing route must use `reference/部门标准/策划/gdd/多Agent设计文档工作流.md` as the workflow source, use `reference/部门标准/策划/gdd/多Agent设计文档调度规则.md` for state/rollback/checkpoint semantics, and load only the current-stage files under `reference/部门标准/策划/gdd/多Agent设计文档判断原则/`.
 
 Before the GDD writing route starts G1, the main agent may read only routing and workflow context needed to classify the task and assemble the G1 task package. Business evidence such as reference GDDs, historical mechanism memory, competitor material, or existing design-document body text must be first interpreted by the G1 sub-agent. If the main agent has already interpreted business evidence, that interpretation is not valid workflow evidence and G1 must be restarted without inheriting the main-thread business conclusion.
 
-The GDD writing route requires real sub-agent evidence. Main-thread simulation of G1/G2/G3/G4/G5/G6 is not valid. For any changed Markdown design document under `workspace/projects/`, except `README.md`, record `workspace/tmp/agent-checkpoints/gdd-write/<doc-id>/workflow-state.json` with `.agents/hooks/checkpoint-gdd-workflow.py`. The checkpoint must bind the target document, current document diff hash, main agent id, actual sub-agent ids and per-stage proof tokens for G1/G2/G3/G4/G5/G6, and main-planner pass decisions for M1/M2/M3/M4. The proof token for each stage must appear with that stage's sub-agent id in the current runtime transcript. The Stop hook `check-gdd-workflow.py` blocks delivery when this evidence is missing, incomplete, expired, stale, not observed in the current runtime transcript, or when the G6 evidence no longer matches the current document diff.
+The GDD writing route requires real Agent evidence. Main-thread simulation of G1/G2/G3/G4/G5/C4/G6 or formal-review evidence is not valid. For any changed Markdown design document under `workspace/projects/`, except `README.md`, record `workspace/tmp/agent-checkpoints/gdd-write/<doc-id>/workflow-state.json` with `.agents/hooks/checkpoint-gdd-workflow.py`. The checkpoint must bind the target document, current document diff hash, main agent id, actual Agent ids and per-stage proof tokens for G1/G2/G3/G4/G5/C4/G6, plus GR for formal GDD delivery, and explicit user confirmations for U1/U2/U3/U4/U5. Each user confirmation must preserve the confirmed object and a direct quote or faithful excerpt observed in a user-authored runtime message; an Agent-generated decision is invalid. The Stop hook `check-gdd-workflow.py` blocks delivery when this evidence is missing, incomplete, expired, stale, or when the checked document no longer matches C4/U4/G6/GR/U5 的版本绑定证据（方向验证稿不要求 GR）。
 
 Do not copy the workflow or judgment principles into `.agents/`; `.agents` only routes and gates this behavior.
 
@@ -173,31 +176,31 @@ For `knowledge-asset` + `strict` work that changes any long-term workflow asset 
 
 Hard requirements:
 
-1. The main agent owns classification, plan, gate transitions, integration, and final delivery.
-2. A delegated independent reviewer must review the changed asset scope against the applicable standard or rule source before delivery.
+1. The main agent owns classification, plan assembly, integration, and execution of user-confirmed transitions. The user owns planning choices and the decision to make the changed governance authoritative.
+2. A delegated independent reviewer must inspect the changed asset scope against the applicable standard or rule source and report conflicts before delivery.
 3. The independent reviewer must not be the same actor that authored the changes and must not own final completion.
-4. Blocking findings must be fixed or explicitly escalated to the user before delivery.
-5. Before delivery, declare the reviewed scope and record a structured checkpoint with `.agents/hooks/checkpoint-independent-review.py --runtime codex --reviewer-runtime <independent-agent-id> --scope <path> ...`.
+4. Findings must be fixed or explicitly presented to the user for a decision before delivery.
+5. Before delivery, declare the reviewed scope and record a structured checkpoint with `.agents/hooks/checkpoint-independent-review.py --runtime codex --reviewer-runtime <independent-agent-id> --result reviewed --scope <path> ...`. The reviewer records findings, not a pass/fail decision; unresolved findings require an explicit user decision.
 6. The checkpoint must be written for the runtime that will run the Stop hook, must name a reviewer runtime different from the main runtime, and must match the current diff within the reviewed scope.
 7. The checkpoint must include the required `knowledge-asset` plan fields: similar assets scanned, rules read, automation entrypoints checked, and source of truth.
-8. The Stop hook `check-flow-gates.py` blocks delivery when scoped long-term assets changed but no matching passing independent review checkpoint exists.
+8. The Stop hook `check-flow-gates.py` blocks delivery when scoped long-term assets changed but no matching completed independent inspection checkpoint exists, or when findings remain without a user decision.
 
 This requirement is not optional. Local grep, diff review, or main-agent self-review does not satisfy the independent review gate.
 
 ## Delegation Rules
 
-The main agent owns planning, gate transitions, and final delivery. Delegated workers or parallel tools handle bounded heavy work.
+The main agent assembles plans, manages execution state, and integrates outputs. The user owns planning choices, gate-transition authorization, risk acceptance, and final delivery decisions. Delegated workers or parallel tools handle bounded heavy work.
 
 Main agent owns:
 
 - task-level plan
-- gate completion decisions
-- gate transitions
-- user approval
-- final integrated answer
-- flow type changes
+- recording whether objective gate requirements have been checked
+- executing gate transitions explicitly confirmed by the user
+- requesting and preserving user approval
+- final integrated answer after the user's content decisions
+- proposing flow type changes for user confirmation when they affect scope or deliverables
 
-Delegated workers must not own task-level plans, gate-transition approval, all-task completion declarations, scope changes, or review-dimension definitions.
+Delegated workers must not own task-level plans, gate-transition approval, all-task completion declarations, scope changes, planning choices, risk acceptance, delivery approval, or review-dimension definitions.
 
 Delegate or parallelize when:
 
@@ -231,7 +234,7 @@ For review delegation, the main agent must:
 
 If no standard exists, stay at `standard-check`, report the gap, and wait for direction.
 
-If delegated results are insufficient, stay at the current gate and narrow the question or solve locally. If multiple delegated results conflict, the main agent compares evidence and owns the final integrated judgment.
+If delegated results are insufficient, stay at the current gate and narrow the question or solve locally. If multiple delegated results conflict, the main agent compares evidence and presents the conflict, options, and recommendation to the user; the user owns the final planning judgment.
 
 Keep the main thread focused on task type, current/completed/next gates, approved plan, confirmed conclusions, and user-visible risks. Put exploratory logs, repeated extraction, and speculative branches outside the main answer when possible.
 

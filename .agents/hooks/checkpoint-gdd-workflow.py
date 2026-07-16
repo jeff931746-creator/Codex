@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Record evidence for the multi-agent GDD writing workflow."""
+"""Record Agent evidence and explicit user confirmations for the GDD workflow."""
 from __future__ import annotations
 
 import argparse
@@ -9,9 +9,9 @@ from pathlib import Path
 
 from hook_utils import WORKSPACE, git_diff_hash, normalize_path, now, write_json, read_json
 
-REQUIRED_STAGES = ('G1', 'G2', 'G3', 'G4', 'G5', 'G6')
-REQUIRED_DECISIONS = ('M1', 'M2', 'M3', 'M4')
-VALID_RESULTS = ('in-progress', 'direction-validation-pass', 'formal-gdd-pass')
+AGENT_STAGES = ('G1', 'G2', 'G3', 'G4', 'G5', 'C4', 'G6', 'GR')
+REQUIRED_USER_CONFIRMATIONS = ('U1', 'U2', 'U3', 'U4', 'U5')
+VALID_RESULTS = ('in-progress', 'user-authorized-direction-delivery', 'user-authorized-formal-delivery')
 
 
 def doc_id_for(path: str) -> str:
@@ -30,22 +30,24 @@ def split_csv(value: str) -> list[str]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description='Record GDD multi-agent workflow evidence.')
-    parser.add_argument('--doc', required=True, help='Target GDD document path, relative to workspace or absolute.')
-    parser.add_argument('--doc-id', default='', help='Stable checkpoint id. Defaults to document stem slug.')
-    parser.add_argument('--main-agent-id', required=True, help='Main agent/runtime id for distinctness checks.')
-    parser.add_argument('--stage', choices=REQUIRED_STAGES, help='Sub-agent stage to record.')
-    parser.add_argument('--agent-id', default='', help='Actual spawned sub-agent id for the stage.')
-    parser.add_argument('--agent-role', default='', help='Stage role, such as target-breakdown or delivery-acceptance.')
-    parser.add_argument('--proof-token', default='', help='Stage-specific token that must appear in the sub-agent transcript output.')
-    parser.add_argument('--stage-status', default='completed', choices=['completed', 'pass'])
-    parser.add_argument('--summary', default='', help='Short summary of the stage output.')
-    parser.add_argument('--decision-stage', choices=REQUIRED_DECISIONS, help='Main-planner decision stage to record.')
-    parser.add_argument('--decision', default='', help='Main-planner decision summary.')
-    parser.add_argument('--decision-status', default='pass', choices=['pass'])
+    parser = argparse.ArgumentParser(description='Record GDD Agent evidence and user confirmations.')
+    parser.add_argument('--doc', required=True)
+    parser.add_argument('--doc-id', default='')
+    parser.add_argument('--main-agent-id', required=True)
+    parser.add_argument('--stage', choices=AGENT_STAGES)
+    parser.add_argument('--agent-id', default='')
+    parser.add_argument('--agent-role', default='')
+    parser.add_argument('--proof-token', default='')
+    parser.add_argument('--stage-status', default='completed', choices=['completed'])
+    parser.add_argument('--summary', default='')
+    parser.add_argument('--user-confirmation-stage', choices=REQUIRED_USER_CONFIRMATIONS)
+    parser.add_argument('--confirmed-object', default='', help='Exact planning object or action confirmed by the user.')
+    parser.add_argument('--user-message-excerpt', default='', help='Direct quote or faithful excerpt from the user message.')
+    parser.add_argument('--confirmation-source', default='user', choices=['user'])
     parser.add_argument('--result', default='in-progress', choices=VALID_RESULTS)
-    parser.add_argument('--direction-validation-items', default='', help='Comma-separated retained direction-validation items.')
-    parser.add_argument('--formal-blockers', default='', help='Comma-separated formal GDD blockers.')
+    parser.add_argument('--direction-validation-items', default=None)
+    parser.add_argument('--formal-blockers', default=None)
+    parser.add_argument('--accepted-risk', default=None, help='Risk explicitly accepted by the user at U5, if any.')
     parser.add_argument('--ttl-seconds', type=int, default=86400)
     args = parser.parse_args()
 
@@ -65,23 +67,18 @@ def main() -> int:
     state['doc_id'] = doc_id
     state['main_agent_id'] = args.main_agent_id.strip()
     state.setdefault('stages', {})
-    state.setdefault('main_decisions', {})
+    state.setdefault('user_confirmations', {})
     state['updated_at'] = ts
     state['expires_at'] = ts + args.ttl_seconds
     state['result'] = args.result
 
-    if args.result != 'in-progress' and args.stage != 'G6':
-        raise SystemExit('direction-validation-pass/formal-gdd-pass requires recording --stage G6 in the same checkpoint call')
+    if args.result != 'in-progress' and args.user_confirmation_stage != 'U5':
+        raise SystemExit('A delivery result requires recording U5 in the same checkpoint call')
 
     if args.stage:
-        if not args.agent_id.strip():
-            raise SystemExit('--agent-id is required when --stage is provided')
-        if not args.agent_role.strip():
-            raise SystemExit('--agent-role is required when --stage is provided')
-        if not args.summary.strip():
-            raise SystemExit('--summary is required when --stage is provided')
-        if not args.proof_token.strip():
-            raise SystemExit('--proof-token is required when --stage is provided')
+        required = (args.agent_id.strip(), args.agent_role.strip(), args.summary.strip(), args.proof_token.strip())
+        if not all(required):
+            raise SystemExit('--agent-id, --agent-role, --summary and --proof-token are required with --stage')
         state['stages'][args.stage] = {
             'agent_id': args.agent_id.strip(),
             'agent_role': args.agent_role.strip(),
@@ -92,20 +89,33 @@ def main() -> int:
             'recorded_at': ts,
         }
 
-    if args.decision_stage:
-        if not args.decision.strip():
-            raise SystemExit('--decision is required when --decision-stage is provided')
-        state['main_decisions'][args.decision_stage] = {
-            'status': args.decision_status,
-            'decision': args.decision.strip(),
+    if args.user_confirmation_stage:
+        if not args.confirmed_object.strip() or not args.user_message_excerpt.strip():
+            raise SystemExit('--confirmed-object and --user-message-excerpt are required with --user-confirmation-stage')
+        state['user_confirmations'][args.user_confirmation_stage] = {
+            'status': 'confirmed',
+            'source': args.confirmation_source,
+            'confirmed_object': args.confirmed_object.strip(),
+            'user_message_excerpt': args.user_message_excerpt.strip(),
+            'target_artifact_hash': git_diff_hash([target_doc]),
             'recorded_at': ts,
         }
 
-    state['direction_validation_pending_items'] = split_csv(args.direction_validation_items)
-    state['formal_gdd_blockers'] = split_csv(args.formal_blockers)
-    state['required_stages'] = list(REQUIRED_STAGES)
-    state['required_main_decisions'] = list(REQUIRED_DECISIONS)
-    if args.stage == 'G6' and args.result != 'in-progress':
+    if args.direction_validation_items is not None:
+        state['direction_validation_pending_items'] = split_csv(args.direction_validation_items)
+    else:
+        state.setdefault('direction_validation_pending_items', [])
+    if args.formal_blockers is not None:
+        state['formal_gdd_blockers'] = split_csv(args.formal_blockers)
+    else:
+        state.setdefault('formal_gdd_blockers', [])
+    if args.accepted_risk is not None:
+        state['accepted_risk'] = args.accepted_risk.strip()
+    else:
+        state.setdefault('accepted_risk', '')
+    state['agent_stages'] = list(AGENT_STAGES)
+    state['required_user_confirmations'] = list(REQUIRED_USER_CONFIRMATIONS)
+    if args.user_confirmation_stage == 'U5' and args.result != 'in-progress':
         state['target_doc_diff_hash'] = git_diff_hash([target_doc])
 
     write_json(path, state)
