@@ -1,4 +1,11 @@
 skills:
+  - name: "activity-dapan-review"
+    path: "skills/activity-dapan-review"
+    status: "active"
+    scope: "global"
+    owner: "mt"
+    runtime_target: "/Users/mt/.codex/skills/activity-dapan-review"
+    notes: "Imported from https://ai.forevernine.net/skills/global/activity-dapan-review at v20260715.113114 and adapted to the current archive/skills + workspace/tmp layout. Depends on user-te-mcp-analysis for TE report and dashboard creation."
   - name: "forevernine-material-downloader"
     path: "skills/forevernine-material-downloader"
     status: "active"

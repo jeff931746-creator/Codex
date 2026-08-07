@@ -1,0 +1,4 @@
+interface:
+  display_name: "活动大盘数据复盘"
+  short_description: "在 TE 创建活动大盘、付费结构、付费内容三张标准报表并挂载看板"
+  default_prompt: "Use $activity-dapan-review to create the three standard TE activity review reports and dashboard."

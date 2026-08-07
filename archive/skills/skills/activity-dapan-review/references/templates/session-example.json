@@ -1,0 +1,14 @@
+{
+  "projectId": 999999,
+  "activityName": "示例活动",
+  "start": "2026-06-27",
+  "end": "2026-07-03",
+  "participationScenes": ["示例场景"],
+  "payContentSplitProp": "scene_id@scene_id_cn2",
+  "tierIntervals": [1, 7, 101, 1001, 10001, 50001],
+  "channels": [
+    { "platform": "channel_a", "areaMin": 1, "areaMax": 9999 },
+    { "platform": "channel_b", "areaMin": 1, "areaMax": 2999 },
+    { "platform": "channel_c", "areaMin": 1, "areaMax": 599 }
+  ]
+}
