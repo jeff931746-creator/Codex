@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -14,6 +15,17 @@ from pathlib import Path
 
 
 SUPPORTED_FORMATS = {"png", "svg", "pdf"}
+
+
+def executable_command(executable: str, package_entry: str) -> list[str]:
+    """Run npm's JavaScript entry directly on Windows, avoiding cmd.exe quoting."""
+    if os.name != "nt" or Path(executable).suffix.lower() not in {".cmd", ".bat"}:
+        return [executable]
+    node = shutil.which("node")
+    entry = Path(executable).parent / "node_modules" / package_entry
+    if node and entry.is_file():
+        return [node, str(entry)]
+    raise SystemExit(f"Cannot locate JavaScript entry for {executable}; reinstall its npm package beside the shim.")
 
 
 def parse_args() -> argparse.Namespace:
@@ -83,12 +95,12 @@ def resolve_output(input_path: Path, out_arg: str | None, format_arg: str | None
 def find_mmdc(allow_npx: bool) -> list[str]:
     mmdc = shutil.which("mmdc")
     if mmdc:
-        return [mmdc]
+        return executable_command(mmdc, "@mermaid-js/mermaid-cli/src/cli.js")
 
     if allow_npx:
         npx = shutil.which("npx")
         if npx:
-            return [npx, "-y", "@mermaid-js/mermaid-cli"]
+            return [*executable_command(npx, "npm/bin/npx-cli.js"), "-y", "@mermaid-js/mermaid-cli"]
 
     install_hint = (
         "Mermaid CLI was not found. Install it with "

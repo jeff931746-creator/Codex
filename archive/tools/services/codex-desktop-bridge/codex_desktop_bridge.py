@@ -14,10 +14,12 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[4]))
+from archive.tools.lib.cli_command import command_prefix
 
 CODEX_HOME = Path(os.environ.get("CODEX_HOME", Path.home() / ".codex"))
 SESSION_INDEX = CODEX_HOME / "session_index.jsonl"
-DEFAULT_WORKDIR = Path(os.environ.get("CODEX_BRIDGE_WORKDIR", "/Users/mt/Documents/Codex"))
+DEFAULT_WORKDIR = Path(os.environ.get("CODEX_BRIDGE_WORKDIR", Path(__file__).resolve().parents[4]))
 STATE_DIR = Path(
     os.environ.get(
         "CODEX_BRIDGE_STATE_DIR",
@@ -62,7 +64,16 @@ def parse_updated_at(value: str) -> datetime:
 
 
 def codex_bin() -> str:
-    return os.environ.get("CODEX_BIN") or shutil.which("codex") or "/Applications/Codex.app/Contents/Resources/codex"
+    configured = os.environ.get("CODEX_BIN")
+    if configured:
+        return shutil.which(configured) or str(Path(configured).expanduser())
+    executable = shutil.which("codex")
+    if executable:
+        return executable
+    mac_bundle = Path("/Applications/Codex.app/Contents/Resources/codex")
+    if sys.platform == "darwin" and mac_bundle.is_file():
+        return str(mac_bundle)
+    raise FileNotFoundError("Codex CLI not found. Add codex to PATH or set CODEX_BIN.")
 
 
 def load_session_index() -> list[SessionRecord]:
@@ -375,12 +386,12 @@ def cmd_send(args: argparse.Namespace) -> int:
     message = load_message(args)
     save_state(record)
 
-    with tempfile.TemporaryDirectory(prefix="codex-bridge-", dir="/tmp") as temp_dir:
+    with tempfile.TemporaryDirectory(prefix="codex-bridge-") as temp_dir:
         last_message_file = Path(temp_dir) / "last-message.txt"
         stdout_file = Path(temp_dir) / "stdout.txt"
         stderr_file = Path(temp_dir) / "stderr.txt"
         cmd = [
-            codex_bin(),
+            *command_prefix(codex_bin()),
             "-C",
             str(DEFAULT_WORKDIR),
             "exec",
@@ -393,6 +404,8 @@ def cmd_send(args: argparse.Namespace) -> int:
         proc = subprocess.run(
             cmd,
             text=True,
+            encoding="utf-8",
+            errors="replace",
             capture_output=True,
             check=False,
         )

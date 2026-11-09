@@ -9,6 +9,7 @@ import re
 import shlex
 import subprocess
 import time
+import tempfile
 from typing import Any, Iterable
 
 WORKSPACE = pathlib.Path(os.environ.get('AGENT_WORKSPACE', pathlib.Path(__file__).resolve().parents[2])).resolve()
@@ -16,9 +17,8 @@ RUNTIME = os.environ.get('AGENT_RUNTIME', 'agent')
 CHECKPOINT_DIR = WORKSPACE / 'workspace/tmp/agent-checkpoints' / RUNTIME
 ALLOWED_WRITE_ROOTS = (
     WORKSPACE,
-    pathlib.Path('/private/tmp'),
-    pathlib.Path('/private/var/folders/wy/ljz0r5_s13lf1jlpv88cn7h00000gn/T'),
-)
+    pathlib.Path(tempfile.gettempdir()).resolve(),
+) + ((pathlib.Path('/tmp').resolve(),) if os.name != 'nt' else ())
 
 WRITE_TOOLS = {'Write', 'Edit', 'MultiEdit', 'NotebookEdit', 'apply_patch', 'functions.apply_patch'}
 READ_TOOLS = {'Read', 'Grep', 'Glob'}
@@ -26,7 +26,7 @@ MUTATING_COMMANDS = {
     'cat', 'chmod', 'chown', 'cp', 'ditto', 'install', 'ln', 'mkdir', 'mv', 'perl',
     'python', 'python3', 'rm', 'rsync', 'sed', 'sh', 'tee', 'touch', 'zsh', 'bash',
 }
-CODE_EXTENSIONS = {'.py', '.sh', '.js', '.ts', '.jsx', '.tsx', '.go', '.rb', '.rs', '.swift', '.zsh', '.bash'}
+CODE_EXTENSIONS = {'.py', '.sh', '.mjs', '.ps1', '.cmd', '.bat', '.js', '.ts', '.jsx', '.tsx', '.go', '.rb', '.rs', '.swift', '.zsh', '.bash'}
 IGNORED_PROJECT_PREFIXES = tuple(''.join(map(chr, codes)) for codes in ([46,99,108,97,117,100,101,47], [46,99,111,100,101,120,47], [46,99,117,114,115,111,114,47], [46,103,101,109,105,110,105,47], [46,99,111,110,116,105,110,117,101,47], [46,97,105,100,101,114,47])) + ('workspace/tmp/agent-checkpoints/', 'worktrees/')
 
 
@@ -74,7 +74,7 @@ def command_text(payload: dict[str, Any]) -> str:
 
 
 def normalize_path(path: str) -> str:
-    value = path.strip()
+    value = path.strip().replace('\\', '/')
     while value.startswith('./'):
         value = value[2:]
     return value
@@ -114,7 +114,7 @@ def is_reference_path(path: pathlib.Path) -> bool:
 
 
 def run_git(args: list[str]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(['git', '-C', str(WORKSPACE), *args], capture_output=True, text=True)
+    return subprocess.run(['git', '-C', str(WORKSPACE), *args], capture_output=True, text=True, encoding='utf-8')
 
 
 def is_ignored_project_path(path: str) -> bool:
@@ -219,7 +219,7 @@ def checkpoint_path(name: str) -> pathlib.Path:
 
 def read_json(path: pathlib.Path) -> dict[str, Any] | None:
     try:
-        data = json.loads(path.read_text())
+        data = json.loads(path.read_text(encoding='utf-8'))
         return data if isinstance(data, dict) else None
     except Exception:
         return None
@@ -227,7 +227,7 @@ def read_json(path: pathlib.Path) -> dict[str, Any] | None:
 
 def write_json(path: pathlib.Path, data: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n')
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
 
 
 def now() -> int:
@@ -241,14 +241,18 @@ def deny(message: str) -> int:
 
 def shell_tokens(command: str) -> list[str]:
     try:
-        return shlex.split(command)
+        # Preserve Windows drive paths instead of treating backslashes as escapes.
+        windows = os.name == 'nt' or bool(re.search(r'[A-Za-z]:[\\/]', command))
+        tokens = shlex.split(command, posix=not windows)
+        return [token[1:-1] if windows and len(token) >= 2 and token[0] in {'"', "'"}
+                and token[-1] == token[0] else token for token in tokens]
     except ValueError:
         return []
 
 
 def shell_executable(command: str) -> str:
     tokens = shell_tokens(command)
-    return os.path.basename(tokens[0]) if tokens else ''
+    return tokens[0].replace('\\', '/').rsplit('/', 1)[-1].lower().removesuffix('.exe') if tokens else ''
 
 
 def shell_looks_mutating(command: str) -> bool:
@@ -259,7 +263,7 @@ def shell_looks_mutating(command: str) -> bool:
         return any(tok.startswith('-i') for tok in shell_tokens(command)[1:])
     if exe == 'cat':
         return bool(re.search(r'(^|[^<])>>?', command))
-    return exe in MUTATING_COMMANDS
+    return exe in MUTATING_COMMANDS or exe in {'powershell', 'pwsh', 'cmd', 'copy', 'move', 'del', 'erase', 'ren', 'new-item', 'set-content', 'add-content', 'out-file', 'copy-item', 'move-item', 'remove-item', 'rename-item'}
 
 
 def extract_write_paths(payload: dict[str, Any]) -> list[str]:
@@ -295,14 +299,42 @@ def extract_write_paths(payload: dict[str, Any]) -> list[str]:
 
 def extract_shell_write_paths(command: str) -> list[str]:
     paths: list[str] = []
-    for match in re.finditer(r'(?:^|\s)(?:>>?|<<)\s*([^\s;&|]+)', command):
+    for match in re.finditer(r'''(?:^|\s)(?:>>?|<<)\s*("[^"]+"|'[^']+'|[^\s;&|]+)''', command):
         target = match.group(1).strip('"\'')
         if target and not target.startswith('&'):
             paths.append(target)
     tokens = shell_tokens(command)
     if not tokens:
         return paths
-    exe = os.path.basename(tokens[0])
+    exe = shell_executable(command)
+    if exe in {'powershell', 'pwsh', 'cmd'}:
+        for index, token in enumerate(tokens[1:], 1):
+            if token.lower() in {'-command', '-c', '/c', '/k'}:
+                inner = tokens[index + 1:]
+                command_text = inner[0] if len(inner) == 1 else ' '.join(
+                    '"' + item + '"' if ' ' in item else item for item in inner)
+                return paths + extract_shell_write_paths(command_text)
+            if token.lower() == '-file' and index + 1 < len(tokens):
+                return paths + [tokens[index + 1]]
+        return paths
+    # PowerShell cmdlets have value arguments which must not be mistaken for paths.
+    ps_commands = {'new-item', 'set-content', 'add-content', 'out-file',
+                   'copy-item', 'move-item', 'remove-item', 'rename-item'}
+    if exe in ps_commands:
+        positional = []
+        for index, token in enumerate(tokens[1:], 1):
+            if token.lower() in {'-path', '-literalpath', '-destination', '-filepath'} and index + 1 < len(tokens):
+                paths.append(tokens[index + 1])
+            if not token.startswith('-'):
+                positional.append(token)
+        if len(tokens) > 1 and not tokens[1].startswith('-'):
+            paths.append(tokens[1])
+        if exe in {'copy-item', 'move-item'} and len(positional) >= 2:
+            paths.append(positional[1])
+        return paths
+    if exe in {'copy', 'move', 'ren'}:
+        operands = [token for token in tokens[1:] if not token.startswith('/')]
+        return paths + operands
     skip_next = False
     for i, tok in enumerate(tokens[1:], start=1):
         if skip_next:
@@ -315,10 +347,10 @@ def extract_shell_write_paths(command: str) -> list[str]:
             continue
         if exe in {'cp', 'mv', 'ditto', 'install', 'ln'} and i == len(tokens) - 1:
             paths.append(tok)
-        elif exe in {'rm', 'mkdir', 'touch', 'chmod', 'chown'}:
+        elif exe in {'rm', 'mkdir', 'touch', 'chmod', 'chown', 'del', 'erase', 'new-item', 'set-content', 'add-content', 'out-file', 'copy-item', 'move-item', 'remove-item', 'rename-item'}:
             paths.append(tok)
         elif exe in {'python', 'python3', 'sh', 'bash', 'zsh', 'perl', 'sed', 'tee', 'rsync'}:
-            if tok.startswith('/') or tok.startswith('./') or '/' in tok:
+            if tok.startswith('/') or tok.startswith('./') or '/' in tok or '\\' in tok:
                 paths.append(tok)
     return paths
 
@@ -335,8 +367,8 @@ def transcript_commands(payload: dict[str, Any]) -> list[str]:
             continue
         name = entry.get('toolName') or entry.get('tool_name') or ''
         inp = entry.get('toolInput') or entry.get('tool_input') or {}
-        if name == 'Bash' and isinstance(inp, dict):
-            command = inp.get('command')
+        if name in {'Bash', 'exec_command', 'functions.exec_command', 'PowerShell'} and isinstance(inp, dict):
+            command = inp.get('command') or inp.get('cmd')
             if isinstance(command, str):
                 commands.append(command)
     return commands

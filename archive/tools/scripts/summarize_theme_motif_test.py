@@ -12,7 +12,7 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-ROOT = Path("/Users/mt/Documents/Codex")
+ROOT = Path(__file__).resolve().parents[3]
 TEST_DIR = ROOT / "archive/资料/买量组合库/题材库/测试/测试_001"
 RESULTS_DIR = TEST_DIR / "03-results"
 REPORTS_DIR = TEST_DIR / "04-reports"

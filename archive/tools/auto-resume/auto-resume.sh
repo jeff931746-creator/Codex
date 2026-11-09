@@ -15,16 +15,16 @@
 set -euo pipefail
 
 # cron 的 PATH 极简，补上 node 和 claude 所在目录，否则会静默失败
-export PATH="/opt/homebrew/bin:/Users/mt/.local/npm/bin:$PATH"
-CLAUDE=/Users/mt/.local/npm/bin/claude
-PROJECT=/Users/mt/Documents/Codex
+export PATH="$HOME/.local/npm/bin:$PATH"
+CLAUDE="${CLAUDE_BIN:-$(command -v claude || true)}"
+PROJECT="$(cd "$(dirname "$0")/../../.." && pwd)"
 SELF="$PROJECT/archive/tools/auto-resume/auto-resume.sh"
 BASE="$PROJECT/archive/tools/auto-resume"
 LOGS="$BASE/_logs"
 STATE="$BASE/_state"
 PROMPTS="$BASE/prompts"
 
-notify() { osascript -e "display notification \"$2\" with title \"auto-resume: $1\"" 2>/dev/null || true; }
+notify() { if command -v osascript >/dev/null 2>&1; then osascript -e "display notification \"$2\" with title \"auto-resume: $1\"" 2>/dev/null || true; fi; }
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOGS/$TASK.log"; }
 
 build_prompt() {

@@ -14,7 +14,7 @@ FORBIDDEN_HEADINGS = ['## Flow Types', '## Plan Requirements', '## Review Discip
 def pointer_bad(path: Path) -> str | None:
     if not path.exists():
         return None
-    text = path.read_text(errors='ignore')
+    text = path.read_text(encoding='utf-8', errors='ignore')
     if any(req not in text for req in REQUIRED):
         return 'missing .agents onboarding/entrypoints pointers'
     nonempty = [line for line in text.splitlines() if line.strip()]

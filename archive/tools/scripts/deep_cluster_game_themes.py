@@ -22,11 +22,12 @@ import sys
 from collections import defaultdict
 from pathlib import Path
 
-ROOT = Path("/Users/mt/Documents/Codex")
+ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 
 from archive.tools.lib.llm_client import chat_text
 from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.portable_paths import filename_stem
 
 LIB_ROOT = ROOT / "archive/资料/游戏题材库"
 RAW_DIR = LIB_ROOT / "_raw"
@@ -382,7 +383,7 @@ def main():
     for c in all_clusters:
         cname = (c.get("cluster_name", "未命名") or "未命名").replace("/", "_").replace(" ", "_")
         macro = c.get("_macro", "?")
-        path = CLUSTER_DIR / f"{macro}_{cname}.md"
+        path = CLUSTER_DIR / f"{filename_stem(f'{macro}_{cname}')}.md"
         path.write_text(cluster_to_markdown(c, macro), encoding="utf-8")
 
     (LIB_ROOT / "00_深度聚类总览.md").write_text(write_index(all_clusters, macro_buckets), encoding="utf-8")

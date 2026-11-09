@@ -1,9 +1,10 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from 'node:url';
 import { SpreadsheetFile, Workbook } from "@oai/artifact-tool";
 
-const WORK_DIR = "/Users/mt/Documents/Codex/tmp/level_progress_analysis/data/april_focus";
-const OUTPUT_DIR = "/Users/mt/Documents/Codex/tmp/level_progress_analysis/reports";
+const WORK_DIR = fileURLToPath(new URL('../data/april_focus/', import.meta.url));
+const OUTPUT_DIR = fileURLToPath(new URL('../reports/', import.meta.url));
 const OUTPUT_PATH = path.join(OUTPUT_DIR, "4月为主关卡流失对比分析报告.xlsx");
 
 const payload = JSON.parse(await fs.readFile(path.join(WORK_DIR, "april_focus_summary.json"), "utf8"));

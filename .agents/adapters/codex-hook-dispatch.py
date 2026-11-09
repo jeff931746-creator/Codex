@@ -9,7 +9,7 @@ import subprocess
 import sys
 
 
-WORKSPACE = pathlib.Path("/Users/mt/Documents/Codex-codex-work").resolve()
+WORKSPACE = pathlib.Path(__file__).resolve().parents[2]
 
 
 def in_workspace(path_text: str) -> bool:
@@ -43,6 +43,7 @@ def main() -> int:
         sys.argv[1:],
         input=raw,
         text=True,
+        encoding="utf-8",
         cwd=str(WORKSPACE),
         env=env,
     )

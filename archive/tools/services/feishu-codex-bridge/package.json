@@ -5,7 +5,9 @@
   "type": "module",
   "description": "Minimal self-hosted Feishu bot bridge for local Codex/OpenClaw sessions or model fallbacks",
   "scripts": {
-    "start": "sh ./run.sh"
+    "start": "node ./run.mjs",
+    "tunnel:quick": "node ./run.mjs quick-tunnel",
+    "tunnel:named": "node ./run.mjs named-tunnel"
   },
   "dependencies": {
     "@larksuiteoapi/node-sdk": "^1.61.0"

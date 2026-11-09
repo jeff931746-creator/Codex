@@ -11,6 +11,7 @@ import re
 import sys
 import time
 from datetime import date, datetime
+import tempfile
 from pathlib import Path
 
 _THIS_FILE = Path(__file__).resolve()
@@ -20,10 +21,11 @@ for _parent in _THIS_FILE.parents:
         break
 
 from archive.tools.lib.llm_client import chat
+from archive.tools.lib.portable_paths import relative_output_path
 
-LIBRARY_ROOT = Path("/Users/mt/Documents/Codex/archive/资料/机制库")
+LIBRARY_ROOT = Path(__file__).resolve().parents[3] / "archive/资料/机制库"
 INDEX_FILE = LIBRARY_ROOT / "00_总索引.md"
-STATE_FILE = Path("/tmp/daily_game_breakdown_state.json")
+STATE_FILE = Path(tempfile.gettempdir()) / "daily_game_breakdown_state.json"
 STATE_TTL_HOURS = 24
 LLM_ROUTE = "SiliconFlow_GLM"
 
@@ -641,17 +643,22 @@ for path, body in file_blocks:
         )
 
 # ========== 目录不覆盖检查 ==========
-game_dir = LIBRARY_ROOT / game_name
+game_relative = relative_output_path(game_name)
+if len(game_relative.parts) != 1:
+    raise RuntimeError("游戏名必须是单个目录名")
+game_dir = LIBRARY_ROOT / game_relative
+game_dir.resolve().relative_to(LIBRARY_ROOT.resolve())
 if game_dir.exists():
     raise RuntimeError(f"游戏目录已存在，拒绝覆盖：{game_dir}")
 
 # ========== 写盘 ==========
-written = []
+destinations = []
 for rel_path, body in file_blocks:
-    rel_path = rel_path.strip()
-    if ".." in rel_path or rel_path.startswith("/"):
-        raise RuntimeError(f"非法相对路径：{rel_path}")
-    target = game_dir / rel_path
+    target = game_dir / relative_output_path(rel_path.strip())
+    target.resolve().relative_to(game_dir.resolve())
+    destinations.append((target, body))
+written = []
+for target, body in destinations:
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(body.strip() + "\n", encoding="utf-8")
     written.append(str(target))

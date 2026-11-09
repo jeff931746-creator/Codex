@@ -11,9 +11,8 @@
 #   2. 再跑本脚本，按提示粘贴 token（不回显）
 set -euo pipefail
 
-export PATH="/opt/homebrew/bin:/Users/mt/.local/npm/bin:$PATH"
-CLAUDE=/Users/mt/.local/npm/bin/claude
-SETTINGS=/Users/mt/.claude/settings.json
+CLAUDE="${CLAUDE_BIN:-$(command -v claude)}"
+SETTINGS="$HOME/.claude/settings.json"
 
 # 从剪贴板读取 token，并去掉终端折行带进来的换行/空白（read 会被换行截断，故不用 read）
 echo "从剪贴板读取 token（请先复制 claude setup-token 输出的那一长串）..."
@@ -41,7 +40,7 @@ unset TOK
 
 echo ""
 echo "== 自测：用 daemon 同样的隔离环境跑一次 claude =="
-if env -i HOME=/Users/mt PATH="$PATH" TERM=xterm "$CLAUDE" -p "回复 OK" 2>&1 | head -5; then
+if env -i HOME="$HOME" PATH="$PATH" TERM=xterm "$CLAUDE" -p "回复 OK" 2>&1 | head -5; then
   echo "↑ 若上面是正常回复而非 'Not logged in'/401，说明 token 生效。"
 else
   echo "✗ 自测调用失败，检查 token 是否粘贴完整。"

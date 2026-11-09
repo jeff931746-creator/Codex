@@ -1,6 +1,6 @@
 # Workflow Chain Rules
 
-Workflow layer architecture and capability lookup protocol for any AI agent working in `/Users/mt/Documents/Codex-codex-work`.
+Workflow layer architecture and capability lookup protocol for any AI agent working in `the current checkout root`.
 
 Detailed reference material lives in `.agents/references/workflow-chain-reference.md`. Use it when creating new projects, moving between workflow phases, or checking stage-specific process details.
 

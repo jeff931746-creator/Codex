@@ -8,7 +8,8 @@ data = json.load(sys.stdin)
 tool_name = data.get('tool_name', '')
 command = data.get('tool_input', {}).get('command', '')
 
-if tool_name != 'Bash':
+command = command or data.get('tool_input', {}).get('cmd', '')
+if tool_name not in {'Bash', 'PowerShell', 'exec_command', 'functions.exec_command'}:
     sys.exit(0)
 if not re.search(r'git\s+commit', command):
     sys.exit(0)

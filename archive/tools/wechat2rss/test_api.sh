@@ -10,7 +10,7 @@ BASE_URL="https://down.mptext.top"
 
 if [ -z "$WX_API_KEY" ]; then
   echo "❌ 请先设置 API Key："
-  echo "   export WX_API_KEY=\"069940d6cb1d4c478b5200aeb98f55b3\""
+  echo "   export WX_API_KEY=\"your_api_key\""
   exit 1
 fi
 

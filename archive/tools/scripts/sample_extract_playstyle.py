@@ -23,18 +23,19 @@ for _parent in _THIS_FILE.parents:
         break
 
 from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.portable_paths import filename_stem
 from archive.tools.lib.llm_client import chat_text
 
 # ========== 配置 ==========
-OUTPUT_DIR = Path("/Users/mt/Documents/Codex/archive/资料/玩法承接库/_draft")
+OUTPUT_DIR = Path(__file__).resolve().parents[3] / "archive/资料/玩法承接库/_draft"
 RAW_DIR = OUTPUT_DIR / "_raw"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
 # 小样：3 个有代表性的游戏（射击肉鸽、放置仙侠、SLG）
 SAMPLE_GAMES = [
-    "/Users/mt/Documents/Codex/archive/资料/机制库/向僵尸开炮",
-    "/Users/mt/Documents/Codex/archive/资料/机制库/一念逍遥",
-    "/Users/mt/Documents/Codex/archive/资料/机制库/口袋奇兵",
+    str(Path(__file__).resolve().parents[3] / "archive/资料/机制库/向僵尸开炮"),
+    str(Path(__file__).resolve().parents[3] / "archive/资料/机制库/一念逍遥"),
+    str(Path(__file__).resolve().parents[3] / "archive/资料/机制库/口袋奇兵"),
 ]
 
 LLM_ROUTE = "SiliconFlow_GLM"
@@ -184,7 +185,7 @@ def write_draft(entry: dict, idx: int):
     """把一个玩法承接条目写成 markdown 草稿"""
     draft_id = entry.get("draft_id", f"draft-PLY-XX-{idx:03d}")
     safe_name = re.sub(r'[<>:"/\\|?*]', '_', entry.get("name", "未命名"))
-    filename = f"sample-{idx:02d}-{draft_id}.md"
+    filename = filename_stem(f"sample-{idx:02d}-{draft_id}") + ".md"
     path = OUTPUT_DIR / filename
 
     check = entry.get("independence_check", {})

@@ -14,7 +14,7 @@ The active workflow rules are agent-neutral. They apply to any AI agent working 
 - `archive/` holds accumulated methods and tools.
 - `reference/` holds stable standards and research.
 - Do not use any external workspace as an implicit dependency. Read from or write to one only when the user explicitly names that target and asks to port, sync, compare, or migrate specific work.
-- Use the local workspace guard before file-changing shell commands when the target path is known: `bash /Users/mt/Documents/Codex-codex-work/tools/workspace-guard/check-paths.sh <path> [...]`.
+- Use the local workspace guard before file-changing shell commands when the target path is known: `python tools/workspace-guard/check_paths.py <path> [...]`.
 
 ## Active Rule Sources
 

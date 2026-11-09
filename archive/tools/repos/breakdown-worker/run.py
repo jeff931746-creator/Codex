@@ -20,7 +20,7 @@ import json
 import os
 import re
 import sys
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 _THIS_FILE = Path(__file__).resolve()
 for _parent in _THIS_FILE.parents:
@@ -33,7 +33,7 @@ from archive.tools.lib.llm_client import chat as llm_chat
 from archive.tools.lib.model_registry import get_model_route
 
 ROOT = Path(__file__).resolve().parent
-REPO_ROOT = ROOT.parent.parent.parent.parent  # /Users/mt/Documents/Codex
+REPO_ROOT = ROOT.parent.parent.parent.parent
 LIBRARY = REPO_ROOT / "archive" / "资料" / "机制库"
 STANDARDS = LIBRARY / "拆解质量标准.md"
 REFERENCE_GAME = LIBRARY / "保卫向日葵"
@@ -44,7 +44,7 @@ def load_env():
     env_path = ROOT / ".env"
     if not env_path.exists():
         return
-    for line in env_path.read_text(encoding="utf-8").splitlines():
+    for line in env_path.read_text(encoding="utf-8-sig").splitlines():
         line = line.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
@@ -151,12 +151,44 @@ def split_files(text: str) -> list[tuple[str, str]]:
         out.append((path, content))
     return out
 
+def relative_output_path(raw: str) -> Path:
+    """Validate model-provided paths using Windows rules on every host."""
+    win_path = PureWindowsPath(raw)
+    parts = raw.replace("\\", "/").split("/")
+    reserved = {"CON", "PRN", "AUX", "NUL", "CONIN$", "CONOUT$"} | {
+        prefix + number for prefix in ("COM", "LPT") for number in "123456789¹²³"
+    }
+    if not raw or win_path.drive or win_path.root:
+        raise ValueError(f"Output path must be relative: {raw!r}")
+    for part in parts:
+        if (
+            not part or part in {".", ".."} or part.endswith((" ", "."))
+            or any(ord(char) < 32 or char in '<>:"|?*' for char in part)
+            or part.split(".", 1)[0].rstrip(" ").upper() in reserved
+        ):
+            raise ValueError(f"Invalid output path component: {raw!r}")
+    return Path(*parts)
+
+
+def game_directory_name(game: str) -> str:
+    relative = relative_output_path(game)
+    if len(relative.parts) != 1:
+        raise ValueError("Game name must be a single directory name")
+    return game
+
+
 def write_outputs(game: str, files: list[tuple[str, str]]) -> Path:
-    out_dir = ROOT / "outputs" / game
-    out_dir.mkdir(parents=True, exist_ok=True)
+    output_root = (ROOT / "outputs").resolve()
+    out_dir = output_root / game_directory_name(game)
+    out_dir.resolve().relative_to(output_root)
+    # Validate all destinations before writing any response file.
+    destinations = []
     for rel, content in files:
-        rel = rel.lstrip("/").replace("..", "_")
-        dest = out_dir / rel
+        dest = out_dir / relative_output_path(rel)
+        dest.resolve().relative_to(out_dir.resolve())
+        destinations.append((dest, content))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    for dest, content in destinations:
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_text(content, encoding="utf-8")
     return out_dir
@@ -172,6 +204,10 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--no-critique", action="store_true", help="跳过第二轮自审（默认会跑）")
     args = ap.parse_args()
+    try:
+        game_directory_name(args.game)
+    except ValueError as error:
+        ap.error(str(error))
 
     route = get_model_route(args.route)
 

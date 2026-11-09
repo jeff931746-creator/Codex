@@ -19,12 +19,14 @@ If the runtime supports hook or policy wiring, configure it to use `.agents/hook
 
 If the runtime does not support hooks, put the same requirements in the runtime's system prompt, project prompt, or startup checklist:
 
-- work only in `/Users/mt/Documents/Codex-codex-work` unless the user explicitly names another target;
+- work only in `the current checkout root` unless the user explicitly names another target;
 - read `.agents/AI-ONBOARDING.md` before non-trivial work;
 - read `.agents/AI-ENTRYPOINTS.md` for the current concrete source list and paths;
 - use `.agents/memory/` for project memory;
 - do not write project rules, memory, checkpoints, task state, or handoff notes to runtime-private directories;
-- run `tools/workspace-guard/check-paths.sh` before file-changing shell commands when target paths are known.
+- run `tools/workspace-guard/check_paths.py` before file-changing shell commands when target paths are known.
 - when context usage exceeds the high-water mark during a task, set `workspace/tmp/agent-checkpoints/<runtime>/context-pressure.json` to `pending-next-task`; before starting the next task, produce a continuation handoff and only then resume risky work.
 
 Hook support gives physical blocking. Without hook support, the onboarding contract is still mandatory, but enforcement is procedural.
+
+On Windows or after moving the checkout, run `python tools/windows/bootstrap.py --runtime codex` (or `claude`) from the root to generate absolute local hook commands. Checked-in JSON files are root-relative templates. The shared `run-hook.py` sets runtime/workspace variables and uses the current Python interpreter without Bash. Read [Windows setup](../../docs/windows.md) for setup, scope and platform limits.

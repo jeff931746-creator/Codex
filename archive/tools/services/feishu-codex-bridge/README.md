@@ -8,7 +8,25 @@
 
 这套方案是“自建桥接”，不是 Codex 官方飞书机器人集成。
 
-This bridge is expected to be operated under the root workspace session protocol in [`/Users/mt/Documents/Codex/CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md).
+This bridge follows the root workspace protocol in [PROJECT.md](../../../../PROJECT.md).
+
+## Windows 与跨平台启动
+
+先安装 Node.js、Python 和所用后端的 CLI，并将可执行文件加入 PATH。进入本目录，用 PowerShell 执行：
+
+```powershell
+Copy-Item .env.example .env
+npm ci
+npm start
+```
+
+填写 `.env` 后再启动。`npm start` 使用 `run.mjs`，在 Windows、macOS、Linux 上均可运行；`.env` 只读取字面值，不执行 shell 表达式。已设置的进程环境变量优先，其次本目录 `.env`，最后共享运行配置：Windows `%LOCALAPPDATA%/FeishuCodexBridge/bridge/.env`，macOS `~/Library/Application Support/FeishuCodexBridge/bridge/.env`，Linux `$XDG_DATA_HOME/FeishuCodexBridge/bridge/.env`（未设置时用 `~/.local/share`）。`CODEX_RUNTIME_ENV_PATH` 可覆盖共享配置路径。
+
+临时隧道用 `npm run tunnel:quick`，固定隧道用 `npm run tunnel:named`。先安装 cloudflared；固定隧道还需配置 `cloudflared/config.yml`。Windows `.env` 路径推荐使用正斜杠，含空格值可加引号。原 `.env` 若复制自 Mac，应清空或修改 `CODEX_PYTHON_BIN`、`CODEX_DESKTOP_BRIDGE_SCRIPT`、`CODEX_BRIDGE_WORKDIR`、`CLOUDFLARED_BIN` 中的旧路径。
+
+Windows 登录后运行可执行 `./install_task.ps1 -Mode bridge` 注册当前用户任务；隧道使用 `-Mode named-tunnel` 或 `-Mode quick-tunnel`。脚本只注册任务，下次登录时启动；立即启动用 `Start-ScheduledTask -TaskName FeishuCodex-bridge`，停止用 `Stop-ScheduledTask`，移除用 `./install_task.ps1 -Mode bridge -Remove`。计划任务沿用当前目录文件，不复制密钥。需要稳定的服务路径时，在 `.env` 中填写 `NODE_BIN` 和 `CLOUDFLARED_BIN` 的实际绝对路径。
+
+`install_launchd.sh` 仅用于 macOS；Windows 使用上面的任务计划程序。此轮未在 Windows 实机执行服务登录、自启动、隧道或外部账号认证。
 
 ## 适合什么场景
 
@@ -41,13 +59,13 @@ This bridge is expected to be operated under the root workspace session protocol
 
 ## 目录
 
-- [server.mjs](/Users/mt/Documents/Codex/tools/feishu-codex-bridge/server.mjs)
-- [package.json](/Users/mt/Documents/Codex/tools/feishu-codex-bridge/package.json)
-- [.env.example](/Users/mt/Documents/Codex/tools/feishu-codex-bridge/.env.example)
-- [run_named_tunnel.sh](/Users/mt/Documents/Codex/tools/feishu-codex-bridge/run_named_tunnel.sh)
-- [run_quick_tunnel.sh](/Users/mt/Documents/Codex/tools/feishu-codex-bridge/run_quick_tunnel.sh)
-- [install_launchd.sh](/Users/mt/Documents/Codex/tools/feishu-codex-bridge/install_launchd.sh)
-- [cloudflared/config.example.yml](/Users/mt/Documents/Codex/tools/feishu-codex-bridge/cloudflared/config.example.yml)
+- [server.mjs](server.mjs)
+- [package.json](package.json)
+- [.env.example](.env.example)
+- [run_named_tunnel.sh](run_named_tunnel.sh)
+- [run_quick_tunnel.sh](run_quick_tunnel.sh)
+- [install_launchd.sh](install_launchd.sh)
+- [cloudflared/config.example.yml](cloudflared/config.example.yml)
 
 ## 1. 准备环境变量
 
@@ -176,6 +194,7 @@ https://xxx.feishu.cn/docx/AbCdEfGhIjKlMnOpQrStUvWx
 - 键支持 `chat:<chat_id>`、`sender:<open_id>`，也支持直接写裸 `chat_id` 或 `open_id`
 - 值是 `codex_desktop_bridge.py select --target ...` 能识别的会话名或 session id
 
+<!-- delivery-writing:allow-example reason="execution-disambiguation" -->
 示例：
 
 ```bash
@@ -185,8 +204,8 @@ FEISHU_SESSION_MAP={"chat:oc_123":"产品群","sender:ou_456":"个人工作流"}
 如果你选择 `codex`，先在本地选定一个可恢复的 Codex 会话：
 
 ```bash
-python3 /Users/mt/Documents/Codex/tools/codex-desktop-bridge/codex_desktop_bridge.py list
-python3 /Users/mt/Documents/Codex/tools/codex-desktop-bridge/codex_desktop_bridge.py select --target "会话名或 session id"
+python ../codex-desktop-bridge/codex_desktop_bridge.py list
+python ../codex-desktop-bridge/codex_desktop_bridge.py select --target "会话名或 session id"
 ```
 
 状态持久化：
@@ -384,7 +403,7 @@ cp cloudflared/config.example.yml cloudflared/config.yml
 
 模板文件在：
 
-- [cloudflared/config.example.yml](/Users/mt/Documents/Codex/tools/feishu-codex-bridge/cloudflared/config.example.yml)
+- [cloudflared/config.example.yml](cloudflared/config.example.yml)
 
 4. 给 tunnel 绑定固定域名：
 
@@ -419,9 +438,9 @@ sh ./install_launchd.sh named-tunnel
 
 对应模板：
 
-- [launchd/com.mt.feishu-codex-bridge.plist](/Users/mt/Documents/Codex/tools/feishu-codex-bridge/launchd/com.mt.feishu-codex-bridge.plist)
-- [launchd/com.mt.feishu-codex-cloudflared.plist](/Users/mt/Documents/Codex/tools/feishu-codex-bridge/launchd/com.mt.feishu-codex-cloudflared.plist)
-- [launchd/com.mt.feishu-codex-quick-tunnel.plist](/Users/mt/Documents/Codex/tools/feishu-codex-bridge/launchd/com.mt.feishu-codex-quick-tunnel.plist)
+- [launchd/com.mt.feishu-codex-bridge.plist](launchd/com.mt.feishu-codex-bridge.plist)
+- [launchd/com.mt.feishu-codex-cloudflared.plist](launchd/com.mt.feishu-codex-cloudflared.plist)
+- [launchd/com.mt.feishu-codex-quick-tunnel.plist](launchd/com.mt.feishu-codex-quick-tunnel.plist)
 
 注意：这套 `launchd` 安装脚本会把运行时文件同步到 `~/Library/Application Support/FeishuCodexBridge/bridge/`，然后让系统从那里启动。这样可以绕开 macOS 对 `Documents/` 目录的后台访问限制，避免出现“agent 已加载但脚本打不开”的假启动状态。
 
@@ -534,8 +553,8 @@ FEISHU_APP_ID=cli_xxx
 FEISHU_APP_SECRET=your_feishu_app_secret
 FEISHU_BACKEND=codex
 CODEX_SESSION_TARGET=
-CODEX_PYTHON_BIN=python3
-CODEX_DESKTOP_BRIDGE_SCRIPT=/Users/mt/Documents/Codex/tools/codex-desktop-bridge/codex_desktop_bridge.py
+CODEX_PYTHON_BIN=
+CODEX_DESKTOP_BRIDGE_SCRIPT=
 ```
 
 启动后访问：

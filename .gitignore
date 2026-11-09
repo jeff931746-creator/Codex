@@ -34,6 +34,7 @@ coverage/
 # Large local reference docs（不推送到远端）
 archive/方法论/立项白皮书/
 workspace/tmp/agent-checkpoints/
+workspace/tmp/runtime-config/
 
 # Office 文档（本地产物，不入版本）
 *.docx

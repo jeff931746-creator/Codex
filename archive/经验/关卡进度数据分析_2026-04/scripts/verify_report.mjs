@@ -1,6 +1,7 @@
 import { FileBlob, SpreadsheetFile } from "@oai/artifact-tool";
+import { fileURLToPath } from 'node:url';
 
-const reportPath = "/Users/mt/Documents/Codex/tmp/level_progress_analysis/reports/1.13-1.15关卡进度分析报告.xlsx";
+const reportPath = fileURLToPath(new URL('../reports/1.13-1.15关卡进度分析报告.xlsx', import.meta.url));
 const input = await FileBlob.load(reportPath);
 const workbook = await SpreadsheetFile.importXlsx(input);
 

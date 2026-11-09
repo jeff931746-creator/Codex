@@ -16,7 +16,7 @@ PRIVATE_RUNTIME_NAMES = (
 )
 
 PRIVATE_PROJECT_DIRS = tuple("." + name for name in PRIVATE_RUNTIME_NAMES)
-PRIVATE_HOME_DIRS = tuple(pathlib.Path("/Users/mt") / name for name in PRIVATE_PROJECT_DIRS)
+PRIVATE_HOME_DIRS = tuple(pathlib.Path.home() / name for name in PRIVATE_PROJECT_DIRS)
 
 DANGER_MESSAGE = "DANGER:工程记忆/规则不得写入 runtime 私有目录。请写入 .agents/memory、.agents/rules 或 workspace/tmp/agent-checkpoints/<runtime>/。"
 

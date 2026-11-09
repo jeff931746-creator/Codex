@@ -16,7 +16,7 @@ DEFAULT_RUNTIME = os.environ.get('AGENT_RUNTIME', 'codex')
 
 
 def run_git(args: list[str]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(['git', '-C', str(WORKSPACE), *args], capture_output=True, text=True)
+    return subprocess.run(['git', '-C', str(WORKSPACE), *args], capture_output=True, text=True, encoding='utf-8')
 
 
 def normalize_path(path: str) -> str:
@@ -172,8 +172,8 @@ def main() -> int:
         'expires_at': now + args.ttl_seconds,
     }
     checkpoint_dir.mkdir(parents=True, exist_ok=True)
-    scope_file.write_text(json.dumps({'scope_paths': scope, 'created_at': now}, ensure_ascii=False, indent=2) + '\n')
-    checkpoint_file.write_text(json.dumps(checkpoint, ensure_ascii=False, indent=2) + '\n')
+    scope_file.write_text(json.dumps({'scope_paths': scope, 'created_at': now}, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    checkpoint_file.write_text(json.dumps(checkpoint, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print(f'✅ independent review checkpoint recorded: {checkpoint_file}')
     return 0
 

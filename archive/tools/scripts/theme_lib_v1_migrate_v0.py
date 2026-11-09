@@ -29,7 +29,9 @@ from datetime import datetime
 from pathlib import Path
 
 # ========== 路径配置 ==========
-WORKSPACE = Path("/Users/mt/Documents/Codex")
+WORKSPACE = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(WORKSPACE))
+from archive.tools.lib.portable_paths import filename_stem
 LIB_ROOT = WORKSPACE / "archive/资料/历史题材库"
 V0_CATEGORY_DIR = LIB_ROOT / "按分类"
 V1_SAMPLES_DIR = LIB_ROOT / "样本/按媒介"
@@ -83,10 +85,7 @@ class V0Row:
     @property
     def file_name_safe(self) -> str:
         """转成安全的文件名"""
-        s = self.work_name
-        s = re.sub(r'[/\\:*?"<>|]', "_", s)
-        s = s.replace(" ", "_")
-        return s
+        return filename_stem(self.work_name.replace(" ", "_"))
 
 
 def parse_v0_table(file_path: Path) -> list[V0Row]:

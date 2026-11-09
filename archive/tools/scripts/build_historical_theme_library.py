@@ -21,11 +21,12 @@ for _parent in _THIS_FILE.parents:
 
 from archive.tools.lib.llm_common import RetryPolicy
 from archive.tools.lib.llm_client import chat_text
+from archive.tools.lib.portable_paths import filename_stem
 
 # ========== 配置 ==========
 OUTPUT_ROOT = Path(os.environ.get(
     "THEME_LIBRARY_ROOT",
-    "/Users/mt/Documents/Codex/archive/资料/历史题材库"
+    str(Path(__file__).resolve().parents[3] / "archive/资料/历史题材库")
 ))
 RAW_DIR = OUTPUT_ROOT / "_raw"
 CLUSTER_DIR = OUTPUT_ROOT / "题材聚类"
@@ -648,7 +649,7 @@ def main():
 
     for cluster in clusters:
         name = cluster.get("cluster_name", "未命名")
-        safe_name = re.sub(r'[<>:"/\\|?*]', '_', name)
+        safe_name = filename_stem(name)
         path = CLUSTER_DIR / f"{safe_name}.md"
         path.write_text(cluster_to_markdown(cluster), encoding="utf-8")
     log(f"  写出 {len(clusters)} 个聚类文件到 题材聚类/")

@@ -2,8 +2,16 @@
 
 set -euo pipefail
 
-PROMPT_FILE="/Users/mt/Documents/Codex/模块槽位塔防/模块槽位塔防_玩法图Prompts.md"
-HANDOFF_SCRIPT="/Users/mt/Documents/Codex/gemini_web_handoff.sh"
+if [[ "$(uname -s)" != Darwin ]]; then
+  echo "This browser workflow requires macOS AppleScript. Use generate_gameplay_series_via_api.py on Windows." >&2
+  exit 1
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+WORKSPACE_ROOT="$(cd "$SCRIPT_DIR/../../../../../../.." && pwd)"
+PROMPT_FILE="$BASE_DIR/概念图Prompt/模块槽位塔防_玩法图Prompts.md"
+HANDOFF_SCRIPT="$WORKSPACE_ROOT/archive/tools/scripts/gemini_web_handoff.sh"
 
 usage() {
   cat <<'EOF'

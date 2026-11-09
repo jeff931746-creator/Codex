@@ -1,9 +1,102 @@
 {
-  "note": "Claude hook adapter example. Configure Claude to use .agents/hooks commands if runtime hook wiring is needed.",
-  "runtime": "claude",
-  "hooksFile": "../hooks.json",
-  "environment": {
-    "AGENT_RUNTIME": "claude",
-    "AGENT_WORKSPACE": "/Users/mt/Documents/Codex-codex-work"
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-reference-permission.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-workspace-write-targets.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude block-private-memory-write.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-context-pressure.py",
+            "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell|exec_command|functions.exec_command",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-commit-message.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude warn-dangerous.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-flow-gates.py",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-thin-runtime-pointers.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-task-flow-state.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-gdd-workflow.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-content-governance-gates.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude stop-status.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-neat-freak.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-validation.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-impl-checklist.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime claude check-context-pressure.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
   }
 }

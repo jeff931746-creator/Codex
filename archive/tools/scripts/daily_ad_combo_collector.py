@@ -12,6 +12,7 @@ import sys
 import time
 import urllib.request
 from datetime import datetime
+import tempfile
 from pathlib import Path
 
 _THIS_FILE = Path(__file__).resolve()
@@ -26,15 +27,15 @@ from archive.tools.lib.llm_client import chat_text
 # ========== 配置 ==========
 LIBRARY_ROOT = Path(os.environ.get(
     "AD_COMBO_LIBRARY_ROOT",
-    "/Users/mt/Documents/Codex/archive/资料/买量组合库"
+    str(Path(__file__).resolve().parents[3] / "archive/资料/买量组合库")
 ))
 STATE_FILE = Path(os.environ.get(
     "AD_COMBO_STATE_FILE",
-    "/tmp/ad_combo_candidates.json"
+    str(Path(tempfile.gettempdir()) / "ad_combo_candidates.json")
 ))
 LOG_FILE = Path(os.environ.get(
     "AD_COMBO_LOG_FILE",
-    "/tmp/ad_combo_collector.log"
+    str(Path(tempfile.gettempdir()) / "ad_combo_collector.log")
 ))
 FEISHU_BRIDGE_URL = os.environ.get(
     "FEISHU_WEBHOOK_URL",

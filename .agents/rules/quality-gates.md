@@ -1,6 +1,6 @@
 # Quality Gates
 
-Factuality, review discipline, and Git hygiene rules for any AI agent working in `/Users/mt/Documents/Codex-codex-work`.
+Factuality, review discipline, and Git hygiene rules for any AI agent working in `the current checkout root`.
 
 ## Factuality Handling
 

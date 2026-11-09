@@ -35,11 +35,12 @@ for _parent in _THIS_FILE.parents:
 
 from archive.tools.lib.llm_client import chat_text
 from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.portable_paths import filename_stem
 
 # ========== 配置 ==========
 OUTPUT_ROOT = Path(os.environ.get(
     "GAME_THEME_LIBRARY_ROOT",
-    "/Users/mt/Documents/Codex/archive/资料/游戏题材库"
+    str(Path(__file__).resolve().parents[3] / "archive/资料/游戏题材库")
 ))
 RAW_DIR = OUTPUT_ROOT / "_raw"
 CLUSTER_DIR = OUTPUT_ROOT / "题材聚类"
@@ -617,7 +618,7 @@ def main():
     for cat, works in categorized.items():
         if not works:
             continue
-        fname = cat_filename_map.get(cat, f"{cat}.md")
+        fname = cat_filename_map.get(cat, f"{filename_stem(cat)}.md")
         (OUTPUT_ROOT / fname).write_text(
             works_to_markdown(works, f"{cat} 题材分析"), encoding="utf-8")
         log(f"  写出 {fname} ({len(works)} 款)")
@@ -626,7 +627,7 @@ def main():
 
     # 题材聚类
     for c in clusters:
-        cname = c.get("cluster_name", "未命名").replace("/", "_").replace(" ", "_")
+        cname = filename_stem(c.get("cluster_name") or "未命名").replace(" ", "_")
         (CLUSTER_DIR / f"{cname}.md").write_text(cluster_to_markdown(c), encoding="utf-8")
 
     # 总览 + README

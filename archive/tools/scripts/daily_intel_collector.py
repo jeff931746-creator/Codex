@@ -23,6 +23,7 @@ import argparse
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -38,6 +39,8 @@ FILTER_LOG = STRATEGY_DIR / "过滤日志.md"
 sys.path.insert(0, str(CODEX_ROOT))
 
 from archive.tools.lib.llm_client import chat_text, chat_with_images  # noqa: E402
+from archive.tools.lib.cli_command import command_prefix
+from archive.tools.lib.portable_paths import filename_stem
 from archive.tools.scripts.controlled_vocab import (  # noqa: E402
     PRIMARY_CATEGORIES, GAMEPLAY_TAGS, normalize_primary, normalize_tags,
 )
@@ -88,8 +91,8 @@ def wx_api_get(endpoint: str, params: dict | None = None) -> dict:
         url += "?" + urllib.parse.urlencode(params)
 
     result = subprocess.run(
-        ["curl", "-s", "--max-time", "30", "-H", f"X-Auth-Key: {api_key}", url],
-        capture_output=True, text=True, timeout=35,
+        [shutil.which("curl") or "curl", "-s", "--max-time", "30", "-H", f"X-Auth-Key: {api_key}", url],
+        capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=35,
     )
     if result.returncode != 0:
         raise RuntimeError(f"curl 失败: {result.stderr}")
@@ -133,7 +136,7 @@ def _download_image_as_base64(url: str) -> tuple[str, str] | None:
     """用 curl 下载图片并返回 (base64_str, media_type)，失败返回 None。"""
     try:
         result = subprocess.run(
-            ["curl", "-sL", "--max-time", "8",
+            [shutil.which("curl") or "curl", "-sL", "--max-time", "8",
              "-H", f"User-Agent: {WX_UA}",
              "-H", "Referer: https://mp.weixin.qq.com/",
              url],
@@ -235,8 +238,8 @@ def fetch_article_content(url: str) -> tuple[str, list[str]]:
     # 1. 先尝试 url-md（返回含 HTML 的混合格式）
     try:
         result = subprocess.run(
-            ["url-md", "md", url, "--quiet", "--timeout", "20"],
-            capture_output=True, text=True, timeout=30,
+            [*command_prefix("url-md"), "md", url, "--quiet", "--timeout", "20"],
+            capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=30,
         )
         if result.returncode == 0:
             raw_html = result.stdout
@@ -257,8 +260,8 @@ def fetch_article_content(url: str) -> tuple[str, list[str]]:
     if not text:
         try:
             result = subprocess.run(
-                ["curl", "-sL", "-H", f"User-Agent: {WX_UA}", url],
-                capture_output=True, text=True, timeout=20,
+                [shutil.which("curl") or "curl", "-sL", "-H", f"User-Agent: {WX_UA}", url],
+                capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=20,
             )
             if result.returncode == 0:
                 raw_html = result.stdout
@@ -629,7 +632,7 @@ def write_strategy_entry(article: dict, analysis: dict, source_name: str) -> Pat
 
     today = time.strftime("%Y-%m-%d")
     # 生成文件名
-    slug = re.sub(r'[/\\:*?"<>|]', '_', article["title"])[:30]
+    slug = filename_stem(article["title"], limit=30)
     filename = f"{today}_{slug}.md"
     filepath = STRATEGY_DIR / "条目" / filename
 
@@ -757,7 +760,7 @@ def write_product_entry(product: dict, article: dict, source_name: str) -> Path 
     weight_dir.mkdir(parents=True, exist_ok=True)
 
     today = time.strftime("%Y-%m-%d")
-    slug = re.sub(r'[/\\:*?"<>|]', '_', name)
+    slug = filename_stem(name)
     filepath = weight_dir / f"{today}_{slug}.md"
 
     # 去重：精确文件名匹配

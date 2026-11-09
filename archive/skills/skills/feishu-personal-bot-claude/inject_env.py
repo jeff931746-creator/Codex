@@ -24,7 +24,7 @@ KEYS = [
 p = os.path.expanduser("~/.claude/settings.json")
 if os.path.exists(p):
     shutil.copy(p, p + ".bak")
-    with open(p) as f:
+    with open(p, encoding="utf-8-sig") as f:
         d = json.load(f)
 else:
     os.makedirs(os.path.dirname(p), exist_ok=True)
@@ -41,7 +41,7 @@ for k in KEYS:
         missing.append(k)
 d["env"] = env
 
-with open(p, "w") as f:
+with open(p, "w", encoding="utf-8", newline="\n") as f:
     json.dump(d, f, indent=2, ensure_ascii=False)
 
 # 只打印键名，绝不打印值

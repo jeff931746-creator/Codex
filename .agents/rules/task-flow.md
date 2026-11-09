@@ -1,6 +1,6 @@
 # Task Flow And Delegation Rules
 
-Unified task classification, gate definitions, plan requirements, delegation rules, and hook triggers for any AI agent working in `/Users/mt/Documents/Codex-codex-work`.
+Unified task classification, gate definitions, plan requirements, delegation rules, and hook triggers for any AI agent working in `the current checkout root`.
 
 ## Global Rules
 

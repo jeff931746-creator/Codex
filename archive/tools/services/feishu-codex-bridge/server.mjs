@@ -3,7 +3,8 @@ import { spawnSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import fs from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
+import { tmpdir } from "node:os";
 import { fileURLToPath, URL } from "node:url";
 import {
   askSiliconFlowChat,
@@ -14,6 +15,7 @@ import { envRoute, getModelRoute } from "../../lib/model-registry.mjs";
 
 const scriptFile = fileURLToPath(import.meta.url);
 const scriptDir = dirname(scriptFile);
+const workspaceRoot = resolve(scriptDir, '../../../..');
 const defaultPort = Number(process.env.PORT || 3000);
 const configuredRouteName = envRoute();
 const configuredRoute = configuredRouteName ? getModelRoute(configuredRouteName) : null;
@@ -60,13 +62,13 @@ const config = {
   ),
   feishuBotOpenId: process.env.FEISHU_BOT_OPEN_ID || "",
   feishuOwnerOpenId: process.env.FEISHU_OWNER_OPEN_ID || "",
-  codexPython: process.env.CODEX_PYTHON_BIN || process.env.PYTHON_BIN || "python3",
+  codexPython: process.env.CODEX_PYTHON_BIN || process.env.PYTHON_BIN || (process.platform === 'win32' ? 'python' : 'python3'),
   codexBridgeScript:
     process.env.CODEX_DESKTOP_BRIDGE_SCRIPT ||
-    "/Users/mt/Documents/Codex/archive/tools/codex-desktop-bridge/codex_desktop_bridge.py",
+    join(scriptDir, '../codex-desktop-bridge/codex_desktop_bridge.py'),
   codexSessionTarget: process.env.CODEX_SESSION_TARGET || "",
   codexWorkdir:
-    process.env.CODEX_BRIDGE_WORKDIR || "/Users/mt/Documents/Codex",
+    process.env.CODEX_BRIDGE_WORKDIR || workspaceRoot,
   llmRoute: configuredRoute?.route || "",
   llmRouteProvider: configuredRoute?.provider || "",
   openaiApiKey: process.env.OPENAI_API_KEY || "",
@@ -566,7 +568,7 @@ async function handleSupplementCommand(text) {
   }
 
   const [, comboName, supplementData] = match;
-  const stateFile = process.env.AD_COMBO_STATE_FILE || "/tmp/ad_combo_candidates.json";
+  const stateFile = process.env.AD_COMBO_STATE_FILE || join(tmpdir(), 'ad_combo_candidates.json');
 
   try {
     let state;
@@ -2385,7 +2387,7 @@ function askCodexBridge(userText, sessionTarget = "") {
   const proc = spawnSync(config.codexPython, args, {
     cwd: config.codexWorkdir,
     encoding: "utf8",
-    env: process.env,
+    env: { ...process.env, PYTHONUTF8: '1', PYTHONIOENCODING: 'utf-8' },
     maxBuffer: 10 * 1024 * 1024,
     timeout: Number(process.env.CODEX_BRIDGE_TIMEOUT_MS || 120000),
     killSignal: "SIGTERM"

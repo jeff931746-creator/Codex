@@ -11,10 +11,12 @@ export const API_BASE_URLS = {
   gemini: "https://generativelanguage.googleapis.com/v1beta/models"
 };
 
-const DEFAULT_RUNTIME_ENV_PATH = join(
-  homedir(),
-  "Library/Application Support/FeishuCodexBridge/bridge/.env"
-);
+const DATA_ROOT = process.platform === "win32"
+  ? process.env.LOCALAPPDATA || join(homedir(), "AppData", "Local")
+  : process.platform === "darwin"
+    ? join(homedir(), "Library", "Application Support")
+    : process.env.XDG_DATA_HOME || join(homedir(), ".local", "share");
+const DEFAULT_RUNTIME_ENV_PATH = join(DATA_ROOT, "FeishuCodexBridge", "bridge", ".env");
 let runtimeEnvLoaded = false;
 
 function runtimeEnvPath(env = process.env) {

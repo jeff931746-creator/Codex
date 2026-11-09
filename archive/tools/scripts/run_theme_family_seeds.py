@@ -24,11 +24,12 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path("/Users/mt/Documents/Codex")
+ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 
 from archive.tools.lib.llm_client import chat_text
 from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.portable_paths import filename_stem
 
 THEME_LIB = ROOT / "archive/资料/买量组合库/题材库"
 RUN_DIR = THEME_LIB / "_run_seeds"
@@ -63,7 +64,7 @@ def build_user(template: str, seed: dict) -> str:
 
 
 def safe_name(name: str) -> str:
-    return name.replace("/", "_").replace(" ", "_")[:40]
+    return filename_stem(name.replace(" ", "_"), limit=40)
 
 
 def main():

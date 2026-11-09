@@ -24,7 +24,7 @@ from datetime import datetime
 from pathlib import Path
 
 # ========== 路径配置 ==========
-WORKSPACE = Path("/Users/mt/Documents/Codex")
+WORKSPACE = Path(__file__).resolve().parents[3]
 LIB_ROOT = WORKSPACE / "archive/资料/历史题材库"
 SAMPLES_DIR = LIB_ROOT / "样本/按媒介"
 MOTIF_DIR = LIB_ROOT / "母题归并"

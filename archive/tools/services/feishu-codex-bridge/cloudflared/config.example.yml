@@ -1,5 +1,6 @@
 tunnel: 00000000-0000-0000-0000-000000000000
-credentials-file: /Users/mt/.cloudflared/00000000-0000-0000-0000-000000000000.json
+# Replace with your real absolute credential path. Windows also accepts C:/Users/... .
+credentials-file: ./cloudflared/00000000-0000-0000-0000-000000000000.json
 
 ingress:
   - hostname: feishu-codex.example.com

@@ -1,9 +1,9 @@
 #!/bin/bash
 # 每日自动合并无冲突分支 + 清理已合并 worktree/分支
-# cron: 0 23 * * * /Users/mt/Documents/Codex/archive/tools/scripts/daily_branch_merge.sh
+# Requires Bash (Git Bash on Windows); schedule manually using this checkout path.
 set -o pipefail
 
-REPO="/Users/mt/Documents/Codex"
+REPO="${AGENT_WORKSPACE:-$(cd "$(dirname "$0")/../../.." && pwd)}"
 LOG_DIR="$REPO/archive/tools/scripts/_logs"
 LOG_FILE="$LOG_DIR/branch_merge_$(date +%Y-%m-%d).log"
 PUSH_MARKER="$LOG_DIR/.pending_push"
@@ -15,10 +15,13 @@ mkdir -p "$LOG_DIR"
 log() { echo "[$(date +%H:%M:%S)] $1" | tee -a "$LOG_FILE"; }
 
 notify() {
+    command -v osascript >/dev/null 2>&1 || { log "$1: $2"; return 0; }
     osascript -e "display notification \"$2\" with title \"$1\"" 2>/dev/null
 }
 
 cd "$REPO" || { log "FATAL: 无法进入 $REPO"; exit 1; }
+# Match Git's drive-letter path spelling under Git Bash when skipping this tree.
+REPO="$(git rev-parse --show-toplevel)" || exit 1
 
 current_branch=$(git symbolic-ref --short HEAD 2>/dev/null)
 if [ "$current_branch" != "main" ]; then
@@ -41,9 +44,9 @@ git fetch origin 2>>"$LOG_FILE"
 # 收集活跃 worktree 分支名（用换行分隔的字符串代替关联数组）
 active_wt_branches=""
 while IFS= read -r line; do
-    branch=$(echo "$line" | awk '{print $3}' | tr -d '[]')
+    branch="${line#branch refs/heads/}"
     [ -n "$branch" ] && active_wt_branches="$active_wt_branches|$branch"
-done < <(git worktree list | tail -n +2)
+done < <(git worktree list --porcelain | grep '^branch refs/heads/')
 
 merged_count=0
 conflict_count=0
@@ -78,9 +81,7 @@ done < <(git branch --no-merged main | grep 'claude/')
 
 # 清理已合并的 worktree
 cleaned_wt=0
-while IFS= read -r line; do
-    wt_path=$(echo "$line" | awk '{print $1}')
-    wt_branch=$(echo "$line" | awk '{print $3}' | tr -d '[]')
+while IFS=$'\t' read -r wt_path wt_branch; do
 
     [ "$wt_path" = "$REPO" ] && continue
 
@@ -88,7 +89,10 @@ while IFS= read -r line; do
         git worktree remove "$wt_path" --force 2>>"$LOG_FILE" && cleaned_wt=$((cleaned_wt + 1))
         log "REMOVED worktree: $(basename "$wt_path")"
     fi
-done < <(git worktree list | tail -n +2)
+done < <(git -c core.quotePath=false worktree list --porcelain | awk '
+    /^worktree / { path=substr($0, 10) }
+    /^branch refs\/heads\// { sub(/^branch refs\/heads\//, ""); print path "\t" $0 }
+')
 
 # 清理已合并的分支
 cleaned_br=0

@@ -23,20 +23,21 @@ for _parent in _THIS_FILE.parents:
         break
 
 from archive.tools.lib.llm_common import RetryPolicy
+from archive.tools.lib.portable_paths import filename_stem
 from archive.tools.lib.llm_client import chat_text
 
 # ========== 配置 ==========
-OUTPUT_DIR = Path("/Users/mt/Documents/Codex/archive/资料/人群簇库/_draft")
+OUTPUT_DIR = Path(__file__).resolve().parents[3] / "archive/资料/人群簇库/_draft"
 RAW_DIR = OUTPUT_DIR / "_raw"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
 # 小样：5 个有人群代表性的游戏（覆盖 Y/M/F/C 等不同人群特征）
 SAMPLE_GAMES = [
-    "/Users/mt/Documents/Codex/archive/资料/机制库/向僵尸开炮",     # 中度休闲射击
-    "/Users/mt/Documents/Codex/archive/资料/机制库/一念逍遥",       # 仙侠放置
-    "/Users/mt/Documents/Codex/archive/资料/机制库/三国志战略版",   # SLG重氪
-    "/Users/mt/Documents/Codex/archive/资料/机制库/咸鱼之王",       # 全民休闲
-    "/Users/mt/Documents/Codex/archive/资料/机制库/保卫向日葵",     # 经典塔防
+    str(Path(__file__).resolve().parents[3] / "archive/资料/机制库/向僵尸开炮"),     # 中度休闲射击
+    str(Path(__file__).resolve().parents[3] / "archive/资料/机制库/一念逍遥"),       # 仙侠放置
+    str(Path(__file__).resolve().parents[3] / "archive/资料/机制库/三国志战略版"),   # SLG重氪
+    str(Path(__file__).resolve().parents[3] / "archive/资料/机制库/咸鱼之王"),       # 全民休闲
+    str(Path(__file__).resolve().parents[3] / "archive/资料/机制库/保卫向日葵"),     # 经典塔防
 ]
 
 LLM_ROUTE = "SiliconFlow_GLM"
@@ -164,7 +165,7 @@ def parse_json(text: str):
 # ========== 写出草稿 ==========
 def write_draft(entry: dict, idx: int):
     draft_id = entry.get("draft_id", f"draft-AUD-X-{idx:03d}")
-    filename = f"sample-{idx:02d}-{draft_id}.md"
+    filename = filename_stem(f"sample-{idx:02d}-{draft_id}") + ".md"
     path = OUTPUT_DIR / filename
 
     def fmt_list(v):

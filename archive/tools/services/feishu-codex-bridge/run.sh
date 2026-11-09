@@ -9,7 +9,7 @@ if [ -f "$DIR/.env" ]; then
   set +a
 fi
 
-NODE_BIN="${NODE_BIN:-/Users/mt/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node}"
+NODE_BIN="${NODE_BIN:-$(command -v node || true)}"
 if [ ! -x "$NODE_BIN" ]; then
   NODE_BIN="$(command -v node || true)"
 fi

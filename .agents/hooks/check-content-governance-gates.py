@@ -44,7 +44,7 @@ def marker_values(text: str, marker: str) -> list[str]:
 def load_scaffold_standard() -> tuple[set[str], tuple[str, ...], list[str]]:
     standard_path = WORKSPACE / ANALYSIS_SCAFFOLD_STANDARD_PATH
     try:
-        text = standard_path.read_text()
+        text = standard_path.read_text(encoding='utf-8')
     except Exception as exc:
         return set(), (), [f'analysis-scaffold standard unreadable: {ANALYSIS_SCAFFOLD_STANDARD_PATH}: {exc}']
 
@@ -61,7 +61,7 @@ def load_scaffold_standard() -> tuple[set[str], tuple[str, ...], list[str]]:
 def load_delivery_writing_standard() -> tuple[tuple[str, ...], set[str], tuple[str, ...], list[str]]:
     standard_path = WORKSPACE / DELIVERY_WRITING_STANDARD_PATH
     try:
-        text = standard_path.read_text()
+        text = standard_path.read_text(encoding='utf-8')
     except Exception as exc:
         return (), set(), (), [f'delivery-writing standard unreadable: {DELIVERY_WRITING_STANDARD_PATH}: {exc}']
 
@@ -236,7 +236,7 @@ def delivery_writing_findings_in_text(path: str, text: str, trigger_terms: tuple
 def delivery_writing_findings(path: str, trigger_terms: tuple[str, ...], allow_reasons: set[str], exempt_fragments: tuple[str, ...]) -> list[str]:
     full_path = WORKSPACE / path
     try:
-        text = full_path.read_text()
+        text = full_path.read_text(encoding='utf-8')
     except UnicodeDecodeError:
         try:
             text = full_path.read_text(encoding='utf-8')
@@ -259,7 +259,7 @@ def scaffold_label_problem(label: str, exact_labels: set[str], label_suffixes: t
 def scaffold_findings(path: str, exact_labels: set[str], label_suffixes: tuple[str, ...]) -> list[str]:
     full_path = WORKSPACE / path
     try:
-        text = full_path.read_text()
+        text = full_path.read_text(encoding='utf-8')
     except UnicodeDecodeError:
         try:
             text = full_path.read_text(encoding='utf-8')

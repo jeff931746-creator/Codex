@@ -29,6 +29,7 @@ from pathlib import Path
 
 CODEX_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(CODEX_ROOT))
+from archive.tools.lib.cli_command import command_prefix
 from archive.tools.scripts.controlled_vocab import (  # noqa: E402
     normalize_primary, normalize_tags,
 )
@@ -117,10 +118,10 @@ def fetch_existing() -> dict[str, list[str]]:
     name_to_ids: dict[str, list[str]] = {}
     offset = 0
     for _ in range(50):
-        cmd = ["lark-cli", "base", "+record-list", "--base-token", BASE_TOKEN,
+        cmd = [*command_prefix("lark-cli"), "base", "+record-list", "--base-token", BASE_TOKEN,
                "--table-id", TABLE_ID, "--as", "bot", "--format", "json",
                "--limit", "200", "--offset", str(offset)]
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+        r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=60)
         d = json.loads(r.stdout)
         data = d.get("data", {})
         rows = data.get("data", [])
@@ -143,11 +144,11 @@ def delete_ids(ids: list[str]) -> int:
     deleted = 0
     for i in range(0, len(ids), 100):
         part = ids[i:i + 100]
-        cmd = ["lark-cli", "base", "+record-delete", "--base-token", BASE_TOKEN,
+        cmd = [*command_prefix("lark-cli"), "base", "+record-delete", "--base-token", BASE_TOKEN,
                "--table-id", TABLE_ID, "--as", "bot", "--yes"]
         for rc in part:
             cmd += ["--record-id", rc]
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+        r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
         try:
             if json.loads(r.stdout).get("ok"):
                 deleted += len(part)
@@ -162,9 +163,9 @@ def batch_create(rows: list[list]) -> tuple[int, int]:
     for i in range(0, len(rows), 50):
         part = rows[i:i + 50]
         payload = json.dumps({"fields": FIELDS, "rows": part}, ensure_ascii=False)
-        cmd = ["lark-cli", "base", "+record-batch-create", "--base-token", BASE_TOKEN,
+        cmd = [*command_prefix("lark-cli"), "base", "+record-batch-create", "--base-token", BASE_TOKEN,
                "--table-id", TABLE_ID, "--as", "bot", "--json", payload]
-        r = subprocess.run(cmd, capture_output=True, text=True, timeout=180)
+        r = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=180)
         out = r.stdout or r.stderr
         try:
             resp = json.loads(out)

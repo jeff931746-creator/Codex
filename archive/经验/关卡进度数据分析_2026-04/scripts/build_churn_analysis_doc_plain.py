@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import os
 
 import pandas as pd
 from docx import Document
@@ -11,9 +12,9 @@ from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
 
-BASE = Path("/Users/mt/Documents/Codex/tmp/level_progress_analysis/data/april_focus")
-INPUT = Path("/Users/mt/Downloads/1.13-1.15关卡进度.xlsx")
-OUT_DIR = Path("/Users/mt/Documents/Codex/tmp/level_progress_analysis/reports")
+BASE = Path(__file__).resolve().parents[1] / "data/april_focus"
+INPUT = Path(os.environ.get("LEVEL_PROGRESS_INPUT", str(Path.home() / "Downloads/1.13-1.15关卡进度.xlsx"))).expanduser()
+OUT_DIR = Path(__file__).resolve().parents[1] / "reports"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 OUT = OUT_DIR / "4月关卡流失综合分析文档.docx"
 

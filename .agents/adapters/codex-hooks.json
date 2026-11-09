@@ -6,38 +6,38 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-reference-permission.py",
-            "statusMessage": "Checking reference edit permission"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-reference-permission.py",
+            "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-workspace-write-targets.py",
-            "statusMessage": "Checking workspace write targets"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-workspace-write-targets.py",
+            "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/block-private-memory-write.py",
-            "statusMessage": "Checking workspace private-state policy"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex block-private-memory-write.py",
+            "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-context-pressure.py",
-            "statusMessage": "Checking context-pressure handoff policy"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-context-pressure.py",
+            "timeout": 5
           }
         ]
       },
       {
-        "matcher": "Bash",
+        "matcher": "Bash|PowerShell|exec_command|functions.exec_command",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py bash /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-commit-message.sh",
-            "statusMessage": "Checking commit message policy"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-commit-message.py",
+            "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py bash /Users/mt/Documents/Codex-codex-work/.agents/hooks/warn-dangerous.sh",
-            "statusMessage": "Checking dangerous command policy"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex warn-dangerous.py",
+            "timeout": 5
           }
         ]
       }
@@ -47,52 +47,53 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-flow-gates.py",
-            "timeout": 10,
-            "statusMessage": "Checking strict knowledge-asset flow gate"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-flow-gates.py",
+            "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-thin-runtime-pointers.py",
-            "timeout": 5,
-            "statusMessage": "Checking thin runtime pointers"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-thin-runtime-pointers.py",
+            "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-task-flow-state.py",
-            "timeout": 5,
-            "statusMessage": "Checking task flow checkpoint"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-task-flow-state.py",
+            "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-content-governance-gates.py",
-            "timeout": 5,
-            "statusMessage": "Checking content governance checkpoints"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-gdd-workflow.py",
+            "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py bash /Users/mt/Documents/Codex-codex-work/.agents/hooks/stop-status.sh",
-            "statusMessage": "Checking workspace status"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-content-governance-gates.py",
+            "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-neat-freak.py",
-            "statusMessage": "Checking QA checkpoint"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex stop-status.py",
+            "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-validation.py",
-            "statusMessage": "Checking validation signal"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-neat-freak.py",
+            "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-impl-checklist.py",
-            "statusMessage": "Checking implementation review checkpoint"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-validation.py",
+            "timeout": 5
           },
           {
             "type": "command",
-            "command": "python3 /Users/mt/Documents/Codex-codex-work/.agents/adapters/codex-hook-dispatch.py python3 /Users/mt/Documents/Codex-codex-work/.agents/hooks/check-context-pressure.py",
-            "statusMessage": "Checking context-pressure handoff policy"
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-impl-checklist.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime codex check-context-pressure.py",
+            "timeout": 5
           }
         ]
       }

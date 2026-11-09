@@ -27,7 +27,7 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path("/Users/mt/Documents/Codex")
+ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 
 from archive.tools.lib.llm_client import chat_text  # noqa: E402

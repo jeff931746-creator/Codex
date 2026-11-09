@@ -1,3 +1,4 @@
+from pathlib import Path
 from docx import Document
 from docx.enum.section import WD_SECTION
 from docx.enum.table import WD_ALIGN_VERTICAL
@@ -7,7 +8,7 @@ from docx.oxml.ns import qn
 from docx.shared import Cm, Pt, RGBColor
 
 
-OUT = "/Users/mt/Documents/Codex/outputs/material_retention_word/4月基准对比1月素材侧付费留存分析.docx"
+OUT = str(Path(__file__).resolve().parents[3] / "outputs/material_retention_word/4月基准对比1月素材侧付费留存分析.docx")
 
 
 COLORS = {

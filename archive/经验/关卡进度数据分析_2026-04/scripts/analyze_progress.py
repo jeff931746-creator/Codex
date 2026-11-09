@@ -1,14 +1,15 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 
-INPUT = Path("/Users/mt/Downloads/1.13-1.15关卡进度.xlsx")
-OUT_DIR = Path("/Users/mt/Documents/Codex/tmp/level_progress_analysis/data/period_comparison")
+INPUT = Path(os.environ.get("LEVEL_PROGRESS_INPUT", str(Path.home() / "Downloads/1.13-1.15关卡进度.xlsx"))).expanduser()
+OUT_DIR = Path(__file__).resolve().parents[1] / "data/period_comparison"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 

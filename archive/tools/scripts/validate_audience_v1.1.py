@@ -24,10 +24,10 @@ for _parent in _THIS_FILE.parents:
 from archive.tools.lib.llm_common import RetryPolicy
 from archive.tools.lib.llm_client import chat_text
 
-OUTPUT_DIR = Path("/Users/mt/Documents/Codex/archive/资料/人群簇库/_draft")
+OUTPUT_DIR = Path(__file__).resolve().parents[3] / "archive/资料/人群簇库/_draft"
 RAW_DIR = OUTPUT_DIR / "_raw"
 TODAY = datetime.now().strftime("%Y-%m-%d")
-RANKING_DIR = Path("/Users/mt/Documents/Codex/archive/资料/竞品库/爆款年度榜")
+RANKING_DIR = Path(__file__).resolve().parents[3] / "archive/资料/竞品库/爆款年度榜"
 
 LLM_ROUTE = "SiliconFlow_DeepSeek_Flash"
 

@@ -6,9 +6,7 @@ Change this file when paths, source lists, hooks, adapters, or public state loca
 
 ## Active Workspace
 
-Agents work only in:
-
-`/Users/mt/Documents/Codex-codex-work`
+Agents work only in the current checkout root: the directory containing `PROJECT.md` and `.agents/AI-ENTRYPOINTS.md`. Resolve it from the entry file location, never from a personal absolute path.
 
 This workspace is independent. Do not read from or write to any external workspace unless the user explicitly names that target and asks to port, sync, compare, or migrate specific work.
 
@@ -95,16 +93,22 @@ Private runtime paths include:
 - `.gemini/`
 - `.continue/`
 - `.aider/`
-- `/Users/mt/.claude/`
-- `/Users/mt/.codex/`
+- `~/.claude/`
+- `~/.codex/`
 - any equivalent runtime-private directory
 
 ## File Safety Guard
 
 Before any shell command or script that creates, edits, moves, deletes, formats, or syncs files, run this guard when target paths are known:
 
-```bash
-bash /Users/mt/Documents/Codex-codex-work/tools/workspace-guard/check-paths.sh <path> [...]
+```text
+python tools/workspace-guard/check_paths.py <path> [...]
 ```
 
-For patch-based edits, inspect patch targets directly and ensure they are inside `/Users/mt/Documents/Codex-codex-work`.
+For patch-based edits, inspect patch targets directly and ensure they are inside `the current checkout root`.
+
+## Windows And Relocation
+
+Run commands from the checkout root with Python 3.10+ (`python -X utf8`). The guard derives its root from its own file and allows only that checkout plus OS temporary directories. `AGENT_WORKSPACE` is an internal adapter override, not permission to access another project.
+
+Checked-in hook JSON files use checkout-relative commands. Generate absolute local commands with `python tools/windows/bootstrap.py --runtime codex` (or `claude`) before connecting runtime hooks. Regenerate after moving the checkout or changing Python. Generated files live under `workspace/tmp/runtime-config/`, not runtime-private state. See `docs/windows.md` for native Windows entrypoints and remaining platform-specific tools.

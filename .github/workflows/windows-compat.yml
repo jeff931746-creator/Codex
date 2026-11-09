@@ -1,0 +1,41 @@
+name: Cross-platform compatibility
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  compatibility:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUTF8: '1'
+      PYTHONIOENCODING: utf-8
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - name: Enable long checkout paths
+        if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Workspace compatibility and safety tests
+        run: python -B -m unittest discover -s tests -v
+      - name: Windows npm CLI argument safety
+        run: python -B -m unittest discover -s archive/tools/lib/tests -v
+      - name: Model output path safety
+        run: python -B -m unittest discover -s archive/tools/repos/breakdown-worker/tests -v
+      - name: Bridge launcher tests
+        run: node --test archive/tools/services/feishu-codex-bridge/tests/launch.test.mjs
+      - name: Existing subtitle parser smoke test
+        run: python -B archive/tools/youtube-transcript-collector/tests/test_vtt_parser.py
+      - name: Existing public text parser smoke test
+        run: python -B archive/tools/douyin-text-extractor/tests/test_extract_douyin_text.py
+      - name: Prerequisite checker
+        run: python -B tools/windows/bootstrap.py --check

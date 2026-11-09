@@ -44,7 +44,7 @@ from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 
-WORKSPACE = Path("/Users/mt/Documents/Codex")
+WORKSPACE = Path(__file__).resolve().parents[3]
 LIB_ROOT = WORKSPACE / "archive/资料/历史题材库"
 SAMPLES_DIR = LIB_ROOT / "样本/按媒介"
 BACKUP_DIR = LIB_ROOT.parent.parent / "tools/scripts/历史题材库_数据/_合并前备份"

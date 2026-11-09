@@ -24,7 +24,7 @@ DEFAULT_GIT_PATHS = ('.agents', 'reference', 'archive')
 
 
 def run_git(args: list[str]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(['git', '-C', str(WORKSPACE), *args], capture_output=True, text=True)
+    return subprocess.run(['git', '-C', str(WORKSPACE), *args], capture_output=True, text=True, encoding='utf-8')
 
 
 def normalize_path(path: str) -> str:
@@ -114,7 +114,7 @@ def load_checkpoint() -> tuple[dict | None, str]:
     if not CHECKPOINT_FILE.exists():
         return None, 'missing'
     try:
-        data = json.loads(CHECKPOINT_FILE.read_text())
+        data = json.loads(CHECKPOINT_FILE.read_text(encoding='utf-8'))
     except Exception:
         return None, 'corrupt'
     return data, 'ok'
@@ -142,7 +142,7 @@ def load_scope() -> tuple[list[str], bool]:
     if not SCOPE_FILE.exists():
         return [], False
     try:
-        data = json.loads(SCOPE_FILE.read_text())
+        data = json.loads(SCOPE_FILE.read_text(encoding='utf-8'))
     except Exception:
         return [], True
     raw_scope = data.get('scope_paths') if isinstance(data, dict) else data
@@ -156,7 +156,7 @@ def active_task_scope() -> list[str]:
     if not TASK_FLOW_FILE.exists():
         return []
     try:
-        data = json.loads(TASK_FLOW_FILE.read_text())
+        data = json.loads(TASK_FLOW_FILE.read_text(encoding='utf-8'))
     except Exception:
         return []
     scope = data.get('scope_paths') if isinstance(data, dict) else []

@@ -2,7 +2,7 @@
 
 This folder holds reusable workflow utilities, local service bridges, model helpers, and tool source repos.
 
-This folder and its children follow the root [`CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md) session protocol.
+This folder and its children follow the root [AI onboarding](../../.agents/AI-ONBOARDING.md) and [active entrypoints](../../.agents/AI-ENTRYPOINTS.md).
 
 ## Canonical Structure
 
@@ -40,7 +40,7 @@ tools/
 
 ## Compatibility Links
 
-Several older workflows and docs still reference the previous root-level paths. Keep these root-level symlinks until all callers have migrated:
+Older workflows may reference the paths below. The formerly tracked symlinks are now regular compatibility directories or forwarding files so Windows checkout needs no symlink privilege:
 
 - `codex-desktop-bridge -> services/codex-desktop-bridge`
 - `feishu-codex-bridge -> services/feishu-codex-bridge`
@@ -52,7 +52,9 @@ Several older workflows and docs still reference the previous root-level paths. 
 - `claude_api.py -> scripts/claude_api.py`
 - `gemini_web_handoff.sh -> scripts/gemini_web_handoff.sh`
 
-Prefer the canonical paths for new references. Use the compatibility links only to avoid breaking existing automation.
+Prefer the canonical paths for new references. Use the forwarding entrypoints only for existing callers.
+
+Install dependencies, store configuration and run maintenance in the canonical directories. The forwarding directories are entrypoints, not full mirrored installations. Windows native commands and platform limits are listed in [Windows setup](../../docs/windows.md).
 
 ## Safety Rules
 

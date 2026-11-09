@@ -11,7 +11,7 @@ def checkpoint_valid(scope: list[str]) -> tuple[bool, str]:
         return False, 'missing'
     try:
         import json
-        data = json.loads(path.read_text())
+        data = json.loads(path.read_text(encoding='utf-8'))
     except Exception:
         return False, 'corrupt'
     if data.get('result') != 'pass':

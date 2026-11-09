@@ -2,10 +2,17 @@
 
 set -euo pipefail
 
-BASE_DIR="/Users/mt/Documents/Codex/模块槽位塔防"
-PROMPT_SCRIPT="$BASE_DIR/submit_gameplay_prompt.sh"
-HANDOFF_SCRIPT="/Users/mt/Documents/Codex/gemini_web_handoff.sh"
-OUTPUT_DIR="$BASE_DIR/玩法图片输出"
+if [[ "$(uname -s)" != Darwin ]]; then
+  echo "This browser screenshot workflow requires macOS AppleScript. Use generate_gameplay_series_via_api.py on Windows." >&2
+  exit 1
+fi
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+BASE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+WORKSPACE_ROOT="$(cd "$SCRIPT_DIR/../../../../../../.." && pwd)"
+PROMPT_SCRIPT="$SCRIPT_DIR/submit_gameplay_prompt.sh"
+HANDOFF_SCRIPT="$WORKSPACE_ROOT/archive/tools/scripts/gemini_web_handoff.sh"
+OUTPUT_DIR="$BASE_DIR/参考输出/玩法图片输出"
 
 image_name() {
   case "$1" in

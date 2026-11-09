@@ -45,27 +45,16 @@ import threading
 from datetime import datetime
 from pathlib import Path
 
-WORKSPACE = Path("/Users/mt/Documents/Codex")
+WORKSPACE = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(WORKSPACE))
 
 
 # ========== 桥接 .env 自动加载 ==========
 def load_bridge_env() -> None:
-    """如果当前环境没有 LLM key,尝试从飞书桥接的 .env 加载"""
-    bridge_env = Path.home() / "Library/Application Support/FeishuCodexBridge/bridge/.env"
-    if not bridge_env.exists():
-        return
-    if os.environ.get("DEEPSEEK_API_KEY") and os.environ.get("SILICONFLOW_API_KEY"):
-        return  # 已经设置就不覆盖
-    for line in bridge_env.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        key, _, value = line.partition("=")
-        key = key.strip()
-        value = value.strip().strip('"').strip("'")
-        if key and value and key not in os.environ:
-            os.environ[key] = value
+    """Load the platform-specific bridge environment without overriding variables."""
+    from archive.tools.lib.api_client import load_runtime_env
+
+    load_runtime_env()
 
 
 load_bridge_env()

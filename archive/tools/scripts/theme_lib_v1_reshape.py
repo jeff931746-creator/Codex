@@ -22,7 +22,7 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-WORKSPACE = Path("/Users/mt/Documents/Codex")
+WORKSPACE = Path(__file__).resolve().parents[3]
 SAMPLES_DIR = WORKSPACE / "archive/资料/历史题材库/样本/按媒介"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 

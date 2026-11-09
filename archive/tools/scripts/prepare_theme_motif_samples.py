@@ -21,7 +21,7 @@ import random
 import re
 from pathlib import Path
 
-ROOT = Path("/Users/mt/Documents/Codex")
+ROOT = Path(__file__).resolve().parents[3]
 THEMES_TABLE = ROOT / "archive/资料/买量组合库/题材总表.md"
 TEST_DIR = ROOT / "archive/资料/买量组合库/题材库/测试/测试_001"
 SAMPLES_DIR = TEST_DIR / "02-samples"

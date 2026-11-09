@@ -6,37 +6,37 @@
         "hooks": [
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-reference-permission.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-reference-permission.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-workspace-write-targets.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-workspace-write-targets.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/block-private-memory-write.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent block-private-memory-write.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-context-pressure.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-context-pressure.py",
             "timeout": 5
           }
         ]
       },
       {
-        "matcher": "Bash",
+        "matcher": "Bash|PowerShell|exec_command|functions.exec_command",
         "hooks": [
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' bash '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-commit-message.sh'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-commit-message.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' bash '/Users/mt/Documents/Codex-codex-work/.agents/hooks/warn-dangerous.sh'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent warn-dangerous.py",
             "timeout": 5
           }
         ]
@@ -47,52 +47,52 @@
         "hooks": [
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-flow-gates.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-flow-gates.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-thin-runtime-pointers.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-thin-runtime-pointers.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-task-flow-state.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-task-flow-state.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-gdd-workflow.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-gdd-workflow.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-content-governance-gates.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-content-governance-gates.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' bash '/Users/mt/Documents/Codex-codex-work/.agents/hooks/stop-status.sh'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent stop-status.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-neat-freak.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-neat-freak.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-validation.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-validation.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-impl-checklist.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-impl-checklist.py",
             "timeout": 5
           },
           {
             "type": "command",
-            "command": "AGENT_WORKSPACE='/Users/mt/Documents/Codex-codex-work' python3 '/Users/mt/Documents/Codex-codex-work/.agents/hooks/check-context-pressure.py'",
+            "command": "python -X utf8 .agents/hooks/run-hook.py --runtime agent check-context-pressure.py",
             "timeout": 5
           }
         ]

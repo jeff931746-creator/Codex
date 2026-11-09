@@ -7,6 +7,7 @@ import gzip
 import json
 import os
 import ssl
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -32,9 +33,17 @@ API_BASE_URLS = {
     "duckduckgo_html": "https://html.duckduckgo.com",
 }
 
-RUNTIME_ENV_PATH = (
-    Path.home() / "Library/Application Support/FeishuCodexBridge/bridge/.env"
-)
+def _default_runtime_env_path() -> Path:
+    if sys.platform == "win32":
+        data_root = Path(os.environ.get("LOCALAPPDATA") or Path.home() / "AppData/Local")
+    elif sys.platform == "darwin":
+        data_root = Path.home() / "Library/Application Support"
+    else:
+        data_root = Path(os.environ.get("XDG_DATA_HOME") or Path.home() / ".local/share")
+    return data_root / "FeishuCodexBridge/bridge/.env"
+
+
+RUNTIME_ENV_PATH = _default_runtime_env_path()
 _RUNTIME_ENV_LOADED = False
 
 
@@ -76,7 +85,7 @@ def load_runtime_env() -> None:
     if not path.exists():
         return
 
-    for raw_line in path.read_text(encoding="utf-8").splitlines():
+    for raw_line in path.read_text(encoding="utf-8-sig").splitlines():
         parsed = _parse_env_line(raw_line)
         if parsed is None:
             continue

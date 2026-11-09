@@ -1,4 +1,4 @@
-#!/Library/Frameworks/Python.framework/Versions/3.10/bin/python3
+#!/usr/bin/env python3
 
 import argparse
 import base64
@@ -17,10 +17,10 @@ for _parent in _THIS_FILE.parents:
 from archive.tools.lib.gemini_client import GeminiError, generate_content, predict
 
 
-BASE_DIR = Path("/Users/mt/Documents/Codex/模块槽位塔防")
-SERIES_PROMPTS = BASE_DIR / "模块槽位塔防_玩法图Prompts.md"
-LOCKED_PROMPTS = BASE_DIR / "图2-图6_布局锁定修正版Prompts.md"
-OUTPUT_DIR = BASE_DIR / "玩法图片输出_api"
+BASE_DIR = _THIS_FILE.parents[1]
+SERIES_PROMPTS = BASE_DIR / "概念图Prompt/模块槽位塔防_玩法图Prompts.md"
+LOCKED_PROMPTS = BASE_DIR / "概念图Prompt/图2-图6_布局锁定修正版Prompts.md"
+OUTPUT_DIR = BASE_DIR / "参考输出/玩法图片输出_api"
 DEFAULT_MODEL = "imagen-4.0-generate-001"
 DEFAULT_GEMINI_IMAGE_MODEL = "gemini-2.5-flash-image"
 

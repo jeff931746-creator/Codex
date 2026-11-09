@@ -1,22 +1,5 @@
 # Workspace Guard
 
-This directory contains local safeguards for this independent workspace.
+Run `python tools/workspace-guard/check_paths.py <path> [...]` from the checkout root before file-changing commands. Python 3.10+ is required. The guard derives the workspace from its own file, resolves parent traversal and symbolic links, and accepts only that checkout and OS temporary directories. It returns 0 for allowed paths, 1 for external destinations, or 64 for a missing argument.
 
-`check-paths.sh` verifies that file-changing commands target only:
-
-- `/Users/mt/Documents/Codex-codex-work`
-- `/private/tmp`
-- `/private/var/folders/wy/ljz0r5_s13lf1jlpv88cn7h00000gn/T`
-
-It blocks writes to external project locations unless the user explicitly asks for that work and the agent intentionally bypasses this local-only guard.
-
-Use it before commands or scripts that may create, edit, move, delete, format, or sync files.
-
-Examples:
-
-```bash
-bash /Users/mt/Documents/Codex-codex-work/tools/workspace-guard/check-paths.sh AGENTS.md tools/workspace-guard/check-paths.sh
-bash /Users/mt/Documents/Codex-codex-work/tools/workspace-guard/check-paths.sh /Users/mt/Documents/External/AGENTS.md
-```
-
-The first command exits `0`; the second exits non-zero.
+The same command runs on Windows, macOS and Linux. `check-paths.sh` remains a compatibility wrapper for existing Unix callers. See [Windows setup](../../docs/windows.md) for runtime hook generation.

@@ -1,6 +1,11 @@
 #!/bin/sh
 set -eu
 
+if [ "$(uname -s)" != Darwin ]; then
+  echo "launchd installation requires macOS. On Windows use install_task.ps1." >&2
+  exit 1
+fi
+
 DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 LAUNCH_AGENTS_DIR="$HOME/Library/LaunchAgents"
 LOG_DIR="$HOME/Library/Logs/FeishuCodexBridge"

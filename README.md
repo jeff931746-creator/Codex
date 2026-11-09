@@ -14,6 +14,8 @@ This workspace is organized into a few stable top-level groups.
 
 Open files from the grouped directories directly. The workspace root is intentionally kept minimal.
 
+Windows setup and cross-platform entrypoints: [Windows 使用说明](docs/windows.md). Run `python tools/windows/bootstrap.py --check` from this directory to inspect prerequisites.
+
 ## Directory Hygiene
 
 不同类型的目录采用不同模板，不把 `skills/` 的打包规范原样套到所有地方。
@@ -29,7 +31,7 @@ Open files from the grouped directories directly. The workspace root is intentio
 
 ## Session Protocol
 
-The workspace follows the root [`CLAUDE.md`](/Users/mt/Documents/Codex/CLAUDE.md) session protocol, including memory loading, routing, compacting, rewinding, and subagent delegation.
+The workspace follows [AI onboarding](.agents/AI-ONBOARDING.md) and [active entrypoints](.agents/AI-ENTRYPOINTS.md), including memory loading, routing, compacting, rewinding, and subagent delegation.
 
 ## Knowledge Rule
 

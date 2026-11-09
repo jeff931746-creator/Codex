@@ -5,6 +5,18 @@
 
 ## 两种模式
 
+Windows 使用跨平台前台入口 `auto_resume.py`，无须 cron；原 `.sh` 保留给已有 Unix cron 任务。先安装 Python、Node.js、Claude CLI 并将它们加入 PATH。
+
+```powershell
+python auto_resume.py session my-task --session-id SESSION_ID --cwd C:/work/project --interval 30 --max-attempts 48
+python auto_resume.py start my-task --interval 30 --max-attempts 48
+python auto_resume.py status my-task
+python auto_resume.py stop my-task
+python auto_resume.py list
+```
+
+`start` 和 `session` 在当前终端持续运行，Ctrl+C 停止。`stop` 阻止下一次尝试，不强杀当前 CLI 调用。运行状态和日志仍保存在本目录 `_state/`、`_logs/`，不写入 AI 运行时私有目录。自定义 CLI 路径使用 `CLAUDE_BIN`。前台入口不会注册后台任务；Windows 实际 CLI 续接仍需在目标机器验证。
+
 ### 1. 会话续接（接 claude 对话历史）
 
 适合：一个对话里交代了大活，干到一半额度没了，想接着干完。
