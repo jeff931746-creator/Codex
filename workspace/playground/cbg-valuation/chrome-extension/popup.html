@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="popup.css"><title>藏宝阁资料同步</title></head>
+<body>
+  <main>
+    <h1>藏宝阁资料同步</h1>
+    <p>打开已登录的角色详情页，点击下方按钮。只读取页面中的角色属性，不读取 Cookie 或 Token。</p>
+    <button id="sync">同步当前角色</button>
+    <section class="page-collect">
+      <label for="page-count">连续采集页数</label>
+      <select id="page-count"><option value="1">1页（约15个）</option><option value="2">2页（约30个）</option><option value="3" selected>3页（约45个）</option><option value="5">5页（约75个）</option><option value="10">10页（约150个）</option><option value="20">20页（约300个）</option></select>
+      <small>保持当前搜索条件，自动读取当前页及后续页；每页和每个详情请求都会限速。关闭扩展弹窗后仍会继续采集，重新打开可查看进度。</small>
+    </section>
+    <button id="collect">连续采集列表</button>
+    <button id="stop" class="danger" disabled>停止采集</button>
+    <section class="automation">
+      <label for="automation-interval">定时自动采集</label>
+      <select id="automation-interval"><option value="60">每1小时</option><option value="360" selected>每6小时</option><option value="720">每12小时</option><option value="1440">每天</option></select>
+      <small id="automation-status">尚未启用。启用后复用当前搜索页和上方页数；登录失效时暂停并通知。</small>
+      <button id="automation-toggle" class="secondary">启用定时采集</button>
+      <button id="automation-run" class="secondary" disabled>立即执行一次</button>
+    </section>
+    <button id="open-search" class="secondary">打开藏宝阁全服搜索</button>
+    <section class="search-fill">
+      <label for="role-select">按已录入角色填写搜索条件</label>
+      <select id="role-select"><option value="">正在读取角色…</option></select>
+      <button id="fill-search" disabled>填入当前全服搜索页</button>
+      <small>填写等级、门派、境界、人物/宠物修炼、成就和师门技能；不会限制服务器，也不会自动提交。</small>
+    </section>
+    <button id="open" class="secondary">打开估价工作台</button>
+    <p id="status" role="status">等待同步。</p>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

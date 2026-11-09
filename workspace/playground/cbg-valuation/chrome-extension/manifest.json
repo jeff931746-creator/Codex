@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "藏宝阁资料同步",
+  "version": "2.1.0",
+  "description": "同步角色详情、填写全服搜索条件，并连续采集多页完整角色行情。",
+  "permissions": ["activeTab", "scripting", "storage", "offscreen", "alarms", "tabs", "notifications"],
+  "host_permissions": [
+    "https://xyq.cbg.163.com/*",
+    "http://127.0.0.1:8765/*"
+  ],
+  "action": {
+    "default_title": "同步藏宝阁资料",
+    "default_popup": "popup.html"
+  },
+  "background": {"service_worker": "background.js", "type": "module"}
+}

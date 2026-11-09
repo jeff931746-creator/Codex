@@ -1,0 +1,12 @@
+.ingestion-run{padding:20px 0;border-top:1px solid var(--line)}
+.raw-attributes{white-space:pre-wrap;overflow-wrap:anywhere;max-height:350px;overflow:auto;font-size:12px;background:#fff;padding:12px;border-radius:8px}
+#offline-panel .fields{margin-top:18px}
+#offline-panel input[type=file]{font-size:11px;padding:10px 6px}
+.ingestion-run>.section-head{margin-bottom:10px}
+.ingestion-run .hint{margin-top:5px}
+.ingestion-run strong{font-size:14px}
+.run-counts{display:flex;flex-wrap:wrap;gap:12px 30px;font-size:12px;color:var(--muted)}
+.run-counts b{color:var(--ink);margin-left:5px}
+#collector .heading{align-items:flex-start}
+#collector article>h2{margin-top:30px}
+@media(max-width:800px){#collector .section-head{align-items:flex-start}.ingestion-run .stage{white-space:normal}}

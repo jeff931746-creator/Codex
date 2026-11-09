@@ -3,6 +3,8 @@
 
 # Local scratch / deprecated space
 /tmp/
+/.tmp/
+/workspace/tmp/
 /research/
 
 # Python

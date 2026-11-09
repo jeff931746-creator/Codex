@@ -1,0 +1,190 @@
+.asset-group > summary {
+  font-size: 14px;
+  font-weight: 650;
+}
+.asset-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  margin-top: 16px;
+}
+.asset-card {
+  min-width: 0;
+  border: 1px solid #ead7c1;
+  border-radius: 14px;
+  background: #fff;
+  padding: 15px;
+}
+.asset-grid-clothes,
+.asset-grid-xiangrui {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.asset-grid-clothes .asset-card,
+.asset-grid-xiangrui .asset-card {
+  padding: 10px;
+}
+.asset-grid-clothes .asset-card-head,
+.asset-grid-xiangrui .asset-card-head {
+  align-items: flex-start;
+  margin-bottom: 4px;
+}
+.asset-grid-clothes .asset-card-head img,
+.asset-grid-xiangrui .asset-card-head img {
+  width: 48px;
+  height: 48px;
+}
+.asset-grid-clothes .asset-card-head strong,
+.asset-grid-xiangrui .asset-card-head strong {
+  font-size: 12px;
+}
+.asset-grid-clothes .asset-card > details,
+.asset-grid-xiangrui .asset-card > details {
+  font-size: 10px;
+}
+.asset-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.asset-card-head img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  border: 2px solid #8fc1dc;
+  background: #edf8ff;
+  border-radius: 6px;
+}
+.asset-card-head strong {
+  display: block;
+  font-size: 16px;
+}
+.asset-card-head span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
+.game-description {
+  background: #174e61;
+  border: 3px solid #2b7b9a;
+  border-radius: 3px;
+  padding: 16px 18px;
+  min-height: 130px;
+  color: #ffe62e;
+  font-size: 15px;
+  line-height: 1.7;
+  text-shadow: 0 1px rgba(0, 0, 0, .18);
+  overflow-wrap: anywhere;
+}
+.asset-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.asset-stats div {
+  background: #fbf2e6;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.asset-stats span {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+}
+.asset-stats strong {
+  font-size: 14px;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.skill-tags span {
+  background: #fff0dc;
+  color: #925725;
+  border: 1px solid #edcfaa;
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 11px;
+}
+.asset-section {
+  border-top: 1px solid #ead7c1;
+  margin-top: 13px;
+  padding-top: 12px;
+}
+.asset-section h4 {
+  color: #96602d;
+  font-size: 12px;
+  margin: 0 0 9px;
+}
+.pet-stats {
+  grid-template-columns: repeat(4, 1fr);
+}
+.pet-core {
+  border-left: 3px solid #d8aa49;
+  background: #fff7de;
+  padding: 10px 12px;
+}
+.pet-core p {
+  color: #65523a;
+  font-size: 12px;
+  margin-top: 5px;
+}
+.pet-equipment {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.pet-equipment > div {
+  background: #174e61;
+  border: 2px solid #2b7b9a;
+  padding: 10px;
+  min-width: 0;
+}
+.pet-equipment strong {
+  color: #ffe62e;
+  font-size: 12px;
+}
+.pet-equipment p {
+  color: #ffe62e;
+  font-size: 11px;
+  line-height: 1.55;
+  margin-top: 6px;
+  overflow-wrap: anywhere;
+}
+.neidan-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.neidan-list span {
+  background: #e8f4ff;
+  border: 1px solid #bad5ea;
+  color: #315f83;
+  border-radius: 8px;
+  padding: 6px 9px;
+  font-size: 11px;
+}
+.asset-card details {
+  margin-top: 13px;
+  padding-top: 10px;
+}
+.raw-attributes {
+  max-height: 360px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #fffaf4;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 11px;
+}
+@media (max-width: 520px) {
+  .asset-stats { grid-template-columns: repeat(2, 1fr); }
+  .pet-equipment { grid-template-columns: 1fr; }
+  .game-description { padding: 13px; font-size: 13px; }
+  .asset-grid-clothes,
+  .asset-grid-xiangrui { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
